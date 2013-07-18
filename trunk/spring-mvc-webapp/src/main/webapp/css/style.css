@@ -1,0 +1,234 @@
+<STYLE type="text/css">
+
+TD.fred {
+}
+
+TABLE.recherche {
+	margin: 0pt;
+	border-width: thin;
+	border-style: solid;
+	border-color: gray;
+	border-right: #1564aa 2px solid; 
+	border-top: #1564aa 2px solid; 
+	border-left: #1564aa 2px solid; 
+	border-bottom: #1564aa 2px solid; 
+	background-color: #BBD3EC;
+	padding: 0pt 5pt 0pt 5pt;
+	text-align: center;
+	line-height: normal;
+	font-size: 12px; 
+	font-family: Verdana;
+}
+
+TD.titre-page {
+	text-align: left;
+	color: darkblue;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+TD.sous-titre {
+	font-family: "Verdana,Arial";
+	font-size: 10px;
+	font-weight: bold;
+	color: black;
+	text-decoration: underline;
+}
+
+TH.titre-colonne {
+	color: #000000;
+	background-color: #BBD3EC; 
+	font-family: Arial; 
+	font-size: 12px; 
+	font-weight: bold;
+}
+
+A.titre-colonne-clicable {
+	color: #000000;
+	background-color: #BBD3EC; 
+	font-family: Arial; 
+	font-size: 12px; 
+	font-weight: bold;
+	text-decoration: none;
+	link-color: #000000; 
+	alink-color: #000000; 
+	vlink-color: #000000;
+}
+
+.nombre {
+	text-align: right;
+	font-size: 9pt;
+	font-family: "Times New Roman";
+}
+
+.inputReadOnlynombre {
+	border-spacing: 0pt;
+	BACKGROUND-COLOR: #BBD3EC; 
+	border-width: thin;
+	border-style: ridge  ;
+	border-color: 1px solid;
+	text-align: right;
+	font-size: 9pt;
+	font-family: "Times New Roman";
+	
+	
+}
+.donnees {
+	border: 1pt solid gray;
+	border-spacing: 0pt;
+	font-size: 10px;
+	font-family: "Verdana";
+}
+
+.donnees2 {
+	font-size: 10px;
+	font-family: "Verdana";
+}
+TD.menucontexteaccueil {
+	font-family: "Verdana,Arial";
+	font-size: 11px;
+	color: #000000;
+}
+
+A.menu {
+	FONT-SIZE: 11px ; 
+	COLOR : #000000; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	TEXT-DECORATION: none
+}
+
+.subMenuTitle{
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+	text-decoration: none;
+}
+TD.champ_obligatoire
+{
+	font-weight: bold;
+	text-align: left;
+}
+TD.champ_saisie
+{
+	text-align: left;
+}
+
+TD {
+	font-size: 9pt;
+	font-family: "Times New Roman";
+}
+
+.libelle {
+	font-size: 9pt;
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+	color : #1564aa;
+}
+
+TABLE.warning {border:0;color:red;font-weight:bold;}
+
+.warning {
+	border:1px #FF9C00 solid; 
+	cellPadding:0; 
+	cellSpacing:0; 
+	width:800; 
+	align:justify; 
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-weight: bold;
+	color:red}
+
+.erreur {
+	font-size: 9pt;
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+	color : #FF0000;
+	font-weight: bold;	
+}
+
+.inputReadOnly {
+	text-align: right;
+	border-spacing: 0pt;
+	font-size: 10px;
+	font-family: "Verdana";
+	BACKGROUND-COLOR: #BBD3EC; 
+	border-width: thin;
+	border-style: ridge  ;
+	border-color: 1px solid;
+	
+}
+
+TEXTAREA.spanInputReadOnly{
+
+	 scrollbar-track-color : #BBD3EC;
+	 scrollbar-arrow-color : #BBD3EC;
+	 scrollbar-base-color : #BBD3EC;
+	 scrollbar-face-color : #BBD3EC;
+	 scrollbar-shadow-color : #BBD3EC;
+	 scrollbar-darkshadow-color : #BBD3EC;
+	 scrollbar-highlight-color : #BBD3EC;
+	
+	margin: 0pt;
+	border-width: thin;
+	border-style: solid;
+	border-color: gray;
+	border-right: #1564aa 0px solid; 
+	border-top: #1564aa 0px solid; 
+	border-left: #1564aa 0px solid; 
+	border-bottom: #1564aa 0px solid; 
+	background-color: #BBD3EC;
+	padding: 0pt 5pt 0pt 5pt;
+	text-align: left;
+	line-height: normal;
+	font-size: 10px;
+	font-family: Verdana;
+}
+TEXTAREA.inputReadOnlySansFond{
+
+	 scrollbar-track-color : white;
+	 scrollbar-arrow-color : white;
+	 scrollbar-base-color : white;
+	 scrollbar-face-color : white;
+	 scrollbar-shadow-color : white;
+	 scrollbar-darkshadow-color : white;
+	 scrollbar-highlight-color : white;
+	
+	margin: 0pt;
+	border-width: thin;
+	border-style: solid;
+	border-color: white;
+	border-right: white 0px solid; 
+	border-top: white 0px solid; 
+	border-left: white 0px solid; 
+	border-bottom: white 0px solid; 
+	padding: 0pt 5pt 0pt 5pt;
+	text-align: left;
+	line-height: normal;
+	font-size: 10px;
+	font-family: Verdana;
+}
+.titre_cadre{
+
+	border:2px black solid;
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.cadre_Noir{
+	border:1px black solid;
+}
+.titre_element_gauche{
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.titre_selection_compte {
+    color: #1564AA;
+    font-family: "Verdana";
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+</STYLE>

@@ -1,0 +1,667 @@
+
+html {
+    font-size: 16px;
+}
+body {
+    font-size: 62.5%;
+}
+.borderbtn {
+    border-bottom: 1px solid #D4D4D4;
+}
+.borderleft {
+    border-left: 1px solid #D4D4D4;
+}
+ul, li {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.aside_el {
+    padding-right: 5px;
+    text-align: right;
+}
+.aside_el h2 {
+    color: #464646;
+    font: 2.9em/0.8em 'Arvo',serif;
+    margin-bottom: 3px;
+    margin-top: 0;
+}
+.aside_el h5 {
+    color: #0099E8;
+    font: 1.35em/1.2em 'Droid Sans',sans-serif;
+}
+.par_el {
+    padding-left: 30px;
+    position: relative;
+}
+.par_el p {
+    color: #8E8D8D;
+    font-family: 'Droid Sans',sans-serif;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    text-align: left;
+}
+.page {
+    padding-bottom: 80px;
+}
+body {
+    background: url("../img/body-bg.png") repeat scroll 0 0 #B9BABE;
+}
+.wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.container {
+    background: url("../img/container-bg.png") repeat scroll 0 0 #FFFFFF;
+    box-shadow: 0 0 20px rgba(3, 3, 3, 0.3);
+    margin: 55px auto 320px;
+    max-width: 940px;
+    position: relative;
+    width: 100%;
+}
+.site_nav {
+    background: url("../img/container-bg.png") repeat scroll 0 0 #FFFFFF;
+    box-shadow: 0 2px 4px rgba(3, 3, 3, 0.2);
+    font-family: 'Droid Sans',serif;
+    height: 85px;
+    z-index: 5000;
+}
+.site_nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.site_nav li {
+    border-top: 10px solid transparent;
+    display: inline-block;
+    margin: 0 0 0 -2px;
+    padding: 0 18px;
+    vertical-align: middle;
+}
+.site_nav a {
+    -moz-transition: all 0.5s ease 0s;
+    color: #0099E8;
+    font-size: 1.6em;
+    line-height: 5.3125em;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -10px;
+}
+.site_nav a:hover {
+    color: #747474;
+    text-decoration: none;
+}
+.site_nav li.active {
+    border-top: 10px solid #0099E8;
+}
+.site_nav li.active a {
+    color: #747474;
+}
+.site_header {
+    padding-bottom: 33px;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+}
+.site_header h1 {
+    color: #464646;
+    display: inline-block;
+    font: bold 6em/0.666667em 'Arvo',serif;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: 2;
+}
+#logoline {
+    text-align: center;
+}
+.site_header h1:before, .site_header h1:after {
+    border-top: 1px solid #D4D4D4;
+    content: " ";
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 1em;
+    width: 32%;
+    z-index: 1;
+}
+.site_header h1:after {
+    left: auto;
+    right: 0;
+}
+.site_header h2 {
+    color: #616161;
+    font: 2.1em 'Arvo',serif;
+    margin: -4px 0 25px;
+}
+.site_header h3 {
+    color: #A4A5A6;
+    font: 400 2.5em/1.2em 'Droid Sans',sans-serif;
+    margin-left: 8%;
+    margin-right: 8%;
+}
+.about_me {
+    margin-top: 50px;
+}
+.circle {
+    border: 4px solid white;
+    border-radius: 50% 50% 50% 50%;
+    box-shadow: 0 0 15px rgba(3, 3, 3, 0.3);
+    display: inline;
+    float: left;
+    height: 84px;
+    margin-right: 20px;
+    margin-top: 4px;
+    overflow: hidden;
+    position: relative;
+    width: 84px;
+}
+.about_me article p:last-child {
+    margin-bottom: -3px;
+}
+.upbtnwrapp {
+    display: none;
+    text-align: center;
+}
+.upbtn {
+    background: none repeat scroll 0 0 black;
+    border-radius: 50% 50% 50% 50%;
+    bottom: 5px;
+    cursor: pointer;
+    display: inline;
+    height: 48px;
+    margin: 0 auto;
+    opacity: 0.3;
+    position: fixed;
+    right: 5px;
+    width: 48px;
+    z-index: 10000;
+}
+.upbtn span {
+    bottom: 5px;
+    color: white;
+    font-size: 35px;
+    line-height: 48px;
+    position: relative;
+    right: 18px;
+    text-align: center;
+}
+.cont_info {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-left: 5px;
+    width: 95%;
+}
+.soc ul li {
+    display: inline-block;
+    float: left;
+    margin: 0 2% 2% 0;
+    width: 18%;
+}
+.soc img {
+    max-width: 100%;
+}
+.info {
+    margin-top: 50px;
+}
+.info ul li {
+    padding-bottom: 20px;
+}
+.info ul li span {
+    color: #222222;
+    font-size: 2.4em;
+    margin: -4px 0 0;
+    padding: 0;
+    position: relative;
+}
+.info ul li a, .info ul li a:hover {
+    color: #959595;
+    font-size: 1.4em;
+    line-height: 0;
+    padding-left: 30px;
+    text-decoration: none;
+}
+.my_expertise {
+    margin-top: 60px;
+}
+.skill_level {
+    margin-top: 10px;
+    padding: 0 12px 0 7px;
+}
+.skill_level h4 {
+    color: #464646;
+    font: bold 1.4em/1.07143em 'Droid Sans',sans-serif;
+    margin-top: -10px;
+    text-align: center;
+}
+.experience {
+    margin-top: 60px;
+}
+.experience p, .education p {
+    color: #C0C0C0;
+}
+.period {
+    background-color: #0099E8;
+    color: white;
+    font: 400 1.6em 'Droid Sans',sans-serif;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: absolute;
+    top: 0;
+}
+.bigspacing {
+    padding-left: 155px;
+}
+.par_el header h2 {
+    color: #464646;
+    font-family: 'Arvo',serif;
+    font-size: 2.3em;
+    font-weight: normal;
+    line-height: 1em;
+    margin-top: 0;
+}
+.par_el header h3 {
+    color: #8E8E8E;
+    font: 1.8em/0.535714em 'Droid Sans',sans-serif;
+    padding-bottom: 5px;
+}
+.in_spacing {
+    padding-bottom: 15px;
+    padding-right: 10px;
+    position: relative;
+}
+.in_spacingbottom {
+    padding-bottom: 0;
+    padding-right: 10px;
+    position: relative;
+}
+.education {
+    margin-top: 60px;
+}
+.portfolio {
+    margin-top: 60px;
+}
+.galleryContainer {
+    margin: -10px auto 0;
+    overflow: hidden;
+    width: 95%;
+}
+.galleryItem {
+    float: left;
+    margin: 2% 3% 5px;
+    width: 27%;
+}
+.galleryItem h3 {
+    color: #616161;
+    font: 1.6em/1.125em 'Droid Sans',sans-serif;
+    padding-top: 5px;
+}
+.galleryItem p {
+    color: #A6ABAE;
+    font: 1.4em/1em 'Droid Sans',sans-serif;
+    margin-top: -8px;
+}
+.galleryItem img {
+    border: 4px solid white;
+    box-shadow: 0 0 5px rgba(3, 3, 3, 0.3);
+    max-width: 100%;
+}
+#contact {
+    margin: 0 18px;
+}
+footer {
+    background: url("../img/contact-bg.png") repeat scroll 0 0 #F0F4F2;
+    border-top: 1px solid #D4D4D4;
+    padding-bottom: 60px;
+    padding-top: 60px;
+}
+.comment_form {
+    background: url("../img/form-bg.png") repeat scroll 0 0 #DFDCDF;
+    margin-bottom: 0;
+    margin-left: 33px;
+    margin-right: 15px;
+    padding: 40px;
+}
+.comment_form fieldset {
+    margin-left: -20px;
+    margin-right: 2px;
+}
+.comment_form input {
+    border: 1px solid #E4E2E2;
+    border-radius: 0 0 0 0;
+    height: 30px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    width: 100%;
+}
+.comment_form textarea {
+    border: 1px solid #E4E2E2;
+    border-radius: 0 0 0 0;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    padding-top: 12px;
+    width: 100%;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #464646;
+    font: 14px 'Droid Sans',sans-serif;
+}
+.send-button a, .send-button a:hover {
+    background-color: #0093D0;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font: 1.4em 'Droid Sans',sans-serif;
+    letter-spacing: -0.5px;
+    margin-right: -20px;
+    padding: 10px 35px;
+    position: relative;
+    text-decoration: none;
+}
+.comment_form ul {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: -15px;
+}
+.comment_form li {
+    color: red;
+    font-size: 1.2em;
+    list-style-type: none;
+    margin-left: -3px;
+    margin-top: -5px;
+}
+.container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.site_header h1:before, .site_header h1:after {
+    width: 28%;
+}
+.cont_info {
+    padding-left: 0;
+}
+.site_header h3 {
+    font: 2em 'Droid Sans',sans-serif;
+}
+.upbtnwrapp {
+    display: block;
+}
+#contact {
+    padding-top: 20px;
+}
+.site_nav a {
+    font-size: 1.6em;
+    line-height: 5.3125em;
+}
+.borderleft {
+    border-left: medium none;
+}
+.site_header {
+    padding-bottom: 25px;
+    padding-top: 17px;
+}
+.site_header h1 {
+    color: #464646;
+    font: bold 4em/0.666667em 'Arvo',serif;
+}
+.site_header h2 {
+    font: 1.9em 'Arvo',serif;
+}
+.site_header h3 {
+    font: 1.7em/1.2em 'Droid Sans',sans-serif;
+}
+.aside_el {
+    margin-bottom: 30px;
+    padding-right: 0;
+    text-align: center;
+}
+.aside_el h5 {
+    margin-top: 15px;
+}
+.par_el {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.cont_info {
+    margin-top: 40px;
+    padding-left: 0;
+}
+.soc {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 200px;
+}
+.info {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 20px;
+    width: 200px;
+}
+.skill_level {
+    margin-top: 10px;
+    padding: 0 18px 0 14px;
+}
+.about_me {
+    margin-top: 35px;
+}
+.my_expertise {
+    margin-top: 35px;
+}
+.experience {
+    margin-top: 35px;
+}
+.education {
+    margin-top: 35px;
+}
+.portfolio {
+    margin-top: 35px;
+}
+footer {
+    padding-bottom: 50px;
+    padding-top: 10px;
+}
+.comment_form {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.site_nav a {
+    font-size: 1.4em;
+    line-height: 6.07143em;
+}
+.site_header {
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+.site_header h1 {
+    color: #464646;
+    font: bold 3em/0.666667em 'Arvo',serif;
+}
+.site_header h2 {
+    font: 1.7em 'Arvo',serif;
+}
+.site_header h3 {
+    font: 1.6em/1.2em 'Droid Sans',sans-serif;
+    margin-top: -15px;
+}
+.aside_el h2 {
+    font: 2em/0.8em 'Arvo',serif;
+    margin-bottom: -10px;
+}
+.aside_el h5 {
+    font: 1.35em/1.1em 'Droid Sans',sans-serif;
+}
+.cont_info {
+    margin-top: 25px;
+}
+.about_me {
+    margin-top: 20px;
+}
+.my_expertise {
+    margin-top: 25px;
+}
+.experience, .education, .portfolio {
+    margin-top: 20px;
+}
+.par_el header h2 {
+    font: 1.9em 'Arvo',serif;
+    margin-top: 3px;
+    padding-top: 2px;
+}
+.par_el header h3 {
+    font: 1.4em/0.535714em 'Droid Sans',sans-serif;
+    padding-bottom: 5px;
+}
+.site_nav {
+    height: 163px;
+    padding-top: 10px;
+}
+.site_nav ul {
+    display: block;
+}
+.site_nav li {
+    border-top: medium none;
+    display: block;
+    margin-left: 0;
+    padding: 0;
+}
+.site_nav a {
+    display: block;
+    font-size: 1.5em;
+    line-height: 1.7em;
+    top: 0;
+}
+.cont_info {
+    margin-top: 20px;
+}
+.info {
+    padding-top: 10px;
+}
+.info ul li {
+    padding-bottom: 10px;
+}
+.aside_el {
+    margin-bottom: 20px;
+}
+.galleryContainer {
+    width: 95%;
+}
+.galleryItem {
+    margin: 2% 3% 5px;
+    width: 43.2%;
+}
+.bigspacing {
+    padding-left: 0;
+}
+.period {
+    font: 600 1.4em 'Droid Sans',sans-serif;
+    right: 20px;
+}
+#contact {
+    padding-top: 15px;
+}
+.site_header {
+    padding-bottom: 10px;
+    padding-top: 0;
+}
+.site_header h1 {
+    font: bold 2.6em 'Arvo',serif;
+}
+.site_header h2 {
+    font: 1.5em 'Arvo',serif;
+}
+.site_header h3 {
+    font: 1.3em/1.2em 'Droid Sans',sans-serif;
+    margin-top: -15px;
+}
+.aside_el h2 {
+    font: 1.8em/0.8em 'Arvo',serif;
+    margin-bottom: -10px;
+}
+.aside_el h5 {
+    font: 1.5em/1.1em 'Droid Sans',sans-serif;
+}
+.par_el p {
+    color: #8E8D8D;
+    font: 1.3em 'Droid Sans',sans-serif;
+    text-align: left;
+}
+.par_el header h2 {
+    font: 1.6em 'Arvo',serif;
+    margin-top: 3px;
+    padding-top: 2px;
+}
+.par_el header h3 {
+    font: 1.3em 'Droid Sans',sans-serif;
+    margin-top: -10px;
+}
+.period {
+    font: 600 1.3em 'Droid Sans',sans-serif;
+}
+.galleryItem h3 {
+    font: 1.4em/1em 'Droid Sans',sans-serif;
+    padding-top: 5px;
+}
+.galleryItem p {
+    font: 1.25em/1em 'Droid Sans',sans-serif;
+    margin-top: -8px;
+}
+.skill_level h4 {
+    font: 1.3em/1.07143em 'Droid Sans',sans-serif;
+    margin-top: -10px;
+}
+.page {
+    padding-bottom: 40px;
+}
+.galleryContainer {
+    margin: -10px auto 0;
+    overflow: hidden;
+    text-align: center;
+    width: 90%;
+}
+.galleryItem {
+    float: none;
+    margin: 20px 3% 5px;
+    width: 91.3%;
+}
+.galleryItem h3 {
+    color: #4F6676;
+    font: 1.5em/1em 'Droid Sans',sans-serif;
+    padding-top: 5px;
+}
+.galleryItem p {
+    color: #A6ABAE;
+    font: 1.3em/1em 'Droid Sans',sans-serif;
+    margin-top: -8px;
+}
+.comment_form {
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 30px;
+}
+.site_header h1 {
+    font: bold 2em 'Arvo',serif;
+}
+.period {
+    font-size: 1.1em;
+}
+.par_el header h2 {
+    font: 1.4em 'Arvo',serif;
+    margin-top: 3px;
+    padding-top: 2px;
+}
+body {
+    background: url("../img/body-bg@2x.png") repeat scroll 0 0 #B9BABE;
+}
+.container, .site_nav {
+    background: url("../img/container-bg@2x.png") repeat scroll 0 0 transparent;
+}
+footer {
+    background: url("../img/contact-bg@2x.png") repeat scroll 0 0 #F0F4F2;
+}
+.comment_form {
+    background: url("../img/form-bg@2x.png") repeat scroll 0 0 #DFDCDF;
+}

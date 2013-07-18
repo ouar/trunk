@@ -1,0 +1,18 @@
+{
+	"sProcessing" : "Veuillez patienter ...",
+	"sLengthMenu" : "Nombre de lignes par page _MENU_",
+	"sZeroRecords" : "Pas de r&eacute;sultat correspondant &agrave; votre recherche.",
+	"sInfo" : "_START_ &agrave; _END_/_TOTAL_ r&eacute;sultat(s)",
+	"sInfoEmpty" : "0 r&eacute;sultat(s)",
+	"sInfoFiltered" : "(sur _MAX_ donn&eacute;es)",
+	"sInfoPostFix" : "",
+	"sSearch" : "Filtre &nbsp;(Destination)",
+	"sUrl" : "",
+	"oPaginate" : {
+		"sFirst" : "Premi\u00e8re page",
+		"sPrevious" : "Page pr\u00e9c\u00e9dente",
+		"sNext" : "Page suivante",
+		"sLast" : "Derni\u00e8re page"
+	}
+
+}
