@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.netapsys.springmvc</groupId>
+  <artifactId>spring-mvc-webapp</artifactId>
+  <packaging>war</packaging>
+  <version>2.0-SNAPSHOT</version>
+  <name>spring-mvc-webapp Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+    <properties>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<jackson.version>1.9.10</jackson.version>
+	</properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+<!-- Spring 3 -->
+			<!-- Spring 3 dependencies -->
+		 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>			
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+
+
+
+
+			
+<!-- Spring AOP dependency -->
+        <dependency>
+    	        <groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>2.2</version>
+	</dependency>
+ 
+        <!-- MySQL database driver -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.9</version>
+	</dependency>
+ 
+	<!-- Hibernate framework -->
+	<!-- <dependency>
+		<groupId>hibernate</groupId>
+		<artifactId>hibernate3</artifactId>
+		<version>3.2.3.GA</version>
+	</dependency>
+ 
+	Hibernate annotation
+	<dependency>
+		<groupId>hibernate-annotations</groupId>
+		<artifactId>hibernate-annotations</artifactId>
+		<version>3.3.0.GA</version>
+	</dependency>
+	
+ 
+	<dependency>
+		<groupId>hibernate-commons-annotations</groupId>
+		<artifactId>hibernate-commons-annotations</artifactId>
+		<version>3.0.0.GA</version>
+	</dependency> -->
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate</artifactId>
+	<version>3.2.3.ga</version>
+</dependency>
+ 
+	<!-- Hibernate annotation -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-annotations</artifactId>
+		<version>3.3.0.ga</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-commons-annotations</artifactId>
+		<version>3.0.0.ga</version>
+	</dependency>
+     <!--         <dependency>
+        <groupId>springframework</groupId>
+        <artifactId>spring-hibernate</artifactId>
+        <version>1.2</version>
+      </dependency> -->
+     <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-hibernate3</artifactId>
+        <version>2.0</version>
+      </dependency>
+    
+    <!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+    
+    
+	<!-- Hibernate library dependecy start -->
+	<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+ <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>      
+      <version>1.1.2</version>
+    </dependency>
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+ <dependency>
+    <groupId>javax</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>6.0</version>
+    <scope>provided</scope>
+</dependency>
+<dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+	<dependency>
+		<groupId>antlr</groupId>
+		<artifactId>antlr</artifactId>
+		<version>2.7.7</version>
+	</dependency>
+	<!-- Hibernate library dependecy end -->
+  </dependencies>
+  <build>
+  <finalName>${project.artifactId}${project.version}</finalName>
+  <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <configuration>
+        <source>1.5</source>
+        <target>1.5</target>
+      </configuration>
+    </plugin>	
+    <plugin>
+      <artifactId>maven-eclipse-plugin</artifactId>
+      <version>2.4</version>
+      <configuration>					
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>true</downloadJavadocs>					
+      </configuration>
+    </plugin>		
+  </plugins>
+</build>
+</project>
