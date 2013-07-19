@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!--  For Spring MVC -->
+    <!--  Enable Spring MVC annotation at type & method level -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+
+    <!-- Web Flow components -->
+    <!-- Install flow handler (FlowHandlerAdapter) -->
+    <!-- It dispatches URL requests to flows -->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+	<property name="flowExecutor" ref="flowExecutor"/>
+    </bean>
+
+    <!-- Map Http request path to flows register in the registry -->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
+        <property name="order" value="0"/>
+    </bean>
+
+    <!-- Define where to locate Tile/Layout Definitions -->
+    <bean id="tilesConfigurer"
+        class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+	    <list>
+		<value>/WEB-INF/layouts/layouts.xml</value>
+		<value>/WEB-INF/jsp/tiles.xml</value>
+	    </list>
+        </property>
+    </bean>
+
+    <!-- Resolves views by delegating to the Tiles layout system -->
+    <!-- Map view name to a tile definition with the same name -->
+    <bean id="tilesViewResolver"
+       class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+           value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+    </bean>
+
+</beans>

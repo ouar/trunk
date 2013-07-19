@@ -1,0 +1,40 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Spring Web Application</display-name>
+
+    <!-- Location of Spring Configuration -->
+    <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>
+	    /WEB-INF/conf/web-application-config.xml
+	</param-value>
+    </context-param>
+
+    <!-- Loads the Spring web application context -->
+    <listener>
+	<listener-class>
+          org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Install Spring MVC DispatcherServlet -->
+    <!-- Handle Spring MVC and web flow requests -->
+    <servlet>
+	<servlet-name>springmvc</servlet-name>
+	<servlet-class>
+             org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value></param-value>
+	</init-param>
+	<load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Map Spring Dispatcher to "/" -->
+    <servlet-mapping>
+	<servlet-name>springmvc</servlet-name>
+	<url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

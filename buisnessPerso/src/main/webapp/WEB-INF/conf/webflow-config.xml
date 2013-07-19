@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/webflow-config
+    http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
+
+    <!-- Register all Web Flow definitions under /WEB-INF/flows/**/*-flow.xml -->
+    <webflow:flow-registry id="flowRegistry"
+        base-path="/WEB-INF/flows"
+        flow-builder-services="flowBuilderServices">
+        <webflow:flow-location-pattern value="/**/*-flow.xml" />
+    </webflow:flow-registry>
+
+    <!-- Deploy a flow executor -->
+    <webflow:flow-executor id="flowExecutor" />
+
+    <!-- Configure flow builder services -->
+    <!-- Configure view service -->
+    <webflow:flow-builder-services id="flowBuilderServices"
+	 view-factory-creator="mvcViewFactoryCreator" />
+
+    <!-- Use a Tile View Resolver -->
+    <bean id="mvcViewFactoryCreator"
+       class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+       <property name="viewResolvers" ref="tilesViewResolver"/>
+    </bean>
+
+</beans>
