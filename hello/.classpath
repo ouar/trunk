@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Local/WorkspaceCeibo_ancienneVesrion/gwt-2.5.1/gwt-user.jar"/>
+	<classpathentry kind="lib" path="C:/Local/WorkspaceCeibo_ancienneVesrion/gwt-2.5.1/gwt-dev.jar"/>
+	<classpathentry kind="lib" path="C:/Local/WorkspaceCeibo_ancienneVesrion/gwt-2.5.1/validation-api-1.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Local/WorkspaceCeibo_ancienneVesrion/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="C:/Developpement/gxt/gxt-3.0.1.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
