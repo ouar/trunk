@@ -1,0 +1,2 @@
+serviceClass: com.dngconsulting.hello.client.GreetingService
+path: 9F3F64EE07D4A5FA4B57ED9C77CC25D9.gwt.rpc
