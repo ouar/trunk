@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='GwtMvp'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	 <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+	<inherits name='com.google.gwt.activity.Activity' />
+
+
+	
+	<replace-with class="fr.soat.client.ClientFactoryImpl">
+		<when-type-is class="fr.soat.client.ClientFactory" />
+	</replace-with>
+
+	<!-- Specify the app entry point class. -->
+	<entry-point class='fr.soat.client.GwtMvp' />
+
+	<!-- Specify the paths for translatable code -->
+	<source path='client' />
+	<source path='shared' />
+
+</module>

@@ -1,0 +1,96 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.title{
+			font-weight: bold;
+			text-align: center;
+			font-size: 16px;
+			color: blue;
+		}
+		.label {
+			font-weight: bold;
+			text-align: left;
+		}
+		
+		.decoPanel {
+			padding: 5px;
+		}
+		
+		.hspace {
+			padding: 10px;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+
+		<div class="container-fluid">
+			<table style='width:60%;' align='center'>
+				<!--espace -->
+				<tr>
+					<td colspan='2' class="{style.hspace}"></td>
+				</tr>
+
+				<tr>
+					<td colspan='2'>
+						<strong class="{style.title}">Saisie des coordonnées : </strong>
+					</td>
+				</tr>
+
+				<!--espace -->
+				<tr>
+					<td colspan='2' class="{style.hspace}"></td>
+				</tr>
+				<!-- civilité -->
+				<tr>
+					<td>
+						<g:Label text="Civilité * : "></g:Label>
+					</td>
+					<td>
+						<g:ListBox ui:field="civilite">
+						</g:ListBox>
+					</td>
+				</tr>
+				<!-- Nom -->
+				<tr>
+					<td>
+						<g:Label text="Nom * : "></g:Label>
+					</td>
+					<td>
+						<g:TextBox ui:field="nom">
+						</g:TextBox>
+					</td>
+				</tr>
+				<!-- Prénom -->
+				<tr>
+					<td>
+						<g:Label text="Prénom * : "></g:Label>
+					</td>
+					<td>
+						<g:TextBox ui:field="prenom">
+						</g:TextBox>
+					</td>
+				</tr>
+				<!-- Email -->
+				<tr>
+					<td>
+						<g:Label text="Email * : "></g:Label>
+					</td>
+					<td>
+						<g:TextBox ui:field="email">
+						</g:TextBox>
+					</td>
+				</tr>
+				<!-- buttons -->
+				<tr>
+					<td colspan='2'>
+						<!-- <g:Button ui:field="backBtn" text="Retour au formulaire" /> -->
+						<g:Button ui:field="saveBtn" text="Enregistrer" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2' class="{style.hspace}"></td>
+				</tr>
+			</table>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
