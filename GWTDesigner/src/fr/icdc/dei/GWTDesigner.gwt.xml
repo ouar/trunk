@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='gwtdesigner'>
+  <!-- Récupère le framework client GWT pour développer en Java			-->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Applique le style de l'application par défaut 				    -->
+  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/>-->
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>-->
+
+  <!-- La compatibilité de l'application pour IE, Firefox et Chrome   	-->
+  <set-property name="user.agent" value="gecko1_8, ie6, ie9, safari" />
+
+  <!-- Le point d'entrée de l'application 								-->
+  <entry-point class='fr.icdc.dei.client.GWTDesigner'/>
+
+  <!-- Les packages à compiler en Javascript 							-->
+  <source path='client'/>
+  <source path='shared'/>
+
+</module>
