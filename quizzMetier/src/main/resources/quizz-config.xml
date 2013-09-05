@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	 
+	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 	 
+	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- parse les annotations dans les répertoires suivants -->
+	<!-- Eviter les fr.icdc.dei.quizz.* afin d'éviter que l'application soit 
+		très longue à charger -->
+	<context:component-scan base-package="fr.gfi.cmg.QuizzCmg.*" />
+	<!-- <context:component-scan base-package="fr.gfi.cmg.QuizzCmg.metier.service.impl" 
+		/> -->
+
+	<!-- Datasource -->
+	<bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/quizzDB" />
+	</bean>
+
+
+	<!-- Hibernate -->
+
+	<!-- la session Factory pour l'utilisation d'Hibernate -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref local="quizzDatasource" />
+		</property>
+		<property name="hibernateProperties">
+			<ref bean="quizzHibernateProperties" />
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Admin.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Langage.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/NiveauQuestion.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Question.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Quizz.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/QuizzQuestion.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/QuizzSujet.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Reponse.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/ReponseCandidat.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/TypeSujet.hbm.xml
+				</value>
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="quizzHibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<!-- prop key="hibernate.hbm2ddl.auto">update</prop -->
+
+				<!-- Statistics stats = HibernateUtil.getSessionFactory().getStatistics(); 
+					stats.logSummary(); -->
+				<prop key="hibernate.generate_statistics">false</prop>
+
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.default_schema">quizz</prop>
+
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="use_sql_comments">true</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<!-- <bean id="performanceInterceptor" class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor" 
+		/> <aop:config> <aop:pointcut id="defaultServiceOperation" expression="execution(* 
+		fr.icdc.dei.quizz.metier..*.*(..))"/> <aop:advisor pointcut-ref="defaultServiceOperation" 
+		advice-ref="performanceInterceptor"/> </aop:config> -->
+	<!-- <bean id="monLogger" class="fr.gfi.cmg.QuizzCmg.util.LogUtil"/>     -->
+	<!--	Fin de la configuration AOP -->	
+	
+	<bean id="monLogger" class="fr.gfi.cmg.QuizzCmg.util.LogUtil"/>     
+ <!--	Debut de la configuration AOP -->	
+		<aop:config>
+		<aop:pointcut id="servicePointcut"  expression="execution(* fr.gfi.cmg.QuizzCmg..*.*(..))" />    		
+		<aop:aspect id="loggingAspect" ref="monLogger">
+		    <aop:before method="logMethodEntry"  pointcut-ref="servicePointcut" />    		
+		    <aop:after-returning method="logMethodExit" returning="result" pointcut-ref="servicePointcut"/>
+		    <aop:after-throwing  pointcut-ref="servicePointcut" throwing="ex" method="logDBException"/>    
+	    </aop:aspect>	    
+	</aop:config>
+
+</beans>

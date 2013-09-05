@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration >
+
+	<!-- DEFINITION DES APPENDERS  -->
+	
+	<!-- Appender pour la console, utile surtout pour un premier debug -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="TRACE" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- param name="ConversionPattern" value="%x %X [%-5p][ %C{1}] >> %m%n" / -->
+	            <param name="ConversionPattern" value="%x - [%d{dd/MM/yyyy HH:mm:ss}] %p %C - %m%n"/>			
+		</layout>
+	</appender>
+
+
+	 <appender name="SERVEUR" class="org.apache.log4j.DailyRollingFileAppender">
+	        <param name="File" value="c:/temp/tt/super.log" />
+	        <param name="Append" value="false"/>
+	        <!-- param name="DatePattern" value="'.'yyyy-ww"/ -->
+	        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+	        <layout class="org.apache.log4j.PatternLayout">
+	            <param name="ConversionPattern" value="[%-5p][ %d{HH:mm:ss,SSS} ][%t] - [ %C{1}] >> %m%n"/>
+	        </layout>
+	 </appender>
+
+
+
+	<!-- Appender de type fichier, avec les traces d'erreurs, utile pour prod et pre prod -->
+	<!-- Attention ! les path doivent utiliser "\\" ou "/" -->
+	<!-- Ex : param name="File" value="c:/log.txt" /-->
+	<appender name="FILELOGERREUR" class="org.apache.log4j.FileAppender">
+		<param name="Threshold" value="ERROR" />
+		<param name="File" value="c:/Local/quizz-erreurs.txt" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p][%t] %d{DATE} %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- pour la definition des patterns, voir : -->
+	<!-- http://logging.apache.org/log4j/docs/api/org/apache/log4j/PatternLayout.html -->
+
+	<!-- LOGGERS LEVEL -->	
+
+	<!-- Applicatif -->
+
+	<category name="fr.icdc.dei.quizz">
+	  <priority value="DEBUG"/>
+	</category>
+
+	<category name="fr.icdc.dei.quizz.presentation">
+	  <priority value="INFO"/>
+	</category>
+
+	<!-- API bas niveau -->
+	
+	<category name="com.sun">
+	  <priority value="FATAL"/>
+	</category>
+	
+	
+	<!-- Apache -->
+	
+	<category name="org.apache">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="org.apache.commons">
+	  <priority value="FATAL"/>
+	</category>
+
+	<category name="org.apache.commons.digester.Digester">
+	  <priority value="FATAL"/>
+	</category>
+	
+
+	<!-- Hibernate -->
+
+	<category name="org.hibernate">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="net.sf">
+	  <priority value="ERROR"/>
+	</category>
+	
+	<!-- Spring -->
+	
+	<category name="org.springframework">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="org.springframework.core">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="org.springframework.beans">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="org.springframework.aop.interceptor.PerformanceMonitorInterceptor">
+	  <priority value="TRACE"/>
+	</category>
+
+	<category name="org.springframework.web">
+	  <priority value="ERROR"/>
+	</category>
+
+	<category name="org.springframework.webflow">
+	  <priority value="ERROR"/>
+	</category>
+		
+	<!-- Test - Dbunit -->
+
+	<category name="org.dbunit">
+	  <priority value="ERROR"/>
+	</category>
+	
+	
+	<!-- APPENDERS DECLARATION, activation des differents modes -->
+	
+	<root>
+		<appender-ref ref="CONSOLE" />
+		<!-- appender-ref ref="SERVEUR" / -->
+		<!-- appender-ref ref="FILELOGCOMPLET" / -->
+	</root>
+
+</log4j:configuration>

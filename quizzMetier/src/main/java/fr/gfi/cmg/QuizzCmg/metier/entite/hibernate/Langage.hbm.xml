@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage" table="langage" >
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="libelle" type="string">
+            <column name="libelle" length="50" not-null="true">
+                <comment>libelle du langage (exemple jee,java,...)</comment>
+            </column>
+        </property>
+        <set name="typeSujets" table="type_sujet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_langage" not-null="true">
+                    <comment>cl&#233; &#233;trang&#233;re vers la table langage</comment>
+                </column>
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet" />
+        </set>
+    </class>
+</hibernate-mapping>

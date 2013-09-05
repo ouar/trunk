@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse" table="reponse">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="question" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question" fetch="select">
+            <column name="ref_question" not-null="true" />
+        </many-to-one>
+        <property name="libReponse" type="string">
+            <column name="lib_reponse" length="65535">
+                <comment>r&#233;ponse d'une question</comment>
+            </column>
+        </property>
+        <property name="bolTypeReponse" type="java.lang.Boolean">
+            <column name="bol_type_reponse">
+                <comment>indique s'il s'agit d'une bonne r&#233;ponse ou pas: 0-&gt;une bonne reponse 1-&gt; fausse reponses</comment>
+            </column>
+        </property>
+        <set name="reponseCandidats" table="reponse_candidat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_reponse">
+                    <comment>r&#233;f&#233;rence de la r&#233;ponse du candidat</comment>
+                </column>
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat" />
+        </set>
+    </class>
+</hibernate-mapping>
