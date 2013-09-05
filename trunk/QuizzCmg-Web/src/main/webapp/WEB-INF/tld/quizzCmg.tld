@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>detail</short-name>
+	<!-- uri>http://dei.icdc.fr/fwk3/taglib/util</uri -->
+	<description>Genration objet langage,typeSujet,niveau difficulté cote
+		client</description>
+
+	<tag>
+		<name>quizzCmg</name>
+		<tag-class>fr.gfi.cmg.QuizzCmg.util.QuizzCmgTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>
+			Tag permettant de générer une fonction javascript, pour afficher des
+			lignes
+			dans un tableau, la valeurs des cellules de ces lignes proviennent de la
+			liste
+			d'objet "list" qui est passé en paramétre
+    </description>
+
+		<attribute>
+			<name>lLangageBeans</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Map</type>
+			<description>Attribut qui va contenir la list des valeurs.Obligatoire</description>
+		</attribute>
+		<attribute>
+			<name>listPanier</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.List</type>
+			<description>Attribut qui va contenir la taille du panier en cours de
+				création.Obligatoire</description>
+		</attribute>
+		<attribute>
+			<name>listAselectionner</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.List</type>
+			<description>Attribut qui va contenir la taille du panier en cours de
+				création.Obligatoire</description>
+		</attribute>
+
+
+	</tag>
+</taglib>
