@@ -1,0 +1,34 @@
+/**
+ * 
+ */
+package fr.gfi.cmg.QuizzCmg.metier.exceptions;
+
+/**
+ * @author ehabumuremyi-e
+ * 
+ */
+public class QuestionsNonTrouveesException extends Exception {
+
+	/**
+	 * @param message
+	 */
+	public QuestionsNonTrouveesException(String message) {
+		super(message);
+	}
+
+	/**
+	 * @param exceptionOrigine
+	 */
+	public QuestionsNonTrouveesException(Throwable exceptionOrigine) {
+		super(exceptionOrigine);
+	}
+
+	/**
+	 * @param message
+	 * @param exceptionOrigine
+	 */
+	public QuestionsNonTrouveesException(String message, Throwable exceptionOrigine) {
+		super(message, exceptionOrigine);
+	}
+
+}

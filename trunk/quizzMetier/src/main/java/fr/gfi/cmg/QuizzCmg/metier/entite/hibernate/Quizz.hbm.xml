@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz" table="quizz" >
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="admin" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin" fetch="select">
+            <column name="ref_admin" not-null="true" />
+        </many-to-one>
+        <property name="intDuree" type="java.lang.Integer">
+            <column name="int_duree" />
+        </property>
+        <property name="libNomCandidat" type="string">
+            <column name="lib_nom_candidat" length="50" />
+        </property>
+        <property name="libCommentaire" type="string">
+            <column name="lib_commentaire" length="65535" />
+        </property>
+        <property name="datQuizz" type="timestamp">
+            <column name="dat_quizz" length="19">
+                <comment>date du passage du quizz par le candidat</comment>
+            </column>
+        </property>
+        <set name="quizzQuestions" table="quizz_question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_quizz" />
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzQuestion" />
+        </set>
+        <set name="quizzSujets" table="quizz_sujet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_quizz" />
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzSujet" />
+        </set>
+        <set name="reponseCandidats" table="reponse_candidat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_quizz" />
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat" />
+        </set>
+    </class>
+</hibernate-mapping>
