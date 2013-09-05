@@ -1,0 +1,31 @@
+<Context docBase="QuizzCmg" path="/QuizzCmg" reloadable="true">
+	<Environment name="web/aliashttp" 
+		             override="false" 
+		             type="java.lang.String" 
+		             value="/quizz" />
+		             
+		<Environment name="app/env" override="false" type="java.lang.String" value="Développement" />
+		
+		<Environment name="intercepteur1/activate" override="false" type="java.lang.String" value="false" />
+		
+		<Environment name="app/uploadfolder" override="false" type="java.lang.String" value="C:/Local/tmp/" />
+		<Environment name="log/console" override="false" type="java.lang.String" value="on" />
+		<Environment name="log/level"   override="false" type="java.lang.String" value="INFO" />		
+		<Environment name="log/proxy/status"   override="false" type="java.lang.String" value="on" />
+		<Environment name="log/chrono"   override="false" type="java.lang.String" value="true" />
+		
+		<Environment name="log/pattern"   override="false" type="java.lang.String" value="%x - [%d{dd/MM/yyyy HH:mm:ss}] %p %C - %m%n" />		
+
+		
+
+		<Resource name="jdbc/quizzDB" auth="Container" type="javax.sql.DataSource"
+				driverClassName="com.mysql.jdbc.Driver"
+				url="jdbc:mysql://localhost:3306/quizz"
+				username="root"
+				password=""
+				validationQuery="select 1"
+				testOnBorrow ="true"
+				maxActive="5"
+				maxIdle="1"
+				maxWait="-1" />
+</Context>
