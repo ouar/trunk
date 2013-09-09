@@ -82,6 +82,7 @@
 				<prop key="/GenererQuizz">GenererQuizzAction</prop>
 				<prop key="/GenererJsonQuizz">GenererJsonQuizzAction</prop>
 				<prop key="/AdministrationQuizz">QuizzAdministrationAction</prop>
+				<prop key="/Ajouter">AjouterAction</prop>
 
 
 
