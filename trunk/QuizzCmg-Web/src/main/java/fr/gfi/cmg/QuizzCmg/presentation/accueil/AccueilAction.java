@@ -40,7 +40,7 @@ public class AccueilAction extends AbstractMonAction {
 		modelAndView.addObject("accueilFormBean", accueilFormBean);
 		HttpSession session = request.getSession();
 
-		this.getListeUtiles(session);
+		this.getListeUtiles(session,false);
 
 		return modelAndView;
 	}

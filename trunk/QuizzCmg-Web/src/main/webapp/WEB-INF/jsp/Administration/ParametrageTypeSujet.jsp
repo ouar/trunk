@@ -58,8 +58,10 @@
 
 					</tbody>
 				</table>
+				<input type="submit" value="Ajouter" id="adminbtnAjouterTypeSujet" />
 				<input type="button" value="Ajouter" id="adminbtnAjouter" />
-
+				<input name="vueEncoursUtlisation" type="hidden" value="typeSujet"/>
+				<input name="typeSujetAjoute" id="typeSujetAjoute" type="hidden" />
 				<div id="divAjoutTypeSujet" style="display: inline-block">
 
 					<form:select path="idLangage" id="idLangage">
@@ -72,19 +74,7 @@
 
 					<input type="text" id="libelleTypeSujet">
 				</div>
-
-				<div id="divAjoutQuestion" style="display: inline-block">
-
-					<form:select path="idQuestion" id="idQuestion">
-
-						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
-							<form:option value="${NiveauQuestion.id}">${NiveauQuestion.libNiveau}</form:option>
-						</c:forEach>
-
-					</form:select>
-
-					<input type="text" id="libelleQuestion">
-				</div>
+				
 				<script type="text/javascript" charset="utf-8">
 					$(document).ready(function() {
 						<c:forEach var="typeSujet" items="${sessionScope['ListeTypeSujets']}">

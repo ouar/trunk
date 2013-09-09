@@ -105,7 +105,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 		List<TypeSujet> lTypeSujetsSaisis = new ArrayList<TypeSujet>();
 		List<TypeSujet> lTypesSujetsParametres = (List<TypeSujet>) request.getAttribute("ListeTypesSujets");
 		if (lTypesSujetsParametres == null) {
-			lTypesSujetsParametres = this.getListTypeSujet(request.getSession());
+			lTypesSujetsParametres = this.getListTypeSujet(request.getSession(),false);
 			request.setAttribute("ListeTypesSujets", lTypesSujetsParametres);
 		}
 

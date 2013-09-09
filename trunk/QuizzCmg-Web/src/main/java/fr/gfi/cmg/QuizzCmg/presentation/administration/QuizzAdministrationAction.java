@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
@@ -18,29 +19,36 @@ public class QuizzAdministrationAction extends AbstractMonAction {
 	@Resource(name = "adminBusinessService")
 	AdminBusinessService bsAdmin;
 
-	/** init du panier de commande **/
+	/**  **/
 	@ModelAttribute("administrationFormBean")
 	public AdministrationFormBean initAdministrationFormBean() {
 		return new AdministrationFormBean();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request) {
+	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request) {
 
+		ModelAndView model;
 		String vueEncoursUtlisation = request.getParameter("vueEncoursUtlisation");
 
 		HttpSession session = request.getSession();
 
-		this.getListeUtiles(session);
+		this.getListeUtiles(session, false);
 
 		if ("langage".equals(vueEncoursUtlisation)) {
-			return "Administration/ParametrageLangage";
+			model = new ModelAndView("Administration/ParametrageLangage");
 
 		} else if ("typeSujet".equals(vueEncoursUtlisation)) {
-			return "Administration/ParametrageTypeSujet";
+			model = new ModelAndView("Administration/ParametrageTypeSujet");
+
 		} else {
-			return "Administration/ParametrageQuestion";
+			model = new ModelAndView("Administration/ParametrageQuestion");
+
 		}
+
+		model.addObject(administrationFormBean);
+
+		return model;
 
 	}
 

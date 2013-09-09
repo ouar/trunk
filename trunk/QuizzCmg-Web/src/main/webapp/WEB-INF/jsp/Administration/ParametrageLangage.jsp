@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<%=application.getContextPath()%>/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<%=application.getContextPath()%>/js/Administration/Administration.js"></script>
 <script type="text/javascript" src="<%=application.getContextPath()%>/js/Gestion/gestion.js"></script>
-<title>Paramétrage Type Sujet</title>
+<title>Paramétrage Langage</title>
 </head>
 <body>
 
@@ -31,31 +31,27 @@
 		<jsp:include page="../include/menu_gauche.jsp"></jsp:include>
 
 		<div id="BoxCentre" style="display: inline-block">
-			<form:form method="post" action="Ajouter" name="Ajouter" commandName="administrationFormBean" modelAttribute="administrationFormBean" id="adminTypeSujet">
+			<form:form method="post" action="Ajouter" name="Ajouter" commandName="administrationFormBean" modelAttribute="administrationFormBean" id="adminLangage">
+		
 
 
 				<table id="dataTableAdminLangage" class="display">
 					<thead>
 						<tr class="ui-state-default">
-							
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Langage</div></th>
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé Type Sujet</div></th>
-								<th align="left" class="devant ui-state-default"><div class="titre-colonne"></div></th>
+
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">ID Langage</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé Langage</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne"></div></th>
 
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="langageBean" items="${sessionScope['ListeLangages']}">
 							<tr>
-								<!-- <td><img src="../images/pictos_supprimer.gif"></td> -->
 								<td>${langageBean.id}</td>
 								<td>${langageBean.libelle}</td>
 								<td>${langageBean.lSujetJson}</td>
-								
-								<%-- <c:forEach var="SujetBean" items="${langageBean.lSujet}">													
-									<td>${SujetBean.id}</td>
-									<td>${SujetBean.libelle}</td>
-								</c:forEach> --%>
+
 							</tr>
 						</c:forEach>
 
@@ -63,58 +59,12 @@
 
 					</tbody>
 				</table>
-				<%-- <input type="button" value="Ajouter" id="adminbtnAjouter" />
-
-				<div id="divAjoutTypeSujet" style="display: inline-block">
-
-					<form:select path="idLangage" id="idLangage">
-
-						<c:forEach var="langageBean" items="${sessionScope['ListeLangages']}">
-							<form:option value="${langageBean.id}">${langageBean.libelle}</form:option>
-						</c:forEach>
-
-					</form:select>
-
-					<input type="text" id="libelleTypeSujet">
-				</div>
-
-				<div id="divAjoutQuestion" style="display: inline-block">
-
-					<form:select path="idQuestion" id="idQuestion">
-
-						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
-							<form:option value="${NiveauQuestion.id}">${NiveauQuestion.libNiveau}</form:option>
-						</c:forEach>
-
-					</form:select>
-
-					<input type="text" id="libelleQuestion">
-				</div>
-				<script type="text/javascript" charset="utf-8">
-					$(document).ready(function() {
-						<c:forEach var="typeSujet" items="${sessionScope['ListeTypeSujets']}">
-						var ObjetAdmin = new $.fn.ObjetAdmin('${typeSujet.langage.id}', '${typeSujet.langage.libelle}', '${typeSujet.id}', '${typeSujet.libelle}', '1', 'facile');
-						adminListTypeSujets.push(ObjetAdmin);
-
-						</c:forEach>
-
-					});
-				</script>
- --%>
-<!-- 
-				<script type="text/javascript" charset="utf-8">
-					$(document).ready(function() {
-
-						<c:forEach var="langageBean" items="${sessionScope['ListeLangages']}">
-
-						<c:forEach var="SujetBean" items='${langageBean.lSujet}'>
-						fnFormatDetails+'${langageBean.id}'+('${SujetBean.id}', '${SujetBean.libelle}');
-						</c:forEach>
-
-						</c:forEach>
-
-					});
-				</script> -->
+			
+				<input type="submit" value="Ajouter" id="adminbtnAjouterLangage" />
+				<input name="vueEncoursUtlisation" type="hidden" value="langage"/>				
+				<form:input path="libelleLangage"/>
+			
+			
 			</form:form>
 		</div>
 

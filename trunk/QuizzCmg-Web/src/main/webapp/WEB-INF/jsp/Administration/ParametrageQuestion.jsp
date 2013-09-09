@@ -40,10 +40,10 @@
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Langage</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé Type Sujet</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé question</div></th>
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellée niveau</div></th>			
-								<th align="left" class="devant ui-state-default"><div class="titre-colonne">duréee réfléxion</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellée niveau</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">duréee réfléxion</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">nombre réponse possible</div></th>
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Image</div></th>					
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Image</div></th>
 
 
 
@@ -55,55 +55,61 @@
 								<td>${question.typeSujet.langage.libelle}</td>
 								<td>${question.typeSujet.libelle}</td>
 								<td>${question.libQuestion}</td>
-								<td>${question.niveauQuestion.libNiveau}</td>		
+								<td>${question.niveauQuestion.libNiveau}</td>
 								<td>${question.intDureeReflexion}</td>
-								<td>${question.bolUniqueReponse}</td>		
-								<td>${question.urlImage}</td>							
-												
+								<td>${question.bolUniqueReponse}</td>
+								<td>${question.urlImage}</td>
+
 							</tr>
 						</c:forEach>
-						
+
 
 
 					</tbody>
 				</table>
-				<%-- <input type="button" value="Ajouter" id="adminbtnAjouter" />
 
-				<div id="divAjoutTypeSujet" style="display: inline-block">
+				<input type="submit" value="Ajouter" id="adminbtnAjouterQuestion" />
+				<input name="vueEncoursUtlisation" type="hidden" value="Question" />
 
-					<form:select path="idLangage" id="idLangage">
-
-						<c:forEach var="langageBean" items="${sessionScope['ListeLangages']}">
-							<form:option value="${langageBean.id}">${langageBean.libelle}</form:option>
-						</c:forEach>
-
-					</form:select>
-
-					<input type="text" id="libelleTypeSujet">
-				</div>
+				<input type="button" value="Ajouter" id="adminbtnAjouter" />
 
 				<div id="divAjoutQuestion" style="display: inline-block">
 
-					<form:select path="idQuestion" id="idQuestion">
 
-						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
-							<form:option value="${NiveauQuestion.id}">${NiveauQuestion.libNiveau}</form:option>
+					Type sujet :
+					<form:select path="idTypeSujet" id="idTypeSujet">
+
+						<c:forEach var="typeSujet" items="${sessionScope['ListeTypeSujets']}">
+							<form:option value="${typeSujet.langage.id}">${typeSujet.libelle}</form:option>
 						</c:forEach>
 
 					</form:select>
 
-					<input type="text" id="libelleQuestion">
-				</div>
-				<script type="text/javascript" charset="utf-8">
-					$(document).ready(function() {
-						<c:forEach var="typeSujet" items="${sessionScope['ListeTypeSujets']}">
-						var ObjetAdmin = new $.fn.ObjetAdmin('${typeSujet.langage.id}', '${typeSujet.langage.libelle}', '${typeSujet.id}', '${typeSujet.libelle}', '1', 'facile');
-						adminListTypeSujets.push(ObjetAdmin);
 
+					Niveau :
+					<form:select path="idQuestion" id="idQuestion">
+
+						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
+							<form:option value="${NiveauQuestion.id}" >${NiveauQuestion.libNiveau}</form:option>
 						</c:forEach>
 
-					});
-				</script> --%>
+					</form:select>
+					
+					Libellé question :<form:input path="libelleQuestion"/> 
+					
+					durée réfléxion  :<form:input path="dureeReflexion"/>
+					
+					Reponses :
+					Réponse1 :<form:input path="reponse"/>
+					Réponse2 :<form:input path="reponse"/>
+					Réponse3 :<form:input path="reponse"/>
+					Réponse4 :<form:input path="reponse"/>
+					
+					Image  :<input type="file" name="image">
+
+				
+				</div>
+
 
 			</form:form>
 		</div>

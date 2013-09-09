@@ -227,12 +227,7 @@ function getTableauLangage(jsonData) {
 	//	
 }
 
-function initlaiser(typeSujet) {
 
-	var objet = new $.fn.ObjetAdmin('${typeSujet.langage.id}', '${typeSujet.langage.libelle}', '${typeSujet.id}', '${typeSujet.libelle}', '1', 'facile');
-	adminListTypeSujets.push(objet);
-
-}
 
 function ajouterTypeSujet() {
 	var idLangageSelectionne = $("#idLangage option:selected").val();
@@ -271,58 +266,23 @@ function raffraichirTableauTypeSujet() {
 	} catch (e) {
 
 	}
-	// $('#panier').val(JSON.stringify(jsonData));
-	// }
+	 $('#typeSujetAjoute').val(JSON.stringify(jsonData));
+
 
 }
 
-function ajouterQuestion() {
 
-}
 
-function fnFormatDetails(nTr) {
-	var aData = tableauAdminLangage.fnGetData(nTr);
+function fnFormatDetails(nTr,dataTableCible) {
+	var aData = dataTableCible.fnGetData(nTr);
 
 	var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-	try {
-		console.log(aData['idTypeSujet']);
-		
-		$.each( aData['idTypeSujet'], function(i, l){ 
-			console.log( "Index #" + i + ": " + l );
-	    });
-		
-	} catch (e) {
-		console.log(e);
-	}
-	var value =$.parseJSON(aData['idTypeSujet']);			
-	console.log(value);
-	var premierCarractere = aData['idTypeSujet'].substr(0, 1);
-	console.log("premierCarractere***********************"+premierCarractere);		
-	var tab = aData['idTypeSujet'].replace(premierCarractere, '');
-	tab = tab.replace(']",', ']');
-	tab = extractionChaine(tab);
-	
-	tab = tab.split("SujetBean");
-	for ( var i = 0; i < tab.length; i++) {
-		if(tab[i]!=""){
-			var dimensions = $.makeArray(tab[i]);
-			dimensions = $.map(dimensions, function(value, key) {
-						
-				value = value.replace("}}}}", "}}}");
-				try {
-					value = $.parseJSON(JSON.stringify(value));		
-				} catch (e) {
-					console.log(e);
-				}
-					
-				console.log("value***********************"+value);				
-				sOut += '<tr><td>Libllé sujet:</td><td>' + value.libelle + '</td></tr>';
-			});
-			
-		}
-		
-		
-	}
+
+	var tableauIdTypeSujet = $.parseJSON(aData['idTypeSujet']);
+
+	$.each(tableauIdTypeSujet, function(i, value) {
+		sOut += '<tr><td>Libllé sujet:</td><td>' + value.libelle + '</td></tr>';
+	});
 	sOut += '</table>';
 	return sOut;
 }
@@ -353,48 +313,8 @@ function detail() {
 		} else {
 			/* Open this row */
 			this.src = "../images/pictos_supprimer.gif";
-			tableauAdminLangage.fnOpen(nTr, fnFormatDetails(nTr), 'details');
+			tableauAdminLangage.fnOpen(nTr, fnFormatDetails(nTr,tableauAdminLangage), 'details');
 		}
 	});
 }
 
-function extractionChaine(a) {
-	var expression1 = 0;
-	var expression2 = 0;
-	var expression3 = 0;
-	// temps que il y'a des éléments non desirées, en boucle et en nettoie la
-	// chaine de caractéres
-	while (expression1 != -1 || expression2 != -1 || expression3 != -1) {
-
-		a = a.replace("[", "{");
-		a = a.replace("]", "}");
-		a = a.replace("=", ":");
-
-		var expression1 = a.indexOf('[');
-		var expression2 = a.indexOf(']');
-		var expression3 = a.indexOf('=');
-
-	}
-	a = extractionChaine2(a);
-	return a;
-
-}
-
-function extractionChaine2(a) {
-	var expression1 = 0;
-	
-
-	// temps que il y'a des éléments non desirées, en boucle et en nettoie la
-	// chaine de caractéres
-	while (expression1 != -1 ) {
-
-		
-		a = a.replace("DifficulteBean {", "DifficulteBean : {");
-
-	
-		var expression1 = a.indexOf('DifficulteBean {');
-
-	}
-	return a;
-
-}
