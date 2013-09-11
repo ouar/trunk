@@ -53,6 +53,8 @@
 				<value>ParametrageTypeSujet</value>
 				<value>ParametrageLangage</value>
 				<value>ParametrageQuestion</value>
+				<value>Administration</value>
+				
 
 
 
@@ -83,8 +85,7 @@
 				<prop key="/GenererJsonQuizz">GenererJsonQuizzAction</prop>
 				<prop key="/AdministrationQuizz">QuizzAdministrationAction</prop>
 				<prop key="/Ajouter">AjouterAction</prop>
-
-
+				<prop key="DetailTypeSujet">DetailTypeSujetAction</prop>
 
 
 

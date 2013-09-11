@@ -97,7 +97,7 @@ function getTableauQuestions(jsonData) {
 
 	var dataTable = $('#dataTableAdminQuestions').dataTable({
 
-		"bAutoWidth" : false,
+		"bAutoWidth" : true,
 		"bPaginate" : false,
 		"bFilter" : false,
 		/*
@@ -111,9 +111,9 @@ function getTableauQuestions(jsonData) {
 		'oLanguage' : {
 			"sProcessing" : "Veuillez patienter ...",
 			"sLengthMenu" : "Nombre de lignes par page _MENU_",
-			"sZeroRecords" : "Pas de r&eacute;sultat correspondant &agrave; votre recherche.",
-			"sInfo" : "_START_ &agrave; _END_/_TOTAL_ r&eacute;sultat(s)",
-			"sInfoEmpty" : "0 r&eacute;sultat(s)",
+			"sZeroRecords" : "Pas de questions liées à ce type de sujet",
+			"sInfo" : "",
+			"sInfoEmpty" : "",
 			"sInfoFiltered" : "(sur _MAX_ donn&eacute;es)",
 			"sInfoPostFix" : "",
 			"sSearch" : "Filtre &nbsp;(Destination)",
@@ -316,5 +316,22 @@ function detail() {
 			tableauAdminLangage.fnOpen(nTr, fnFormatDetails(nTr,tableauAdminLangage), 'details');
 		}
 	});
+}
+
+function ajouterTypeSujet(idLangage) {
+	
+	$('#vueEncoursUtlisation').val("typeSujet");
+	
+	$('#idLangage').val(idLangage);
+	
+}
+
+
+function ajouterLangage() {
+	
+	$('#vueEncoursUtlisation').val("langage");
+	
+	$('#idLangage').val(-1);
+	
 }
 
