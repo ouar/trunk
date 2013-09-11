@@ -1,6 +1,5 @@
 package fr.gfi.cmg.QuizzCmg.presentation.administration;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
@@ -33,13 +30,13 @@ public class AjouterAction extends AbstractMonAction {
 	AdminBusinessService bsAdmin;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam("vueEncoursUtlisation") String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) {
+	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) {
 
 		ModelAndView model = null;
 
 		if ("langage".equals(vueEncoursUtlisation)) {
 
-			model = new ModelAndView("Administration/ParametrageLangage");
+			model = new ModelAndView("Administration/Administration");
 
 			Langage langage = new Langage();
 
@@ -54,50 +51,50 @@ public class AjouterAction extends AbstractMonAction {
 			}
 
 		} else if ("typeSujet".equals(vueEncoursUtlisation)) {
+			// String idlangage = request.getParameter("langage");
 
-			List<TypeSujet> list = deserializerObjetJson(typeSujetAjoute);
+			Langage langage = new Langage();
+			langage.setId(administrationFormBean.getIdLangage());
+			TypeSujet typesujet = new TypeSujet();
+			String[] libelleTypeSujet = administrationFormBean.getLibelleTypeSujet();
+			if (libelleTypeSujet != null && libelleTypeSujet.length > 0) {
+				for (int i = 0; i < libelleTypeSujet.length; i++) {
 
-			if (list != null && list.size() > 0) {
-
-				for (TypeSujet typeSujet : list) {
-
-					if (typeSujet.getId() == null) {
-						try {
-							bsAdmin.ajouter(typeSujet);
-						} catch (BusinessServiceException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					if (libelleTypeSujet[i] != null && !libelleTypeSujet[i].equals("")) {
+						typesujet.setLibelle(libelleTypeSujet[i]);
 					}
 
 				}
 			}
+			typesujet.setLangage(langage);
+			try {
+				bsAdmin.ajouter(typesujet);
+			} catch (BusinessServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-			model = new ModelAndView("Administration/ParametrageTypeSujet");
+			model = new ModelAndView("Administration/Administration");
 
 		} else {
 
-			
 			Langage langage = new Langage();
-			langage.setId(administrationFormBean.getIdLangage());
-			TypeSujet typeSujet = new TypeSujet();			
+			// langage.setId(administrationFormBean.getIdLangage());
+			TypeSujet typeSujet = new TypeSujet();
 			typeSujet.setId(administrationFormBean.getIdTypeSujet());
 			typeSujet.setLangage(langage);
 			NiveauQuestion niveauQuestion = new NiveauQuestion();
 			niveauQuestion.setId(administrationFormBean.getIdNiveauQuestion());
-			
+
 			Question question = new Question();
-			
+
 			question.setIntDureeReflexion((administrationFormBean.getDureeReflexion()));
 			question.setLibQuestion(administrationFormBean.getLibelleQuestion());
 			question.setUrlImage(administrationFormBean.getImage());
 			question.setTypeSujet(typeSujet);
 			question.setNiveauQuestion(niveauQuestion);
-			
-			Set<Reponse> listReponse=new HashSet<Reponse>();
-			
-			
-			
+
+			Set<Reponse> listReponse = new HashSet<Reponse>();
 
 			String[] reponses = administrationFormBean.getReponse();
 
@@ -107,41 +104,28 @@ public class AjouterAction extends AbstractMonAction {
 
 					Reponse reponse = new Reponse();
 					reponse.setLibReponse(reponses[i]);
+					reponse.setQuestion(question);
 					listReponse.add(reponse);
 
 				}
 			}
 
 			question.setReponses(listReponse);
-			// administrationFormBean.getReponse1();
 
-			// private Integer id;
-			// private Question question;
-			// private String libReponse;
-
-			// private Integer id;
-			// private TypeSujet typeSujet;
-			// private NiveauQuestion niveauQuestion;
-			// private String libQuestion;
-			// private Date datCreation;
-			// private Integer intDureeReflexion;
-			// private Boolean bolUniqueReponse;
-			// private String urlImage;
-			// private Set<Reponse> reponses = new HashSet<Reponse>(0);
-			
 			try {
 				bsAdmin.ajouter(question);
 			} catch (BusinessServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			List<Question> listQuestionsFiltres = this.getQuestionsByIdTypeSujet(request.getSession(), typeSujet.getId());
+			administrationFormBean.setListQuestionsFiltres(listQuestionsFiltres);
 			model = new ModelAndView("Administration/ParametrageQuestion");
 
 		}
 
 		this.getListeUtiles(request.getSession(), true);
-
+		administrationFormBean.reset();
 		model.addObject(administrationFormBean);
 
 		return model;

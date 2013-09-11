@@ -36,7 +36,7 @@ public class QuizzAdministrationAction extends AbstractMonAction {
 		this.getListeUtiles(session, false);
 
 		if ("langage".equals(vueEncoursUtlisation)) {
-			model = new ModelAndView("Administration/ParametrageLangage");
+			model = new ModelAndView("Administration/Administration");
 
 		} else if ("typeSujet".equals(vueEncoursUtlisation)) {
 			model = new ModelAndView("Administration/ParametrageTypeSujet");

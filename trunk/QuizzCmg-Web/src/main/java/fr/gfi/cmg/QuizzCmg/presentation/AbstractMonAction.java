@@ -125,17 +125,17 @@ public abstract class AbstractMonAction {
 
 		}
 
-		getListQuestions(session,reinitialisation);
+		getListQuestions(session, reinitialisation);
 
-		getListNiveauDifficultes(session,reinitialisation);
+		getListNiveauDifficultes(session, reinitialisation);
 
-		getListTypeSujet(session,reinitialisation);
+		getListTypeSujet(session, reinitialisation);
 	}
 
 	/**
 	 * @param session
 	 */
-	protected void getListQuestions(HttpSession session,boolean reinitialisation) {
+	protected void getListQuestions(HttpSession session, boolean reinitialisation) {
 		/** Chargement des questions **/
 		if (session.getAttribute(AbstractConstantes.LISTE_QUESTIONS) == null || reinitialisation) {
 
@@ -157,7 +157,7 @@ public abstract class AbstractMonAction {
 	/**
 	 * @param session
 	 */
-	protected void getListNiveauDifficultes(HttpSession session,boolean reinitialisation) {
+	protected void getListNiveauDifficultes(HttpSession session, boolean reinitialisation) {
 		if (session.getAttribute(AbstractConstantes.LISTE_NIVEAU_DIFFICULTES) == null || reinitialisation) {
 			List<NiveauQuestion> lNiveauQuestions = null;
 
@@ -176,7 +176,7 @@ public abstract class AbstractMonAction {
 	 * @param session
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<TypeSujet> getListTypeSujet(HttpSession session,boolean reinitialisation) {
+	protected List<TypeSujet> getListTypeSujet(HttpSession session, boolean reinitialisation) {
 		List<TypeSujet> lListTypeSujets = null;
 		/** Chargement des langage / sujet et leur niveau de difficultés **/
 		if (session.getAttribute(AbstractConstantes.LISTE_TYPE_SUJETS) == null || reinitialisation) {
@@ -203,53 +203,21 @@ public abstract class AbstractMonAction {
 	}
 
 	/**
-	 * @param listTypeSujet
-	 * @param listNiveauTypeSujetPanier
-	 * @param panier
-	 * @throws NumberFormatException
+	 * @param session
 	 */
-	public List<TypeSujet> deserializerObjetJson(String param) throws NumberFormatException {
+	@SuppressWarnings("unchecked")
+	protected List<Question> getQuestionsByIdTypeSujet(HttpSession session, int idTypeSujet) {
+		List<Question> lListQuestions = (List<Question>) session.getAttribute(AbstractConstantes.LISTE_QUESTIONS);
+		List<Question> lListQuestionsFiltres = new ArrayList<Question>();
+		if (lListQuestions != null && lListQuestions.size() > 0) {
+			for (Question question : lListQuestions) {
 
-		List<TypeSujet> listNiveauTypeSujet = new ArrayList<TypeSujet>();
-		param = param.replaceAll("\"", "'");
-		param = "{'source':" + param + "}";
-
-		try {
-			JSONObject myjson = new JSONObject(param);
-			JSONArray jsonMainArr = myjson.getJSONArray("source");
-
-			for (int i = 0; i < jsonMainArr.length(); i++) { // **line 2**
-				JSONObject childJSONObject = jsonMainArr.getJSONObject(i);
-
-				String idLangage = childJSONObject.getString("idLangage");
-				String libelleLangage = childJSONObject.getString("libelleLangage");
-				String idTypeSujet = childJSONObject.getString("idTypeSujet");
-				String libelleTypeSujet = childJSONObject.getString("libelleTypeSujet");
-
-				Langage langage = new Langage();
-				
-				langage.setId(Integer.parseInt(idLangage));
-				langage.setLibelle(libelleLangage);
-
-				TypeSujet typesujet = new TypeSujet();
-				
-				if(idTypeSujet!=null &&  idTypeSujet!="null"){
-					typesujet.setId(Integer.parseInt(idTypeSujet));
+				if (question.getTypeSujet().getId().equals(idTypeSujet)) {
+					lListQuestionsFiltres.add(question);
 				}
-			
-				
-				
-				typesujet.setLibelle(libelleTypeSujet);
-				typesujet.setLangage(langage);
-
-				listNiveauTypeSujet.add(typesujet);
 
 			}
-
-		} catch (JSONException e) {
-
-			e.printStackTrace();
 		}
-		return listNiveauTypeSujet;
+		return lListQuestionsFiltres;
 	}
 }
