@@ -37,8 +37,8 @@
 				<table id="dataTableAdminQuestions" class="display">
 					<thead>
 						<tr class="ui-state-default">
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Langage</div></th>
-							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé Type Sujet</div></th>
+							<!-- <th align="left" class="devant ui-state-default"><div class="titre-colonne">Langage</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé Type Sujet</div></th> -->
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellé question</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Libellée niveau</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">duréee réfléxion</div></th>
@@ -50,10 +50,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="question" items="${sessionScope['ListeQuestionss']}">
+						<c:forEach var="question" items="${administrationFormBean.listQuestionsFiltres}">
 							<tr>
-								<td>${question.typeSujet.langage.libelle}</td>
-								<td>${question.typeSujet.libelle}</td>
+								<%-- <td>${question.typeSujet.langage.libelle}</td>
+								<td>${question.typeSujet.libelle}</td> --%>
 								<td>${question.libQuestion}</td>
 								<td>${question.niveauQuestion.libNiveau}</td>
 								<td>${question.intDureeReflexion}</td>
@@ -71,23 +71,17 @@
 				<input type="submit" value="Ajouter" id="adminbtnAjouterQuestion" />
 				<input name="vueEncoursUtlisation" type="hidden" value="Question" />
 
-				<input type="button" value="Ajouter" id="adminbtnAjouter" />
+				
 
 				<div id="divAjoutQuestion" style="display: inline-block">
 
 
-					Type sujet :
-					<form:select path="idTypeSujet" id="idTypeSujet">
-
-						<c:forEach var="typeSujet" items="${sessionScope['ListeTypeSujets']}">
-							<form:option value="${typeSujet.langage.id}">${typeSujet.libelle}</form:option>
-						</c:forEach>
-
-					</form:select>
-
-
-					Niveau :
-					<form:select path="idQuestion" id="idQuestion">
+					<label>Type sujet :</label>${administrationFormBean.libelleTypeSujetFiltree}
+					
+					<br><br><br>
+					<label>Niveau :</label>
+					
+					<form:select path="idNiveauQuestion" id="idNiveauQuestion">
 
 						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
 							<form:option value="${NiveauQuestion.id}" >${NiveauQuestion.libNiveau}</form:option>
@@ -95,11 +89,11 @@
 
 					</form:select>
 					
-					Libellé question :<form:input path="libelleQuestion"/> 
+					<label>Libellé question :</label><form:input path="libelleQuestion"/> 
 					
-					durée réfléxion  :<form:input path="dureeReflexion"/>
+					<label>durée réfléxion  :</label><form:input path="dureeReflexion"/>
 					
-					Reponses :
+					<label>Reponses :</label>
 					Réponse1 :<form:input path="reponse"/>
 					Réponse2 :<form:input path="reponse"/>
 					Réponse3 :<form:input path="reponse"/>
@@ -110,7 +104,7 @@
 				
 				</div>
 
-
+			<form:input path="idTypeSujet"  cssStyle="visibility: hidden;"/>
 			</form:form>
 		</div>
 

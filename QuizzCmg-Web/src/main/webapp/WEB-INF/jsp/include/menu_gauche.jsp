@@ -15,7 +15,7 @@
 	</ul>
 
 	<ul>
-		<li><a href="AdministrationQuizz">Administration</a>
+		<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Administration</a>
 			<ul class="dropdown-menu">
 				<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Paramétrage Langage</a>
 				<li><a href="AdministrationQuizz?vueEncoursUtlisation=typeSujet">Paramétrage Type sujet</a>
