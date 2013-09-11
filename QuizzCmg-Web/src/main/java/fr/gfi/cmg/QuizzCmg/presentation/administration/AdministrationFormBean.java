@@ -1,6 +1,11 @@
 package fr.gfi.cmg.QuizzCmg.presentation.administration;
 
 import java.io.Serializable;
+import java.util.List;
+
+import javax.validation.constraints.Null;
+
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 
 public class AdministrationFormBean implements Serializable {
 
@@ -9,15 +14,15 @@ public class AdministrationFormBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 4906651985022713791L;
 
-	private String libelleTypeSujet;
+	private String[] libelleTypeSujet;
 	
-	private int idTypeSujet;
+	private Integer idTypeSujet;
 
-	private int idLangage;
+	private Integer idLangage;
 	
-	private int idQuestion;
+	private Integer idQuestion;
 	
-	private int idNiveauQuestion;
+	private Integer idNiveauQuestion=null;
 	
 	private String action;
 	
@@ -28,119 +33,169 @@ public class AdministrationFormBean implements Serializable {
 	
 	private String libelleQuestion;
 	
-	private int dureeReflexion;
+	private Integer dureeReflexion;
 	
 	private String[] reponse;
-//	private String reponse2;
-//	private String reponse3;
-//	private String reponse4;
+
+	
+	private String libelleTypeSujetFiltree;
 	
 	private String image;
 	
-
+	private List<Question> listQuestionsFiltres;
 
 	public AdministrationFormBean() {
 
 	}
 
-	public String getLibelleTypeSujet() {
+
+	public String[] getLibelleTypeSujet() {
 		return libelleTypeSujet;
 	}
 
-	public void setLibelleTypeSujet(String libelleTypeSujet) {
+
+	public void setLibelleTypeSujet(String[] libelleTypeSujet) {
 		this.libelleTypeSujet = libelleTypeSujet;
 	}
 
-	public int getIdLangage() {
+
+	public Integer getIdTypeSujet() {
+		return idTypeSujet;
+	}
+
+
+	public void setIdTypeSujet(Integer idTypeSujet) {
+		this.idTypeSujet = idTypeSujet;
+	}
+
+
+	public Integer getIdLangage() {
 		return idLangage;
 	}
 
-	public void setIdLangage(int idLangage) {
+
+	public void setIdLangage(Integer idLangage) {
 		this.idLangage = idLangage;
 	}
 
-	public int getIdQuestion() {
+
+	public Integer getIdQuestion() {
 		return idQuestion;
 	}
 
-	public void setIdQuestion(int idQuestion) {
+
+	public void setIdQuestion(Integer idQuestion) {
 		this.idQuestion = idQuestion;
 	}
+
+
+	public Integer getIdNiveauQuestion() {
+		return idNiveauQuestion;
+	}
+
+
+	public void setIdNiveauQuestion(Integer idNiveauQuestion) {
+		this.idNiveauQuestion = idNiveauQuestion;
+	}
+
 
 	public String getAction() {
 		return action;
 	}
 
+
 	public void setAction(String action) {
 		this.action = action;
 	}
+
 
 	public String getVueEncoursUtlisation() {
 		return vueEncoursUtlisation;
 	}
 
+
 	public void setVueEncoursUtlisation(String vueEncoursUtlisation) {
 		this.vueEncoursUtlisation = vueEncoursUtlisation;
 	}
+
 
 	public String getLibelleLangage() {
 		return libelleLangage;
 	}
 
+
 	public void setLibelleLangage(String libelleLangage) {
 		this.libelleLangage = libelleLangage;
 	}
 
-	public int getIdTypeSujet() {
-		return idTypeSujet;
-	}
-
-	public void setIdTypeSujet(int idTypeSujet) {
-		this.idTypeSujet = idTypeSujet;
-	}
 
 	public String getLibelleQuestion() {
 		return libelleQuestion;
 	}
 
+
 	public void setLibelleQuestion(String libelleQuestion) {
 		this.libelleQuestion = libelleQuestion;
 	}
 
-	public int getDureeReflexion() {
+
+	public Integer getDureeReflexion() {
 		return dureeReflexion;
 	}
 
-	public void setDureeReflexion(int dureeReflexion) {
+
+	public void setDureeReflexion(Integer dureeReflexion) {
 		this.dureeReflexion = dureeReflexion;
 	}
-
 
 
 	public String[] getReponse() {
 		return reponse;
 	}
 
+
 	public void setReponse(String[] reponse) {
 		this.reponse = reponse;
 	}
+
+
+	public String getLibelleTypeSujetFiltree() {
+		return libelleTypeSujetFiltree;
+	}
+
+
+	public void setLibelleTypeSujetFiltree(String libelleTypeSujetFiltree) {
+		this.libelleTypeSujetFiltree = libelleTypeSujetFiltree;
+	}
+
 
 	public String getImage() {
 		return image;
 	}
 
+
 	public void setImage(String image) {
 		this.image = image;
 	}
 
-	public int getIdNiveauQuestion() {
-		return idNiveauQuestion;
+
+	public List<Question> getListQuestionsFiltres() {
+		return listQuestionsFiltres;
 	}
 
-	public void setIdNiveauQuestion(int idNiveauQuestion) {
-		this.idNiveauQuestion = idNiveauQuestion;
+
+	public void setListQuestionsFiltres(List<Question> listQuestionsFiltres) {
+		this.listQuestionsFiltres = listQuestionsFiltres;
 	}
-	
-	
+
+
+	public void reset() {
+		
+		libelleTypeSujet=null;
+		reponse=null;
+		libelleQuestion=null;
+		dureeReflexion=null;
+		idNiveauQuestion=null;
+	}
 
 }
