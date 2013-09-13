@@ -3,9 +3,7 @@ package fr.gfi.cmg.QuizzCmg.presentation.administration;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.QuestionBean;
 
 public class AdministrationFormBean implements Serializable {
 
@@ -42,7 +40,12 @@ public class AdministrationFormBean implements Serializable {
 	
 	private String image;
 	
-	private List<Question> listQuestionsFiltres;
+	private List<QuestionBean> listQuestionsFiltres;
+	
+	
+	private boolean typeReponse;
+	
+	
 
 	public AdministrationFormBean() {
 
@@ -179,12 +182,12 @@ public class AdministrationFormBean implements Serializable {
 	}
 
 
-	public List<Question> getListQuestionsFiltres() {
+	public List<QuestionBean> getListQuestionsFiltres() {
 		return listQuestionsFiltres;
 	}
 
 
-	public void setListQuestionsFiltres(List<Question> listQuestionsFiltres) {
+	public void setListQuestionsFiltres(List<QuestionBean> listQuestionsFiltres) {
 		this.listQuestionsFiltres = listQuestionsFiltres;
 	}
 
@@ -197,5 +200,18 @@ public class AdministrationFormBean implements Serializable {
 		dureeReflexion=null;
 		idNiveauQuestion=null;
 	}
+
+
+	public boolean isTypeReponse() {
+		return typeReponse;
+	}
+
+
+	public void setTypeReponse(boolean typeReponse) {
+		this.typeReponse = typeReponse;
+	}
+
+
+	
 
 }

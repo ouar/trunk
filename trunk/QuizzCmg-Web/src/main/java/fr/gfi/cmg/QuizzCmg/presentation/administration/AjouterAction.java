@@ -1,13 +1,17 @@
 package fr.gfi.cmg.QuizzCmg.presentation.administration;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +26,7 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.QuestionBean;
 
 @Controller("AjouterAction")
 public class AjouterAction extends AbstractMonAction {
@@ -29,6 +34,7 @@ public class AjouterAction extends AbstractMonAction {
 	@Resource(name = "adminBusinessService")
 	AdminBusinessService bsAdmin;
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) {
 
@@ -96,16 +102,31 @@ public class AjouterAction extends AbstractMonAction {
 
 			Set<Reponse> listReponse = new HashSet<Reponse>();
 
-			String[] reponses = administrationFormBean.getReponse();
+			Map paramMap = request.getParameterMap();
+			Iterator entries = paramMap.entrySet().iterator();
+			while (entries.hasNext()) {
+				Entry entree = (Entry) entries.next();
+				String cle = (String) entree.getKey();
 
-			if (reponses != null && reponses.length > 0) {
+				if (cle.indexOf("_typeReponse") != -1) {
+					String[] valeur = (String[]) entree.getValue();
+					String[] tab = valeur[0].split("_");
 
-				for (int i = 0; i < reponses.length; i++) {
+					if (tab != null && tab.length >= 2) {
 
-					Reponse reponse = new Reponse();
-					reponse.setLibReponse(reponses[i]);
-					reponse.setQuestion(question);
-					listReponse.add(reponse);
+						String[] libellereponse = (String[]) paramMap.get(tab[0]);
+						String typeReponse = tab[1];
+						Reponse reponse = new Reponse();
+						reponse.setLibReponse(libellereponse[0]);
+						reponse.setQuestion(question);
+						if ("VRAI".equals(typeReponse)) {
+							reponse.setBolTypeReponse(true);
+						} else if ("FAUSSE".equals(typeReponse)) {
+							reponse.setBolTypeReponse(false);
+						}
+						listReponse.add(reponse);
+
+					}
 
 				}
 			}
@@ -118,7 +139,7 @@ public class AjouterAction extends AbstractMonAction {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Question> listQuestionsFiltres = this.getQuestionsByIdTypeSujet(request.getSession(), typeSujet.getId());
+			List<QuestionBean> listQuestionsFiltres = this.getQuestionsByIdTypeSujet(request.getSession(), typeSujet.getId());
 			administrationFormBean.setListQuestionsFiltres(listQuestionsFiltres);
 			model = new ModelAndView("Administration/ParametrageQuestion");
 
@@ -130,4 +151,6 @@ public class AjouterAction extends AbstractMonAction {
 
 		return model;
 	}
+
+
 }
