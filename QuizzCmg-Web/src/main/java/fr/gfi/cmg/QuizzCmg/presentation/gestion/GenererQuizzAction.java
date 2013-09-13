@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -154,7 +155,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 	
 	public String validate(GestionFormBean gestionFormBean,HttpServletRequest request) {
-		super.validate(request.getSession());		
+		this.isConnect(request.getSession());		
 
 		List<String> listTypeSujet = new ArrayList<String>();
 		List<BeanNiveauTypeSujet> listNiveauTypeSujetPanier = new ArrayList<BeanNiveauTypeSujet>();
@@ -251,5 +252,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }

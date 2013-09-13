@@ -118,6 +118,5 @@ public class langageBean implements Serializable {
 	public void setlSujetJson(JSONArray lSujetJson) {
 		this.lSujetJson = lSujetJson;
 	}
-	
-	
+
 }
