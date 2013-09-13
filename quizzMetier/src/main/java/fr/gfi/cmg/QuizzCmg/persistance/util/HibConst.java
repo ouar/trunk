@@ -1,5 +1,7 @@
 package fr.gfi.cmg.QuizzCmg.persistance.util;
 
+
+
 public class HibConst {
 
 	public enum ParametresEnum {
@@ -81,7 +83,8 @@ public class HibConst {
 	
 	public enum typeSujetEnum {
 
-		Langage("langage");
+		Langage("langage"),	Questions("questions"),	QuizzSujets("quizzSujets");	
+	
 
 		private final String value;
 
