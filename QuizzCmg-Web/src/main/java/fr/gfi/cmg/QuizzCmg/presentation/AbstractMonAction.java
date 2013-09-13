@@ -7,8 +7,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
@@ -18,10 +19,11 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
-import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 import fr.gfi.cmg.QuizzCmg.persistance.util.HibConst;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.QuestionBean;
 import fr.gfi.cmg.QuizzCmg.presentation.beans.SujetBean;
 import fr.gfi.cmg.QuizzCmg.presentation.beans.langageBean;
+import fr.gfi.cmg.QuizzCmg.presentation.exceptions.ActionException;
 import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
 
 public abstract class AbstractMonAction {
@@ -35,6 +37,8 @@ public abstract class AbstractMonAction {
 	private boolean erreur = false;
 	protected Admin connecte = null;
 
+	protected ModelAndView model = null;
+
 	public boolean isErreur() {
 		return this.erreur;
 	}
@@ -43,7 +47,7 @@ public abstract class AbstractMonAction {
 		this.erreur = isErreur;
 	}
 
-	public void validate(HttpSession session) {
+	public void isConnect(HttpSession session) {
 		this.setErreur(false);
 		connecte = (Admin) session.getAttribute("CONNECTE");
 		if (connecte == null) {
@@ -183,6 +187,8 @@ public abstract class AbstractMonAction {
 
 			List<String> lAssociations = new ArrayList<String>();
 			lAssociations.add(HibConst.typeSujetEnum.Langage.getValue());
+			lAssociations.add(HibConst.typeSujetEnum.QuizzSujets.getValue());
+			lAssociations.add(HibConst.typeSujetEnum.Questions.getValue());
 
 			try {
 				lListTypeSujets = bsAdmin.getListTypesSujet(lAssociations);
@@ -206,18 +212,40 @@ public abstract class AbstractMonAction {
 	 * @param session
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<Question> getQuestionsByIdTypeSujet(HttpSession session, int idTypeSujet) {
+	protected List<QuestionBean> getQuestionsByIdTypeSujet(HttpSession session, int idTypeSujet) {
 		List<Question> lListQuestions = (List<Question>) session.getAttribute(AbstractConstantes.LISTE_QUESTIONS);
-		List<Question> lListQuestionsFiltres = new ArrayList<Question>();
+		List<QuestionBean> lListQuestionsFiltres = new ArrayList<QuestionBean>();
 		if (lListQuestions != null && lListQuestions.size() > 0) {
 			for (Question question : lListQuestions) {
 
 				if (question.getTypeSujet().getId().equals(idTypeSujet)) {
-					lListQuestionsFiltres.add(question);
+					QuestionBean questionBean = new QuestionBean(question);
+
+					lListQuestionsFiltres.add(questionBean);
 				}
 
 			}
 		}
 		return lListQuestionsFiltres;
 	}
+
+	@ExceptionHandler(BusinessServiceException.class)
+	public ModelAndView handleException(BusinessServiceException ex) {
+		ModelAndView model;
+
+		model = new ModelAndView("Erreur/Erreur");
+		model.addObject("message", ex.getMessage());
+
+		return model;
+
+	}
+
+	@ExceptionHandler(ActionException.class)	
+	public ModelAndView handleCustomized4Exception(ActionException ex) {
+
+		this.model.addObject("message", ex.getMessage());
+		return model;
+
+	}
+
 }
