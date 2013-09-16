@@ -1,6 +1,6 @@
 <%@page language="java"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 
@@ -34,8 +34,7 @@
 <BR>
 <SPAN class="titre1">Message d'erreur à l'intention du technicien</SPAN>
 <BR>
-<DIV style="border:1px gray solid;color:black;font:14px">
-  
+<c:out value="${message}"></c:out>
 </DIV>
 		
 
