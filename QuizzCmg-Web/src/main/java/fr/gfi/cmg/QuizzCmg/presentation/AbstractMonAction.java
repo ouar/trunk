@@ -1,10 +1,12 @@
 package fr.gfi.cmg.QuizzCmg.presentation;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -57,7 +59,7 @@ public abstract class AbstractMonAction {
 
 	}
 
-	public void ajouter(Object objet) {
+	public void ajouter(Object objet) throws SQLException {
 		try {
 			bsAdmin.ajouter(objet);
 		} catch (BusinessServiceException e) {
@@ -139,13 +141,16 @@ public abstract class AbstractMonAction {
 	/**
 	 * @param session
 	 */
-	protected void getListQuestions(HttpSession session, boolean reinitialisation) {
+	@SuppressWarnings("unchecked")
+	protected List<Question> getListQuestions(HttpSession session, boolean reinitialisation) {
 		/** Chargement des questions **/
+		List<Question> lListQuestions = null;
 		if (session.getAttribute(AbstractConstantes.LISTE_QUESTIONS) == null || reinitialisation) {
 
-			List<Question> lListQuestions = null;
-
 			try {
+				List<String> lAssociations = new ArrayList<String>();
+				lAssociations.add(HibConst.typeSujetEnum.Langage.getValue());
+				lAssociations.add(HibConst.typeSujetEnum.QuizzSujets.getValue());
 				lListQuestions = bsAdmin.getAllQuestionsResponses();
 
 			} catch (BusinessServiceException e) {
@@ -155,7 +160,10 @@ public abstract class AbstractMonAction {
 
 			session.setAttribute(AbstractConstantes.LISTE_QUESTIONS, lListQuestions);
 
+		} else {
+			lListQuestions = (List<Question>) session.getAttribute(AbstractConstantes.LISTE_QUESTIONS);
 		}
+		return lListQuestions;
 	}
 
 	/**
@@ -229,22 +237,19 @@ public abstract class AbstractMonAction {
 		return lListQuestionsFiltres;
 	}
 
-	@ExceptionHandler(BusinessServiceException.class)
-	public ModelAndView handleException(BusinessServiceException ex) {
-		ModelAndView model;
-
-		model = new ModelAndView("Erreur/Erreur");
-		model.addObject("message", ex.getMessage());
-
-		return model;
-
-	}
-
-	@ExceptionHandler(ActionException.class)	
-	public ModelAndView handleCustomized4Exception(ActionException ex) {
-
-		this.model.addObject("message", ex.getMessage());
-		return model;
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handleException(Exception ex) {
+		
+		if (ex instanceof ActionException) {			
+			this.model.addObject("erreur", ex.getMessage());
+			return this.model;
+		} else {
+			ModelAndView model = null;
+			model = new ModelAndView("Erreur/Erreur");
+			model.addObject("message", ex.getMessage());
+			return model;
+		}
+		
 
 	}
 
