@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +24,12 @@ public class DetailTypeSujetAction extends AbstractMonAction {
 	AdminBusinessService bsAdmin;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, 
-			@RequestParam(value = "idTypeSujet", required = false) int idTypeSujet,@RequestParam(value = "libelleTypeSujet", required = false) String libelleTypeSujet) {
+	public ModelAndView execute(@ModelAttribute("administrationFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, 
+			@RequestParam(value = "idTypeSujet", required = false) Integer idTypeSujet,@RequestParam(value = "libelleTypeSujet", required = false) String libelleTypeSujet,@RequestParam(value = "erreur", required = false) String erreur) {
 
 		ModelAndView model = null;
+		
+
 
 		model = new ModelAndView("Administration/ParametrageQuestion");
 
@@ -38,6 +40,9 @@ public class DetailTypeSujetAction extends AbstractMonAction {
 		administrationFormBean.setIdTypeSujet(idTypeSujet);
 		//administrationFormBean.reset();
 		model.addObject(administrationFormBean);
+		if(erreur!=null && !erreur.equals("")){
+			model.addObject("erreur", erreur);
+		}
 
 		return model;
 	}

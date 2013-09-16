@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +22,6 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
-import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
 import fr.gfi.cmg.QuizzCmg.presentation.beans.QuestionBean;
@@ -36,7 +34,7 @@ public class AjouterAction extends AbstractMonAction {
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView execute(@ModelAttribute("gestionFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) {
+	public ModelAndView execute(@ModelAttribute("administrationFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) throws Exception {
 
 		ModelAndView model = null;
 
@@ -48,13 +46,7 @@ public class AjouterAction extends AbstractMonAction {
 
 			langage.setLibelle(administrationFormBean.getLibelleLangage());
 
-			try {
-				bsAdmin.ajouter(langage);
-
-			} catch (BusinessServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			bsAdmin.ajouter(langage);
 
 		} else if ("typeSujet".equals(vueEncoursUtlisation)) {
 			// String idlangage = request.getParameter("langage");
@@ -73,12 +65,8 @@ public class AjouterAction extends AbstractMonAction {
 				}
 			}
 			typesujet.setLangage(langage);
-			try {
-				bsAdmin.ajouter(typesujet);
-			} catch (BusinessServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			bsAdmin.ajouter(typesujet);
 
 			model = new ModelAndView("Administration/Administration");
 
@@ -96,7 +84,7 @@ public class AjouterAction extends AbstractMonAction {
 
 			question.setIntDureeReflexion((administrationFormBean.getDureeReflexion()));
 			question.setLibQuestion(administrationFormBean.getLibelleQuestion());
-			question.setUrlImage(administrationFormBean.getImage());
+			question.setUrlImage(""+administrationFormBean.getImage());
 			question.setTypeSujet(typeSujet);
 			question.setNiveauQuestion(niveauQuestion);
 
@@ -133,15 +121,18 @@ public class AjouterAction extends AbstractMonAction {
 
 			question.setReponses(listReponse);
 
-			try {
-				bsAdmin.ajouter(question);
-			} catch (BusinessServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (listReponse != null && listReponse.size() > 0) {
+				question.setBolUniqueReponse(false);
+			} else {
+				question.setBolUniqueReponse(true);
 			}
+
+			bsAdmin.ajouter(question);
+
 			List<QuestionBean> listQuestionsFiltres = this.getQuestionsByIdTypeSujet(request.getSession(), typeSujet.getId());
 			administrationFormBean.setListQuestionsFiltres(listQuestionsFiltres);
-			model = new ModelAndView("Administration/ParametrageQuestion");
+			model = new ModelAndView();
+			model.setViewName("redirect:DetailTypeSujet?idTypeSujet=" + administrationFormBean.getIdTypeSujet());
 
 		}
 
@@ -151,6 +142,5 @@ public class AjouterAction extends AbstractMonAction {
 
 		return model;
 	}
-
 
 }

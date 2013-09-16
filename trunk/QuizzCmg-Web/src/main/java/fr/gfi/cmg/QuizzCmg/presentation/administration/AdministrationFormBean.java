@@ -38,7 +38,7 @@ public class AdministrationFormBean implements Serializable {
 	
 	private String libelleTypeSujetFiltree;
 	
-	private String image;
+	private Object image;
 	
 	private List<QuestionBean> listQuestionsFiltres;
 	
@@ -172,12 +172,12 @@ public class AdministrationFormBean implements Serializable {
 	}
 
 
-	public String getImage() {
+	public Object getImage() {
 		return image;
 	}
 
 
-	public void setImage(String image) {
+	public void setImage(Object image) {
 		this.image = image;
 	}
 
