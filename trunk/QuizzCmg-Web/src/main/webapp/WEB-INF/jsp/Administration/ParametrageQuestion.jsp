@@ -31,7 +31,7 @@
 		<jsp:include page="../include/menu_gauche.jsp"></jsp:include>
 
 		<div id="BoxCentre" style="display: inline-block">
-			<form:form method="post" action="Ajouter" name="Ajouter" commandName="administrationFormBean" modelAttribute="administrationFormBean" id="adminQuestion">
+			<form:form method="post" action="Ajouter" name="Ajouter" modelAttribute="administrationFormBean" id="adminQuestion" enctype="multipart/form-data">
 
 
 				<table id="dataTableAdminQuestions" class="display">
@@ -50,15 +50,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="question" items="${administrationFormBean.listQuestionsFiltres}">
+						<c:forEach var="questionBean" items="${administrationFormBean.listQuestionsFiltres}">
 							<tr>
 								<%-- <td>${question.typeSujet.langage.libelle}</td>
 								<td>${question.typeSujet.libelle}</td> --%>
-								<td>${question.libQuestion}</td>
-								<td>${question.niveauQuestion.libNiveau}</td>
-								<td>${question.intDureeReflexion}</td>
-								<td>${question.bolUniqueReponse}</td>
-								<td>${question.urlImage}</td>
+								<td>${questionBean.libQuestion}</td>
+								<td>${questionBean.difficulteBean.libelle}</td>
+								<td>${questionBean.intDureeReflexion}</td>
+								<td>${questionBean.bolUniqueReponse}</td>
+								<td>${questionBean.urlImage}</td>
 
 							</tr>
 						</c:forEach>
@@ -99,11 +99,11 @@
 					Réponse3 :<form:input path="reponse"/>
 					Réponse4 :<form:input path="reponse"/>
 					
-					Image  :<input type="file" name="image">
-
+					Image  : <form:input path="image" type="file"/>
+					
 				
 				</div>
-
+			
 			<form:input path="idTypeSujet"  cssStyle="visibility: hidden;"/>
 			</form:form>
 		</div>
