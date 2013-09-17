@@ -14,12 +14,13 @@ import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.persistance.service.AdminPersistenceService;
 import fr.gfi.cmg.QuizzCmg.persistance.util.HibConst;
 import fr.gfi.cmg.QuizzCmg.persistance.util.MyRequest;
@@ -30,19 +31,19 @@ public class AdminPersistenceServiceImpl implements AdminPersistenceService {
 	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
-	public Admin getUserByNameAndPwd(String sName, String sPass) {
+	public User getUserByNameAndPwd(String sName, String sPass) {
 		Session hSession = null;
-		Admin admin = null;
+		User user = null;
 
 		hSession = this.sessionFactory.getCurrentSession();
 
-		final Criteria criteres = hSession.createCriteria(Admin.class);
+		final Criteria criteres = hSession.createCriteria(User.class);
 		criteres.add(Restrictions.eq("libNom", sName));
 		criteres.add(Restrictions.eq("libPassword", sPass));
 
-		admin = (Admin) criteres.uniqueResult();
+		user = (User) criteres.uniqueResult();
 
-		return admin;
+		return user;
 	}
 
 	/**
@@ -134,12 +135,12 @@ public class AdminPersistenceServiceImpl implements AdminPersistenceService {
 	 * 
 	 * @return @
 	 */
-	public List<Admin> getListAdmin() {
+	public List<User> getListUser() {
 		Session hSession = null;
 
 		hSession = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		final List<Admin> lAdmins = hSession.createCriteria(Admin.class).list();
+		final List<User> lAdmins = hSession.createCriteria(User.class).list();
 		return lAdmins;
 
 	}

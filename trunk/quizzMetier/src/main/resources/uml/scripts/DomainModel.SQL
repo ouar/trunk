@@ -9,6 +9,9 @@ USE quizz
 
 
 --  Drop Tables, Stored Procedures and Views 
+
+DROP TABLE IF EXISTS admin
+;
 DROP TABLE IF EXISTS reponse_candidat
 ;
 DROP TABLE IF EXISTS reponse
@@ -23,11 +26,13 @@ DROP TABLE IF EXISTS quizz
 ;
 DROP TABLE IF EXISTS question
 ;
+DROP TABLE IF EXISTS user
+;
+DROP TABLE IF EXISTS role
+;
 DROP TABLE IF EXISTS niveau_question
 ;
 DROP TABLE IF EXISTS langage
-;
-DROP TABLE IF EXISTS admin
 ;
 
 
@@ -105,10 +110,10 @@ CREATE TABLE quizz
 	lib_nom_candidat VARCHAR(50),
 	lib_commentaire TEXT,
 	dat_quizz DATETIME COMMENT 'date du passage du quizz par le candidat',
-	ref_admin INTEGER NOT NULL,
+	ref_user INTEGER NOT NULL,
 	PRIMARY KEY (Id),
 	UNIQUE UQ_quizz_Id(Id),
-	KEY (ref_admin)
+	KEY (ref_user)
 )  COMMENT='recense des quizz'
 ;
 
@@ -131,6 +136,28 @@ CREATE TABLE question
 ;
 
 
+CREATE TABLE user
+(
+	Id INTEGER NOT NULL AUTO_INCREMENT,
+	lib_nom VARCHAR(50),
+	lib_prenom VARCHAR(50),
+	lib_password VARCHAR(50),
+	Id_role INTEGER NOT NULL,
+	PRIMARY KEY (Id)
+)  COMMENT='recense tous les utlisateurs'
+;
+
+
+CREATE TABLE role
+(
+	id INTEGER NOT NULL,
+	lib_role VARCHAR(50) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE UQ_roles_lib_role(lib_role)
+)  COMMENT='cette table référentiel sert à resencer les différents roles possible que puisse posséder un utlisateurs'
+;
+
+
 CREATE TABLE niveau_question
 (
 	Id INTEGER NOT NULL AUTO_INCREMENT,
@@ -146,17 +173,6 @@ CREATE TABLE langage
 	libelle VARCHAR(50) NOT NULL COMMENT 'libelle du langage (exemple jee,java,...)',
 	PRIMARY KEY (id)
 )  COMMENT='Table qui recense les différents langage telle que java,UMl,C'
-;
-
-
-CREATE TABLE admin
-(
-	Id INTEGER NOT NULL AUTO_INCREMENT,
-	lib_nom VARCHAR(50),
-	lib_prenom VARCHAR(50),
-	lib_password VARCHAR(50),
-	PRIMARY KEY (Id)
-)  COMMENT='recense tous les administrateurs'
 ;
 
 
@@ -204,8 +220,8 @@ ALTER TABLE type_sujet ADD CONSTRAINT FK_type_sujet_langage
 	FOREIGN KEY (ref_langage) REFERENCES langage (id)
 ;
 
-ALTER TABLE quizz ADD CONSTRAINT FK_quizz_admin 
-	FOREIGN KEY (ref_admin) REFERENCES admin (Id)
+ALTER TABLE quizz ADD CONSTRAINT FK_quizz_user 
+	FOREIGN KEY (ref_user) REFERENCES user (Id)
 ;
 
 ALTER TABLE question ADD CONSTRAINT FK_question_niveau_question 

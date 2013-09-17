@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 17 sept. 2013 17:50:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz" table="quizz" catalog="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="admin" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin" fetch="select">
-            <column name="ref_admin" not-null="true" />
+        <many-to-one name="user" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User" fetch="select">
+            <column name="ref_user" not-null="true" />
         </many-to-one>
         <property name="intDuree" type="java.lang.Integer">
             <column name="int_duree" />

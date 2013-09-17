@@ -37,7 +37,9 @@
 
 		<property name="mappingResources">
 			<list>
-				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Admin.hbm.xml
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Role.hbm.xml
+				</value>
+				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/User.hbm.xml
 				</value>
 				<value>/fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Langage.hbm.xml
 				</value>
