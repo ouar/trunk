@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 2 août 2013 10:03:09 by Hibernate Tools 3.4.0.CR1
+// Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,57 +10,27 @@ import java.util.Set;
  */
 public class Langage implements java.io.Serializable {
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Langage other = (Langage) obj;
-		if (id != other.id)
-			return false;
-		if (libelle == null) {
-			if (other.libelle != null)
-				return false;
-		} else if (!libelle.equals(other.libelle))
-			return false;
-		return true;
-	}
-
-	private int id;
+	private Integer id;
 	private String libelle;
 	private Set<TypeSujet> typeSujets = new HashSet<TypeSujet>(0);
 
 	public Langage() {
 	}
 
-	public Langage(int id, String libelle) {
-		this.id = id;
+	public Langage(String libelle) {
 		this.libelle = libelle;
 	}
 
-	public Langage(int id, String libelle, Set<TypeSujet> typeSujets) {
-		this.id = id;
+	public Langage(String libelle, Set<TypeSujet> typeSujets) {
 		this.libelle = libelle;
 		this.typeSujets = typeSujets;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

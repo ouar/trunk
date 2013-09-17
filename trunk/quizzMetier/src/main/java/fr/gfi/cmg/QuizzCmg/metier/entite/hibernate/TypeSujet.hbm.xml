@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet" table="type_sujet" >
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet" table="type_sujet" catalog="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
@@ -14,7 +14,7 @@
             </column>
         </many-to-one>
         <property name="libelle" type="string">
-            <column name="libelle" length="50" not-null="true" unique="true">
+            <column name="libelle" length="50" not-null="true">
                 <comment>libell&#233; du type (ex: Hibernate ou J2E)</comment>
             </column>
         </property>

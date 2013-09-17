@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question" table="question" >
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question" table="question" catalog="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
@@ -43,6 +43,11 @@
                 <comment>url d'une &#233;ventuelle image utilis&#233;e pour la question</comment>
             </column>
         </property>
+        <property name="isValid" type="java.lang.Boolean">
+            <column name="isValid">
+                <comment>indique si une question est toujours valide c'est &#224; dire utilisable par un quizz</comment>
+            </column>
+        </property>
         <set name="quizzQuestions" table="quizz_question" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ref_question" />
@@ -55,7 +60,7 @@
             </key>
             <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat" />
         </set>
-        <set name="reponses" table="reponse" inverse="true" lazy="true" fetch="select" cascade="save-update">
+        <set name="reponses" table="reponse" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ref_question" not-null="true" />
             </key>

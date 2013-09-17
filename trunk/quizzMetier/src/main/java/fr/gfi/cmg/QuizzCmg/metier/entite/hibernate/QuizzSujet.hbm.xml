@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 ao?t 2013 10:03:10 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzSujet" table="quizz_sujet" >
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzSujet" table="quizz_sujet" catalog="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
@@ -13,6 +13,9 @@
         </many-to-one>
         <many-to-one name="typeSujet" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet" fetch="select">
             <column name="ref_type_sujet" />
+        </many-to-one>
+        <many-to-one name="niveauQuestion" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion" fetch="select">
+            <column name="ref_niveau_question" not-null="true" />
         </many-to-one>
     </class>
 </hibernate-mapping>
