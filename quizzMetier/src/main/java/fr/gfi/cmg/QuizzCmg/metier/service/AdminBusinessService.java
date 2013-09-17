@@ -2,16 +2,17 @@ package fr.gfi.cmg.QuizzCmg.metier.service;
 
 import java.util.List;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 
 public interface AdminBusinessService {
 
-	public Admin getUserByNameAndPwd(String user, String password)
+	public User getUserByNameAndPwd(String user, String password)
 			throws BusinessServiceException;
 
 	
@@ -37,7 +38,7 @@ public interface AdminBusinessService {
 	 * @return
 	 * @throws BusinessServiceException
 	 */
-	public List<Admin> getListAdmin() throws BusinessServiceException;
+	public List<User> getListUser() throws BusinessServiceException;
 
 	/**
 	 * récupère la liste de toutes les questions parametrées contenant aussi des

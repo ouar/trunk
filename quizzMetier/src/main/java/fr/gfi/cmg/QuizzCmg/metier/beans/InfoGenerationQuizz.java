@@ -2,16 +2,18 @@ package fr.gfi.cmg.QuizzCmg.metier.beans;
 
 import java.util.List;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
+
 import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 
 public class InfoGenerationQuizz {
 
 	private NiveauQuestion niveauQuestion;
 	private List<TypeSujet> lTypeSujet;
-	private Admin admin;
+	private User user;
 	private String nomCandidat;
 	private String prenomCandidat;
 	private List<BeanNiveauTypeSujet> listNiveauTypeSujet;
@@ -20,10 +22,10 @@ public class InfoGenerationQuizz {
 
 	}
 
-	public InfoGenerationQuizz(NiveauQuestion niveauQuestion, List<TypeSujet> lTypeSujet, Admin admin, String nomCandidat, String prenomCandidat) {
+	public InfoGenerationQuizz(NiveauQuestion niveauQuestion, List<TypeSujet> lTypeSujet, User user, String nomCandidat, String prenomCandidat) {
 		this.niveauQuestion = niveauQuestion;
 		this.lTypeSujet = lTypeSujet;
-		this.admin = admin;
+		this.user = user;
 		this.nomCandidat = nomCandidat;
 		this.prenomCandidat = prenomCandidat;
 	}
@@ -58,19 +60,14 @@ public class InfoGenerationQuizz {
 		this.lTypeSujet = lTypeSujet;
 	}
 
-	/**
-	 * @return the admin
-	 */
-	public Admin getAdmin() {
-		return admin;
+
+
+	public User getUser() {
+		return user;
 	}
 
-	/**
-	 * @param admin
-	 *            the admin to set
-	 */
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	/**

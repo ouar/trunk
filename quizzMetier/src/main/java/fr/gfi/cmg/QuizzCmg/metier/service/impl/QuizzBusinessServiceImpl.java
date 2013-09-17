@@ -67,7 +67,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		 */
 
 		Quizz quizz = new Quizz();
-		quizz.setAdmin(infoGenerationQuizz.getAdmin());
+		quizz.setUser(infoGenerationQuizz.getUser());
 		quizz.setDatQuizz(new Date());
 		quizz.setLibNomCandidat(infoGenerationQuizz.getPrenomCandidat() + " "
 				+ infoGenerationQuizz.getNomCandidat());

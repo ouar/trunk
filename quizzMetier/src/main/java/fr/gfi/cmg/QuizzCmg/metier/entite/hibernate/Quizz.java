@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1
+// Generated 17 sept. 2013 17:50:17 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Quizz implements java.io.Serializable {
 
 	private Integer id;
-	private Admin admin;
+	private User user;
 	private Integer intDuree;
 	private String libNomCandidat;
 	private String libCommentaire;
@@ -24,12 +24,12 @@ public class Quizz implements java.io.Serializable {
 	public Quizz() {
 	}
 
-	public Quizz(Admin admin) {
-		this.admin = admin;
+	public Quizz(User user) {
+		this.user = user;
 	}
 
-	public Quizz(Admin admin, Integer intDuree, String libNomCandidat, String libCommentaire, Date datQuizz, Set<QuizzQuestion> quizzQuestions, Set<QuizzSujet> quizzSujets, Set<ReponseCandidat> reponseCandidats) {
-		this.admin = admin;
+	public Quizz(User user, Integer intDuree, String libNomCandidat, String libCommentaire, Date datQuizz, Set<QuizzQuestion> quizzQuestions, Set<QuizzSujet> quizzSujets, Set<ReponseCandidat> reponseCandidats) {
+		this.user = user;
 		this.intDuree = intDuree;
 		this.libNomCandidat = libNomCandidat;
 		this.libCommentaire = libCommentaire;
@@ -47,12 +47,12 @@ public class Quizz implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Admin getAdmin() {
-		return this.admin;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Integer getIntDuree() {

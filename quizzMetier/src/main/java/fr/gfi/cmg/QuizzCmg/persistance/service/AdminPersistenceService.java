@@ -5,17 +5,18 @@ package fr.gfi.cmg.QuizzCmg.persistance.service;
 
 import java.util.List;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 
 public interface AdminPersistenceService {
 
-	public Admin getUserByNameAndPwd(String sName, String sPass);
+	public User getUserByNameAndPwd(String sName, String sPass);
 
 	/**
 	 * 
@@ -56,7 +57,7 @@ public interface AdminPersistenceService {
 	 * 
 	 * @return @
 	 */
-	public List<Admin> getListAdmin();
+	public List<User> getListUser();
 
 	/**
 	 * retourne toutes les questions parametrées (avec des réponses parametrées
