@@ -46,7 +46,7 @@ $(document).ready(function() {
 		  
 		
 				<form:select path="user">
-					<c:forEach var="user" items="${ListeAdmins}">
+					<c:forEach var="user" items="${ListeUsers}">
 						<form:option value="${user.libNom}">${user.libPrenom} ${user.libNom}</form:option>
 					</c:forEach>
 				</form:select>

@@ -3,7 +3,7 @@
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="CONNECTE" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin" scope="session" />
+<jsp:useBean id="CONNECTE" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User" scope="session" />
 
 <c:if test="${CONNECTE != null}"> 
 	<c:remove var="CONNECTE" scope="session"/>
