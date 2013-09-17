@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 2 août 2013 10:03:09 by Hibernate Tools 3.4.0.CR1
+// Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,9 +19,9 @@ public class Question implements java.io.Serializable {
 	private Integer intDureeReflexion;
 	private Boolean bolUniqueReponse;
 	private String urlImage;
+	private Boolean isValid;
 	private Set<QuizzQuestion> quizzQuestions = new HashSet<QuizzQuestion>(0);
-	private Set<ReponseCandidat> reponseCandidats = new HashSet<ReponseCandidat>(
-			0);
+	private Set<ReponseCandidat> reponseCandidats = new HashSet<ReponseCandidat>(0);
 	private Set<Reponse> reponses = new HashSet<Reponse>(0);
 
 	public Question() {
@@ -32,11 +32,7 @@ public class Question implements java.io.Serializable {
 		this.niveauQuestion = niveauQuestion;
 	}
 
-	public Question(TypeSujet typeSujet, NiveauQuestion niveauQuestion,
-			String libQuestion, Date datCreation, Integer intDureeReflexion,
-			Boolean bolUniqueReponse, String urlImage,
-			Set<QuizzQuestion> quizzQuestions,
-			Set<ReponseCandidat> reponseCandidats, Set<Reponse> reponses) {
+	public Question(TypeSujet typeSujet, NiveauQuestion niveauQuestion, String libQuestion, Date datCreation, Integer intDureeReflexion, Boolean bolUniqueReponse, String urlImage, Boolean isValid, Set<QuizzQuestion> quizzQuestions, Set<ReponseCandidat> reponseCandidats, Set<Reponse> reponses) {
 		this.typeSujet = typeSujet;
 		this.niveauQuestion = niveauQuestion;
 		this.libQuestion = libQuestion;
@@ -44,6 +40,7 @@ public class Question implements java.io.Serializable {
 		this.intDureeReflexion = intDureeReflexion;
 		this.bolUniqueReponse = bolUniqueReponse;
 		this.urlImage = urlImage;
+		this.isValid = isValid;
 		this.quizzQuestions = quizzQuestions;
 		this.reponseCandidats = reponseCandidats;
 		this.reponses = reponses;
@@ -111,6 +108,14 @@ public class Question implements java.io.Serializable {
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+
+	public Boolean getIsValid() {
+		return this.isValid;
+	}
+
+	public void setIsValid(Boolean isValid) {
+		this.isValid = isValid;
 	}
 
 	public Set<QuizzQuestion> getQuizzQuestions() {

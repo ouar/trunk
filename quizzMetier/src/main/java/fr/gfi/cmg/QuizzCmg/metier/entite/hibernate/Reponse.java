@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 2 août 2013 10:03:09 by Hibernate Tools 3.4.0.CR1
+// Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +14,7 @@ public class Reponse implements java.io.Serializable {
 	private Question question;
 	private String libReponse;
 	private Boolean bolTypeReponse;
-	private Set<ReponseCandidat> reponseCandidats = new HashSet<ReponseCandidat>(
-			0);
+	private Set<ReponseCandidat> reponseCandidats = new HashSet<ReponseCandidat>(0);
 
 	public Reponse() {
 	}
@@ -24,8 +23,7 @@ public class Reponse implements java.io.Serializable {
 		this.question = question;
 	}
 
-	public Reponse(Question question, String libReponse,
-			Boolean bolTypeReponse, Set<ReponseCandidat> reponseCandidats) {
+	public Reponse(Question question, String libReponse, Boolean bolTypeReponse, Set<ReponseCandidat> reponseCandidats) {
 		this.question = question;
 		this.libReponse = libReponse;
 		this.bolTypeReponse = bolTypeReponse;

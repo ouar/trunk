@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 2 août 2013 10:03:09 by Hibernate Tools 3.4.0.CR1
+// Generated 17 sept. 2013 15:46:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,13 +13,15 @@ public class NiveauQuestion implements java.io.Serializable {
 	private Integer id;
 	private String libNiveau;
 	private Set<Question> questions = new HashSet<Question>(0);
+	private Set<QuizzSujet> quizzSujets = new HashSet<QuizzSujet>(0);
 
 	public NiveauQuestion() {
 	}
 
-	public NiveauQuestion(String libNiveau, Set<Question> questions) {
+	public NiveauQuestion(String libNiveau, Set<Question> questions, Set<QuizzSujet> quizzSujets) {
 		this.libNiveau = libNiveau;
 		this.questions = questions;
+		this.quizzSujets = quizzSujets;
 	}
 
 	public Integer getId() {
@@ -44,6 +46,14 @@ public class NiveauQuestion implements java.io.Serializable {
 
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
+	}
+
+	public Set<QuizzSujet> getQuizzSujets() {
+		return this.quizzSujets;
+	}
+
+	public void setQuizzSujets(Set<QuizzSujet> quizzSujets) {
+		this.quizzSujets = quizzSujets;
 	}
 
 }

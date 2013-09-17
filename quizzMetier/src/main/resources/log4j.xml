@@ -16,7 +16,7 @@
 
 
 	 <appender name="SERVEUR" class="org.apache.log4j.DailyRollingFileAppender">
-	        <param name="File" value="c:/temp/tt/super.log" />
+	        <param name="File" value="${catalina.home}/logs/quizz.log" />
 	        <param name="Append" value="false"/>
 	        <!-- param name="DatePattern" value="'.'yyyy-ww"/ -->
 	        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
@@ -32,7 +32,7 @@
 	<!-- Ex : param name="File" value="c:/log.txt" /-->
 	<appender name="FILELOGERREUR" class="org.apache.log4j.FileAppender">
 		<param name="Threshold" value="ERROR" />
-		<param name="File" value="c:/Local/quizz-erreurs.txt" />
+		<param name="File" value="${catalina.home}/logs/quizz_erreur.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%-5p][%t] %d{DATE} %c - %m%n" />
 		</layout>

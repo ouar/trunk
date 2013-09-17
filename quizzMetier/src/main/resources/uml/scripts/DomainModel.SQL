@@ -64,7 +64,9 @@ CREATE TABLE quizz_sujet
 	Id INTEGER NOT NULL AUTO_INCREMENT,
 	ref_quizz INTEGER,
 	ref_type_sujet INTEGER,
+	ref_niveau_question INTEGER NOT NULL,
 	PRIMARY KEY (Id),
+	KEY (ref_niveau_question),
 	KEY (ref_quizz),
 	KEY (ref_type_sujet)
 )  COMMENT='table de correspondance entre un quizz et les différents types de sujets. '
@@ -176,6 +178,10 @@ ALTER TABLE reponse_candidat ADD CONSTRAINT FK_reponse_candidat_reponse
 
 ALTER TABLE reponse ADD CONSTRAINT FK_reponse_question 
 	FOREIGN KEY (ref_question) REFERENCES question (Id)
+;
+
+ALTER TABLE quizz_sujet ADD CONSTRAINT FK_quizz_sujet_niveau_question 
+	FOREIGN KEY (ref_niveau_question) REFERENCES niveau_question (Id)
 ;
 
 ALTER TABLE quizz_sujet ADD CONSTRAINT FK_quizz_sujet_quizz 
