@@ -1,5 +1,10 @@
 package fr.gfi.cmg.QuizzCmg.presentation.administration;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -8,13 +13,18 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
@@ -34,7 +44,7 @@ public class AjouterAction extends AbstractMonAction {
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView execute(@ModelAttribute("administrationFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute, @RequestParam(value = "image", required = false) String image) throws Exception {
+	public ModelAndView execute(@ModelAttribute("administrationFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute) throws Exception {
 
 		ModelAndView model = null;
 
@@ -69,8 +79,12 @@ public class AjouterAction extends AbstractMonAction {
 			bsAdmin.ajouter(typesujet);
 
 			model = new ModelAndView("Administration/Administration");
-
 		} else {
+			String urlImage="";
+			if (administrationFormBean.getImage() != null) {
+				 urlImage=enregistrerImage(administrationFormBean.getImage(), request, administrationFormBean.getLibelleQuestion());
+			
+			}
 
 			Langage langage = new Langage();
 			// langage.setId(administrationFormBean.getIdLangage());
@@ -84,7 +98,7 @@ public class AjouterAction extends AbstractMonAction {
 
 			question.setIntDureeReflexion((administrationFormBean.getDureeReflexion()));
 			question.setLibQuestion(administrationFormBean.getLibelleQuestion());
-			question.setUrlImage(""+administrationFormBean.getImage());
+			question.setUrlImage(urlImage);
 			question.setTypeSujet(typeSujet);
 			question.setNiveauQuestion(niveauQuestion);
 
@@ -141,6 +155,26 @@ public class AjouterAction extends AbstractMonAction {
 		model.addObject(administrationFormBean);
 
 		return model;
+	}
+
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
+
+		// Convert multipart object to byte[]
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+
+	}
+
+	public String enregistrerImage(byte[] imageInByte, HttpServletRequest request, String libelleQuestion) throws IOException {
+
+		String urlImage = "";
+		// convert byte array back to BufferedImage
+		InputStream in = new ByteArrayInputStream(imageInByte);
+		BufferedImage bImageFromConvert = ImageIO.read(in);
+		urlImage = request.getSession().getServletContext().getRealPath("/imageUpload") + "\\" + libelleQuestion + ".jpg";
+		ImageIO.write(bImageFromConvert, "jpg", new File(urlImage));
+		return urlImage;
+
 	}
 
 }

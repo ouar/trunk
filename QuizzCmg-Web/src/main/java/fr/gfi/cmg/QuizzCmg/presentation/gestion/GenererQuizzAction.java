@@ -232,7 +232,10 @@ public class GenererQuizzAction extends AbstractMonAction {
 				BeanNiveauTypeSujet bean = new BeanNiveauTypeSujet();
 				bean.getTypeSujet().setId(Integer.parseInt(idTypeSujet));
 				bean.getTypeSujet().setLibelle(libelleTypeSujet);
-				bean.getTypeSujet().setLangage(new Langage(Integer.parseInt(idLangage), libelleLangage));
+				Langage langage=new Langage();
+				langage.setId(Integer.parseInt(idLangage));
+				langage.setLibelle(libelleLangage);
+				bean.getTypeSujet().setLangage(langage);
 				bean.getNiveauQuestion().setId(Integer.parseInt(idNiveau));
 				bean.getNiveauQuestion().setLibNiveau(libelleNiveau);
 
