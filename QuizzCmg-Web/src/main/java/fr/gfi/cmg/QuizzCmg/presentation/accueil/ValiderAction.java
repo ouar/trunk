@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 
@@ -38,7 +39,7 @@ public class ValiderAction {
 			retour = "Accueil/Accueil";
 		}
 
-		Admin connecte = null;
+		User connecte = null;
 		try {
 			connecte = (this.bsAdmin).getUserByNameAndPwd(
 					accueilFormBean.getUser(), accueilFormBean.getPass());

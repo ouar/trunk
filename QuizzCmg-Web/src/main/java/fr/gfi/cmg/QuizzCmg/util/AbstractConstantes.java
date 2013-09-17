@@ -30,7 +30,7 @@ public abstract class AbstractConstantes {
 		}
 	};
 
-	public static String LISTE_ADMINS = "ListeAdmins";
+	public static String LISTE_USERS = "ListeUsers";
 	public static String LISTE_LANGAGES = "ListeLangages";
 	public static String LISTE_TYPE_SUJETS = "ListeTypeSujets";
 	public static String LISTE_NIVEAU_DIFFICULTES = "ListeNiveauxDifficultes";
