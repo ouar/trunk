@@ -112,10 +112,10 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 		try {
 
 			jsonQuizz.accumulate("idQuestionnaire", quizz.getId());
-			jsonQuizz.accumulate("idCandidat", quizz.getAdmin().getId());
+			jsonQuizz.accumulate("idCandidat", quizz.getUser().getId());
 			jsonQuizz.accumulate("nomCandidat", quizz.getLibNomCandidat());
-			jsonQuizz.accumulate("idExaminateur", quizz.getAdmin().getId());
-			jsonQuizz.accumulate("nomExaminateur", quizz.getAdmin().getId());
+			jsonQuizz.accumulate("idExaminateur", quizz.getUser().getId());
+			jsonQuizz.accumulate("nomExaminateur", quizz.getUser().getId());
 		} catch (JSONException e) {
 
 			e.printStackTrace();

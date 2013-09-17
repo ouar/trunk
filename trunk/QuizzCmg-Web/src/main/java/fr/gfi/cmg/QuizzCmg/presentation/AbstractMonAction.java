@@ -13,11 +13,12 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Admin;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
@@ -37,7 +38,7 @@ public abstract class AbstractMonAction {
 	AdminBusinessService bsAdmin;
 
 	private boolean erreur = false;
-	protected Admin connecte = null;
+	protected User connecte = null;
 
 	protected ModelAndView model = null;
 
@@ -51,7 +52,7 @@ public abstract class AbstractMonAction {
 
 	public void isConnect(HttpSession session) {
 		this.setErreur(false);
-		connecte = (Admin) session.getAttribute("CONNECTE");
+		connecte = (User) session.getAttribute("CONNECTE");
 		if (connecte == null) {
 			this.setErreur(true);
 
@@ -86,17 +87,17 @@ public abstract class AbstractMonAction {
 	public void getListeUtiles(HttpSession session, boolean reinitialisation) {
 
 		/** Chargement des administrateurs **/
-		if (session.getAttribute(AbstractConstantes.LISTE_ADMINS) == null || reinitialisation) {
+		if (session.getAttribute(AbstractConstantes.LISTE_USERS) == null || reinitialisation) {
 
-			List<Admin> listeAdmins = null;
+			List<User> listeUsers = null;
 			try {
-				listeAdmins = bsAdmin.getListAdmin();
+				listeUsers = bsAdmin.getListUser();
 			} catch (BusinessServiceException e) {
 
 				e.printStackTrace();
 			}
 
-			session.setAttribute(AbstractConstantes.LISTE_ADMINS, listeAdmins);
+			session.setAttribute(AbstractConstantes.LISTE_USERS, listeUsers);
 
 		}
 		/** Chargement des langage / sujet et leur niveau de difficultés **/
