@@ -43,7 +43,7 @@ $(document).ready(function() {
 		  <p>
 		  <label>Login</label> 
 		
-		  ${message}
+		 	${erreur}
 		
 				<form:select path="user">
 					<c:forEach var="user" items="${ListeUsers}">
