@@ -1,7 +1,5 @@
 package fr.gfi.cmg.QuizzCmg.persistance.util;
 
-
-
 public class HibConst {
 
 	public enum ParametresEnum {
@@ -21,9 +19,7 @@ public class HibConst {
 
 	public enum QuizzEnum {
 
-		TypesSujets("quizzSujets.typeSujet"), TypesSujetsLangage("quizzSujets.typeSujet.langage"), Reponses("quizzQuestions.question.reponses"), Questions(
-				"quizzQuestions.question"), QuestionsReponsesCandidat("quizzQuestions.question.reponses.reponseCandidats"), ReponsesCandidat("reponseCandidats"), Admin(
-				"admin"), NiveauQuestion("quizzQuestions.question.niveauQuestion");
+		TypesSujets("quizzSujets.typeSujet"), TypesSujetsLangage("quizzSujets.typeSujet.langage"), Reponses("quizzQuestions.question.reponses"), Questions("quizzQuestions.question"), QuestionsReponsesCandidat("quizzQuestions.question.reponses.reponseCandidats"), ReponsesCandidat("reponseCandidats"), Admin("admin"), NiveauQuestion("quizzQuestions.question.niveauQuestion");
 
 		private final String value;
 
@@ -68,7 +64,7 @@ public class HibConst {
 
 	public enum QuestionEnum {
 
-		Reponses("reponses"), Niveau("niveauQuestion"), sujet("typeSujet"), Langage("typeSujet.langage");
+		Reponses("reponses"), Niveau("niveauQuestion"), sujet("typeSujet"), Langage("typeSujet.langage"), quizzQuestions("quizzQuestions"), reponseCandidats("reponseCandidats");
 
 		private final String value;
 
@@ -80,11 +76,10 @@ public class HibConst {
 			return this.value;
 		}
 	}
-	
+
 	public enum typeSujetEnum {
 
-		Langage("langage"),	Questions("questions"),	QuizzSujets("quizzSujets");	
-	
+		Langage("langage"), Questions("questions"), QuizzSujets("quizzSujets");
 
 		private final String value;
 
