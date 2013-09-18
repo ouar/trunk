@@ -60,7 +60,7 @@ public class LogUtil {
 	
 	public void logDBException( JoinPoint joinPoint, Exception ex) {
       
-            log.error(ex.getMessage());
+            log.error(ex.getMessage()+" "+ ex.getCause());
       
  }
 

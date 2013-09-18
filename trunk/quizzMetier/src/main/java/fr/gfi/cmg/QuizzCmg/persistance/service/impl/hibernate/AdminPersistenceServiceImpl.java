@@ -207,7 +207,7 @@ public class AdminPersistenceServiceImpl implements AdminPersistenceService {
 		hSession.save(objet);
 
 	}
-
+	
 	@Override
 	public void supprimer(Object object) {
 		Session hSession = null;

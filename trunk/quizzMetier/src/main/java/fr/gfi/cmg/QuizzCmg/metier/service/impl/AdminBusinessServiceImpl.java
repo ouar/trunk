@@ -181,12 +181,9 @@ public class AdminBusinessServiceImpl implements AdminBusinessService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void ajouter(Object objet) throws BusinessServiceException {
-		if(!(objet instanceof Question)){
+		
 			adminPersistenceService.ajouter(objet);
-		}
-		else {
-			adminPersistenceService.ajouter(objet);
-		}
+		
 		
 	}
 
