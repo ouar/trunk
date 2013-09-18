@@ -247,7 +247,7 @@ public abstract class AbstractMonAction {
 		} else {
 			ModelAndView model = null;
 			model = new ModelAndView("Erreur/Erreur");
-			model.addObject("message", ex.getMessage());
+			model.addObject("message", ex.getMessage()+" "+ ex.getCause());
 			return model;
 		}
 		

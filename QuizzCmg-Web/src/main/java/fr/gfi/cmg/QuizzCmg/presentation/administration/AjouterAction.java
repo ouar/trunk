@@ -5,6 +5,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +37,7 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
 import fr.gfi.cmg.QuizzCmg.presentation.beans.QuestionBean;
+import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
 
 @Controller("AjouterAction")
 public class AjouterAction extends AbstractMonAction {
@@ -47,6 +50,7 @@ public class AjouterAction extends AbstractMonAction {
 	public ModelAndView execute(@ModelAttribute("administrationFormBean") AdministrationFormBean administrationFormBean, HttpServletRequest request, @RequestParam(value = "vueEncoursUtlisation", required = false) String vueEncoursUtlisation, @RequestParam(value = "typeSujetAjoute", required = false) String typeSujetAjoute) throws Exception {
 
 		ModelAndView model = null;
+		SimpleDateFormat formater = new SimpleDateFormat(AbstractConstantes.FORMAT_DATE_YYYYMMDDHHMMSS);
 
 		if ("langage".equals(vueEncoursUtlisation)) {
 
@@ -80,10 +84,10 @@ public class AjouterAction extends AbstractMonAction {
 
 			model = new ModelAndView("Administration/Administration");
 		} else {
-			String urlImage="";
-			if (administrationFormBean.getImage() != null) {
-				 urlImage=enregistrerImage(administrationFormBean.getImage(), request, administrationFormBean.getLibelleQuestion());
-			
+			String urlImage = "";
+			if (administrationFormBean.getImage() != null && administrationFormBean.getImage().length>0) {
+				urlImage = enregistrerImage(administrationFormBean.getImage(), request, formater);
+
 			}
 
 			Langage langage = new Langage();
@@ -101,7 +105,7 @@ public class AjouterAction extends AbstractMonAction {
 			question.setUrlImage(urlImage);
 			question.setTypeSujet(typeSujet);
 			question.setNiveauQuestion(niveauQuestion);
-
+			question.setIsValid(true);
 			Set<Reponse> listReponse = new HashSet<Reponse>();
 
 			Map paramMap = request.getParameterMap();
@@ -131,6 +135,8 @@ public class AjouterAction extends AbstractMonAction {
 					}
 
 				}
+				
+				
 			}
 
 			question.setReponses(listReponse);
@@ -165,14 +171,16 @@ public class AjouterAction extends AbstractMonAction {
 
 	}
 
-	public String enregistrerImage(byte[] imageInByte, HttpServletRequest request, String libelleQuestion) throws IOException {
+	public String enregistrerImage(byte[] imageInByte, HttpServletRequest request, SimpleDateFormat formater) throws IOException {
 
 		String urlImage = "";
-		// convert byte array back to BufferedImage
+			
 		InputStream in = new ByteArrayInputStream(imageInByte);
 		BufferedImage bImageFromConvert = ImageIO.read(in);
-		urlImage = request.getSession().getServletContext().getRealPath("/imageUpload") + "\\" + libelleQuestion + ".jpg";
-		ImageIO.write(bImageFromConvert, "jpg", new File(urlImage));
+		Date aujourdhui = new Date();	
+		urlImage =formater.format(aujourdhui) + ".jpg";
+
+		ImageIO.write(bImageFromConvert, "jpg", new File(request.getSession().getServletContext().getRealPath("/imageUpload") + "/" +urlImage));
 		return urlImage;
 
 	}

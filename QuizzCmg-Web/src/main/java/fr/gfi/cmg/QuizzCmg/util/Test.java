@@ -1,30 +1,51 @@
 package fr.gfi.cmg.QuizzCmg.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Test {
 
 	public static void main(String[] args) {
 		
-	String numDate="20130828";
-	String numcmd="";
-			
-					//le premier numéro de la liste des numéro de commande est à 1
-					int tmp = 1 ;
-					
-				
-						tmp = Integer.parseInt("00242") + 1;
-					
-					
-					if (tmp<10)
-						numcmd = numDate+"0000"+tmp;
-					else if (tmp<100)
-						numcmd = numDate+"000"+tmp;
-					else if (tmp<1000)
-						numcmd = numDate+"00"+tmp;
-					else if (tmp<10000)
-						numcmd = numDate+""+tmp;
-	
-	
-		System.out.println(numcmd);
+		
+		System.out.println(15 & 4);
+
+		SimpleDateFormat formater = null;
+
+		Date aujourdhui = new Date();
+
+		formater = new SimpleDateFormat("dd-MM-yy");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("yyyyMMddhhmmss");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("yyMMdd");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("h:mm a");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("K:mm a, z");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("hh:mm a, zzzz");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("EEEE, d MMM yyyy");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' hh:mm:ss");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("'le' dd MMMM yyyy 'à' hh:mm:ss");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("dd MMMMM yyyy GGG, hh:mm aaa");
+		System.out.println(formater.format(aujourdhui));
+
+		formater = new SimpleDateFormat("yyyyMMddHHmmss");
+		System.out.println(formater.format(aujourdhui));
 
 	}
 

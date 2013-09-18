@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
+import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.exceptions.ActionException;
 
 /**
  * 
@@ -23,15 +25,13 @@ import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
  * 
  */
 @Controller("ValiderAction")
-public class ValiderAction {
+public class ValiderAction extends AbstractMonAction {
 
 	@Resource(name = "adminBusinessService")
 	AdminBusinessService bsAdmin;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String validate(
-			@ModelAttribute("accueilFormBean") @Valid AccueilFormBean accueilFormBean,
-			BindingResult result, HttpServletRequest request) {
+	public String validate(@ModelAttribute("accueilFormBean") @Valid AccueilFormBean accueilFormBean, BindingResult result, HttpServletRequest request) throws ActionException  {
 
 		String retour = "";
 		if (StringUtils.isBlank(accueilFormBean.getPass())) {
@@ -41,8 +41,7 @@ public class ValiderAction {
 
 		User connecte = null;
 		try {
-			connecte = (this.bsAdmin).getUserByNameAndPwd(
-					accueilFormBean.getUser(), accueilFormBean.getPass());
+			connecte = (this.bsAdmin).getUserByNameAndPwd(accueilFormBean.getUser(), accueilFormBean.getPass());
 		} catch (BusinessServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +51,15 @@ public class ValiderAction {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("CONNECTE", connecte);
-			retour = "redirect:AfficherFormulaireGenerationQuizz" ;
+			retour = "redirect:AfficherFormulaireGenerationQuizz";
+		}
+		else {
+			this.model = new ModelAndView();
+			this.model.setViewName("Accueil/Accueil");
+			this.model.addObject("accueilFormBean", accueilFormBean);
+			this.getListeUtiles(request.getSession(), false);
+			throw new ActionException("Vous n'êtes pas habilité");
+			
 		}
 		return retour;
 	}

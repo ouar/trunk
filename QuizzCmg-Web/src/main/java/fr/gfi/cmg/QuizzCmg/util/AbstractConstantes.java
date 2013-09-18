@@ -1,5 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.util;
 
+
 public abstract class AbstractConstantes {
 
 	public static enum BS {
@@ -35,6 +36,10 @@ public abstract class AbstractConstantes {
 	public static String LISTE_TYPE_SUJETS = "ListeTypeSujets";
 	public static String LISTE_NIVEAU_DIFFICULTES = "ListeNiveauxDifficultes";
 	public static String LISTE_QUESTIONS = "ListeQuestionss";
+	
+	public static String FORMAT_DATE_YYYYMMDDHHMMSS="yyyyMMddhhmmss";
+	
+	
 	
 
 }

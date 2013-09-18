@@ -15,7 +15,6 @@ import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
 import fr.gfi.cmg.QuizzCmg.presentation.exceptions.ActionException;
-import fr.gfi.cmg.QuizzCmg.util.LogUtil;
 
 /**
  * 
@@ -38,7 +37,7 @@ public class AccueilAction extends AbstractMonAction {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView genererListUtil(@ModelAttribute("accueilFormBean") AccueilFormBean accueilFormBean, HttpServletRequest request) throws BusinessServiceException, ActionException {
-		log.debug("sssssssssssssssssssss");
+	
 		ModelAndView modelAndView = new ModelAndView("Accueil/Accueil");
 
 		modelAndView.addObject("accueilFormBean", accueilFormBean);

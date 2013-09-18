@@ -56,8 +56,8 @@ public class SupprimerAction extends AbstractMonAction {
 
 		} else if ("question".equals(vueEncoursUtlisation)) {
 			model = new ModelAndView();
-			model.setViewName("redirect:DetailTypeSujet?idTypeSujet="+idTypeSujet);
-			
+			model.setViewName("redirect:DetailTypeSujet?idTypeSujet=" + idTypeSujet);
+
 			administrationFormBean.reset();
 			model.addObject(administrationFormBean);
 			List<Question> lListQuestions = new ArrayList<Question>();
@@ -69,14 +69,9 @@ public class SupprimerAction extends AbstractMonAction {
 
 					if (question.getId().equals(idQuestion)) {
 
-						if ((question.getQuizzQuestions() == null || question.getQuizzQuestions().size() == 0) && (question.getReponseCandidats() == null || question.getReponseCandidats().size() == 0)) {
+						question.setIsValid(false);
 
-							bsAdmin.supprimer(question);
-
-						} else {						
-							this.model = model;
-							throw new ActionException("Impossible de supprimer cette question car elle est rattachée à des réponses de candidat ou à un quizz !");
-						}
+						bsAdmin.modifier(question);
 
 					}
 
@@ -87,7 +82,6 @@ public class SupprimerAction extends AbstractMonAction {
 		}
 
 		this.getListeUtiles(request.getSession(), true);
-		
 
 		return model;
 	}
