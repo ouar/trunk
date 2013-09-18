@@ -28,11 +28,14 @@
 		<!--  Note: le tag html:errors ne fonctionne pas
 			      => on garde l'ancien html:Warning pour l'instant
 			  -->
+			  
+			
 		<jsp:include page="../include/menu_gauche.jsp"></jsp:include>
 
 		<div id="BoxCentre" style="display: inline-block">
-			<form:form method="post" action="Ajouter" name="Ajouter" commandName="administrationFormBean" modelAttribute="administrationFormBean" id="adminLangage">
-
+			<form:form method="post" action="Ajouter" name="administrationFormBean" commandName="administrationFormBean" modelAttribute="administrationFormBean" id="adminLangage">
+ 		
+ 			  ${erreur}
 				<div style="display: inline-block; border: 1px black solid;width: 100%">
 					<c:forEach var="langageBean" items="${sessionScope['ListeLangages']}">
 						<div style="border-right: 1px solid black; width: 100%; height: 100%">
@@ -42,9 +45,12 @@
 							<div style="width: 50%; float: right; display: table-cell;">
 								<c:forEach var="sujetBean" items="${langageBean.lSujet}">
 									<label><a href="../QuizzCmg-Web/DetailTypeSujet?idTypeSujet=${sujetBean.id}&libelleTypeSujet=${sujetBean.libelle}">${sujetBean.libelle}</a></label>
+									<a href="../QuizzCmg-Web/Supprimer?idTypeSujet=${sujetBean.id}&vueEncoursUtlisation=typeSujet"><img src="../images/pictos_supprimer.gif"></a>
 								</c:forEach>
 								<input type="submit" value="Ajouter type sujet" id="adminbtnAjouterTypeSujet" onclick="ajouterTypeSujet(${langageBean.id});" />
+								
 								<form:input path="libelleTypeSujet" />
+									
 							</div>
 						</div>
 					</c:forEach>
