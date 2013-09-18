@@ -37,13 +37,13 @@ $(document).ready(function() {
 <div id="BoxLogin">
 	
 	<form:form method="post"  action="Valider" name="Valider"  commandName="accueilFormBean" modelAttribute="accueilFormBean">	
-	
+	<%-- action="<%=request.getContextPath() %>/j_spring_security_check --%>
   		<%-- <form:errors path="*"  element="div" /> --%>
 		  <span class="titre">connexion</span>		
 		  <p>
 		  <label>Login</label> 
 		
-		  
+		  ${message}
 		
 				<form:select path="user">
 					<c:forEach var="user" items="${ListeUsers}">
