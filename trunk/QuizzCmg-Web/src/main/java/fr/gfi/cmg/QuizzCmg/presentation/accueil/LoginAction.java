@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.presentation.gestion.GestionFormBean;
 
@@ -16,9 +15,7 @@ import fr.gfi.cmg.QuizzCmg.presentation.gestion.GestionFormBean;
 public class LoginAction {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String execute(
-			@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,
-			HttpServletRequest request) {
+	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		final User connecte = (User) session.getAttribute("CONNECTE");
 		if (connecte == null) {

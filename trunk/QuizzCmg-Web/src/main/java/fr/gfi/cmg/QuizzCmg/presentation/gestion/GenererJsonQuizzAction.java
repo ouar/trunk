@@ -30,18 +30,21 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 	QuizzBusinessService bsqz;
 
 
-	
+	HttpServletRequest vRequest;
 
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {		
 				
-
+			this.vRequest=request;
 			Quizz quizz;
 			try {
 				gestionFormBean.setIdQuizzAConsulter(Integer.parseInt(request.getParameter("tfIdQuizzAConsulter")));
 				quizz = this.bsqz.getDetailsQuizz(gestionFormBean.getIdQuizzAConsulter());
-				gestionFormBean.setJsonObject(getJsonQuizzCmgObject(quizz));
+				if(quizz!=null){
+					gestionFormBean.setJsonObject(getJsonQuizzCmgObject(quizz));
+				}
+			
 			} catch (BusinessServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,7 +74,13 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 			jsonQuizzQuestion.accumulate("isPlusieursReponsesCorrectes", quizzQuestion.getQuestion().getBolUniqueReponse());
 			jsonQuizzQuestion.accumulate("dureeReflexionEnSec", quizzQuestion.getQuestion().getIntDureeReflexion());
 			jsonQuizzQuestion.accumulate("libEnonce", quizzQuestion.getQuestion().getLibQuestion());
-			jsonQuizzQuestion.accumulate("picture", quizzQuestion.getQuestion().getUrlImage());
+			String urlImage;
+			if(quizzQuestion.getQuestion().getUrlImage()!=null && !"".equals(quizzQuestion.getQuestion().getUrlImage()) && vRequest!=null){
+				urlImage = vRequest.getScheme() + "://" + vRequest.getServerName() + ":" + vRequest.getServerPort() + vRequest.getContextPath()+"/imageUpload/"+quizzQuestion.getQuestion().getUrlImage();
+				jsonQuizzQuestion.accumulate("picture", urlImage);
+			}
+			
+			
 		} catch (JSONException e) {
 
 			e.printStackTrace();
@@ -164,16 +173,16 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 
 			}
 			listJsonReponse.put(jsonReponse);
-			// JSONObject reponses = new JSONObject();
+			
 			try {
 				jsonQuizzQuestion.accumulate("reponses", jsonReponse);
-				// reponses = reponses.put("reponses", listJsonReponse);
+				
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 			listJsonQuizzQuesion.put(jsonQuizzQuestion);
-			// listJsonQuizzQuesion.put(reponses);
+			
 
 		}
 
@@ -181,7 +190,7 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 		try {
 			Questions = Questions.put("Questions", listJsonQuizzQuesion);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		listQuizzGlobale.put(Questions);

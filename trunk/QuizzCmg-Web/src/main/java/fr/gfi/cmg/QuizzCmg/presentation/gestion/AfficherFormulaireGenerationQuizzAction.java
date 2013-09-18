@@ -56,7 +56,7 @@ public class AfficherFormulaireGenerationQuizzAction extends AbstractMonAction {
 		}
 	
 
-		//ModelAndView modelAndView = new ModelAndView("Accueil/Accueil");
+		
 		
 	}
 

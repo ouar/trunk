@@ -25,6 +25,7 @@ public class QuestionBean implements Serializable {
 	private Boolean bolUniqueReponse;
 	private String urlImage;
 	private JSONArray reponses = new JSONArray();
+	private Boolean isValid;
 
 	public QuestionBean() {
 
@@ -35,6 +36,7 @@ public class QuestionBean implements Serializable {
 		this.id = question.getId();
 		this.libQuestion = question.getLibQuestion();
 		this.datCreation = question.getDatCreation();
+		this.isValid = question.getIsValid();
 
 		this.intDureeReflexion = question.getIntDureeReflexion();
 		this.bolUniqueReponse = question.getBolUniqueReponse();
@@ -47,6 +49,7 @@ public class QuestionBean implements Serializable {
 		this.sujetBean = new SujetBean();
 		this.sujetBean.setId(question.getTypeSujet().getId());
 		this.sujetBean.setLibelle(question.getTypeSujet().getLibelle());
+		
 
 		Set<Reponse> reponses = question.getReponses();
 
@@ -139,6 +142,14 @@ public class QuestionBean implements Serializable {
 
 	public void setReponses(JSONArray reponses) {
 		this.reponses = reponses;
+	}
+
+	public Boolean getIsValid() {
+		return isValid;
+	}
+
+	public void setIsValid(Boolean isValid) {
+		this.isValid = isValid;
 	}
 
 }
