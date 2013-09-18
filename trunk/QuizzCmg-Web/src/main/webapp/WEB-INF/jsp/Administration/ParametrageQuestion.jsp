@@ -33,7 +33,7 @@
 		<div id="BoxCentre" style="display: inline-block">
 			<form:form method="post" action="Ajouter" name="Ajouter" modelAttribute="administrationFormBean" id="adminQuestion" enctype="multipart/form-data">
 
-
+ 				${erreur}
 				<table id="dataTableAdminQuestions" class="display">
 					<thead>
 						<tr class="ui-state-default">
@@ -44,6 +44,8 @@
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">duréee réfléxion</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">nombre réponse possible</div></th>
 							<th align="left" class="devant ui-state-default"><div class="titre-colonne">Image</div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne"></div></th>
+							<th align="left" class="devant ui-state-default"><div class="titre-colonne"></div></th>
 
 
 
@@ -51,16 +53,20 @@
 					</thead>
 					<tbody>
 						<c:forEach var="questionBean" items="${administrationFormBean.listQuestionsFiltres}">
-							<tr>
-								<%-- <td>${question.typeSujet.langage.libelle}</td>
+							<c:if test="${questionBean.isValid}">
+								<tr>
+									<%-- <td>${question.typeSujet.langage.libelle}</td>
 								<td>${question.typeSujet.libelle}</td> --%>
-								<td>${questionBean.libQuestion}</td>
-								<td>${questionBean.difficulteBean.libelle}</td>
-								<td>${questionBean.intDureeReflexion}</td>
-								<td>${questionBean.bolUniqueReponse}</td>
-								<td>${questionBean.urlImage}</td>
+									<td>${questionBean.libQuestion}</td>
+									<td>${questionBean.difficulteBean.libelle}</td>
+									<td>${questionBean.intDureeReflexion}</td>
+									<td>${questionBean.bolUniqueReponse}</td>
+									<td>${questionBean.urlImage}</td>
+									<td><a href="../QuizzCmg-Web/Supprimer?idTypeSujet=${questionBean.sujetBean.id}&idQuestion=${questionBean.id}&vueEncoursUtlisation=question"><img src="../images/pictos_supprimer.gif"></a></td>
+									<td>${questionBean.reponses}</td>
 
-							</tr>
+								</tr>
+							</c:if>
 						</c:forEach>
 
 
@@ -71,43 +77,42 @@
 				<input type="submit" value="Ajouter" id="adminbtnAjouterQuestion" />
 				<input name="vueEncoursUtlisation" type="hidden" value="Question" />
 
-				
+
+
 
 				<div id="divAjoutQuestion" style="display: inline-block">
 
 
-					<label>Type sujet :</label>${administrationFormBean.libelleTypeSujetFiltree}
-					
-					<br><br><br>
-					<label>Niveau :</label>
-					
+					<label>Type sujet :</label>${administrationFormBean.libelleTypeSujetFiltree} <br> <br> <br> <label>Niveau :</label>
+
 					<form:select path="idNiveauQuestion" id="idNiveauQuestion">
 
 						<c:forEach var="NiveauQuestion" items="${sessionScope['ListeNiveauxDifficultes']}">
-							<form:option value="${NiveauQuestion.id}" >${NiveauQuestion.libNiveau}</form:option>
+							<form:option value="${NiveauQuestion.id}">${NiveauQuestion.libNiveau}</form:option>
 						</c:forEach>
 
 					</form:select>
-					
-					<label>Libellé question :</label><form:input path="libelleQuestion"/> 
-					
-					<label>durée réfléxion  :</label><form:input path="dureeReflexion"/>
-					
-					<label>Reponses :</label>
-					Réponse1 :<form:input path="reponse"/>
-					Réponse2 :<form:input path="reponse"/>
-					Réponse3 :<form:input path="reponse"/>
-					Réponse4 :<form:input path="reponse"/>
-					
-					Image  : <form:input path="image" type="file"/>
-					
-				
+
+					<label>Libellé question :</label>
+					<form:input path="libelleQuestion" />
+
+					<label>durée réfléxion :</label>
+					<form:input path="dureeReflexion" />
+
+					<label>Reponses :</label> Réponse : <input type="text" id="reponse1" name="reponse1"> 
+					Vrai/Faux : <input type="checkbox" id="checkReponse1"><input type="hidden" id="_typeReponse1" name="_typeReponse1" value="reponse1_FAUSSE"> Image :
+					<form:input path="image" type="file" />
 				</div>
-			
-			<form:input path="idTypeSujet"  cssStyle="visibility: hidden;"/>
-			</form:form>
+				<input type="button" value="Ajouter reponse" id="AjouterReponse" onclick="ajouterReponse()" />
+				<input type="hidden" id="nombreReponses" value="1">
+				<form:input path="idTypeSujet" cssStyle="visibility: hidden;" />
+				
 		</div>
 
+
+		</form:form>
 	</div>
+
+
 </body>
 </html>

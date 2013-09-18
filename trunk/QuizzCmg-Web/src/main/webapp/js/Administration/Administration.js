@@ -29,6 +29,8 @@ function getTableauQuestions(jsonData) {
 		}, {
 			"mDataProp" : "urlImage",
 		}, {
+			"mDataProp" : "TEST",
+		}, {
 			"mDataProp" : "reponses",
 			"bVisible" : false
 		} ],
