@@ -30,7 +30,7 @@
 			  -->
 		<jsp:include page="../include/menu_gauche.jsp"></jsp:include>
 
-		<div id="BoxCentre" style="display: inline-block">
+		<div id="BoxCentre" style="display: inline-block;width: 60%">
 			<form:form method="post" action="Ajouter" name="Ajouter" modelAttribute="administrationFormBean" id="adminQuestion" enctype="multipart/form-data">
 
  				${erreur}
@@ -62,7 +62,7 @@
 									<td>${questionBean.intDureeReflexion}</td>
 									<td>${questionBean.bolUniqueReponse}</td>
 									<td>${questionBean.urlImage}</td>
-									<td><a href="../QuizzCmg-Web/Supprimer?idTypeSujet=${questionBean.sujetBean.id}&idQuestion=${questionBean.id}&vueEncoursUtlisation=question"><img src="../images/pictos_supprimer.gif"></a></td>
+									<td><a href="../QuizzCmg-Web/Supprimer?idTypeSujet=${questionBean.sujetBean.id}&idQuestion=${questionBean.id}&vueEncoursUtlisation=question" style="cursor: pointer;"><img src="../images/pictos_supprimer.gif" title="Supprimer" alt="Supprimer"></a></td>
 									<td>${questionBean.reponses}</td>
 
 								</tr>
