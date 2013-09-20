@@ -60,7 +60,7 @@
             </key>
             <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat" />
         </set>
-        <set name="reponses" table="reponse" inverse="true" lazy="true" fetch="select">
+        <set name="reponses" table="reponse" inverse="true" lazy="true" fetch="select" cascade="save-update">
             <key>
                 <column name="ref_question" not-null="true" />
             </key>
