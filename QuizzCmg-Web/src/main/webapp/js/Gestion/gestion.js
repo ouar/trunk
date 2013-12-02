@@ -20,6 +20,11 @@ $(document).ready(function() {
 			return !(elem.elements.idTypeSujet == idTypeSujet && elem.elements.idNiveau == idNiveau);
 		});
 	};
+//	$( "#generation" ).submit(function( event ) {
+//		$('#idDujetDifficulte').val(JSON.stringify($('#idDujetDifficulte').val()));
+//		event.preventDefault();
+//		});
+	
 
 });
 
@@ -56,22 +61,7 @@ function getTableauPanier(jsonData) {
 		"aaData" : jsonData,
 
 		'oLanguage' : {
-			"sProcessing" : "Veuillez patienter ...",
-			"sLengthMenu" : "Nombre de lignes par page _MENU_",
-			"sZeroRecords" : "Pas de r&eacute;sultat correspondant &agrave; votre recherche.",
-			"sInfo" : "_START_ &agrave; _END_/_TOTAL_ r&eacute;sultat(s)",
-			"sInfoEmpty" : "0 r&eacute;sultat(s)",
-			"sInfoFiltered" : "(sur _MAX_ donn&eacute;es)",
-			"sInfoPostFix" : "",
-			"sSearch" : "Filtre &nbsp;(Destination)",
-			"sUrl" : "",
-			"oPaginate" : {
-				"sFirst" : "Premi\u00e8re page",
-				"sPrevious" : "Page pr\u00e9c\u00e9dente",
-				"sNext" : "Page suivante",
-				"sLast" : "Derni\u00e8re page"
-			}
-
+			'sUrl' : '../../js/datatable_fr.txt'// choix de la langue française
 		},
 		"fnRowCallback" : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 			var idLangage = aData["idLangage"];
@@ -80,10 +70,8 @@ function getTableauPanier(jsonData) {
 			var libelleTypeSujet = aData["libelleTypeSujet"];
 			var idNiveau = aData["idNiveau"];
 			var libelleNiveau = aData["libelleNiveau"];
-			var imgTag = "<p style='text-align: center;'><a onclick=\"supprimerTypeDeSujetPanier(" + idLangage + ",'" + libelleLangage + "'," + idTypeSujet + ",'" + libelleTypeSujet + "'," + idNiveau + ",'" + libelleNiveau + "');\" style='cursor: pointer;'><img src='../images/pictos_supprimer.gif' title='Supprimer' alt='Supprimer'></a></p>";
-			$('td:eq(3)', nRow).html(imgTag); // quand il
-			// s'agit de la
-			// cellule
+			var imgTag = "<p style='text-align: center;'><a onclick=\"supprimerTypeDeSujetPanier(" + idLangage + ",'" + libelleLangage + "'," + idTypeSujet + ",'" + libelleTypeSujet + "'," + idNiveau + ",'" + libelleNiveau + "');\" style='cursor: pointer;'><img src='../../images/pictos_supprimer.gif' title='Supprimer' alt='Supprimer'></a></p>";
+			$('td:eq(3)', nRow).html(imgTag); // quand il s'agit de la cellule
 			// 3 on rajoute le code html
 			return nRow;
 		}
@@ -182,7 +170,7 @@ function createObject() {
 
 function selectLangage() {
 
-	$("#IdLangage").change(function() {
+	$("#tfIdLangage").change(function() {
 
 		raffraichirOngletTypeSujet();
 	});
@@ -249,7 +237,6 @@ function raffraichirPanier() {
 
 	});
 	try {
-
 		tableauPanier.fnDestroy();
 		tableauPanier = getTableauPanier(jsonData);
 	} catch (e) {
@@ -264,7 +251,7 @@ function raffraichirPanier() {
 
 function raffraichirOngletTypeSujet() {
 
-	var idLangageSelectionne = $("#IdLangage option:selected").val();
+	var idLangageSelectionne = $("#tfIdLangage option:selected").val();
 
 	for ( var i = 0; i < tableauListLangage.length; i++) {
 
@@ -353,16 +340,6 @@ function genererQuizz() {
 		}
 
 		return isFormulaireValid;
-	});
-
-}
-
-function loadFlashCode(urlFlashCode) {
-
-	$(document).ready(function() {
-
-		$("#divFlashCode").html($("<img>").attr("src", urlFlashCode));
-
 	});
 
 }
