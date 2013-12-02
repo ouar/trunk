@@ -51,7 +51,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		 */
 		final List<Question> lQuestions = quizzPersistenceService
 				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
-						.getListNiveauTypeSujet());
+						.getlSujetDifficulte());
 
 		/*
 		 * on alimente l'entité quizz
@@ -249,7 +249,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		 */
 		lQuestions = quizzPersistenceService
 				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
-						.getListNiveauTypeSujet());
+						.getlSujetDifficulte());
 
 		/*
 		 * on alimente l'entité quizz
