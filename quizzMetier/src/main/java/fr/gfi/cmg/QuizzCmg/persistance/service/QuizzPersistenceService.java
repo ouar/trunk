@@ -5,12 +5,12 @@ package fr.gfi.cmg.QuizzCmg.persistance.service;
 
 import java.util.List;
 
+import fr.gfi.cmg.QuizzCmg.metier.beans.SujetDifficulteBean;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzSujet;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat;
-import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 
 
 /**
@@ -69,7 +69,7 @@ public interface QuizzPersistenceService {
 	 * @return
 	 * @
 	 */
-	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion( List<BeanNiveauTypeSujet> listNiveauTypeSujet)
+	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion( List<SujetDifficulteBean>  listNiveauTypeSujet)
 			;
 
 	/**

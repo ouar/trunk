@@ -1,19 +1,17 @@
 package fr.gfi.cmg.QuizzCmg.metier.beans;
 
+
+
 import java.util.List;
 
 
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
-
 import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 
 public class InfoGenerationQuizz {
 
-	private NiveauQuestion niveauQuestion;
-	private List<TypeSujet> lTypeSujet;
-	private User user;
+	private List<SujetDifficulteBean> lSujetDifficulte;
+	private User  user;
 	private String nomCandidat;
 	private String prenomCandidat;
 	private List<BeanNiveauTypeSujet> listNiveauTypeSujet;
@@ -22,46 +20,14 @@ public class InfoGenerationQuizz {
 
 	}
 
-	public InfoGenerationQuizz(NiveauQuestion niveauQuestion, List<TypeSujet> lTypeSujet, User user, String nomCandidat, String prenomCandidat) {
-		this.niveauQuestion = niveauQuestion;
-		this.lTypeSujet = lTypeSujet;
+	public InfoGenerationQuizz(List<SujetDifficulteBean> lSujetDifficulte, User user, String nomCandidat, String prenomCandidat) {
+		this.setlSujetDifficulte(lSujetDifficulte);
 		this.user = user;
 		this.nomCandidat = nomCandidat;
 		this.prenomCandidat = prenomCandidat;
 	}
 
-	/**
-	 * @return the lNiveauQuestion
-	 */
-	public NiveauQuestion getNiveauQuestion() {
-		return niveauQuestion;
-	}
-
-	/**
-	 * @param lNiveauQuestion
-	 *            the lNiveauQuestion to set
-	 */
-	public void setNiveauQuestion(NiveauQuestion niveauQuestion) {
-		this.niveauQuestion = niveauQuestion;
-	}
-
-	/**
-	 * @return the lTypeSujet
-	 */
-	public List<TypeSujet> getlTypeSujet() {
-		return lTypeSujet;
-	}
-
-	/**
-	 * @param lTypeSujet
-	 *            the lTypeSujet to set
-	 */
-	public void setlTypeSujet(List<TypeSujet> lTypeSujet) {
-		this.lTypeSujet = lTypeSujet;
-	}
-
-
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -107,8 +73,13 @@ public class InfoGenerationQuizz {
 	public void setListNiveauTypeSujet(List<BeanNiveauTypeSujet> listNiveauTypeSujet) {
 		this.listNiveauTypeSujet = listNiveauTypeSujet;
 	}
-	
-	
-	
+
+	public void setlSujetDifficulte(List<SujetDifficulteBean> lSujetDifficulte) {
+		this.lSujetDifficulte = lSujetDifficulte;
+	}
+
+	public List<SujetDifficulteBean> getlSujetDifficulte() {
+		return lSujetDifficulte;
+	}
 
 }

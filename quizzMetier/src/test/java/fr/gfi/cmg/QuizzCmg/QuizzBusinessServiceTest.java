@@ -72,16 +72,16 @@ public class QuizzBusinessServiceTest {
 	// dbTester.onTearDown();
 	// }
 
-	@Test
-	public void testgetDetailsQuizz() throws BusinessServiceException {
-
-		logger.debug("recherche d'ouvrage par titre");
-
-		Quizz quizz = quizzBS.getDetailsQuizz(28);
-
-		assertNotNull(quizz);
-		// assertTrue(ouvrages.get(0).getTitre().equals("Le petit Nicholas") );
-	}
+//	@Test
+//	public void testgetDetailsQuizz() throws BusinessServiceException {
+//
+//		logger.debug("recherche d'ouvrage par titre");
+//
+//		Quizz quizz = quizzBS.getDetailsQuizz(28);
+//
+//		ass(quizz);
+//		// assertTrue(ouvrages.get(0).getTitre().equals("Le petit Nicholas") );
+//	}
 
 	@Test
 	public void testgetAllQuestions() throws BusinessServiceException {

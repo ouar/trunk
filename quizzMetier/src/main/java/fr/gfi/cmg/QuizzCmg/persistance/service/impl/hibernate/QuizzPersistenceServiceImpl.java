@@ -14,6 +14,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import fr.gfi.cmg.QuizzCmg.metier.beans.SujetDifficulteBean;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzQuestion;
@@ -39,7 +40,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion(
-			List<BeanNiveauTypeSujet> listNiveauTypeSujet) {
+			List<SujetDifficulteBean>  listNiveauTypeSujet) {
 		Session hSession = null;
 
 		List<Question> lQuestions = null;
@@ -55,15 +56,12 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 
 		Disjunction orTypeSujet = Restrictions.disjunction();
 
-		for (BeanNiveauTypeSujet bean : listNiveauTypeSujet) {
-			Conjunction andNiveauTypeSujet = Restrictions.conjunction();
-			andNiveauTypeSujet.add(
-					Restrictions.eq("typeSujet", bean.getTypeSujet()))
-					.add(Restrictions.eq("niveauQuestion",
-							bean.getNiveauQuestion()));
+		
+		for (SujetDifficulteBean bean : listNiveauTypeSujet) {
+			Conjunction andNiveauTypeSujet =Restrictions.conjunction();
+			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", bean.getSujet().getId())).add(Restrictions.eq("niveauQuestion.id", bean.getDifficulte().getId()));
 			orTypeSujet.add(andNiveauTypeSujet);
-
-		}
+		}	
 		criteres.add(orTypeSujet);
 
 		// On traite le résultat de la requête pour avoir une question avec

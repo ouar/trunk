@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>quizzMetier</groupId>
-	<artifactId>quizzMetier</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>fr.gfi.cmg</groupId>
+	<artifactId>QuizzMetier</artifactId>
+	<version>1.2-SNAPSHOT</version>
 	<properties>
 		<jaxws.plugin.version>2.1</jaxws.plugin.version>
 		<jaxws.rt.version>2.2.5</jaxws.rt.version>
@@ -331,7 +331,33 @@
 		</dependency>
 	</dependencies>
 	<build>
-
+		<!-- <resources>
+          <resource>
+            <directory>${basedir}/src/main/java/fr/gfi/cmg/QuizzCmgfr/metier/entite/hibernate</directory>
+            <filtering>false</filtering>
+            <includes>
+              <include>*.xml</include>              
+            </includes>
+          </resource>
+         <resource>
+            <directory>${basedir}/src/main/java/fr/gfi/cmg/QuizzCmgfr/metier/entite/hibernate</directory>
+            <filtering>false</filtering>            
+          </resource> 
+        </resources> -->
+        <resources>
+        <resource>
+            <directory>${basedir}/src/main/java</directory>
+            <filtering>false</filtering>
+        </resource>
+        <resource>
+            <directory>${basedir}/src/main/resources</directory>
+            <filtering>false</filtering>
+        </resource>
+        <resource>
+            <directory>${basedir}/src/test/java</directory>
+            <filtering>false</filtering>
+        </resource>
+        </resources>
 		<plugins>
 
 			<plugin>
@@ -353,4 +379,5 @@
 		</plugins>
 
 	</build>
+
 </project>
