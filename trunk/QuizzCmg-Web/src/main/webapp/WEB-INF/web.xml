@@ -28,7 +28,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:commons-config.xml,classpath:quizz-config.xml,/WEB-INF/QuizzCmg-Web-servlet.xml,/WEB-INF/QuizzCmg-Web-security.xml
+			classpath:commons-config.xml,classpath:quizz-config.xml,/WEB-INF/QuizzCmg-Web-servlet.xml
 		</param-value>
 	</context-param>
 
@@ -45,7 +45,7 @@
 	</jsp-config>
   
   <!-- Spring Security -->
-	<filter>
+	<!-- <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>
                   org.springframework.web.filter.DelegatingFilterProxy
@@ -55,6 +55,6 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/QuizzCmg-Web/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 </web-app>
 
