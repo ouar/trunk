@@ -127,6 +127,7 @@ label{
 	font-weight:bold;
 	line-height:28px;
 	margin-bottom:5px;
+	margin-left:10px;
 	width:180px;
 	clear:left;
 }
@@ -172,6 +173,7 @@ select{
 	padding:3px;
 	-moz-box-shadow:0 0 3px #aaa;
 	-webkit-box-shadow:0 0 3px #aaa;
+	min-width: 150px;
 }
 select:active,
 select:focus{
@@ -304,7 +306,7 @@ a.submit:focus{
 	background-repeat: repeat;
 }
 
-#BoxPresentation,#BoxBoiteAIdee,#BoxCentre,#BoxLogin,div.box-centre,div.box-info,#BoxDroite{
+#BoxPresentation,#BoxBoiteAIdee,#BoxCentre,#BoxLogin,div.box-centre,div.box-info,#BoxDroite,#BoxPanier{
 	margin-top:20px;
 	background:#f7f7f7;
 	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
@@ -316,6 +318,18 @@ a.submit:focus{
 	-webkit-box-shadow:0 0 15px #aaa;
 	padding:20px;
 	display: block;
+}
+
+#BoxCentre,#BoxPanier{
+	display:inline-block;
+}
+
+
+#BoxDroite,#BoxPanier {
+    margin-left: 1%;
+    margin-right: 1%;     
+    float: left;
+    width: 30%;
 }
 
 #BoxBoiteAIdee{
@@ -372,6 +386,7 @@ div.box-info{
 #BoxBoiteAIdee .titre,
 #BoxCentre .titre,
 #BoxDroite .titre,
+#BoxPanier .titre,
 #BoxLogin .titre,
 div.box .titre,
 div.box-centre .titre,
@@ -454,9 +469,50 @@ input[type=radio],input[type="checkbox"]{
 li .question{
 }
 
-#BoxDroite {
-     margin-left: 1%;
-    margin-right: 1%;     
-    float: left;
-    width: 30%;
+
+#divSujets{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border: 1px solid #AAAAAA;
 }
+
+.divSujet{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.divLangage{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#BoxPanier .divLangage{
+	border: 1px solid #AAAAAA;
+}
+
+.titreLangage{
+	border-right: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding-left:10px;
+	padding-right:10px;
+	font-size: 14px;
+}
+
+#BoxPanier .divSujet{
+	
+}
+
+.divSujet>input[type=checkbox]{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.spanDifficulte{
+	line-height: 28px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+ .ui-effects-transfer { border: 2px dotted gray; }

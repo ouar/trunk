@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.gfi.cmg.QuizzCmg.metier.beans.InfoGenerationQuizz;
 import fr.gfi.cmg.QuizzCmg.metier.beans.Questionnaire;
+import fr.gfi.cmg.QuizzCmg.metier.beans.SujetDifficulteBean;
+
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
@@ -27,6 +29,10 @@ import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
 import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+
+import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
+
+
 
 @Controller("GenererQuizzAction")
 public class GenererQuizzAction extends AbstractMonAction {
@@ -52,12 +58,26 @@ public class GenererQuizzAction extends AbstractMonAction {
 		try {
 
 		
+			
+		
 
-			lTypeSujetsSaisis = recupListTypeSujetsSaisis(gestionFormBean,request);
+			List<JSONObject> lSujetsDifficulteJson = generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
 
-			final NiveauQuestion niveauQuestion = recupNiveauQuestionSaisi(gestionFormBean,request);
+			// construction du tableau de Sujet avec niveau de difficulté voulu
+			List<SujetDifficulteBean> lSujetsDifficulte = new ArrayList<SujetDifficulteBean>();
+			for (JSONObject sujetJson : lSujetsDifficulteJson) {
+				NiveauQuestion difficulte = new NiveauQuestion();
+				difficulte.setId(Integer.valueOf((String) sujetJson.get("difficulteid")));
+				// difficulte.setLibNiveau((String)
+				// sujetJson.get("difficulteid"));
 
-			InfoGenerationQuizz infoGenerationQuizz = new InfoGenerationQuizz(niveauQuestion, lTypeSujetsSaisis, connecte, gestionFormBean.getNomCandidat(), gestionFormBean.getPrenomCandidat());
+				TypeSujet sujet = new TypeSujet();
+				sujet.setId(Integer.valueOf((String) sujetJson.get("sujetid")));
+
+				lSujetsDifficulte.add(new SujetDifficulteBean(sujet, difficulte));
+			}
+
+			InfoGenerationQuizz infoGenerationQuizz = new InfoGenerationQuizz(lSujetsDifficulte, connecte, gestionFormBean.getNomCandidat(), gestionFormBean.getPrenomCandidat());
 			infoGenerationQuizz.setListNiveauTypeSujet(gestionFormBean.getListNiveauTypeSujetPanier());
 			Questionnaire questionnaire = this.bsqz.genererQuizz(infoGenerationQuizz);
 
@@ -67,6 +87,8 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 			gestionFormBean.getPanierListQuizz().add(quizz);
 
+			
+
 			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
 			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + urlServeur + "/QuizzCmg-Web/GenererJsonQuizz?tfIdQuizzAConsulter=" + questionnaire.getQuizz().getId();
@@ -74,6 +96,9 @@ public class GenererQuizzAction extends AbstractMonAction {
 			gestionFormBean.setUrlFlashCode(urlFlashCode);
 
 			retour= "Gestion/ResumerQuizz";
+			
+
+			
 		
 
 		} catch (BusinessServiceException e) {
@@ -96,58 +121,13 @@ public class GenererQuizzAction extends AbstractMonAction {
 		
 		
 		}
+		catch (JSONException e) {
+//			throw new ActionException(e.getMessage(), e);
+		}
 		return retour;
 
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<TypeSujet> recupListTypeSujetsSaisis(GestionFormBean gestionFormBean,HttpServletRequest request) throws BusinessServiceException  {
-		List<TypeSujet> lTypeSujetsSaisis = new ArrayList<TypeSujet>();
-		List<TypeSujet> lTypesSujetsParametres = (List<TypeSujet>) request.getAttribute("ListeTypesSujets");
-		if (lTypesSujetsParametres == null) {
-			lTypesSujetsParametres = this.getListTypeSujet(request.getSession(),false);
-			request.setAttribute("ListeTypesSujets", lTypesSujetsParametres);
-		}
-
-		for (String sTypeSujet : gestionFormBean.getListTypeSujet()) {
-
-			Integer idSujet = new Integer(sTypeSujet);
-			// Integer idSujet = (Integer) gestionFormBean.getListTypeSujet().get(i);
-			for (TypeSujet sTypeSujetParametre : lTypesSujetsParametres) {
-
-				if (sTypeSujetParametre.getId().equals(idSujet)) {
-
-					lTypeSujetsSaisis.add(sTypeSujetParametre);
-
-				}
-			}
-
-		}
-
-		return lTypeSujetsSaisis;
-	}
-
-	@SuppressWarnings("unchecked")
-	private NiveauQuestion recupNiveauQuestionSaisi(GestionFormBean gestionFormBean,HttpServletRequest request) throws BusinessServiceException  {
-		NiveauQuestion niveauQuestionSaisi = null;
-		List<NiveauQuestion> lNiveauQuestions = (List<NiveauQuestion>) request.getAttribute("ListeNiveauxDifficultes");
-
-		if (lNiveauQuestions == null) {
-			lNiveauQuestions = this.bsAdmin.getListNiveauxQuestion();		
-			request.setAttribute("ListeNiveauxDifficultes", lNiveauQuestions);
-		}
-
-		for (NiveauQuestion niveauQuestion : lNiveauQuestions) {
-			if (niveauQuestion.getId().equals(gestionFormBean.getIdNiveauQuestionnaire())) {
-				niveauQuestionSaisi = niveauQuestion;
-				break;
-
-			}
-		}
-
-		return niveauQuestionSaisi;
-
-	}
 
 
 
@@ -156,20 +136,12 @@ public class GenererQuizzAction extends AbstractMonAction {
 	public String validate(GestionFormBean gestionFormBean,HttpServletRequest request) {
 		this.isConnect(request.getSession());		
 
-		List<String> listTypeSujet = new ArrayList<String>();
-		List<BeanNiveauTypeSujet> listNiveauTypeSujetPanier = new ArrayList<BeanNiveauTypeSujet>();
-
-		List<BeanNiveauTypeSujet> listNiveauTypeSujetAselectionner = new ArrayList<BeanNiveauTypeSujet>();
-
-		String panier = request.getParameter("panier");
-		String aselectionner = request.getParameter("aselectionner");
-
-		deserializerObjetJson(listTypeSujet, listNiveauTypeSujetPanier, panier);
-		deserializerObjetJson(null, listNiveauTypeSujetAselectionner, aselectionner);
-
-		gestionFormBean.setListTypeSujet(listTypeSujet);
-		gestionFormBean.setListNiveauTypeSujetPanier(listNiveauTypeSujetPanier);
-		gestionFormBean.setListNiveauTypeSujetAselectionner(listNiveauTypeSujetAselectionner);
+		try {
+			generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		boolean isErreur=false;
 
@@ -204,56 +176,16 @@ public class GenererQuizzAction extends AbstractMonAction {
 		}
 
 	}
-
-	/**
-	 * @param listTypeSujet
-	 * @param listNiveauTypeSujetPanier
-	 * @param panier
-	 * @throws NumberFormatException
-	 */
-	private void deserializerObjetJson(List<String> listTypeSujet, List<BeanNiveauTypeSujet> listNiveauTypeSujetPanier, String panier) throws NumberFormatException {
-		panier = panier.replaceAll("\"", "'");
-		panier = "{'source':" + panier + "}";
-
-		try {
-			JSONObject myjson = new JSONObject(panier);
-			JSONArray jsonMainArr = myjson.getJSONArray("source");
-
-			for (int i = 0; i < jsonMainArr.length(); i++) { // **line 2**
-				JSONObject childJSONObject = jsonMainArr.getJSONObject(i);
-
-				String idLangage = childJSONObject.getString("idLangage");
-				String libelleLangage = childJSONObject.getString("libelleLangage");
-				String idTypeSujet = childJSONObject.getString("idTypeSujet");
-				String libelleTypeSujet = childJSONObject.getString("libelleTypeSujet");
-				String idNiveau = childJSONObject.getString("idNiveau");
-				String libelleNiveau = childJSONObject.getString("libelleNiveau");
-
-				BeanNiveauTypeSujet bean = new BeanNiveauTypeSujet();
-				bean.getTypeSujet().setId(Integer.parseInt(idTypeSujet));
-				bean.getTypeSujet().setLibelle(libelleTypeSujet);
-				Langage langage=new Langage();
-				langage.setId(Integer.parseInt(idLangage));
-				langage.setLibelle(libelleLangage);
-				bean.getTypeSujet().setLangage(langage);
-				bean.getNiveauQuestion().setId(Integer.parseInt(idNiveau));
-				bean.getNiveauQuestion().setLibNiveau(libelleNiveau);
-
-				if (listNiveauTypeSujetPanier != null) {
-					listNiveauTypeSujetPanier.add(bean);
-				}
-
-				if (listTypeSujet != null) {
-					listTypeSujet.add(idTypeSujet);
-				}
-
-			}
-
-		} catch (JSONException e) {
-
-			e.printStackTrace();
+	private List<JSONObject> generateListObjectFromJson(String json) throws JSONException {
+		ArrayList<JSONObject> lSujetDifficulte = new ArrayList<JSONObject>();
+		JSONArray ljsonSujetDifficulte = new JSONArray(json);
+		for (int i = 0; i < ljsonSujetDifficulte.length(); i++) {
+			lSujetDifficulte.add(ljsonSujetDifficulte.getJSONObject(i));
 		}
+		return lSujetDifficulte;
 	}
+
+	
 
 	
 

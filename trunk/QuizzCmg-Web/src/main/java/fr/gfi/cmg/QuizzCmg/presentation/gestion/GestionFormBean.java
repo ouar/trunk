@@ -10,6 +10,7 @@ import fr.gfi.cmg.QuizzCmg.metier.beans.WrapperResultatsQuizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 
+
 /**
  * @author seouar
  * 
@@ -23,7 +24,10 @@ public class GestionFormBean implements Serializable {
 	/**
 	 * 
 	 */
-
+//	@CheckSpecialChars(allow = { SpecialChar.ACCOLADE_OUVRANTE, SpecialChar.ACCOLADE_FERMANTE, SpecialChar.POINT_VIRGULE, SpecialChar.VIRGULE,
+//			SpecialChar.DEUX_POINTS, SpecialChar.GUILLEMET, SpecialChar.CROCHET_OUVRANT, SpecialChar.CROCHET_FERMANT,
+//			SpecialChar.SLASH,SpecialChar.DIESE})
+	private String jsonSujetDifficulte;
 	private List<String> listTypeSujet;
 	private Integer idNiveauQuestionnaire;
 	private String nomCandidat;
@@ -273,6 +277,14 @@ public class GestionFormBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getJsonSujetDifficulte() {
+		return jsonSujetDifficulte;
+	}
+
+	public void setJsonSujetDifficulte(String jsonSujetDifficulte) {
+		this.jsonSujetDifficulte = jsonSujetDifficulte;
 	}
 
 }
