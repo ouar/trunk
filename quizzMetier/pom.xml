@@ -367,19 +367,18 @@
 					 <skipTests>true</skipTests>
 					<source>1.6</source>
 					<target>1.6</target>
-					 <encoding>UTF-8</encoding>
+					<encoding>Cp1252</encoding>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
+			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.4</version>
 				
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					 <encoding>UTF-8</encoding>
 				</configuration>
-			</plugin> -->
+			</plugin>
 		</plugins>
 
 	</build>
