@@ -11,7 +11,7 @@
 		<org.springsecurity.version>3.1.2.RELEASE</org.springsecurity.version>
 		
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
  
 		<!-- PROPRIETES TECHNIQUES -->
 	</properties>
@@ -367,7 +367,7 @@
 					 <skipTests>true</skipTests>
 					<source>1.6</source>
 					<target>1.6</target>
-					<encoding>Cp1252</encoding>
+					<encoding>ISO-8859-1</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
