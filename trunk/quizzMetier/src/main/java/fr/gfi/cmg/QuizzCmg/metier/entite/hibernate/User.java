@@ -1,6 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.metier.entite.hibernate;
 
-// Generated 17 sept. 2013 17:50:17 by Hibernate Tools 3.4.0.CR1
+// Generated 6 févr. 2014 13:18:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,22 +14,17 @@ public class User implements java.io.Serializable {
 	private String libNom;
 	private String libPrenom;
 	private String libPassword;
-	private int idRole;
-	private Set<Quizz> quizzs = new HashSet<Quizz>(0);
+	private Set<UserRoles> userRoleses = new HashSet<UserRoles>(0);
 
 	public User() {
 	}
 
-	public User(int idRole) {
-		this.idRole = idRole;
-	}
-
-	public User(String libNom, String libPrenom, String libPassword, int idRole, Set<Quizz> quizzs) {
+	public User(String libNom, String libPrenom, String libPassword,
+			Set<UserRoles> userRoleses) {
 		this.libNom = libNom;
 		this.libPrenom = libPrenom;
 		this.libPassword = libPassword;
-		this.idRole = idRole;
-		this.quizzs = quizzs;
+		this.userRoleses = userRoleses;
 	}
 
 	public Integer getId() {
@@ -64,20 +59,12 @@ public class User implements java.io.Serializable {
 		this.libPassword = libPassword;
 	}
 
-	public int getIdRole() {
-		return this.idRole;
+	public Set<UserRoles> getUserRoleses() {
+		return this.userRoleses;
 	}
 
-	public void setIdRole(int idRole) {
-		this.idRole = idRole;
-	}
-
-	public Set<Quizz> getQuizzs() {
-		return this.quizzs;
-	}
-
-	public void setQuizzs(Set<Quizz> quizzs) {
-		this.quizzs = quizzs;
+	public void setUserRoleses(Set<UserRoles> userRoleses) {
+		this.userRoleses = userRoleses;
 	}
 
 }

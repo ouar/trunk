@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 f?vr. 2014 13:18:48 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.UserRoles" table="user_roles">
+        <id name="userRoleId" type="int">
+            <column name="USER_ROLE_ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User" fetch="select">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="role" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Role" fetch="select">
+            <column name="ROLE_ID" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

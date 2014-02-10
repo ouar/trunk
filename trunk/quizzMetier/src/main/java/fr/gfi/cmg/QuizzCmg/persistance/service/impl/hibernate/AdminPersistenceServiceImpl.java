@@ -221,4 +221,6 @@ public class AdminPersistenceServiceImpl implements AdminPersistenceService {
 		hSession = this.sessionFactory.getCurrentSession();
 		hSession.update(object);
 	}
+
+	
 }

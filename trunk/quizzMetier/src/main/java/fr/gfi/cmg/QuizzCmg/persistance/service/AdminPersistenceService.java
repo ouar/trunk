@@ -107,4 +107,6 @@ public interface AdminPersistenceService {
 	 */
 	public void modifier(Object object);
 
+	;
+
 }

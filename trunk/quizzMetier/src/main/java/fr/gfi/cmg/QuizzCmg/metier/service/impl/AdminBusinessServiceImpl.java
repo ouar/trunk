@@ -1,10 +1,15 @@
 package fr.gfi.cmg.QuizzCmg.metier.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +22,7 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Question;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.UserRoles;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.persistance.service.AdminPersistenceService;
@@ -198,5 +204,10 @@ public class AdminBusinessServiceImpl implements AdminBusinessService {
 	public void modifier(Object object) throws BusinessServiceException {
 		adminPersistenceService.modifier(object);
 	}
+	
+
+	
+	
+
 
 }

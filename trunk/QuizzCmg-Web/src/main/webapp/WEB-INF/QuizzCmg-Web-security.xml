@@ -1,56 +1,140 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:b="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-
-	<!-- <global-method-security pre-post-annotations="enabled" />
-
-	<http pattern="/QuizzCmg-Web/Accueil" security="none" />
+<global-method-security jsr250-annotations="enabled"></global-method-security>
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/web/**" access="hasRole('Habilite')" />
-		<intercept-url pattern="/ajax/**" access="hasRole('Habilite')" />
-		<form-login login-page="/QuizzCmg-Web/Accueil" default-target-url="/web/accueil" always-use-default-target="true" authentication-failure-url="/web/login?login_error=1" />
-		<logout logout-success-url="/QuizzCmg-Web/Accueil" />
+		<intercept-url pattern="/QuizzCmg-Web/Accueil" access="permitAll" />		
+		<intercept-url pattern="/QuizzCmg-Web/AfficherFormulaireGenerationQuizz" access="hasRole('ROLE_USER')" /> 
+		<intercept-url pattern="/QuizzCmg-Web/Valider" access="permitAll" />
+		<!-- <intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/accessdenied" access="permitAll" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> -->
+		<form-login login-page="/QuizzCmg-Web/Accueil" default-target-url="/QuizzCmg-Web/Valider"
+			authentication-failure-url="/QuizzCmg-Web/Accueil/failLogin"   />
+		<logout logout-success-url="/QuizzCmg-Web/Valider" />
+		<access-denied-handler error-page="/QuizzCmg-Web/Accueil/acceesRefuse" />
 	</http>
-
-	<jee:jndi-lookup id="idAppli" jndi-name="java:comp/env/ldap/gide/idappli" />
-	<jee:jndi-lookup id="codeAppli" jndi-name="java:comp/env/ldap/gide/codeappli" />
-	<jee:jndi-lookup id="gideURL" jndi-name="java:comp/env/ldap/gide/url" />
-
-	Provider de securite GIDE
-	<b:bean id="wsGideAuthenticationProvider" class="fr.icdc.dei.fwk.security.provider.WSGideUserDetailsAuthenticationProvider">
-		<b:property name="idApplication" ref="idAppli" />
-		<b:property name="codeApplication" ref="codeAppli" />
-		<b:property name="gideUrl" ref="gideURL" />
-	</b:bean>
-
-	Activation du manager d'authentification
-	<authentication-manager>
-		<authentication-provider ref="wsGideAuthenticationProvider" />
-		<authentication-provider>
-			<user-service>
-				<user name="yguenoun" password="password" authorities="Habilite" />
-				<user name="gdauvergne" password="password" authorities="Habilite, Administrateur" />
-			</user-service>
-		</authentication-provider>
-
-	</authentication-manager> -->
 	
-	<http auto-config="true">
-		<intercept-url pattern="/Accueil*" access="ROLE_USER" />
-	</http>
- 
-	<authentication-manager>
-	  <authentication-provider>
-	    <user-service>
-		<user name="mkyong" password="123456" authorities="ROLE_USER" />
-	    </user-service>
-	  </authentication-provider>
-	</authentication-manager>
 	
+	
+<!-- <beans:bean id="userDetailsService" class="fr.gfi.cmg.QuizzCmg.metier.service.impl.AuthentificationBusinessServiceImpl" />
+<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+<b:property name="userDetailsService" ref="userDetailsService"></b:property>
+  
+</beans:bean>
+
+<beans:bean id="providerManager" class="org.springframework.security.authentication.ProviderManager">
+    <b:property name="providers">
+    <b:list>
+     <b:ref local="daoAuthenticationProvider" />
+    </b:list>
+       
+    </b:property>
+</beans:bean>
+<authentication-manager >
+<authentication-provider user-service-ref="providerManager"></authentication-provider>
+</authentication-manager>  -->
+ <beans:bean id="md5"
+    class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+</beans:bean >
+
+ <beans:bean id="authenticationProvider"
+    class="fr.gfi.cmg.QuizzCmg.metier.service.impl.AuthentificationBusinessServiceImpl">
+</beans:bean>  
+  <authentication-manager>  
+<authentication-provider user-service-ref='authenticationProvider'>
+    <!-- <password-encoder ref="md5" /> -->
+</authentication-provider>
+</authentication-manager> 
+	<!-- <http realm="Project Realm" auto-config="true">
+		<intercept-url pattern="/auth/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**" access="ROLE_ADMIN" />
+		<form-login login-page="/auth/login.jsp"
+			authentication-failure-url="/auth/login.jsp?login_error=1" />
+		<logout logout-success-url="/auth/login.jsp" />
+		<remember-me />
+	</http> -->
+
+
+<!-- <authentication-manager>
+    <authentication-provider>
+
+        <user-service>
+           
+        </user-service>
+
+    </authentication-provider>
+</authentication-manager> -->
+
+
+    <!-- <authentication-manager>  
+        <authentication-provider user-service-ref="authentificationBusinessService">  
+            <password-encoder hash="plaintext">  
+        </password-encoder></authentication-provider>  
+    </authentication-manager>   -->
+
+<!--  <authentication-manager  alias="authentificationBusinessService">  
+        
+    </authentication-manager>  -->  
+    
+<!--     <beans:bean id="authenticationProvider"
+    class="fr.gfi.cmg.QuizzCmg.metier.service.impl.AuthentificationBusinessServiceImpl">
+</beans:bean> 
+ <authentication-manager>  
+<authentication-provider user-service-ref='authenticationProvider'>
+    <password-encoder ref="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+</authentication-provider>
+</authentication-manager> -->
+   <!--  <beans:bean id="authentificationBusinessService" 
+    class="fr.gfi.cmg.QuizzCmg.metier.service.impl.AuthentificationBusinessServiceImpl"> 
+    <authentication-manager >
+    <authentication-provider user-service-ref="authentificationBusinessService"></authentication-provider>
+    </authentication-manager>
+    </beans:bean> -->
+   <!--  <authentication-manager>  
+        <authentication-provider  user-service-ref="authentificationBusinessServiceImpl">  
+            <password-encoder hash="md5">  
+        </password-encoder></authentication-provider>  
+    </authentication-manager>   -->
+<!-- <authentication-manager>
+        <authentication-provider>
+            <user-service id="">
+                <user name="alpha" password="pass1" authorities="ROLE_ADMIN" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager> -->
+	<!-- <authentication-manager>  
+        <authentication-provider  user-service-ref="customUserDetailsService">  
+            <password-encoder hash="md5">  
+        </password-encoder></authentication-provider>  
+    </authentication-manager>  -->
+	<!-- <global-method-security pre-post-annotations="enabled" /> <http pattern="/QuizzCmg-Web/Accueil" 
+		security="none" /> <http auto-config="true" use-expressions="true"> <intercept-url 
+		pattern="/web/**" access="hasRole('Habilite')" /> <intercept-url pattern="/ajax/**" 
+		access="hasRole('Habilite')" /> <form-login login-page="/QuizzCmg-Web/Accueil" 
+		default-target-url="/web/accueil" always-use-default-target="true" authentication-failure-url="/web/login?login_error=1" 
+		/> <logout logout-success-url="/QuizzCmg-Web/Accueil" /> </http> <jee:jndi-lookup 
+		id="idAppli" jndi-name="java:comp/env/ldap/gide/idappli" /> <jee:jndi-lookup 
+		id="codeAppli" jndi-name="java:comp/env/ldap/gide/codeappli" /> <jee:jndi-lookup 
+		id="gideURL" jndi-name="java:comp/env/ldap/gide/url" /> Provider de securite 
+		GIDE <b:bean id="wsGideAuthenticationProvider" class="fr.icdc.dei.fwk.security.provider.WSGideUserDetailsAuthenticationProvider"> 
+		<b:property name="idApplication" ref="idAppli" /> <b:property name="codeApplication" 
+		ref="codeAppli" /> <b:property name="gideUrl" ref="gideURL" /> </b:bean> 
+		Activation du manager d'authentification <authentication-manager> <authentication-provider 
+		ref="wsGideAuthenticationProvider" /> <authentication-provider> <user-service> 
+		<user name="yguenoun" password="password" authorities="Habilite" /> <user 
+		name="gdauvergne" password="password" authorities="Habilite, Administrateur" 
+		/> </user-service> </authentication-provider> </authentication-manager> -->
+
+
+
 
 </beans:beans>

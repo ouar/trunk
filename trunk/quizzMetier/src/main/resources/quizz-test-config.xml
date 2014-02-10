@@ -41,7 +41,7 @@
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 
 		<property name="dataSource">
-			<ref local="quizzDatasource" />
+			<ref  bean="quizzDatasource" />
 		</property>
 		<property name="hibernateProperties">
 			<ref bean="quizzHibernateProperties" />

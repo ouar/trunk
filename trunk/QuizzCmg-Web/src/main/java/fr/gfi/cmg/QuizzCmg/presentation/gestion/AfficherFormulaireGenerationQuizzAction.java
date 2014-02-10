@@ -1,5 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.presentation.gestion;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,21 +40,16 @@ public class AfficherFormulaireGenerationQuizzAction extends AbstractMonAction {
 		fb.reset();
 
 	}
+	
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
 		
-		isConnect(session);
-		if (this.isErreur()) {
-			return "redirect:LoginAction";		
-		}
-
-		else {
 			initialiserFormulaireGeneration(gestionFormBean);
 
 			return"Gestion/GenerationQuizz";
-		}
+		
 	
 
 		

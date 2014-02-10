@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 sept. 2013 17:50:17 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 6 f?vr. 2014 13:18:48 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Role" table="role" catalog="quizz">
+    <class name="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Role" table="role">
         <id name="id" type="int">
             <column name="id" />
             <generator class="assigned" />
@@ -11,5 +11,11 @@
         <property name="libRole" type="string">
             <column name="lib_role" length="50" not-null="true" unique="true" />
         </property>
+        <set name="userRoleses" table="user_roles" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ROLE_ID" not-null="true" />
+            </key>
+            <one-to-many class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.UserRoles" />
+        </set>
     </class>
 </hibernate-mapping>
