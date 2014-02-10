@@ -122,6 +122,8 @@
 	
 	<root>
 		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="SERVEUR" />
+		<appender-ref ref="FILELOGCOMPLET" />
 		<!-- appender-ref ref="SERVEUR" / -->
 		<!-- appender-ref ref="FILELOGCOMPLET" / -->
 	</root>

@@ -1,11 +1,14 @@
 package fr.gfi.cmg.QuizzCmg.presentation.accueil;
 
+import java.security.Principal;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +25,7 @@ import fr.gfi.cmg.QuizzCmg.presentation.exceptions.ActionException;
  * 
  */
 @Controller("AccueilAction")
+@RequestMapping(value = "/Accueil/**")
 public class AccueilAction extends AbstractMonAction {
 
 	
@@ -35,10 +39,10 @@ public class AccueilAction extends AbstractMonAction {
 		return new AccueilFormBean();
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/Accueil",method = RequestMethod.GET)
 	public ModelAndView genererListUtil(@ModelAttribute("accueilFormBean") AccueilFormBean accueilFormBean, HttpServletRequest request) throws BusinessServiceException, ActionException {
 	
-		ModelAndView modelAndView = new ModelAndView("Accueil/Accueil");
+		ModelAndView modelAndView = new ModelAndView("Accueil/Login");
 
 		modelAndView.addObject("accueilFormBean", accueilFormBean);
 		HttpSession session = request.getSession();
@@ -47,5 +51,22 @@ public class AccueilAction extends AbstractMonAction {
 
 		return modelAndView;
 	}
+	
+	 @RequestMapping(value = "/Accueil/acceesRefuse", method = RequestMethod.GET)  
+	 public ModelAndView accessDenied(Principal principal) {  
+		 ModelAndView modelAndView = new ModelAndView("Accueil/acceesRefuse");
+	  String username = principal.getName();  
+	  modelAndView.addObject("message", "Désolé "+username+" Vous n'avez pas de privilèges pour accéder à cette page !!!");  
+	 
+	  return modelAndView;  
+	 } 
+	 
+	 @RequestMapping(value="/Accueil/failLogin", method = RequestMethod.GET)  
+	 public String loginerror(ModelMap model) {  
+	   
+	  model.addAttribute("error", "true");  
+	  return "Accueil/Login";  
+	   
+	 }
 
 }

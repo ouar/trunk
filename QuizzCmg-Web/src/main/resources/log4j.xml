@@ -87,11 +87,11 @@
 	
 	<!-- Spring -->
 	
-	<category name="org.springframework">
-	  <priority value="ERROR"/>
+	<category name="org.springframework.*">
+	  <priority value="DEBUG"/>
 	</category>
 
-	<category name="org.springframework.core">
+	<!-- <category name="org.springframework.core">
 	  <priority value="ERROR"/>
 	</category>
 
@@ -109,7 +109,7 @@
 
 	<category name="org.springframework.webflow">
 	  <priority value="ERROR"/>
-	</category>
+	</category> -->
 		
 	<!-- Test - Dbunit -->
 
@@ -122,6 +122,8 @@
 	
 	<root>
 		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="SERVEUR" />
+		<appender-ref ref="FILELOGCOMPLET" />
 		<!-- appender-ref ref="SERVEUR" / -->
 		<!-- appender-ref ref="FILELOGCOMPLET" / -->
 	</root>

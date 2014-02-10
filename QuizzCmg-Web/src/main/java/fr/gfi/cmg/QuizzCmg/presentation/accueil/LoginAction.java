@@ -19,7 +19,7 @@ public class LoginAction {
 		HttpSession session = request.getSession();
 		final User connecte = (User) session.getAttribute("CONNECTE");
 		if (connecte == null) {
-			return "Accueil/Accueil";
+			return "Accueil/Login";
 		} else {
 			return "Gestion/GenerationQuizz";
 		}

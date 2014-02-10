@@ -6,7 +6,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +65,24 @@ public class ValiderAction extends AbstractMonAction {
 			
 		}
 		return retour;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model,HttpServletRequest request) {
+		String retour = null;
+		UserDetails userDetails =
+			 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+ 
+		if(userDetails!=null){
+			System.out.println("zzzzzzzzzzzzzz");
+			
+			retour = "redirect:AfficherFormulaireGenerationQuizz";
+		}
+		
+		
+		
+		return retour;
+ 
 	}
 
 }

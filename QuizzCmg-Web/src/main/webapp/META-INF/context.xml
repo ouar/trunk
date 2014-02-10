@@ -20,9 +20,9 @@
 
 		<Resource name="jdbc/quizzDB" auth="Container" type="javax.sql.DataSource"
 				driverClassName="com.mysql.jdbc.Driver"
-				url="jdbc:mysql://localhost:3306/quizz"
-				username="root"
-				password=""
+				url="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz"
+				username="quizzCMG"
+				password="quizzCMG"
 				validationQuery="select 1"
 				testOnBorrow ="true"
 				maxActive="5"

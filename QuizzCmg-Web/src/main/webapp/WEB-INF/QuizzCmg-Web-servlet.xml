@@ -35,6 +35,9 @@
 				<value>ParametrageQuestion</value>
 				<value>Administration</value>
 				<value>Erreur</value>
+				<value>Login</value>
+				<value>acceesRefuse</value>
+				
 				
 			</list>
 		</property>
@@ -50,7 +53,7 @@
 		</property>
 		<property name="mappings">
 			<props>
-				<prop key="/Accueil">AccueilAction</prop>
+				<prop key="/Accueil/**">AccueilAction</prop>
 				<prop key="/Valider">ValiderAction</prop>
 				<prop key="/AfficherFormulaireGenerationQuizz">AfficherFormulaireGenerationQuizzAction</prop>
 				<prop key="/AfficherListQuizz">AfficherListQuizzAction</prop>
@@ -61,7 +64,12 @@
 				<prop key="/AdministrationQuizz">QuizzAdministrationAction</prop>
 				<prop key="/Ajouter">AjouterAction</prop>
 				<prop key="DetailTypeSujet">DetailTypeSujetAction</prop>
-				<prop key="Supprimer">SupprimerAction</prop>
+				<prop key="/Supprimer">SupprimerAction</prop>
+				<!-- <prop key="/Accueil/acceesRefuse">AccueilAction</prop>
+				<prop key="/Accueil/failLogin">AccueilAction</prop> -->
+				
+				
+				
 			</props>
 		</property>
 	</bean>

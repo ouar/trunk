@@ -92,4 +92,6 @@ public interface AdminBusinessService {
 	 */
 	public void modifier(Object object)
 			throws BusinessServiceException;
+	
+	
 }

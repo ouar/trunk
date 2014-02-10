@@ -3,8 +3,8 @@ package  fr.gfi.cmg.QuizzCmg.presentation.gestion;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,18 +25,11 @@ public class AfficherListQuizzAction extends AbstractMonAction {
 	QuizzBusinessService bsqz;
 
 	
-	
+	@RolesAllowed("ROLE_USER")
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
 		
-		isConnect(session);
-		if (this.isErreur()) {
-			return "redirect:LoginAction";		
-		}
-
-		else {
 			try {
 				List<Quizz> lQuizzs = bsqz.getListQuizzByDate();
 				gestionFormBean.setListQuizz(lQuizzs);
@@ -47,10 +40,7 @@ public class AfficherListQuizzAction extends AbstractMonAction {
 			}
 
 			return"Gestion/ListQuizz";
-		}
-	
-
-		
+			
 		
 	}
 

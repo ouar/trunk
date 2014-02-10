@@ -2,48 +2,40 @@
 
 <%@ page import="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<jsp:useBean id="CONNECTE"
+	class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User"
+	scope="session" />
 
-<jsp:useBean id="CONNECTE" class="fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User" scope="session" />
-
-<%
-	User user = (User) request.getSession().getAttribute("CONNECTE");
-%>
 
 <div id="BoxPresentation">
 
-	<%
-		if (user != null && ((user.getIdRole() & 2) == 2)) {
-	%>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<ul>
+			<li><a href="AfficherFormulaireGenerationQuizz">Génerer un
+					Quizz</a>
+			</li>
+		</ul>
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<ul>
+			<li><a href="AfficherListQuizz">Consulter un Quizz</a>
+			</li>
+		</ul>
+	</sec:authorize>
 
-	<ul>
-		<li><a href="AfficherFormulaireGenerationQuizz">Génerer un Quizz</a></li>
-	</ul>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<ul>
+			<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Administration</a>
+			</li>
+		</ul>
 
-	<%
-		}
-	%>
-	<%
-		if (user != null && ((user.getIdRole() & 1) == 1)) {
-	%>
-	<ul>
-		<li><a href="AfficherListQuizz">Consulter un Quizz</a></li>
-	</ul>
-	<%
-		}
-	%>
-	<%
-		if (user != null && ((user.getIdRole() & 4) == 4)) {
-	%>
-
-	<ul>
-		<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Administration</a>
-	</ul>
-
-	<%
-		}
-	%>
+	</sec:authorize>
 
 </div>
