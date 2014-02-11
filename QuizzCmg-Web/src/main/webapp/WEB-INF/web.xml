@@ -12,7 +12,7 @@
  
   <resource-ref>
 	<description>MySQL Datasource example</description>
-	<res-ref-name>jdbc/quizzDBb</res-ref-name>
+	<res-ref-name>jdbc/quizzDB</res-ref-name>
 	<res-type>javax.sql.DataSource</res-type>
 	<res-auth>Container</res-auth>
   </resource-ref>
