@@ -28,9 +28,9 @@
 	<!-- Datasource -->
 	<bean id="quizzDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		 <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/quizz_v1"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>		
+        <property name="url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz"/>
+        <property name="username" value="quizzCMG"/>
+        <property name="password" value="quizzCMG"/>		
 	</bean>
 
 	

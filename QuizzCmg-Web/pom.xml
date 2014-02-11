@@ -154,7 +154,8 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>QuizzCmg-Web</finalName>
+		
+		<finalName>${artifactId}</finalName>
 	</build>
 </project>
 

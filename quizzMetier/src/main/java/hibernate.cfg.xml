@@ -6,9 +6,10 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quizz</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.default_schema">quizz</property>
+        <property name="hibernate.connection.url">jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz</property>
+        <property name="hibernate.connection.username">quizzCMG</property>
+        <property name="hibernate.default_schema">cmgquizz</property>
+        <property name="hibernate.connection.password">quizzCMG</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <mapping resource="fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Reponse.hbm.xml" />
@@ -22,5 +23,7 @@
         <mapping resource="fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/QuizzSujet.hbm.xml" />
         <mapping resource="fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/NiveauQuestion.hbm.xml" />
         <mapping resource="fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/Quizz.hbm.xml" />
+         <mapping resource="fr/gfi/cmg/QuizzCmg/metier/entite/hibernate/UserRoles.hbm.xml" />
+       
     </session-factory>
 </hibernate-configuration>
