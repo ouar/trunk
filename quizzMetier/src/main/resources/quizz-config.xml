@@ -3,10 +3,13 @@
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	
 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	 
 	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 	 
+	 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
 	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- parse les annotations dans les répertoires suivants -->
@@ -18,17 +21,17 @@
 		
 
 	<!-- Datasource -->
-	<!-- <bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!--  <bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/quizzDB" />
-	</bean> -->
-
+	</bean> --> 
+<jee:jndi-lookup id="dataSource" jndi-name="jdbc/quizzDB" resource-ref="true" />
 	
-<bean id="quizzDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!-- <bean id="quizzDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
    <property name="url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz" />
    <property name="username" value="quizzCMG" />
    <property name="password" value="quizzCMG" />
-</bean>
+</bean> -->
 
 	<!-- Hibernate -->
 
