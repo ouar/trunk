@@ -21,15 +21,14 @@
 	<!-- <bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/quizzDB" />
 	</bean> -->
-	<context:property-placeholder system-properties-mode="FALLBACK" />
+
 	
 <bean id="quizzDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-   <property name="driverClassName" value="${dt4j.driver}" />
-   <property name="url" value="${dt4j.url}" />
-   <property name="username" value="${dt4j.username}" />
-   <property name="password" value="${dt4j.password}" />
+   <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+   <property name="url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz" />
+   <property name="username" value="quizzCMG" />
+   <property name="password" value="quizzCMG" />
 </bean>
-
 
 	<!-- Hibernate -->
 
