@@ -6,7 +6,7 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz</property>
+        <property name="hibernate.connection.url">jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz</property>
         <property name="hibernate.connection.username">quizzCMG</property>
         <property name="hibernate.default_schema">cmgquizz</property>
         <property name="hibernate.connection.password">quizzCMG</property>
