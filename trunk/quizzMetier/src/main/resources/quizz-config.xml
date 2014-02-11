@@ -18,9 +18,17 @@
 		
 
 	<!-- Datasource -->
-	<bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!-- <bean id="quizzDatasource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/quizzDB" />
-	</bean>
+	</bean> -->
+	<context:property-placeholder system-properties-mode="FALLBACK" />
+	
+<bean id="quizzDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="driverClassName" value="${dt4j.driver}" />
+   <property name="url" value="${dt4j.url}" />
+   <property name="username" value="${dt4j.username}" />
+   <property name="password" value="${dt4j.password}" />
+</bean>
 
 
 	<!-- Hibernate -->
