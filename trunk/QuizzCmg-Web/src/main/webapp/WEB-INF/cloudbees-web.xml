@@ -6,8 +6,9 @@
 <resource name="jdbc/quizzDB" auth="Container" type="javax.sql.DataSource">
   <param name="username" value="quizzCMG" />
   <param name="password" value="quizzCMG" />
-  <param name="url" value="jdbc:cloudbees://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz" />
-
+  <param name="driverClassName" value="com.mysql.jdbc.Driver"></param>
+  <param name="url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz" />
+	
   <!-- For these connections settings, see:
    http://commons.apache.org/dbcp/configuration.html
   -->
