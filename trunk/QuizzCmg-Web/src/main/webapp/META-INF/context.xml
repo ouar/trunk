@@ -18,7 +18,7 @@
 
 		
 
-		<Resource name="jdbc/quizzDB" auth="Container" type="javax.sql.DataSource"
+		<!-- <Resource name="jdbc/quizzDB" auth="Container" type="javax.sql.DataSource"
 				driverClassName="com.mysql.jdbc.Driver"				
 				url="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/cmgquizz"
 				username="quizzCMG"
@@ -27,7 +27,7 @@
 				testOnBorrow ="true"
 				maxActive="5"
 				maxIdle="1"
-				maxWait="-1" />
+				maxWait="-1" /> -->
 	<!-- <Context>
       <Loader delegate="true" />
     </Context> -->
