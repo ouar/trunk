@@ -28,7 +28,7 @@
 				maxActive="5"
 				maxIdle="1"
 				maxWait="-1" />
-	<Context>
+	<!-- <Context>
       <Loader delegate="true" />
-    </Context>
+    </Context> -->
 </Context>
