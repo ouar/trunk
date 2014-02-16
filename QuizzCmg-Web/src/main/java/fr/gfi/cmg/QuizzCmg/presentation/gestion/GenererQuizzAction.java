@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
+import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.QuestionsNonTrouveesException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
@@ -31,6 +33,7 @@ import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
 
 import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
+import fr.gfi.cmg.QuizzCmg.util.UserBean;
 
 
 
@@ -63,7 +66,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 			List<JSONObject> lSujetsDifficulteJson = generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
 
-			// construction du tableau de Sujet avec niveau de difficulté voulu
+			// construction du tableau de Sujet avec niveau de difficultï¿½ voulu
 			List<SujetDifficulteBean> lSujetsDifficulte = new ArrayList<SujetDifficulteBean>();
 			for (JSONObject sujetJson : lSujetsDifficulteJson) {
 				NiveauQuestion difficulte = new NiveauQuestion();
@@ -79,6 +82,11 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 			InfoGenerationQuizz infoGenerationQuizz = new InfoGenerationQuizz(lSujetsDifficulte, connecte, gestionFormBean.getNomCandidat(), gestionFormBean.getPrenomCandidat());
 			infoGenerationQuizz.setListNiveauTypeSujet(gestionFormBean.getListNiveauTypeSujetPanier());
+			User user =new User();
+			UserBean activeUser = (UserBean)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			user.setId(activeUser.getId());
+			user.setLibNom(activeUser.getUsername());
+			infoGenerationQuizz.setUser(user);
 			Questionnaire questionnaire = this.bsqz.genererQuizz(infoGenerationQuizz);
 
 			final Quizz quizz = this.bsqz.getDetailsQuizz(questionnaire.getQuizz().getId());
@@ -108,8 +116,8 @@ public class GenererQuizzAction extends AbstractMonAction {
 		} catch (QuestionsNonTrouveesException e) {
 
 			/*
-			 * Dans le cas où les critères ne correspondent, l'écran doit rester
-			 * dans l'état dans lequel il a été saisi.
+			 * Dans le cas oï¿½ les critï¿½res ne correspondent, l'ï¿½cran doit rester
+			 * dans l'ï¿½tat dans lequel il a ï¿½tï¿½ saisi.
 			 */
 			List<String> listIdTypesSujetSaisis = new ArrayList<String>();
 			for (TypeSujet typeSujet : lTypeSujetsSaisis) {
