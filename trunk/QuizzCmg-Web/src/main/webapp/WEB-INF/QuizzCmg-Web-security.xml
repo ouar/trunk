@@ -12,7 +12,7 @@
 
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/QuizzCmg-Web/Accueil" access="permitAll" />		
-		<intercept-url pattern="/QuizzCmg-Web/AfficherFormulaireGenerationQuizz" access="hasRole('ROLE_USER')" /> 
+		<intercept-url pattern="/QuizzCmg-Web/AfficherFormulaireGenerationQuizz" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" /> 
 		<intercept-url pattern="/QuizzCmg-Web/Valider" access="permitAll" />
 		<!-- <intercept-url pattern="/logout" access="permitAll" />
 		<intercept-url pattern="/accessdenied" access="permitAll" />
