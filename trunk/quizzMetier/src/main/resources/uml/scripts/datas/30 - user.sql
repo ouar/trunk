@@ -10,11 +10,12 @@
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-# Dumping data for table quizz.user: ~0 rows (approximately)
+# Dumping data for table user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO quizz.user (`Id`, `lib_nom`, `lib_prenom`, `lib_password`,`Id_role`) VALUES
-	(1, 'SECLY', 'Pierre', 'psecly',15),
-	(2, 'HABUMUREMYI', 'Evode', 'ehabumuremyi',15);
+INSERT INTO `user` (`Id`, `lib_nom`, `lib_prenom`, `lib_password`) VALUES
+	(1, 'SECLY', 'Pierre', 'psecly'),
+	(2, 'atkin', 'Evode', 'patkin'),
+	(3, 'OUAR', 'SALAH EDDINE', 'souar');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

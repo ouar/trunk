@@ -10,7 +10,7 @@
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-# Dumping data for table quizz.niveau_question: ~0 rows (approximately)
+# Dumping data for table sniveau_question: ~0 rows (approximately)
 /*!40000 ALTER TABLE `niveau_question` DISABLE KEYS */;
 INSERT INTO `niveau_question` (`Id`, `lib_niveau`) VALUES
 	(1, 'facile'),
