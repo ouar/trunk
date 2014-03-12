@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
+import com.google.gson.JsonObject;
 
 import fr.gfi.cmg.QuizzCmg.metier.beans.WrapperResultatsQuizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
@@ -44,7 +44,7 @@ public class GestionFormBean implements Serializable {
 	private List<Quizz> panierListQuizz = new ArrayList<Quizz>();
 	private int idLangage;
 	private String libelleLangage;
-	public JSONArray jsonObject;
+	public String json;
 
 	List<BeanNiveauTypeSujet> listNiveauTypeSujetPanier = new ArrayList<BeanNiveauTypeSujet>();
 
@@ -231,12 +231,12 @@ public class GestionFormBean implements Serializable {
 		this.panierListQuizz = panierListQuizz;
 	}
 
-	public JSONArray getJsonObject() {
-		return jsonObject;
+	public String getJson() {
+		return json;
 	}
 
-	public void setJsonObject(JSONArray jsonObject) {
-		this.jsonObject = jsonObject;
+	public void setJson(String json) {
+		this.json = json;
 	}
 
 	public String getLibelleLangage() {

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,10 @@ import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.QuestionsNonTrouveesException;
 import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
 import fr.gfi.cmg.QuizzCmg.persistance.service.QuizzPersistenceService;
+import fr.gfi.quiz.json.entite.IdLibelle;
+import fr.gfi.quiz.json.entite.Personne;
+import fr.gfi.quiz.json.entite.Quiz;
+import fr.gfi.quiz.json.entite.TypeQuestion;
 
 @Service("quizzBusinessService")
 public class QuizzBusinessServiceImpl implements QuizzBusinessService {
@@ -34,7 +39,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	private QuizzPersistenceService quizzPersistenceService;
 
 	/**
-	 * génère un quizz.
+	 * gï¿½nï¿½re un quizz.
 	 * 
 	 * @param infoGenerationQuestionnnaire
 	 * @return
@@ -46,20 +51,20 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 			throws BusinessServiceException, QuestionsNonTrouveesException {
 
 		/*
-		 * on récupère du questionnaire selon le(s) type(s) de sujet et niveau
-		 * de difficulté.
+		 * on rÃ©cupÃ¨re du questionnaire selon le(s) type(s) de sujet et niveau
+		 * de difficultÃ©.
 		 */
 		final List<Question> lQuestions = quizzPersistenceService
 				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
 						.getlSujetDifficulte());
 
 		/*
-		 * on alimente l'entité quizz
+		 * on alimente l'entitÃ© quizz
 		 */
 
 		if (lQuestions == null || lQuestions.isEmpty()) {
 			throw new QuestionsNonTrouveesException(
-					" Il n'y a pas de questions correspondant à vos critères de géneration");
+					" Il n'y a pas de questions correspondant ï¿½ vos critï¿½res de gï¿½neration");
 		}
 
 		/**
@@ -74,13 +79,13 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		// enregistrement du quizz
 		quizz = quizzPersistenceService.enregistreQuizz(quizz);
 
-		// On récupère ici la vraie liste des types de sujet du
+		// On rÃ©cupÃ¨re ici la vraie liste des types de sujet du
 		// questionnaire
-		// qui peut être différente de la liste choisie par l'utilisateur
-		// lors de la génération.
+		// qui peut Ãªtre diffÃ©rente de la liste choisie par l'utilisateur
+		// lors de la gÃ©nÃ©ration.
 		final List<TypeSujet> lTypesSujetsForQuestionnairePossible = getTypesSujetsForQuestionnaire(lQuestions);
 
-		// on associe l'entité Quizz à un type de sujet.
+		// on associe l'entitÃ© Quizz Ã  un type de sujet.
 		for (TypeSujet typeSujet : lTypesSujetsForQuestionnairePossible) {
 			QuizzSujet quizzSujet = new QuizzSujet();
 			quizzSujet.setTypeSujet(typeSujet);
@@ -91,7 +96,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 
 		}
 
-		// on associe l'entité Quizz aux questions posées.
+		// on associe l'entitÃ© Quizz aux questions posï¿½es.
 		for (Question question : lQuestions) {
 			QuizzQuestion quizzQuestion = new QuizzQuestion();
 			quizzQuestion.setQuestion(question);
@@ -115,7 +120,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	}
 
 	/**
-	 * persister les réponses du candidat faisant un quizz.
+	 * persister les rÃ©ponses du candidat faisant un quizz.
 	 * 
 	 * @param infoReponsesCandidat
 	 * @throws BusinessServiceException
@@ -132,8 +137,8 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		Quizz quizz = infoReponsesCandidat.getQuizz();
 		int duree = (int) (new Date().getTime() - quizz.getDatQuizz().getTime());
 
-		// on met à jour un quizz avec la durée passée par un candidat pour
-		// répondre
+		// on met Ã  jour un quizz avec la durÃ©e passÃ©e par un candidat pour
+		// rÃ©pondre
 
 		quizzPersistenceService.enrengistrerDureeQuizz(quizz.getId(), duree);
 
@@ -141,7 +146,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 				.getMapQuestionsReponses();
 
 		/*
-		 * on enregistre des réponses candidats.
+		 * on enregistre des rÃ©ponses candidats.
 		 */
 		for (Map.Entry<Question, List<Reponse>> e : mapQuestionsReponses
 				.entrySet()) {
@@ -149,8 +154,8 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 			List<Reponse> lReponsesCochees = e.getValue();
 
 			/*
-			 * Pour chaque question répondue, on alimentera la table
-			 * "reponse_candidat" autant des fois qu'il ya des réponses cochées
+			 * Pour chaque question rÃ©pondue, on alimentera la table
+			 * "reponse_candidat" autant des fois qu'il ya des rÃ©ponses cochÃ©es
 			 * par le candidat.
 			 */
 			for (Reponse reponse : lReponsesCochees) {
@@ -188,7 +193,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	}
 
 	/**
-	 * récupère tous les objets quizz ordonnés par la date de création.
+	 * rÃ©cupÃ¨re tous les objets quizz ordonnÃ©s par la date de crÃ©ation.
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<Quizz> getListQuizzByDate() throws BusinessServiceException {
@@ -207,7 +212,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	}
 
 	/**
-	 * retourne les objets réponses candidats attachés à un quizz.
+	 * retourne les objets rÃ©ponses candidats attachÃ©s Ã  un quizz.
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<ReponseCandidat> getListReponsesCandidatsByQuizz(Integer id)
@@ -244,23 +249,106 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		List<Question> lQuestions = null;
 
 		/*
-		 * on récupère du questionnaire selon le(s) type(s) de sujet et niveau
-		 * de difficulté.
+		 * on rÃ©cupÃ¨re du questionnaire selon le(s) type(s) de sujet et niveau
+		 * de difficultÃ©.
 		 */
 		lQuestions = quizzPersistenceService
 				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
 						.getlSujetDifficulte());
 
 		/*
-		 * on alimente l'entité quizz
+		 * on alimente l'entitÃ© quizz
 		 */
 
 		if (lQuestions == null || lQuestions.isEmpty()) {
 			throw new QuestionsNonTrouveesException(
-					" Il n'y a pas de questions correspondant à vos critères de géneration");
+					" Il n'y a pas de questions correspondant ï¿½ vos critï¿½res de gï¿½neration");
 		}
 
 		return lQuestions;
 
+	}
+
+	@Override
+	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD) {
+		Quiz quiz = new Quiz();
+		
+		quiz.setId(quizzBD.getId());
+		
+		Personne examinateur = new Personne();
+		examinateur.setId(quizzBD.getUser().getId());
+		examinateur.setNom(quizzBD.getUser().getLibNom());
+		examinateur.setPrenom(quizzBD.getUser().getLibPrenom());
+		quiz.setExaminateur(examinateur);
+		
+		Personne candidat = new Personne();
+		candidat.setNom(quizzBD.getLibNomCandidat());
+		quiz.setCandidat(candidat);
+		
+		List<TypeQuestion> lTypesQuestions = new ArrayList<TypeQuestion>();
+		for(QuizzSujet quizzSujet : quizzBD.getQuizzSujets()){
+			TypeQuestion typeQuestion = new TypeQuestion();
+			
+			IdLibelle sujet = new IdLibelle();
+			sujet.setId(quizzSujet.getTypeSujet().getId());
+			sujet.setLibelle(quizzSujet.getTypeSujet().getLibelle());
+			
+			IdLibelle difficulte = new IdLibelle();
+//			difficulte.setId(quizzSujet.getNiveauQuestion().getId());
+//			difficulte.setLibelle(quizzSujet.getNiveauQuestion().getLibNiveau());
+			
+			IdLibelle langage = new IdLibelle();
+			langage.setId(quizzSujet.getTypeSujet().getLangage().getId());
+			langage.setLibelle(quizzSujet.getTypeSujet().getLangage().getLibelle());
+			
+			typeQuestion.setDifficulte(difficulte);
+			typeQuestion.setLangage(langage);
+			typeQuestion.setTypeSujet(sujet);
+			
+			lTypesQuestions.add(typeQuestion);
+		}
+		quiz.setLTypesQuestions(lTypesQuestions);
+		
+		List<fr.gfi.quiz.json.entite.Question> lQuestions = new ArrayList<fr.gfi.quiz.json.entite.Question>();
+		for(QuizzQuestion quizzQuestion : quizzBD.getQuizzQuestions()){
+			fr.gfi.quiz.json.entite.Question question = new fr.gfi.quiz.json.entite.Question();
+			Question questionBD = quizzQuestion.getQuestion(); 
+			question.setId(questionBD.getId());
+			question.setDureeReflexionEnSec(questionBD.getIntDureeReflexion());
+			question.setLibelle(questionBD.getLibQuestion());
+			question.setPlusieursReponsesCorrectes(questionBD.getBolUniqueReponse());
+			
+			IdLibelle typeSujet = new IdLibelle();
+			typeSujet.setId(questionBD.getTypeSujet().getId());
+			typeSujet.setLibelle(questionBD.getTypeSujet().getLibelle());
+			question.setTypeSujet(typeSujet);
+			
+			IdLibelle langage = new IdLibelle();
+			langage.setId(questionBD.getTypeSujet().getLangage().getId());
+			langage.setLibelle(questionBD.getTypeSujet().getLangage().getLibelle());
+			question.setLangage(langage);
+			
+			if(StringUtils.isNotEmpty(questionBD.getUrlImage())){
+				question.setUrlInmage(questionBD.getUrlImage());
+			}
+			
+			List<fr.gfi.quiz.json.entite.Reponse> lReponses = new ArrayList<fr.gfi.quiz.json.entite.Reponse>();
+			for(Reponse reponseBD : questionBD.getReponses()){
+				fr.gfi.quiz.json.entite.Reponse reponse = new fr.gfi.quiz.json.entite.Reponse();
+				
+				IdLibelle reponseIdLib = new IdLibelle();
+				reponseIdLib.setId(reponseBD.getId());
+				reponseIdLib.setLibelle(reponseBD.getLibReponse());
+				reponse.setReponse(reponseIdLib);
+				reponse.setCorrecte(reponseBD.getBolTypeReponse());
+				
+				lReponses.add(reponse);
+			}
+			question.setlReponses(lReponses);
+			lQuestions.add(question);
+		}
+		quiz.setLQuestions(lQuestions);
+		
+		return quiz;
 	}
 }

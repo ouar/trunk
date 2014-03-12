@@ -10,13 +10,14 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.QuestionsNonTrouveesException;
+import fr.gfi.quiz.json.entite.Quiz;
 
 
 public interface QuizzBusinessService  {
 
 	/**
-	 * génère un questionnaire en fonction du type de sujet et du niveau de
-	 * difficulté d'une question.
+	 * gÃ©nÃ¨re un questionnaire en fonction du type de sujet et du niveau de
+	 * difficultÃ© d'une question.
 	 * 
 	 * @param infoGenerationQuestionnnaire
 	 * @return
@@ -29,7 +30,7 @@ public interface QuizzBusinessService  {
 			throws BusinessServiceException, QuestionsNonTrouveesException;
 
 	/**
-	 * enregistre les réponses répondues par le candidat à un quizz.
+	 * enregistre les rÃ©ponses rÃ©pondues par le candidat Ã  un quizz.
 	 * 
 	 * @param infoReponsesCandidat
 	 * @throws BusinessServiceException
@@ -44,7 +45,7 @@ public interface QuizzBusinessService  {
 	public List<Quizz> getListQuizzByDate() throws BusinessServiceException;
 
 	/**
-	 * récupère le détail d'un quizz.
+	 * rÃ©cupÃ¨re le dÃ©tail d'un quizz.
 	 * 
 	 * @param id
 	 * @return
@@ -53,7 +54,7 @@ public interface QuizzBusinessService  {
 	public Quizz getDetailsQuizz(Integer id) throws BusinessServiceException;
 
 	/**
-	 * Récupère la liste des réponses candidats correspondant à un quizz.
+	 * RÃ©cupÃ¨re la liste des rÃ©ponses candidats correspondant Ã  un quizz.
 	 * 
 	 * @param Id
 	 * @return
@@ -77,4 +78,6 @@ public interface QuizzBusinessService  {
 	 */
 	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion (InfoGenerationQuizz infoGenerationQuizz) throws BusinessServiceException, QuestionsNonTrouveesException;
 
+	
+	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD);
 }

@@ -8,7 +8,7 @@
 
 <HTML>
   <head>
-	  <link rel="stylesheet" href="<util:WebPath/>/css/style.css">
+	  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     <title>Erreur Grave</title>
   </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="2">

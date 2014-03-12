@@ -64,8 +64,8 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 		}	
 		criteres.add(orTypeSujet);
 
-		// On traite le résultat de la requête pour avoir une question avec
-		// des réponses correspondantes et non pas autant de questions qu'il
+		// On traite le rï¿½sultat de la requï¿½te pour avoir une question avec
+		// des rï¿½ponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		lQuestions = (List<Question>) MyRequest.list(criteres, lAssociations);
@@ -105,17 +105,18 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.QuizzEnum.TypesSujets.getValue());
+		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Questions_Quizz.getValue());
-		lAssociations.add(HibConst.QuizzEnum.Admin.getValue());
+		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		lAssociations.add(HibConst.QuizzEnum.NiveauQuestion.getValue());
+		lAssociations.add(HibConst.QuizzEnum.NiveauSujet.getValue());
 		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidat.getValue());
 		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
 
-		// On traite le résultat de la requête pour avoir une question avec
-		// des réponses correspondantes et non pas autant de questions qu'il
+		// On traite le rÃ©sultat de la requÃªte pour avoir une question avec
+		// des rÃ©ponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
 
@@ -146,12 +147,12 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 		lAssociations.add(HibConst.QuizzEnum.TypesSujets.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Questions_Quizz.getValue());
-		lAssociations.add(HibConst.QuizzEnum.Admin.getValue());
+		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 
-		// On traite le résultat de la requête pour avoir une question avec
-		// des réponses correspondantes et non pas autant de questions qu'il
+		// On traite le rï¿½sultat de la requï¿½te pour avoir une question avec
+		// des rï¿½ponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
 
@@ -209,8 +210,8 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 				.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.TypeSujet.getValue());
 
-		// On traite le résultat de la requête pour avoir une question avec
-		// des réponses correspondantes et non pas autant de questions qu'il
+		// On traite le rï¿½sultat de la requï¿½te pour avoir une question avec
+		// des rï¿½ponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		lReponseCandidats = (List<ReponseCandidat>) MyRequest.list(criteres,
@@ -255,7 +256,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	}
 
 	/**
-	 * Met à jour un quizz avec la durée passée par un candidat pour répondre
+	 * Met ï¿½ jour un quizz avec la durï¿½e passï¿½e par un candidat pour rï¿½pondre
 	 * aux questions.
 	 * 
 	 * @param idQuizz
@@ -273,7 +274,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	}
 
 	/**
-	 * enregistre une réponse cochée par un candidat pour une question au cours
+	 * enregistre une rï¿½ponse cochï¿½e par un candidat pour une question au cours
 	 * d'un quizz.
 	 * 
 	 * @param reponseCandidat

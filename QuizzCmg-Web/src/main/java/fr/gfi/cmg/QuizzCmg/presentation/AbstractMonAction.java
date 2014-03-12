@@ -32,10 +32,10 @@ import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
 public abstract class AbstractMonAction {
 
 	@Resource(name = "quizzBusinessService")
-	QuizzBusinessService bsqz;
+	public QuizzBusinessService bsqz;
 
 	@Resource(name = "adminBusinessService")
-	AdminBusinessService bsAdmin;
+	public AdminBusinessService bsAdmin;
 
 	private boolean erreur = false;
 	protected User connecte = null;
@@ -100,7 +100,7 @@ public abstract class AbstractMonAction {
 			session.setAttribute(AbstractConstantes.LISTE_USERS, listeUsers);
 
 		}
-		/** Chargement des langage / sujet et leur niveau de difficultés **/
+		/** Chargement des langage / sujet et leur niveau de difficultï¿½s **/
 		if (session.getAttribute(AbstractConstantes.LISTE_LANGAGES) == null || reinitialisation) {
 
 			List<String> lAssociations = new ArrayList<String>();
@@ -191,7 +191,7 @@ public abstract class AbstractMonAction {
 	@SuppressWarnings("unchecked")
 	protected List<TypeSujet> getListTypeSujet(HttpSession session, boolean reinitialisation) {
 		List<TypeSujet> lListTypeSujets = null;
-		/** Chargement des langage / sujet et leur niveau de difficultés **/
+		/** Chargement des langage / sujet et leur niveau de difficultï¿½s **/
 		if (session.getAttribute(AbstractConstantes.LISTE_TYPE_SUJETS) == null || reinitialisation) {
 
 			List<String> lAssociations = new ArrayList<String>();

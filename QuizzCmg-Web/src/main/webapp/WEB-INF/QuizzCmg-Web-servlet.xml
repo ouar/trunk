@@ -37,11 +37,8 @@
 				<value>Erreur</value>
 				<value>Login</value>
 				<value>acceesRefuse</value>
-				
-				
 			</list>
 		</property>
-
 	</bean>
 
 
@@ -60,7 +57,7 @@
 				<prop key="/ConsulterQuizz">ConsulterQuizzAction</prop>
 				<prop key="/deconnexion">LoginAction</prop>
 				<prop key="/GenererQuizz">GenererQuizzAction</prop>
-				<prop key="/GenererJsonQuizz">GenererJsonQuizzAction</prop>
+				<prop key="/getQuizz">GenererJsonQuizzAction</prop>
 				<prop key="/AdministrationQuizz">QuizzAdministrationAction</prop>
 				<prop key="/Ajouter">AjouterAction</prop>
 				<prop key="DetailTypeSujet">DetailTypeSujetAction</prop>
