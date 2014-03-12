@@ -1,8 +1,6 @@
 package fr.gfi.cmg.QuizzCmg.presentation.gestion;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +26,7 @@ public class AfficherFormulaireGenerationQuizzAction extends AbstractMonAction {
 
 
 	/**
-	 * initialisation des attributs du formulaire de génération.
+	 * initialisation des attributs du formulaire de gï¿½nï¿½ration.
 	 * 
 	 * @param fb
 	 */

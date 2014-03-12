@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fr.gfi.cmg.QuizzCmg.metier.beans.InfoGenerationQuizz;
 import fr.gfi.cmg.QuizzCmg.metier.beans.Questionnaire;
 import fr.gfi.cmg.QuizzCmg.metier.beans.SujetDifficulteBean;
-
-import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.NiveauQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
@@ -29,10 +27,7 @@ import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.QuestionsNonTrouveesException;
 import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
 import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
-import fr.gfi.cmg.QuizzCmg.persistance.util.BeanNiveauTypeSujet;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
-
-import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
 import fr.gfi.cmg.QuizzCmg.util.UserBean;
 
 
@@ -66,7 +61,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 			List<JSONObject> lSujetsDifficulteJson = generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
 
-			// construction du tableau de Sujet avec niveau de difficult� voulu
+			// construction du tableau de Sujet avec niveau de difficulté voulu
 			List<SujetDifficulteBean> lSujetsDifficulte = new ArrayList<SujetDifficulteBean>();
 			for (JSONObject sujetJson : lSujetsDifficulteJson) {
 				NiveauQuestion difficulte = new NiveauQuestion();
@@ -99,7 +94,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 
 			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + urlServeur + "/QuizzCmg-Web/GenererJsonQuizz?tfIdQuizzAConsulter=" + questionnaire.getQuizz().getId();
+			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + urlServeur + "/QuizzCmg-Web%" + questionnaire.getQuizz().getId();
 
 			gestionFormBean.setUrlFlashCode(urlFlashCode);
 
@@ -116,8 +111,8 @@ public class GenererQuizzAction extends AbstractMonAction {
 		} catch (QuestionsNonTrouveesException e) {
 
 			/*
-			 * Dans le cas o� les crit�res ne correspondent, l'�cran doit rester
-			 * dans l'�tat dans lequel il a �t� saisi.
+			 * Dans le cas ou les critères ne correspondent, l'écran doit rester
+			 * dans l'état dans lequel il a été saisi.
 			 */
 			List<String> listIdTypesSujetSaisis = new ArrayList<String>();
 			for (TypeSujet typeSujet : lTypeSujetsSaisis) {
