@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
@@ -15,7 +14,7 @@ import fr.gfi.quiz.json.moteur.JsonBuilder;
 public class testJson extends TestCase {
 
 	Gson gson;
-	
+
 	private static String jsonstatic = "{" +
 			"  \"id\": 15," +
 			"  \"candidat\": {" +
@@ -174,8 +173,8 @@ public class testJson extends TestCase {
 			"    }" +
 			"  ]" +
 			"}";
-	
-	
+
+
 	 /**
      * Create the test case
      *
