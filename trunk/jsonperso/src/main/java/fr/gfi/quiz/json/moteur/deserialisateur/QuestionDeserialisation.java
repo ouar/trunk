@@ -28,7 +28,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		IdLibelle typeSujet = context.deserialize(jsonObject.get("typeSujet"), IdLibelle.class);
 		IdLibelle difficulte = context.deserialize(jsonObject.get("difficulte"), IdLibelle.class);
 		
-		boolean isPlusieursReponsesCorrectes = jsonObject.get("plusieursReponsesCorrectes").getAsBoolean();
+		boolean isUniqueReponseCorrecte = jsonObject.get("uniqueReponseCorrecte").getAsBoolean();
 		int dureeReflexionEnSec = jsonObject.get("dureeReflexionEnSec").getAsInt();
 		String libEnonce = jsonObject.get("libelle").getAsString();
 		
@@ -43,7 +43,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		question.setLangage(langage);
 		question.setTypeSujet(typeSujet);
 		question.setDifficulte(difficulte);
-		question.setPlusieursReponsesCorrectes(isPlusieursReponsesCorrectes);
+		question.setUniqueReponseCorrecte(isUniqueReponseCorrecte);
 		question.setDureeReflexionEnSec(dureeReflexionEnSec);
 		question.setLibelle(libEnonce);
 		question.setlReponses(lReponses);
