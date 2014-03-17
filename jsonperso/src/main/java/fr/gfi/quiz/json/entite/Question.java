@@ -14,7 +14,7 @@ public class Question implements Serializable {
 	private IdLibelle langage;
 	private IdLibelle typeSujet;
 	private IdLibelle difficulte;
-	private boolean plusieursReponsesCorrectes;
+	private boolean uniqueReponseCorrecte;
 	private int dureeReflexionEnSec;
 	private String libelle;
 	private String urlInmage;
@@ -25,7 +25,7 @@ public class Question implements Serializable {
 	}
 
 	public Question(int id, IdLibelle langage, IdLibelle typeSujet,
-			IdLibelle difficulte, boolean plusieursReponsesCorrectes,
+			IdLibelle difficulte, boolean uniqueReponseCorrecte,
 			int dureeReflexionEnSec, String libelle, String urlInmage,
 			List<Reponse> lReponses) {
 		super();
@@ -33,7 +33,7 @@ public class Question implements Serializable {
 		this.langage = langage;
 		this.typeSujet = typeSujet;
 		this.difficulte = difficulte;
-		this.plusieursReponsesCorrectes = plusieursReponsesCorrectes;
+		this.uniqueReponseCorrecte = uniqueReponseCorrecte;
 		this.dureeReflexionEnSec = dureeReflexionEnSec;
 		this.libelle = libelle;
 		this.urlInmage = urlInmage;
@@ -72,12 +72,12 @@ public class Question implements Serializable {
 		this.difficulte = difficulte;
 	}
 
-	public boolean isPlusieursReponsesCorrectes() {
-		return plusieursReponsesCorrectes;
+	public boolean isUniqueReponseCorrecte() {
+		return uniqueReponseCorrecte;
 	}
 
-	public void setPlusieursReponsesCorrectes(boolean plusieursReponsesCorrectes) {
-		this.plusieursReponsesCorrectes = plusieursReponsesCorrectes;
+	public void setUniqueReponseCorrecte(boolean uniqueReponseCorrecte) {
+		this.uniqueReponseCorrecte = uniqueReponseCorrecte;
 	}
 
 	public int getDureeReflexionEnSec() {
@@ -116,7 +116,7 @@ public class Question implements Serializable {
 	public String toString() {
 		return "Question [id=" + id + ", langage=" + langage + ", typeSujet="
 				+ typeSujet + ", difficulte=" + difficulte
-				+ ", plusieursReponsesCorrectes=" + plusieursReponsesCorrectes
+				+ ", uniqueReponseCorrecte=" + uniqueReponseCorrecte
 				+ ", dureeReflexionEnSec=" + dureeReflexionEnSec + ", libelle="
 				+ libelle + ", urlInmage=" + urlInmage + ", lReponses="
 				+ lReponses + "]";
@@ -134,7 +134,7 @@ public class Question implements Serializable {
 				+ ((lReponses == null) ? 0 : lReponses.hashCode());
 		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
 		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		result = prime * result + (plusieursReponsesCorrectes ? 1231 : 1237);
+		result = prime * result + (uniqueReponseCorrecte ? 1231 : 1237);
 		result = prime * result
 				+ ((typeSujet == null) ? 0 : typeSujet.hashCode());
 		result = prime * result
@@ -175,7 +175,7 @@ public class Question implements Serializable {
 				return false;
 		} else if (!libelle.equals(other.libelle))
 			return false;
-		if (plusieursReponsesCorrectes != other.plusieursReponsesCorrectes)
+		if (uniqueReponseCorrecte != other.uniqueReponseCorrecte)
 			return false;
 		if (typeSujet == null) {
 			if (other.typeSujet != null)
