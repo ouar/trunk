@@ -14,7 +14,8 @@ public class Quizz implements java.io.Serializable {
 	private Integer id;
 	private User user;
 	private Integer intDuree;
-	private String libNomCandidat;
+	private String prenomCandidat;
+	private String nomCandidat;
 	private String libCommentaire;
 	private Date datQuizz;
 	private Set<QuizzQuestion> quizzQuestions = new HashSet<QuizzQuestion>(0);
@@ -28,10 +29,11 @@ public class Quizz implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public Quizz(User user, Integer intDuree, String libNomCandidat, String libCommentaire, Date datQuizz, Set<QuizzQuestion> quizzQuestions, Set<QuizzSujet> quizzSujets, Set<ReponseCandidat> reponseCandidats) {
+	public Quizz(User user, Integer intDuree, String prenomCandidat, String nomCandidat, String libCommentaire, Date datQuizz, Set<QuizzQuestion> quizzQuestions, Set<QuizzSujet> quizzSujets, Set<ReponseCandidat> reponseCandidats) {
 		this.user = user;
 		this.intDuree = intDuree;
-		this.libNomCandidat = libNomCandidat;
+		this.prenomCandidat = prenomCandidat;
+		this.nomCandidat = nomCandidat;
 		this.libCommentaire = libCommentaire;
 		this.datQuizz = datQuizz;
 		this.quizzQuestions = quizzQuestions;
@@ -63,12 +65,20 @@ public class Quizz implements java.io.Serializable {
 		this.intDuree = intDuree;
 	}
 
-	public String getLibNomCandidat() {
-		return this.libNomCandidat;
+	public String getNomCandidat() {
+		return this.nomCandidat;
 	}
 
-	public void setLibNomCandidat(String libNomCandidat) {
-		this.libNomCandidat = libNomCandidat;
+	public void setNomCandidat(String nomCandidat) {
+		this.nomCandidat = nomCandidat;
+	}
+	
+	public String getPrenomCandidat() {
+		return this.prenomCandidat;
+	}
+
+	public void setPrenomCandidat(String prenomCandidat) {
+		this.prenomCandidat = prenomCandidat;
 	}
 
 	public String getLibCommentaire() {

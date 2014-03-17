@@ -14,8 +14,11 @@
         <property name="intDuree" type="java.lang.Integer">
             <column name="int_duree" />
         </property>
-        <property name="libNomCandidat" type="string">
-            <column name="lib_nom_candidat" length="50" />
+        <property name="prenomCandidat" type="string">
+            <column name="prenom_candidat" length="50" />
+        </property>
+        <property name="nomCandidat" type="string">
+            <column name="nom_candidat" length="50" />
         </property>
         <property name="libCommentaire" type="string">
             <column name="lib_commentaire" length="65535" />

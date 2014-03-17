@@ -39,7 +39,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	private QuizzPersistenceService quizzPersistenceService;
 
 	/**
-	 * g�n�re un quizz.
+	 * génère un quizz.
 	 * 
 	 * @param infoGenerationQuestionnnaire
 	 * @return
@@ -54,9 +54,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		 * on récupère du questionnaire selon le(s) type(s) de sujet et niveau
 		 * de difficulté.
 		 */
-		final List<Question> lQuestions = quizzPersistenceService
-				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
-						.getlSujetDifficulte());
+		final List<Question> lQuestions = quizzPersistenceService.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz.getlSujetDifficulte());
 
 		/*
 		 * on alimente l'entité quizz
@@ -64,7 +62,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 
 		if (lQuestions == null || lQuestions.isEmpty()) {
 			throw new QuestionsNonTrouveesException(
-					" Il n'y a pas de questions correspondant � vos crit�res de g�neration");
+					" Il n'y a pas de questions correspondant à vos critères de géneration");
 		}
 
 		/**
@@ -74,8 +72,8 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		Quizz quizz = new Quizz();
 		quizz.setUser(infoGenerationQuizz.getUser());
 		quizz.setDatQuizz(new Date());
-		quizz.setLibNomCandidat(infoGenerationQuizz.getPrenomCandidat() + " "
-				+ infoGenerationQuizz.getNomCandidat());
+		quizz.setPrenomCandidat(infoGenerationQuizz.getPrenomCandidat());
+		quizz.setNomCandidat(infoGenerationQuizz.getNomCandidat());
 		// enregistrement du quizz
 		quizz = quizzPersistenceService.enregistreQuizz(quizz);
 
@@ -91,19 +89,16 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 			quizzSujet.setTypeSujet(typeSujet);
 			quizzSujet.setQuizz(quizz);
 			// enregistrement du quizzSujet
-			quizzSujet = quizzPersistenceService
-					.enregistrerQuizzSujet(quizzSujet);
+			quizzSujet = quizzPersistenceService.enregistrerQuizzSujet(quizzSujet);
 
 		}
 
-		// on associe l'entité Quizz aux questions pos�es.
 		for (Question question : lQuestions) {
 			QuizzQuestion quizzQuestion = new QuizzQuestion();
 			quizzQuestion.setQuestion(question);
 			quizzQuestion.setQuizz(quizz);
 			// enregistrement du quizzQuestion
-			quizzQuestion = quizzPersistenceService
-					.enregistrerQuizzQuestion(quizzQuestion);
+			quizzQuestion = quizzPersistenceService.enregistrerQuizzQuestion(quizzQuestion);
 
 		}
 
@@ -179,16 +174,13 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	 * @return
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	private List<TypeSujet> getTypesSujetsForQuestionnaire(
-			final List<Question> lQuestions) {
+	private List<TypeSujet> getTypesSujetsForQuestionnaire(final List<Question> lQuestions) {
 		Map<String, TypeSujet> hashMap = new HashMap<String, TypeSujet>();
 		for (Question question : lQuestions) {
-			hashMap.put(question.getTypeSujet().getLibelle(),
-					question.getTypeSujet());
+			hashMap.put(question.getTypeSujet().getLibelle(), question.getTypeSujet());
 		}
 
-		final List<TypeSujet> lTypesSujetsForQuestionnairePossible = new ArrayList<TypeSujet>(
-				hashMap.values());
+		final List<TypeSujet> lTypesSujetsForQuestionnairePossible = new ArrayList<TypeSujet>(hashMap.values());
 		return lTypesSujetsForQuestionnairePossible;
 	}
 
@@ -218,8 +210,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 	public List<ReponseCandidat> getListReponsesCandidatsByQuizz(Integer id)
 			throws BusinessServiceException {
 
-		final List<ReponseCandidat> lCandidats = quizzPersistenceService
-				.getListReponsesCandidatsByQuizz(id);
+		final List<ReponseCandidat> lCandidats = quizzPersistenceService.getListReponsesCandidatsByQuizz(id);
 		return lCandidats;
 
 	}
@@ -282,7 +273,8 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 		quiz.setExaminateur(examinateur);
 		
 		Personne candidat = new Personne();
-		candidat.setNom(quizzBD.getLibNomCandidat());
+		candidat.setPrenom(quizzBD.getPrenomCandidat());
+		candidat.setNom(quizzBD.getNomCandidat());
 		quiz.setCandidat(candidat);
 		
 		List<TypeQuestion> lTypesQuestions = new ArrayList<TypeQuestion>();
@@ -294,8 +286,6 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 			sujet.setLibelle(quizzSujet.getTypeSujet().getLibelle());
 			
 			IdLibelle difficulte = new IdLibelle();
-//			difficulte.setId(quizzSujet.getNiveauQuestion().getId());
-//			difficulte.setLibelle(quizzSujet.getNiveauQuestion().getLibNiveau());
 			
 			IdLibelle langage = new IdLibelle();
 			langage.setId(quizzSujet.getTypeSujet().getLangage().getId());
@@ -316,7 +306,7 @@ public class QuizzBusinessServiceImpl implements QuizzBusinessService {
 			question.setId(questionBD.getId());
 			question.setDureeReflexionEnSec(questionBD.getIntDureeReflexion());
 			question.setLibelle(questionBD.getLibQuestion());
-			question.setPlusieursReponsesCorrectes(questionBD.getBolUniqueReponse());
+			question.setUniqueReponseCorrecte(questionBD.getBolUniqueReponse());
 			
 			IdLibelle typeSujet = new IdLibelle();
 			typeSujet.setId(questionBD.getTypeSujet().getId());

@@ -39,8 +39,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	 * @return @
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion(
-			List<SujetDifficulteBean>  listNiveauTypeSujet) {
+	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion(List<SujetDifficulteBean>  listNiveauTypeSujet) {
 		Session hSession = null;
 
 		List<Question> lQuestions = null;
@@ -64,8 +63,8 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 		}	
 		criteres.add(orTypeSujet);
 
-		// On traite le r�sultat de la requ�te pour avoir une question avec
-		// des r�ponses correspondantes et non pas autant de questions qu'il
+		// On traite le résultat de la requête pour avoir une question avec
+		// des réponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		lQuestions = (List<Question>) MyRequest.list(criteres, lAssociations);
@@ -151,8 +150,8 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 
-		// On traite le r�sultat de la requ�te pour avoir une question avec
-		// des r�ponses correspondantes et non pas autant de questions qu'il
+		// On traite le résultat de la requète pour avoir une question avec
+		// des réponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
 
@@ -210,8 +209,8 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 				.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.TypeSujet.getValue());
 
-		// On traite le r�sultat de la requ�te pour avoir une question avec
-		// des r�ponses correspondantes et non pas autant de questions qu'il
+		// On traite le résultat de la requète pour avoir une question avec
+		// des réponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		lReponseCandidats = (List<ReponseCandidat>) MyRequest.list(criteres,
@@ -256,7 +255,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	}
 
 	/**
-	 * Met � jour un quizz avec la dur�e pass�e par un candidat pour r�pondre
+	 * Met à jour un quizz avec la durée passée par un candidat pour répondre
 	 * aux questions.
 	 * 
 	 * @param idQuizz
@@ -274,7 +273,7 @@ public class QuizzPersistenceServiceImpl implements QuizzPersistenceService {
 	}
 
 	/**
-	 * enregistre une r�ponse coch�e par un candidat pour une question au cours
+	 * enregistre une réponse cochée par un candidat pour une question au cours
 	 * d'un quizz.
 	 * 
 	 * @param reponseCandidat
