@@ -70,7 +70,7 @@ public class testJson extends TestCase {
 			"        \"id\": 1," +
 			"        \"libelle\": \"facile\"" +
 			"      }," +
-			"      \"plusieursReponsesCorrectes\": false," +
+			"      \"uniqueReponseCorrecte\": false," +
 			"      \"dureeReflexionEnSec\": 120," +
 			"      \"libelle\": \"qu\u0027est ce qu\u0027un war\"," +
 			"      \"lReponses\": [" +
@@ -114,7 +114,7 @@ public class testJson extends TestCase {
 			"        \"id\": 1," +
 			"        \"libelle\": \"facile\"" +
 			"      }," +
-			"      \"plusieursReponsesCorrectes\": true," +
+			"      \"uniqueReponseCorrecte\": true," +
 			"      \"dureeReflexionEnSec\": 120," +
 			"      \"libelle\": \"quel est la différence entre HQL et Criteria\"," +
 			"      \"lReponses\": [" +
@@ -158,7 +158,7 @@ public class testJson extends TestCase {
 			"        \"id\": 1," +
 			"        \"libelle\": \"facile\"" +
 			"      }," +
-			"      \"plusieursReponsesCorrectes\": false," +
+			"      \"uniqueReponseCorrecte\": false," +
 			"      \"dureeReflexionEnSec\": 222," +
 			"      \"libelle\": \"test\"," +
 			"      \"urlInmage\": \"http://quizzcmg-web.samourai.eu.cloudbees.net:80/imageUpload/20140216043837.jpg\"," +
