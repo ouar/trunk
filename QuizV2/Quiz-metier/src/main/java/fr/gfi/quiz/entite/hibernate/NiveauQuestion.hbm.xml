@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mars 2014 17:00:26 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.quiz.entite.hibernate.NiveauQuestion" table="niveau_question" catalog="quizz">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <property name="libNiveau" type="string">
+            <column name="lib_niveau" length="50">
+                <comment>niveau du quizz</comment>
+            </column>
+        </property>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_niveau_question" not-null="true">
+                    <comment>difficult&#233; de la question</comment>
+                </column>
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.Question" />
+        </set>
+        <set name="quizzSujets" table="quizz_sujet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_niveau_question" not-null="true" />
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.QuizzSujet" />
+        </set>
+    </class>
+</hibernate-mapping>

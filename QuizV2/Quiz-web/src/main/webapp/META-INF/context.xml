@@ -1,0 +1,22 @@
+<Context docBase="Quiz-web-springmvc" path="/Quiz-web-springmvc" reloadable="true">
+
+	<!-- Environnement de l'application -->
+	<Environment name="app/env" override="false" type="java.lang.String" value="Développement" />
+
+	<!-- Variable d'environnement pour le connecteur de securite Spring security Gide -->
+	<Environment name="ldap/gide/idappli" override="false" type="java.lang.String" value="1557" />
+	<Environment name="ldap/gide/codeappli" override="false" type="java.lang.String" value="CF8" />
+	<Environment name="ldap/gide/url" override="false" type="java.lang.String" value="http://dwsgide-int.serv.cdc.fr/WsGide/services/Gide" />
+
+	<!-- La datasource de prod à spécialiser !! -->
+	<Resource name="jdbc/QuizDB" auth="Container" type="javax.sql.DataSource"
+				driverClassName="com.mysql.jdbc.Driver"
+				url="jdbc:mysql://localhost:3306/Quiz"
+				username="root"
+				password=""
+				validationQuery="select 1"
+				testOnBorrow ="true"
+				maxActive="5"
+				maxIdle="1"
+				maxWait="-1" />
+</Context>

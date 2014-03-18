@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+    <!--Default Cache configuration. These will applied to caches programmatically created through
+        the CacheManager.
+
+        The following attributes are required for defaultCache:
+
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires.
+                            i.e. The maximum amount of time between accesses before an element expires
+                            Is only used if the element is not eternal.
+                            Optional attribute. A value of 0 means that an Element can idle for infinity
+        timeToLiveSeconds - Sets the time to live for an element before it expires.
+                            i.e. The maximum time between creation time and when an element expires.
+                            Is only used if the element is not eternal.
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+
+    <diskStore path="C:/Local/temp/ehcache"/>
+
+   <defaultCache
+        maxElementsInMemory="10000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="true"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+    />
+     
+     <cache name="cache-users"
+        maxElementsInMemory="500"
+        eternal="false"
+        timeToIdleSeconds="6000"
+        timeToLiveSeconds="12000"
+     />
+
+     <cache name="cache-dref-ville"
+        maxElementsInMemory="500"
+        eternal="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+     />
+
+     <cache name="cache-dref-editeur"
+        maxElementsInMemory="500"
+        eternal="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+     />
+
+</ehcache>
+

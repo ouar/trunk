@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mars 2014 17:00:26 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.quiz.entite.hibernate.Question" table="question" catalog="quizz">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="typeSujet" class="fr.gfi.quiz.entite.hibernate.TypeSujet" fetch="select">
+            <column name="ref_type_sujet" not-null="true">
+                <comment>cl&#233; etrang&#232;re vers la table des types de sujet</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="niveauQuestion" class="fr.gfi.quiz.entite.hibernate.NiveauQuestion" fetch="select">
+            <column name="ref_niveau_question" not-null="true">
+                <comment>difficult&#233; de la question</comment>
+            </column>
+        </many-to-one>
+        <property name="libQuestion" type="string">
+            <column name="lib_question" length="65535">
+                <comment>libell&#233; de la question pos&#233;e</comment>
+            </column>
+        </property>
+        <property name="datCreation" type="date">
+            <column name="dat_creation" length="10">
+                <comment>date de cr&#233;ation de la question</comment>
+            </column>
+        </property>
+        <property name="intDureeReflexion" type="java.lang.Integer">
+            <column name="int_duree_reflexion">
+                <comment>dur&#233;e estim&#233;e pour r&#233;pondre &#224; une question</comment>
+            </column>
+        </property>
+        <property name="bolUniqueReponse" type="java.lang.Boolean">
+            <column name="bol_unique_reponse">
+                <comment>indique si une question a une ou plusieurs r&#233;ponse(s) possible(s) 0-&gt;une reponse 1-&gt;plusieurs reponses</comment>
+            </column>
+        </property>
+        <property name="urlImage" type="string">
+            <column name="url_image" length="50">
+                <comment>url d'une &#233;ventuelle image utilis&#233;e pour la question</comment>
+            </column>
+        </property>
+        <property name="isValid" type="java.lang.Boolean">
+            <column name="isValid">
+                <comment>indique si une question est toujours valide c'est &#224; dire utilisable par un quizz</comment>
+            </column>
+        </property>
+        <set name="quizzQuestions" table="quizz_question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_question" />
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.QuizzQuestion" />
+        </set>
+        <set name="reponseCandidats" table="reponse_candidat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_question" not-null="true" />
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.ReponseCandidat" />
+        </set>
+        <set name="reponses" table="reponse" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_question" not-null="true" />
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.Reponse" />
+        </set>
+    </class>
+</hibernate-mapping>

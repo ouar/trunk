@@ -1,0 +1,46 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/web/login" security="none" />
+	<http pattern="/web/healthCheck" security="none" />
+
+	<http auto-config="true" use-expressions="true" disable-url-rewriting="true" create-session="ifRequired">
+        <intercept-url pattern="/web/login" access="permitAll" />
+        <intercept-url pattern="/web/accueil" access="hasRole('Habilite')" />
+        <intercept-url pattern="/web/healthCheck" access="permitAll" />
+        <intercept-url pattern="/web/errors/**" access="permitAll" />
+        <intercept-url pattern="/j_spring_security_check" access="permitAll" />
+        <intercept-url pattern="/web/j_spring_security_check" access="permitAll" />
+		<intercept-url pattern="/web/dref/**" access="hasRole('Administrateur')" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<!-- Ne pas oublier de fermer les autres URLs-->
+		<intercept-url pattern="/**" access="denyAll" />
+		<form-login
+			login-page="/web/login"
+			default-target-url="/web/accueil"
+			always-use-default-target="true"
+			 />
+		<remember-me user-service-ref="userDetailsService"/>
+		<access-denied-handler error-page="/web/errors/403"/>
+		<logout logout-success-url="/web/login" />
+	</http>
+
+
+
+	<!-- Activation du manager d'authentification -->
+ 	<beans:bean id="authenticationProvider"	class="fr.gfi.quiz.presentation.Authentification">
+	</beans:bean>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref='authenticationProvider'>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

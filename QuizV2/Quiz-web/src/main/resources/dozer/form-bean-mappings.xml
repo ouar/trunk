@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net
+
+http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>fr.gfi.quiz.entite.Editeur</class-a>
+		<class-b>fr.gfi.quiz.presentation.referentiel.form.EditeurForm</class-b>
+
+		<field>
+			<a>ville.nom</a>
+			<b>nomVille</b>
+		</field>
+		<field>
+			<a>ville.codePostal</a>
+			<b>codePostal</b>
+		</field>
+		<field>
+            <a>ouvrages</a>
+            <b>ouvrages</b>
+            <b-hint>fr.gfi.quiz.presentation.referentiel.form.OuvrageForm</b-hint>
+        </field>				
+	</mapping>
+
+	<mapping>
+		<class-a>fr.gfi.quiz.entite.Ouvrage</class-a>
+		<class-b>fr.gfi.quiz.presentation.referentiel.form.OuvrageForm</class-b>				
+	</mapping>
+	
+</mappings>
