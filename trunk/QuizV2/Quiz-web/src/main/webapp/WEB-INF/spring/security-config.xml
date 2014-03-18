@@ -38,8 +38,8 @@
  	<beans:bean id="authenticationProvider"	class="fr.gfi.quiz.presentation.Authentification">
 	</beans:bean>
 
-	<authentication-manager>
-		<authentication-provider user-service-ref='authenticationProvider'>
+	<authentication-manager erase-credentials="false">
+		<authentication-provider ref='authenticationProvider'>
 		</authentication-provider>
 	</authentication-manager>
 
