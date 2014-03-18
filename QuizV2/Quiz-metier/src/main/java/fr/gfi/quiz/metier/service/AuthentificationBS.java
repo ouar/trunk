@@ -9,7 +9,7 @@ public interface AuthentificationBS {
 	List<ROLES> authentification(String sLogin, String sPassword);
 
 
-	enum ROLES{
+	public enum ROLES{
 		CANDIDAT,ADMINISTRATEUR,UTILISATEUR;
 	}
 }
