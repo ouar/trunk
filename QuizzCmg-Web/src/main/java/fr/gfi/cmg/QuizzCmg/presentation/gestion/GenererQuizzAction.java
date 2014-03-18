@@ -3,7 +3,6 @@ package fr.gfi.cmg.QuizzCmg.presentation.gestion;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,9 +24,8 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.TypeSujet;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.QuestionsNonTrouveesException;
-import fr.gfi.cmg.QuizzCmg.metier.service.AdminBusinessService;
-import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 import fr.gfi.cmg.QuizzCmg.util.UserBean;
 
 
@@ -35,30 +33,14 @@ import fr.gfi.cmg.QuizzCmg.util.UserBean;
 @Controller("GenererQuizzAction")
 public class GenererQuizzAction extends AbstractMonAction {
 
-	@Resource(name = "quizzBusinessService")
-	QuizzBusinessService bsqz;
-	
-	@Resource(name = "adminBusinessService")
-	AdminBusinessService bsAdmin;
-
-
-
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
 
-			validate(gestionFormBean, request);
-		
+		validate(gestionFormBean, request);
 		List<TypeSujet> lTypeSujetsSaisis = null;
-		
 		String retour="";
-
 		try {
-
-		
-			
-		
-
 			List<JSONObject> lSujetsDifficulteJson = generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
 
 			// construction du tableau de Sujet avec niveau de difficulté voulu
@@ -85,31 +67,22 @@ public class GenererQuizzAction extends AbstractMonAction {
 			Questionnaire questionnaire = this.bsqz.genererQuizz(infoGenerationQuizz);
 
 			final Quizz quizz = this.bsqz.getDetailsQuizz(questionnaire.getQuizz().getId());
-
 			gestionFormBean.setQuizz(quizz);
-
 			gestionFormBean.getPanierListQuizz().add(quizz);
-
-			
 
 			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + urlServeur + "/QuizzCmg-Web%" + questionnaire.getQuizz().getId();
+			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" 
+									+ urlServeur + "/QuizzCmg-Web" 
+									+ SEPARATOR + questionnaire.getQuizz().getId();
 
 			gestionFormBean.setUrlFlashCode(urlFlashCode);
-
 			retour= "Gestion/ResumerQuizz";
-			
-
-			
-		
-
 		} catch (BusinessServiceException e) {
-
-		
-
+			System.err.println(e);
 		} catch (QuestionsNonTrouveesException e) {
-
+			System.err.println(e);
+			
 			/*
 			 * Dans le cas ou les critères ne correspondent, l'écran doit rester
 			 * dans l'état dans lequel il a été saisi.
@@ -125,7 +98,7 @@ public class GenererQuizzAction extends AbstractMonAction {
 		
 		}
 		catch (JSONException e) {
-//			throw new ActionException(e.getMessage(), e);
+			System.err.println(e);
 		}
 		return retour;
 
@@ -142,43 +115,34 @@ public class GenererQuizzAction extends AbstractMonAction {
 		try {
 			generateListObjectFromJson(gestionFormBean.getJsonSujetDifficulte());
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e);
 		}
 		
 		boolean isErreur=false;
 
 		if (gestionFormBean.getListTypeSujet() == null || gestionFormBean.getListTypeSujet().isEmpty()) {
-			//this.addError(new FWKError("lib.typeSujet.manquant"));
 			isErreur=true;
 		}
 
 		if (StringUtils.isBlank((""+gestionFormBean.getIdNiveauQuestionnaire()))) {
-			//this.addError(new FWKError("lib.niveauQuestion.manquant"));
 			isErreur=true;
 		}
 
 		if (StringUtils.isBlank(gestionFormBean.getNomCandidat())) {
-			//this.addError(new FWKError("lib.nomCandidat.manquant"));
-			//this.setScene("GenerationQuizz");
 			isErreur=true;
 		}
 
 		if (StringUtils.isBlank((gestionFormBean.getPrenomCandidat()))) {
-			//this.addError(new FWKError("lib.prenomCandidat.manquant"));
 			isErreur=true;
 		}
+		
 		if(isErreur){
-			
 			 return "Gestion/GenerationQuizz";
-			
-		}
-		else {
+		}else {
 			return "Gestion/GenerationQuizz";
-			
 		}
-
 	}
+	
 	private List<JSONObject> generateListObjectFromJson(String json) throws JSONException {
 		ArrayList<JSONObject> lSujetDifficulte = new ArrayList<JSONObject>();
 		JSONArray ljsonSujetDifficulte = new JSONArray(json);
@@ -187,9 +151,5 @@ public class GenererQuizzAction extends AbstractMonAction {
 		}
 		return lSujetDifficulte;
 	}
-
-	
-
-	
 
 }

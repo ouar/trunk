@@ -1,5 +1,5 @@
-<%@page language="java"%>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
@@ -36,23 +36,6 @@
 				src="<%=application.getContextPath()%>/images/quizz.gif" />
 				Lien Quizz </span>
 			<div id="divFlashCode"></div>
-			<form:form method="post"  action="Repondrequizz" name="Repondrequizz"  commandName="gestionFormBean" modelAttribute="gestionFormBean">		
-				<%-- <c:set var="quizz" value="${gestionFormBean.quizz}"
-					scope="page" />
-				<ul>
-					<c:forEach var="quizzquestion" items="${quizz.quizzQuestions}">
-						<li class="question">
-							<div class="libelleQuestion">
-								<c:out value="${quizzquestion.question.libQuestion}" />
-							</div> <span style="display: none">${quizzquestion.question.id}</span>
-							<ul>
-								<c:forEach var="reponse"
-									items="${quizzquestion.question.reponses}">
-									<li>${reponse.libReponse}</li>
-								</c:forEach>
-							</ul></li>
-					</c:forEach>
-				</ul> --%>
 				<script type="text/javascript">
 					var urlFlashCode = '${gestionFormBean.urlFlashCode}';
 
@@ -65,7 +48,6 @@
 							});
 				</script>
 
-			</form:form>
 		</div>
 
 	</div>

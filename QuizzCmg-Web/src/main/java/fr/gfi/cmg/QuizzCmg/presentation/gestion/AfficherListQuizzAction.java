@@ -2,7 +2,6 @@ package  fr.gfi.cmg.QuizzCmg.presentation.gestion;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,18 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
-import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 
 @Controller("AfficherListQuizzAction")
 public class AfficherListQuizzAction extends AbstractMonAction {
 
-	
-
-	@Resource(name = "quizzBusinessService")
-	QuizzBusinessService bsqz;
-
-	
 	@RolesAllowed("ROLE_USER")
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
@@ -35,21 +28,10 @@ public class AfficherListQuizzAction extends AbstractMonAction {
 				gestionFormBean.setListQuizz(lQuizzs);
 				
 			} catch (BusinessServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println(e);
 			}
 
 			return"Gestion/ListQuizz";
-			
-		
 	}
-
-
-
-	
-
-
-
-
 
 }

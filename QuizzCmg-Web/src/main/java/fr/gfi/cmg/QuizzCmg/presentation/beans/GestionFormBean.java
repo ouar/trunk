@@ -1,10 +1,8 @@
-package fr.gfi.cmg.QuizzCmg.presentation.gestion;
+package fr.gfi.cmg.QuizzCmg.presentation.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.JsonObject;
 
 import fr.gfi.cmg.QuizzCmg.metier.beans.WrapperResultatsQuizz;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;

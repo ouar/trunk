@@ -58,6 +58,7 @@
 				<prop key="/deconnexion">LoginAction</prop>
 				<prop key="/GenererQuizz">GenererQuizzAction</prop>
 				<prop key="/getQuizz">GenererJsonQuizzAction</prop>
+				<prop key="/saveQuizz">SaveJsonQuizzAction</prop>
 				<prop key="/AdministrationQuizz">QuizzAdministrationAction</prop>
 				<prop key="/Ajouter">AjouterAction</prop>
 				<prop key="DetailTypeSujet">DetailTypeSujetAction</prop>

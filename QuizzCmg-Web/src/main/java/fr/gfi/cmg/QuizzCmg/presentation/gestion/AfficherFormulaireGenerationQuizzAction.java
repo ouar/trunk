@@ -8,22 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 
 
 
 @Controller("AfficherFormulaireGenerationQuizzAction")
 public class AfficherFormulaireGenerationQuizzAction extends AbstractMonAction {
 
-	
-	
 	/** init du panier de commande **/
 	@ModelAttribute("gestionFormBean")
 	public GestionFormBean initGestionFormBean() {
 		return new GestionFormBean();
 	}
-
-	
-
 
 	/**
 	 * initialisation des attributs du formulaire de g�n�ration.
@@ -39,26 +35,9 @@ public class AfficherFormulaireGenerationQuizzAction extends AbstractMonAction {
 
 	}
 	
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
-		
-		
 			initialiserFormulaireGeneration(gestionFormBean);
-
 			return"Gestion/GenerationQuizz";
-		
-	
-
-		
-		
 	}
-
-
-
-
-
-
-
-
 }
