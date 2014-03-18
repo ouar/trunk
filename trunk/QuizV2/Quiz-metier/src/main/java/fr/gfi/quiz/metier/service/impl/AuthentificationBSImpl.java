@@ -26,9 +26,10 @@ public class AuthentificationBSImpl implements AuthentificationBS{
 		if(user != null){
 			if(StringUtils.isNotBlank(user.getLibPassword())){
 				if(user.getLibPassword().equals(sLogin)){
-					/**
-					 * On ajoute les roles
-					 */
+					if(user.getUserRoleses() != null && user.getUserRoleses().size()>0){
+
+					}
+
 				}
 			}
 		}else{
