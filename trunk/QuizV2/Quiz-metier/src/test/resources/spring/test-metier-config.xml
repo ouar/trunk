@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	 
+	 http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 	 
+	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!-- Activer les annotations -->
+	<context:annotation-config />
+	<!-- Activer les annotations pour la gestion du cache -->
+	<cache:annotation-driven />
+
+	<!-- parse les annotations dans les répertoires suivants -->
+	<!-- Eviter les fr.gfi.quiz.* afin d'éviter que l'application soit 
+		très longue à charger resource-pattern="Ouvrage**" -->
+	<context:component-scan base-package="fr.gfi.quiz.metier.service.impl" resource-pattern="Editeur**" />
+	<!-- <context:component-scan base-package="fr.gfi.quiz.dao.impl" resource-pattern="Ouvrage**" /> -->
+
+	<bean id="editeurDAO" class="fr.icdc.dei.fwk.test.MockitoFactoryBean">
+        <constructor-arg name="classToBeMocked" value="fr.gfi.quiz.dao.EditeurDAO" />
+    </bean>
+    
+
+	<!-- Configuration du cache Nous allons configurer Spring afin que le framework 
+		utilise l’implémentation la plus simple fournie (ConcurrentMap). -->
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+		<property name="caches">
+			<set>
+				<bean
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+					p:name="cache-dref-ville" />
+				<bean
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+					p:name="cache-dref-editeur" />
+			</set>
+		</property>
+	</bean>
+
+
+</beans>

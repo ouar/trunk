@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<groups xmlns="http://www.isdc.ro/wro"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  		xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+
+    <group name='Quiz-simple-all'>
+        <css>/resources/css/libs/bootstrap-3.0.css</css>
+        <css>/resources/css/Quiz.css</css>
+
+        <js>/resources/js/libs/modernizr-2.6.1.min.js</js>
+        <js>/resources/js/libs/jquery-1.10.2.min.js</js>
+        <js>/resources/js/libs/bootstrap-3.0.min.js</js>
+    </group>
+
+    <group name='Quiz-commons'>
+        <css>/resources/css/libs/bootstrap-3.0.css</css>
+        <css>/resources/css/libs/jquery.dataTables-1.9.4.css</css>
+        <css>/resources/css/libs/ui/jquery-ui-1.10.2.custom.css</css>
+        <css>/resources/css/libs/DT_bootstrap-3.0.css</css>
+        <css>/resources/css/libs/select2-3.4.2.css</css>
+        <css>/resources/css/Quiz.css</css>
+
+        <js>/resources/js/libs/modernizr-2.6.1.min.js</js>
+        <js>/resources/js/libs/jquery-1.10.2.min.js</js>
+        <js>/resources/js/libs/jquery-ui-1.10.2.custom.min.js</js>
+        <js>/resources/js/libs/jquery.ui.datepicker-fr.js</js>
+        <js>/resources/js/libs/jquery.metadata-2.0.js</js>
+        <js>/resources/js/libs/jquery.validate-1.10.1.min.js</js>
+        <js>/resources/js/libs/additional-methods-1.10.0.min.js</js>
+        <js>/resources/js/libs/select2-3.4.2.js</js>
+        <js>/resources/js/libs/jquery.dataTables-1.9.4.min.js</js>
+        <js>/resources/js/libs/bootstrap-3.0.min.js</js>
+        <js>/resources/js/libs/socle-dei-commons-2.0.js</js>
+    </group>
+
+    <group name='Quiz-hybride-all'>
+
+        <group-ref>Quiz-commons</group-ref>
+
+        <js>/resources/js/scenes/commons-Quiz.js</js>
+
+        <!-- Inclure ici les JS/CSS de votre scénario géré en mode web  -->
+    </group>
+
+    <group name='Quiz-spi-all'>
+        <group-ref>Quiz-commons</group-ref>
+
+        <js>/resources/js/libs/purl-2.2.1.js</js>
+        <js>/resources/js/libs/angular-1.0.2.js</js>
+        <js>/resources/js/libs/angular-resource-1.0.2.js</js>
+
+        <js>/resources/js/scenes/commons-Quiz.js</js>
+
+		<!-- Inclure ici les JS/CSS de votre scénario géré en mode SPI  -->
+    </group>
+</groups>

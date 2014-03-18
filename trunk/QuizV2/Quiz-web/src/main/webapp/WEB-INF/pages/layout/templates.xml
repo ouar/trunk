@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!--
+
+		DEFINITION DES TEMPLATES DE PAGE
+
+	 -->
+
+    <definition name=".loginTemplate" template="/WEB-INF/pages/layout/simple.jsp">
+        <put-attribute name="title" value="Quiz" type="string" />
+        <put-attribute name="header" value="/WEB-INF/pages/includes/simpleHeader.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/layout/blank.jsp" />
+    </definition>
+
+    <definition name=".simpleTemplate" template="/WEB-INF/pages/layout/simple.jsp">
+        <put-attribute name="title" value="Quiz" type="string" />
+        <put-attribute name="header" value="/WEB-INF/pages/includes/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/layout/blank.jsp" />
+    </definition>
+
+
+    <!-- Default Main Template -->
+
+    <definition name=".mainTemplate" template="/WEB-INF/pages/layout/main.jsp">
+        <put-attribute name="title" value="Quiz" type="string" />
+        <put-attribute name="header" value="/WEB-INF/pages/includes/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/pages/layout/menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/layout/blank.jsp" />
+        <put-attribute name="script-domaine" value="default" />
+    </definition>
+
+    <definition name=".jsonTemplate" template="/WEB-INF/pages/layout/json.jsp">
+        <put-attribute name="jsonBody" value="{}" type="string" />
+    </definition>
+
+ 	<!--
+
+		PAGES GENERIQUES (Erreur)
+
+	 -->
+
+
+    <definition name="error.404.scene" extends=".simpleTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/404.jsp" />
+    </definition>
+
+    <definition name="error.500.scene" extends=".simpleTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/500.jsp" />
+    </definition>
+
+    <definition name="error.hdiv.scene" extends=".simpleTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/hdivError.jsp" />
+    </definition>
+
+    <definition name="business.exception.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/businessServiceException.jsp" />
+    </definition>
+
+    <definition name="runtime.exception.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/runtimeServiceException.jsp" />
+    </definition>
+
+    <definition name="security.exception.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/securityException.jsp" />
+    </definition>
+
+    <definition name="security.xss.exception.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/xssException.jsp" />
+    </definition>
+
+    <definition name="bfa.exception.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/errors/bruteForceAttackException.jsp" />
+    </definition>
+
+ 	<!--
+
+		Scénario : LOGIN, ACCUEUIL
+
+	 -->
+
+
+    <definition name="login.scene" extends=".loginTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/login/login.jsp" />
+    </definition>
+
+    <definition name="accueil.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/accueil/accueil.jsp" />
+    </definition>
+
+ 	<!--
+
+		Scénario : Editeur
+
+	 -->
+
+    <definition name="editeur.list.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/dref/editeur/list.jsp" />
+        <put-attribute name="script-domaine" value="dref/editeur" />
+    </definition>
+
+    <definition name="editeur.detail.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/dref/editeur/detail.jsp" />
+        <put-attribute name="script-domaine" value="dref/editeur" />
+    </definition>
+
+    <definition name="editeur.edit.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/dref/editeur/edit.jsp" />
+        <put-attribute name="script-domaine" value="dref/editeur" />
+    </definition>
+
+
+</tiles-definitions>

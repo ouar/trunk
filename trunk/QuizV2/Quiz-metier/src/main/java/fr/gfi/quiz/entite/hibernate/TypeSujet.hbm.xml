@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mars 2014 17:00:26 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="fr.gfi.quiz.entite.hibernate.TypeSujet" table="type_sujet" catalog="quizz">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="langage" class="fr.gfi.quiz.entite.hibernate.Langage" fetch="select">
+            <column name="ref_langage" not-null="true">
+                <comment>cl&#233; &#233;trang&#233;re vers la table langage</comment>
+            </column>
+        </many-to-one>
+        <property name="libelle" type="string">
+            <column name="libelle" length="50" not-null="true">
+                <comment>libell&#233; du type (ex: Hibernate ou J2E)</comment>
+            </column>
+        </property>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_type_sujet" not-null="true">
+                    <comment>cl&#233; etrang&#232;re vers la table des types de sujet</comment>
+                </column>
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.Question" />
+        </set>
+        <set name="quizzSujets" table="quizz_sujet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ref_type_sujet" />
+            </key>
+            <one-to-many class="fr.gfi.quiz.entite.hibernate.QuizzSujet" />
+        </set>
+    </class>
+</hibernate-mapping>
