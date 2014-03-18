@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Langage;
@@ -30,6 +32,9 @@ import fr.gfi.cmg.QuizzCmg.presentation.exceptions.ActionException;
 import fr.gfi.cmg.QuizzCmg.util.AbstractConstantes;
 
 public abstract class AbstractMonAction {
+	
+	public final static String SEPARATOR = "|";
+	
 
 	@Resource(name = "quizzBusinessService")
 	public QuizzBusinessService bsqz;
@@ -57,7 +62,6 @@ public abstract class AbstractMonAction {
 			this.setErreur(true);
 
 		}
-
 	}
 
 	public void ajouter(Object objet) throws SQLException {

@@ -3,7 +3,6 @@ package fr.gfi.cmg.QuizzCmg.presentation.gestion;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -19,14 +18,11 @@ import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.QuizzQuestion;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Reponse;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.ReponseCandidat;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
-import fr.gfi.cmg.QuizzCmg.metier.service.QuizzBusinessService;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 
 @Controller("ConsulterQuizzAction")
 public class ConsulterQuizzAction extends AbstractMonAction {
-
-	@Resource(name = "quizzBusinessService")
-	QuizzBusinessService bsqz;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean, HttpServletRequest request) {
@@ -41,12 +37,9 @@ public class ConsulterQuizzAction extends AbstractMonAction {
 			gestionFormBean.setQuizz(quizz);
 			getListReponsesCandidatsByQuizz(gestionFormBean);
 		} catch (BusinessServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e);
 		}
-
 		return "Gestion/ResultatQuizz";
-
 	}
 
 	public void getListReponsesCandidatsByQuizz(GestionFormBean gestionFormBean) throws BusinessServiceException {
@@ -57,7 +50,7 @@ public class ConsulterQuizzAction extends AbstractMonAction {
 	}
 
 	/**
-	 * Construction d'une liste d'affichage des résultats à un quizz.
+	 * Construction d'une liste d'affichage des rï¿½sultats ï¿½ un quizz.
 	 * 
 	 * @param pQuizz
 	 * @param pListReponseCandidats
@@ -67,7 +60,7 @@ public class ConsulterQuizzAction extends AbstractMonAction {
 
 		List<WrapperResultatsQuizz> lWrapperResultatsQuizz = new ArrayList<WrapperResultatsQuizz>();
 		List<Integer> lIdentifiantsReponsesChoisies = new ArrayList<Integer>();
-		// construction d'une liste des identifiants des réponses répondues par
+		// construction d'une liste des identifiants des rï¿½ponses rï¿½pondues par
 		// le candidat
 		for (ReponseCandidat reponseCandidat : pListReponseCandidats) {
 			lIdentifiantsReponsesChoisies.add(reponseCandidat.getReponse().getId());
@@ -82,7 +75,7 @@ public class ConsulterQuizzAction extends AbstractMonAction {
 			List<Reponse> lReponses = new ArrayList<Reponse>(question.getReponses());
 
 			// enrichissement du bean d'affichage avec les informations
-			// concernant chaque réponse posée.
+			// concernant chaque rÃ©ponse posÃ©e.
 			for (Reponse reponse : lReponses) {
 				String sLibReponse = reponse.getLibReponse();
 				Integer idReponseParametre = reponse.getId();

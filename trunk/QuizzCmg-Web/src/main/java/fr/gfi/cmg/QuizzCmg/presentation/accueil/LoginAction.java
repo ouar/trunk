@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.User;
-import fr.gfi.cmg.QuizzCmg.presentation.gestion.GestionFormBean;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 
 @Controller("LoginAction")
 public class LoginAction {

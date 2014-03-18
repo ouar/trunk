@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fr.gfi.cmg.QuizzCmg.metier.entite.hibernate.Quizz;
 import fr.gfi.cmg.QuizzCmg.metier.exceptions.BusinessServiceException;
 import fr.gfi.cmg.QuizzCmg.presentation.AbstractMonAction;
+import fr.gfi.cmg.QuizzCmg.presentation.beans.GestionFormBean;
 import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
 
@@ -17,11 +18,7 @@ import fr.gfi.quiz.json.moteur.JsonBuilder;
 @Controller("GenererJsonQuizzAction")
 public class GenererJsonQuizzAction extends AbstractMonAction {
 
-
-
-
 	HttpServletRequest vRequest;
-
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {		
@@ -37,16 +34,9 @@ public class GenererJsonQuizzAction extends AbstractMonAction {
 				}
 			
 			} catch (BusinessServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println(e);
 			}
-
-		
-		
 			return "Gestion/JsonResponse";		
-
-	
-
 	}
 
 }

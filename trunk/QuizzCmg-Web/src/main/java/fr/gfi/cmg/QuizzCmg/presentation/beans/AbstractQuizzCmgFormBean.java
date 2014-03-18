@@ -1,4 +1,4 @@
-package fr.gfi.cmg.QuizzCmg.presentation;
+package fr.gfi.cmg.QuizzCmg.presentation.beans;
 
 import java.io.Serializable;
 
