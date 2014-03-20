@@ -11,7 +11,7 @@ public class LangageForm {
 
 	private IdLibelle langage;
 	private List<SujetForm> lSujets;
-	
+
 	public LangageForm() {
 		langage = new IdLibelle();
 		lSujets = new ArrayList<SujetForm>();
@@ -21,20 +21,23 @@ public class LangageForm {
 		this();
 		this.langage = langage;
 	}
-	
+
 	public LangageForm(int id, String libelle) {
 		this();
 		langage.setId(id);
 		langage.setLibelle(libelle);
 	}
-	
-	public LangageForm(Langage langageFromBDD){	
+
+	public LangageForm(Langage langageFromBDD){
 		this();
 		langage.setId(langageFromBDD.getId());
 		langage.setLibelle(langageFromBDD.getLibelle());
 		if (langageFromBDD.getTypeSujets().size() > 0) {
 			for (TypeSujet typeSujet : langageFromBDD.getTypeSujets()) {
-				lSujets.add(new SujetForm(typeSujet));
+				SujetForm sujetTemp = new SujetForm(typeSujet);
+				if(!lSujets.contains(sujetTemp)){
+					lSujets.add(sujetTemp);
+				}
 			}
 		}
 	}
@@ -84,5 +87,6 @@ public class LangageForm {
 			return false;
 		return true;
 	}
+
 
 }

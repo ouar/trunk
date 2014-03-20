@@ -20,13 +20,13 @@ public class AuthentificationBSImpl implements AuthentificationBS{
 
 	@Resource(name="adminDAO")
 	private AdminDAO adminDAO;
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<String> authentification(String sLogin, String sPassword) {
 		List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(UserEnum.roles.getValue());
-		
+
 		User user = adminDAO.getUserByNameAndPwd(sLogin,sPassword,lAssociations);
 		if(user != null && user.getUserRoleses() != null && user.getUserRoleses().size()>0){
 			List<String> lDroits = new ArrayList<String>();

@@ -1,22 +1,11 @@
 package fr.gfi.quiz.presentation.commun.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.gfi.quiz.dao.utils.HibConst;
-import fr.gfi.quiz.entite.hibernate.Langage;
-import fr.gfi.quiz.entite.hibernate.NiveauQuestion;
-import fr.gfi.quiz.entite.hibernate.Question;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
 import fr.gfi.quiz.entite.hibernate.User;
-import fr.gfi.quiz.metier.exception.BusinessServiceException;
 import fr.gfi.quiz.metier.service.AuthentificationBS;
 import fr.gfi.quiz.metier.service.QuizBS;
 
@@ -25,9 +14,9 @@ public class AbstractController {
 	@Resource(name = "quizBS")
 	public QuizBS quizBS;
 
-	@Resource(name = "authentificationBS")
+	@Resource(name = "authBS")
 	public AuthentificationBS authentificationBS;
-	
+
 	private boolean erreur = false;
 	protected User connecte = null;
 
@@ -230,8 +219,8 @@ public class AbstractController {
 //
 //	@ExceptionHandler(Exception.class)
 //	public ModelAndView handleException(Exception ex) {
-//		
-//		if (ex instanceof ActionException) {			
+//
+//		if (ex instanceof ActionException) {
 //			this.model.addObject("erreur", ex.getMessage());
 //			return this.model;
 //		} else {
@@ -240,7 +229,7 @@ public class AbstractController {
 //			model.addObject("message", ex.getMessage()+" "+ ex.getCause());
 //			return model;
 //		}
-//		
+//
 //
 //	}
 }
