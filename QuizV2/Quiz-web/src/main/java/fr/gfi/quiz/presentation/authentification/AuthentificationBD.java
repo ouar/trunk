@@ -1,5 +1,6 @@
 package fr.gfi.quiz.presentation.authentification;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,36 +11,33 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import fr.gfi.quiz.metier.service.AuthentificationBS;
 
-public class Authentification implements AuthenticationProvider{
+public class AuthentificationBD implements AuthenticationProvider{
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Authentification.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthentificationBD.class);
 
 
-	@Resource(name="authentificationBS")
+	@Resource(name="authBS")
 	private AuthentificationBS authentificationBS;
 
-@Override
+	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		LOGGER.debug("demande d'authentification du login [" + authentication.getName() + "]");
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
-		List<AuthentificationBS.ROLES> lRoles = authentificationBS.authentification(username, password);
+		List<String> lRoles = authentificationBS.authentification(username, password);
 		if(lRoles != null && lRoles.size()>0){
-			for(AuthentificationBS.ROLES role : lRoles){
-				switch(role){
-					case CANDIDAT:
-						break;
-					case ADMINISTRATEUR:
-						break;
-					case UTILISATEUR:
-						break;
-				}
+			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+			for(String sRoles : lRoles){
+				grantedAuths.add(new SimpleGrantedAuthority(sRoles));
 			}
+			Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
+			return auth;
 		}
-
 		return null;
 	}
 

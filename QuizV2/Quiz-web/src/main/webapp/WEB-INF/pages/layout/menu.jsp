@@ -14,7 +14,6 @@
 		<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Administration</a></li>
 	</sec:authorize>
 
-
 	</ul>
 
 </div>

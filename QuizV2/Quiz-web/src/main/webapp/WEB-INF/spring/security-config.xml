@@ -27,7 +27,6 @@
 			default-target-url="/web/accueil"
 			always-use-default-target="true"
 			 />
-		<remember-me user-service-ref="userDetailsService"/>
 		<access-denied-handler error-page="/web/errors/403"/>
 		<logout logout-success-url="/web/login" />
 	</http>
@@ -35,11 +34,11 @@
 
 
 	<!-- Activation du manager d'authentification -->
- 	<beans:bean id="authenticationProvider"	class="fr.gfi.quiz.presentation.Authentification">
-	</beans:bean>
+ 	<beans:bean id="AuthenticationBDDProvider"	class="fr.gfi.quiz.presentation.authentification.AuthentificationBD"/>
+	
 
 	<authentication-manager erase-credentials="false">
-		<authentication-provider ref='authenticationProvider'>
+		<authentication-provider ref="AuthenticationBDDProvider">
 		</authentication-provider>
 	</authentication-manager>
 

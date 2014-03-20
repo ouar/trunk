@@ -1,39 +1,39 @@
 package fr.gfi.quiz.metier.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.gfi.quiz.dao.AdminDAO;
+import fr.gfi.quiz.dao.utils.HibConst.UserEnum;
 import fr.gfi.quiz.entite.hibernate.User;
+import fr.gfi.quiz.entite.hibernate.UserRoles;
 import fr.gfi.quiz.metier.service.AuthentificationBS;
 
-@Service("authentificationBS")
+@Service("authBS")
 public class AuthentificationBSImpl implements AuthentificationBS{
 
-	@Resource(name="adminDao")
-	private AdminDAO adminDao;
-
+	@Resource(name="adminDAO")
+	private AdminDAO adminDAO;
+	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<ROLES> authentification(String sLogin, String sPassword) {
-		User user = adminDao.getUserByLogin(sLogin);
-		if(user != null){
-			if(StringUtils.isNotBlank(user.getLibPassword())){
-				if(user.getLibPassword().equals(sLogin)){
-					if(user.getUserRoleses() != null && user.getUserRoleses().size()>0){
-
-					}
-
-				}
+	public List<String> authentification(String sLogin, String sPassword) {
+		List<String> lAssociations = new ArrayList<String>();
+		lAssociations.add(UserEnum.roles.getValue());
+		
+		User user = adminDAO.getUserByNameAndPwd(sLogin,sPassword,lAssociations);
+		if(user != null && user.getUserRoleses() != null && user.getUserRoleses().size()>0){
+			List<String> lDroits = new ArrayList<String>();
+			for(UserRoles userRole : user.getUserRoleses()){
+				lDroits.add(userRole.getRole().getLibRole());
 			}
-		}else{
-			return null;
+			return lDroits;
 		}
 		return null;
 	}

@@ -57,15 +57,4 @@
 		<beans:property name="order" value="3" />
 	</beans:bean>
 
-
-	<beans:bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
-
-	<interceptors>
-		<beans:bean id="localeChangeInterceptor"
-			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<beans:property name="paramName" value="lang" />
-		</beans:bean>
-	</interceptors>
-
 </beans:beans>
