@@ -7,8 +7,8 @@
 	<ul class="nav nav-pills nav-stacked">
 
 	<sec:authorize access="hasRole('ROLE_USER')">
-		<li><a href="AfficherFormulaireGenerationQuizz">Génerer un Quizz</a></li>
-		<li><a href="AfficherListQuizz">Consulter un Quizz</a></li>
+		<li><a href="<c:url value="/web/quiz/new" />">Génerer un Quizz</a></li>
+		<li><a href="<c:url value="/web/quiz/list" />">Consulter un Quizz</a></li>
 	</sec:authorize>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<li><a href="AdministrationQuizz?vueEncoursUtlisation=langage">Administration</a></li>

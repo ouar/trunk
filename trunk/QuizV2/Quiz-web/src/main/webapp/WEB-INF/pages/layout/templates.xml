@@ -37,13 +37,9 @@
 
 	<!--
 		PAGES TROP SPECIFIQUES POUR DEPENDRE D'UN MODELE
-	--> 
+	-->
     <definition name="jsonTemplate" template="/WEB-INF/pages/layout/json.jsp"/>
-    <definition name="new.quiz.scene" template="/WEB-INF/pages/scenes/quiz">
-    	<put-attribute name="header" value="/WEB-INF/pages/includes/header.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/pages/layout/menu.jsp" />
-    </definition>
+
 
 
  	<!--
@@ -99,7 +95,18 @@
     <definition name="accueil.scene" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/pages/scenes/accueil/accueil.jsp" />
     </definition>
-    
+
+    <definition name="new.quiz.scene" template="/WEB-INF/pages/scenes/quiz/newQuiz.jsp">
+    	<put-attribute name="header" value="/WEB-INF/pages/includes/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/pages/layout/menu.jsp" />
+        <put-attribute name="title" value="Création d'un nouveau Quiz" type="string" />
+    </definition>
+
+    <definition name="quiz.liste.scene" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/listeQuiz.jsp" />
+    </definition>
+
  	<!--
 
 		Scénario : Editeur

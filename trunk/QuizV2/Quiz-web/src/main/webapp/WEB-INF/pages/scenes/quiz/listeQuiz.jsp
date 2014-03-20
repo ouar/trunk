@@ -8,15 +8,15 @@
 	<form:form method="post"  action="ConsulterQuizz" name="ConsulterQuizz"  commandName="gestionFormBean" modelAttribute="gestionFormBean">
 
 		  <span class="titre">Liste des quizz</span>
-		  
+
 		  <p>
 			<select name="idQuizzAConsulter">
-				<c:forEach var="quizz" items="${gestionFormBean.listQuizz}">
-					<option value="${quizz.id}">${quizz.datQuizz} ${quizz.libNomCandidat}</option>
+				<c:forEach var="quiz" items="${lQuiz}">
+					<option value="${quiz.id}">${quiz.datQuizz} ${quiz.libNomCandidat}</option>
 				</c:forEach>
 		  	</select>
 		  </p>
-		 
+
 		  <div>
 		  	<input type="submit" value="Consulter"/>
 		  </div>

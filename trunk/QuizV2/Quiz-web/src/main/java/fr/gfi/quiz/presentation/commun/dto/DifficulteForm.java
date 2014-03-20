@@ -8,7 +8,7 @@ import fr.gfi.quiz.json.entite.IdLibelle;
 public class DifficulteForm implements Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5731830960371485057L;
 	IdLibelle difficulte;
@@ -17,7 +17,7 @@ public class DifficulteForm implements Serializable{
 		super();
 		difficulte = new IdLibelle();
 	}
-	
+
 	public DifficulteForm(IdLibelle difficulte) {
 		this();
 		this.difficulte = difficulte;
@@ -28,11 +28,11 @@ public class DifficulteForm implements Serializable{
 		difficulte.setId(id);
 		difficulte.setLibelle(libelle);
 	}
-	
+
 	public DifficulteForm(NiveauQuestion difficulteBDD){
 		this(difficulteBDD.getId(),difficulteBDD.getLibNiveau());
 	}
-	
+
 	public IdLibelle getDifficulte() {
 		return difficulte;
 	}
@@ -41,8 +41,8 @@ public class DifficulteForm implements Serializable{
 		this.difficulte = difficulte;
 	}
 
-		
-	
+
+
 	@Override
 	public String toString() {
 		return "DifficulteForm [difficulte=" + difficulte + "]";
@@ -73,7 +73,6 @@ public class DifficulteForm implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
+
 }

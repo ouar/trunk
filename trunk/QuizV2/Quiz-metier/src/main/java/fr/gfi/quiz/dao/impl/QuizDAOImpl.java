@@ -29,12 +29,12 @@ import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
 @Repository("quizDAO")
 public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
-	
+
 	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
 	/**
-	 * 
+	 *
 	 * @param lTypeSujets
 	 * @param niveauQuestion
 	 * @return @
@@ -56,12 +56,12 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		Disjunction orTypeSujet = Restrictions.disjunction();
 
-		
+
 		for (SujetDifficulteBean bean : listNiveauTypeSujet) {
 			Conjunction andNiveauTypeSujet =Restrictions.conjunction();
 			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", bean.getSujet().getId())).add(Restrictions.eq("niveauQuestion.id", bean.getDifficulte().getId()));
 			orTypeSujet.add(andNiveauTypeSujet);
-		}	
+		}
 		criteres.add(orTypeSujet);
 
 		// On traite le résultat de la requête pour avoir une question avec
@@ -76,21 +76,14 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Quizz> getListQuizzByDate() {
-
 		Session hSession = null;
-
 		List<Quizz> lQuizz = null;
-
 		hSession = sessionFactory.getCurrentSession();
-
 		final Criteria criteres = hSession.createCriteria(Quizz.class);
-
 		criteres.addOrder(Order.desc("datQuizz"));
-
 		lQuizz = criteres.list();
 
 		return lQuizz;
-
 	}
 
 	public Quizz getDetailsQuizz(Integer id) {
@@ -240,7 +233,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param quizz
 	 * @return @
 	 */
@@ -258,7 +251,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	/**
 	 * Met Ã  jour un quizz avec la durée passée par un candidat pour répondre
 	 * aux questions.
-	 * 
+	 *
 	 * @param idQuizz
 	 * @param duree
 	 *            @
@@ -276,7 +269,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	/**
 	 * enregistre une réponse cochée par un candidat pour une question au cours
 	 * d'un quizz.
-	 * 
+	 *
 	 * @param reponseCandidat
 	 * @return @
 	 */
@@ -304,19 +297,19 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	@Override
 	public void create(Object objet) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
