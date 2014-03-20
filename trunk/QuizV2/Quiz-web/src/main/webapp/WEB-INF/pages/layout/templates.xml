@@ -6,9 +6,7 @@
 <tiles-definitions>
 
 	<!--
-
 		DEFINITION DES TEMPLATES DE PAGE
-
 	 -->
 
     <definition name=".loginTemplate" template="/WEB-INF/pages/layout/simple.jsp">
@@ -37,9 +35,16 @@
         <put-attribute name="script-domaine" value="default" />
     </definition>
 
-    <definition name=".jsonTemplate" template="/WEB-INF/pages/layout/json.jsp">
-        <put-attribute name="jsonBody" value="{}" type="string" />
+	<!--
+		PAGES TROP SPECIFIQUES POUR DEPENDRE D'UN MODELE
+	--> 
+    <definition name="jsonTemplate" template="/WEB-INF/pages/layout/json.jsp"/>
+    <definition name="new.quiz.scene" template="/WEB-INF/pages/scenes/quiz">
+    	<put-attribute name="header" value="/WEB-INF/pages/includes/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/pages/includes/footer.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/pages/layout/menu.jsp" />
     </definition>
+
 
  	<!--
 
@@ -94,7 +99,7 @@
     <definition name="accueil.scene" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/pages/scenes/accueil/accueil.jsp" />
     </definition>
-
+    
  	<!--
 
 		Scénario : Editeur

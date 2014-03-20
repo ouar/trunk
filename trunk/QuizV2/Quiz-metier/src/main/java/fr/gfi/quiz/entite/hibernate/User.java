@@ -1,6 +1,6 @@
 package fr.gfi.quiz.entite.hibernate;
 
-// Generated 18 mars 2014 17:00:25 by Hibernate Tools 3.4.0.CR1
+// Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,20 +11,22 @@ import java.util.Set;
 public class User implements java.io.Serializable {
 
 	private Integer id;
-	private String libNom;
-	private String libPrenom;
-	private String libPassword;
+	private String nom;
+	private String prenom;
+	private String login;
+	private String password;
 	private Set<Quizz> quizzs = new HashSet<Quizz>(0);
 	private Set<UserRoles> userRoleses = new HashSet<UserRoles>(0);
 
 	public User() {
 	}
 
-	public User(String libNom, String libPrenom, String libPassword,
+	public User(String nom, String prenom, String login, String password,
 			Set<Quizz> quizzs, Set<UserRoles> userRoleses) {
-		this.libNom = libNom;
-		this.libPrenom = libPrenom;
-		this.libPassword = libPassword;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.password = password;
 		this.quizzs = quizzs;
 		this.userRoleses = userRoleses;
 	}
@@ -37,28 +39,36 @@ public class User implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getLibNom() {
-		return this.libNom;
+	public String getNom() {
+		return this.nom;
 	}
 
-	public void setLibNom(String libNom) {
-		this.libNom = libNom;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public String getLibPrenom() {
-		return this.libPrenom;
+	public String getPrenom() {
+		return this.prenom;
 	}
 
-	public void setLibPrenom(String libPrenom) {
-		this.libPrenom = libPrenom;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
-	public String getLibPassword() {
-		return this.libPassword;
+	public String getLogin() {
+		return this.login;
 	}
 
-	public void setLibPassword(String libPassword) {
-		this.libPassword = libPassword;
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Set<Quizz> getQuizzs() {

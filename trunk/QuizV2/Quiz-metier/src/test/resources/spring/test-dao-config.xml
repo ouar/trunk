@@ -47,7 +47,7 @@
 	<!-- Configuration Hibernate -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="desoteDatasource" />
+		<property name="dataSource" ref="quizDatasource" />
 		<property name="packagesToScan">
 			<list>
 				<value>fr.gfi.quiz.entite</value>
@@ -62,8 +62,8 @@
 			<props>
 				<prop key="hibernate.generate_statistics">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 				<prop key="use_sql_comments">true</prop>
 				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
 
@@ -72,7 +72,7 @@
 	</bean>
 
 	<!-- Datasource -->
-	<jdbc:embedded-database id="desoteDatasource"
+	<jdbc:embedded-database id="quizDatasource"
 		type="H2">
 		<jdbc:script location="classpath:/database/h2/create_table.sql" />
 		<jdbc:script location="classpath:/database/h2/insert_data.sql" />

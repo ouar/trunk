@@ -1,6 +1,6 @@
 package fr.gfi.quiz.entite.hibernate;
 
-// Generated 18 mars 2014 17:00:25 by Hibernate Tools 3.4.0.CR1
+// Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;

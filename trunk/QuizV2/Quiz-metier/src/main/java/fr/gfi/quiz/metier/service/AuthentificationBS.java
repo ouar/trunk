@@ -4,12 +4,6 @@ import java.util.List;
 
 public interface AuthentificationBS {
 
+	List<String> authentification(String sLogin, String sPassword);
 
-
-	List<ROLES> authentification(String sLogin, String sPassword);
-
-
-	public enum ROLES{
-		CANDIDAT,ADMINISTRATEUR,UTILISATEUR;
-	}
 }

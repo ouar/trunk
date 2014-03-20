@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 18 mars 2014 17:00:26 by Hibernate Tools 3.4.0.CR1 -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="fr.gfi.quiz.entite.hibernate.User" table="user" catalog="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
         </id>
-        <property name="libNom" type="string">
-            <column name="lib_nom" length="50" />
+        <property name="nom" type="string">
+            <column name="nom" length="50" />
         </property>
-        <property name="libPrenom" type="string">
-            <column name="lib_prenom" length="50" />
+        <property name="prenom" type="string">
+            <column name="prenom" length="50" />
         </property>
-        <property name="libPassword" type="string">
-            <column name="lib_password" length="50" />
+        <property name="login" type="string">
+            <column name="login" length="20" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="20" />
         </property>
         <set name="quizzs" table="quizz" inverse="true" lazy="true" fetch="select">
             <key>
