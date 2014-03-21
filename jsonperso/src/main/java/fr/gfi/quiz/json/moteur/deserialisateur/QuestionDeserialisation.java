@@ -24,22 +24,22 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		
 		final JsonObject jsonObject = json.getAsJsonObject();
 		
+		
+		
 		IdLibelle langage = context.deserialize(jsonObject.get("langage"), IdLibelle.class);
 		IdLibelle typeSujet = context.deserialize(jsonObject.get("typeSujet"), IdLibelle.class);
 		IdLibelle difficulte = context.deserialize(jsonObject.get("difficulte"), IdLibelle.class);
 		
+		int idQuestion = jsonObject.get("id").getAsInt();
+		String libEnonce = jsonObject.get("libelle").getAsString();
 		boolean isUniqueReponseCorrecte = jsonObject.get("uniqueReponseCorrecte").getAsBoolean();
 		int dureeReflexionEnSec = jsonObject.get("dureeReflexionEnSec").getAsInt();
-		String libEnonce = jsonObject.get("libelle").getAsString();
-		
-		String sUrlImage = null;
-		
-		
-		
-		
+
+			
 		Reponse[] tabTypeReponses = context.deserialize(jsonObject.get("lReponses"), Reponse[].class);
 		List<Reponse> lReponses = Arrays.asList(tabTypeReponses);
 		
+		question.setId(idQuestion);
 		question.setLangage(langage);
 		question.setTypeSujet(typeSujet);
 		question.setDifficulte(difficulte);
@@ -48,7 +48,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		question.setLibelle(libEnonce);
 		question.setlReponses(lReponses);
 		if(jsonObject.has("image")){
-			sUrlImage = jsonObject.get("image").getAsString();
+			String sUrlImage = jsonObject.get("image").getAsString();
 			question.setUrlInmage(sUrlImage);
 		}
 		
