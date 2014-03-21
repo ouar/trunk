@@ -28,7 +28,7 @@ public class ReponseDeserialisation implements JsonDeserializer<Reponse> {
 			  reponse.setCorrecte(correcte.booleanValue());
 		  }
 		  if(jsonObject.has("choisie")){
-			  Boolean choisie = jsonObject.get("correcte").getAsBoolean();
+			  Boolean choisie = jsonObject.get("choisie").getAsBoolean();
 			  reponse.setChoisie(choisie.booleanValue());
 		  }
 		  return reponse;

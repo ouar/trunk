@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
 
-public class testJson extends TestCase {
+public class TestJsonTablette extends TestCase {
 
 	Gson gson;
 
@@ -180,7 +180,7 @@ public class testJson extends TestCase {
      *
      * @param testName name of the test case
      */
-    public testJson( String testName )
+    public TestJsonTablette( String testName )
     {
         super( testName );
     }
@@ -190,15 +190,15 @@ public class testJson extends TestCase {
      */
     public static Test suite()
     {
-        return (Test) new TestSuite( testJson.class );
+        return (Test) new TestSuite( TestJsonTablette.class );
     }
 
 	public void testDeserialisationQuiz() throws UnsupportedEncodingException {
-		Quiz quiz = JsonBuilder.getBeanFromJson(jsonstatic);
+		Quiz quiz = JsonBuilder.getQuizBeanFromJson(jsonstatic);
 		assertNotNull(quiz);
 		String json = JsonBuilder.getJsonStringFromBean(quiz);
 		System.out.println(json);
-		Quiz quiz2 = JsonBuilder.getBeanFromJson(json);
+		Quiz quiz2 = JsonBuilder.getQuizBeanFromJson(json);
 		assertEquals(quiz, quiz2);
 	}
 
