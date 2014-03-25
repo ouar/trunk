@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/quiz_header" />
+    
+    <RelativeLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="60dp"
+		android:id="@+id/layoutBarre"
+		android:layout_below="@+id/header"
+        />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/layoutBarre"
+        android:background="#A9A9A9" />
+        
+    <TextView
+        android:id="@+id/question_numero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/layoutBarre"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="10dp"
+        android:text="@string/question_numero"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/question_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/layoutBarre"
+        android:layout_marginTop="16dp"
+        android:paddingRight="10dp"
+        android:text="@string/question_theme"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/question_titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/question_numero"
+        android:layout_below="@+id/question_numero"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:textSize="40sp"
+        android:text="@string/question_intitule" />
+        
+    <LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:paddingLeft="10dp"
+		android:id="@+id/layoutOfDynamicContent"
+		android:layout_below="@+id/question_titre"
+		android:layout_marginTop="50dp"
+        />        
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit"
+        android:textSize="12sp"
+    
+        />
+
+
+    
+
+</RelativeLayout>
