@@ -5,14 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-	<form:form method="post"  action="ConsulterQuizz" name="ConsulterQuizz"  commandName="gestionFormBean" modelAttribute="gestionFormBean">
 
-		  <span class="titre">Liste des quizz</span>
-
-		  <p>
-			<select name="idQuizzAConsulter">
 				<c:forEach var="quiz" items="${lQuiz}">
-					<option value="${quiz.id}">${quiz.datQuizz} ${quiz.libNomCandidat}</option>
+					<option value="${quiz.id}">${quiz.datQuizz} ${quiz.nomCandidat} ${quiz.prenomCandidat}</option>
 				</c:forEach>
 		  	</select>
 		  </p>

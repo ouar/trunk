@@ -11,16 +11,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.quiz.dao.utils.HibConst;
+import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Quizz;
+import fr.gfi.quiz.entite.hibernate.User;
+import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
+import fr.gfi.quiz.metier.exception.QuestionsNonTrouveesException;
 import fr.gfi.quiz.presentation.commun.dto.GestionFormBean;
 import fr.gfi.quiz.presentation.commun.dto.LangageForm;
 
@@ -30,6 +35,8 @@ import fr.gfi.quiz.presentation.commun.dto.LangageForm;
 public class QuizController extends AbstractController{
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(QuizController.class);
+
+	private final static String SEPARATOR = "|";
 
 
 	@RequestMapping(value="/new")
@@ -56,10 +63,37 @@ public class QuizController extends AbstractController{
 	}
 
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String creerQuiz(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
-		System.out.println(gestionFormBean);
+	public ModelAndView creerQuiz(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
+		
+		ModelAndView model = new ModelAndView("quiz.flash");
+		
+		List<ChoixQuiz> lChoix = JsonBuilder.getChoixQuizBeanFromJson(gestionFormBean.getJsonSujetDifficulte());
+		InfoGenerationQuizz infoGenerationQuizz = new InfoGenerationQuizz(lChoix, connecte, gestionFormBean.getNomCandidat(), gestionFormBean.getPrenomCandidat());
+		//infoGenerationQuizz.setListNiveauTypeSujet(gestionFormBean.getListNiveauTypeSujetPanier());
+		User user =new User();
+		//UserBean activeUser = (UserBean)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		user.setId(1);
+		infoGenerationQuizz.setUser(user);
+		Quizz quiz;
+		try {
+			quiz = quizBS.genererQuizz(infoGenerationQuizz);
 
-		return "new.quiz.scene";
+			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" 
+					+ urlServeur + "/web/quiz" 
+					+ SEPARATOR + quiz.getId();
+
+			model.addObject("flashUrl", urlFlashCode);
+
+		} catch (BusinessServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (QuestionsNonTrouveesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
 	}
 
 
@@ -89,7 +123,7 @@ public class QuizController extends AbstractController{
 	@RequestMapping(value="/getjson/{idquiz}")
 	public ModelAndView afficherQuizEnJson(@PathVariable("idquiz") Integer idQuizz) {
 
-		ModelAndView mv = new ModelAndView("json");
+		ModelAndView mv = new ModelAndView("quiz.json.tablette");
 		Quizz quizz;
 		try {
 			quizz = quizBS.getDetailsQuizz(idQuizz);
@@ -105,10 +139,12 @@ public class QuizController extends AbstractController{
 		return mv;
 	}
 
-	@RequestMapping(value="/save/{idquiz}")
-	public String enregistrerQuiz(@PathVariable("idquiz") Integer idQuizz) {
-		//TODO
-		return null;
+
+	@RequestMapping(value="/save/{idquiz}",method = RequestMethod.POST, headers ={"Accept=application/json"},consumes="application/json")
+	public String enregistrerQuiz(@PathVariable("idquiz") Integer idQuizz,@RequestBody String json) {
+		Quiz quizRepondu = JsonBuilder.getQuizBeanFromJson(json);
+		quizBS.enregistrerReponsesQuizz(quizRepondu);
+		return "accueil.scene";
 	}
 
 

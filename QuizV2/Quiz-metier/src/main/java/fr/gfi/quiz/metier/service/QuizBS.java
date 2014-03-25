@@ -2,9 +2,11 @@ package fr.gfi.quiz.metier.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.InfoReponseCandidat;
-import fr.gfi.quiz.entite.Questionnaire;
 import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
@@ -28,7 +30,7 @@ public interface QuizBS {
 	 * @throws QuestionsNonTrouveesException
 	 */
 
-	public Questionnaire genererQuizz(InfoGenerationQuizz infoGenerationQuestionnnaire) throws BusinessServiceException, QuestionsNonTrouveesException;
+	public Quizz genererQuizz(InfoGenerationQuizz infoGenerationQuestionnnaire) throws BusinessServiceException, QuestionsNonTrouveesException;
 
 	/**
 	 * enregistre les réponses répondues par le candidat à un quizz.
@@ -38,6 +40,11 @@ public interface QuizBS {
 	 */
 	public void enregistrerReponsesQuizz(InfoReponseCandidat infoReponsesCandidat) throws BusinessServiceException;
 
+	/**
+	 * Enregistre les réponses sélectionnées par le candidat
+	 * @param quiz
+	 */
+	public void enregistrerReponsesQuizz(Quiz quiz);
 	/**
 	 * 
 	 * @return
@@ -83,4 +90,5 @@ public interface QuizBS {
 	public List<Langage> getListLangage(List<String> lAssociations);
 	
 	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD);
+	
 }

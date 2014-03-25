@@ -27,7 +27,7 @@ cd ..
 echo select 'fin des traitements' as '-------------------------------';>>generatedScript.sql
 echo Script genere, veuillez verifier son contenu avant execution (return pour executer)
 pause
-mysql -h localhost -u root -ptrankil -D quizz < generatedScript.SQL 2>&1
+mysql -h localhost -u root -ptrankil -D quizz --default-character-set=utf8 < generatedScript.SQL 2>&1
 pause
 exit
 

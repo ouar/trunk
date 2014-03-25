@@ -5,21 +5,22 @@ package fr.gfi.quiz.entite;
 import java.util.List;
 
 import fr.gfi.quiz.entite.hibernate.User;
+import fr.gfi.quiz.json.entite.ChoixQuiz;
 
 public class InfoGenerationQuizz {
 
-	private List<SujetDifficulteBean> lSujetDifficulte;
+	private List<ChoixQuiz> lChoix;
 	private User  user;
 	private String nomCandidat;
 	private String prenomCandidat;
-	private List<BeanNiveauTypeSujet> listNiveauTypeSujet;
+	//private List<BeanNiveauTypeSujet> listNiveauTypeSujet;
 	
 	public InfoGenerationQuizz() {
 
 	}
 
-	public InfoGenerationQuizz(List<SujetDifficulteBean> lSujetDifficulte, User user, String nomCandidat, String prenomCandidat) {
-		this.setlSujetDifficulte(lSujetDifficulte);
+	public InfoGenerationQuizz(List<ChoixQuiz> lChoix2, User user, String nomCandidat, String prenomCandidat) {
+		this.lChoix = lChoix2;
 		this.user = user;
 		this.nomCandidat = nomCandidat;
 		this.prenomCandidat = prenomCandidat;
@@ -64,20 +65,20 @@ public class InfoGenerationQuizz {
 		this.prenomCandidat = prenomCandidat;
 	}
 
-	public List<BeanNiveauTypeSujet> getListNiveauTypeSujet() {
-		return listNiveauTypeSujet;
+//	public List<BeanNiveauTypeSujet> getListNiveauTypeSujet() {
+//		return listNiveauTypeSujet;
+//	}
+//
+//	public void setListNiveauTypeSujet(List<BeanNiveauTypeSujet> listNiveauTypeSujet) {
+//		this.listNiveauTypeSujet = listNiveauTypeSujet;
+//	}
+
+
+	public List<ChoixQuiz> getlChoix() {
+		return lChoix;
 	}
 
-	public void setListNiveauTypeSujet(List<BeanNiveauTypeSujet> listNiveauTypeSujet) {
-		this.listNiveauTypeSujet = listNiveauTypeSujet;
+	public void setlChoix(List<ChoixQuiz> lChoix) {
+		this.lChoix = lChoix;
 	}
-
-	public void setlSujetDifficulte(List<SujetDifficulteBean> lSujetDifficulte) {
-		this.lSujetDifficulte = lSujetDifficulte;
-	}
-
-	public List<SujetDifficulteBean> getlSujetDifficulte() {
-		return lSujetDifficulte;
-	}
-
 }
