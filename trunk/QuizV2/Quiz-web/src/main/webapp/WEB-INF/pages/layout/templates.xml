@@ -38,7 +38,7 @@
 	<!--
 		PAGES TROP SPECIFIQUES POUR DEPENDRE D'UN MODELE
 	-->
-    <definition name="jsonTemplate" template="/WEB-INF/pages/layout/json.jsp"/>
+    <definition name=".jsonTemplate" template="/WEB-INF/pages/layout/json.jsp"/>
 
 
 
@@ -103,9 +103,16 @@
         <put-attribute name="title" value="Création d'un nouveau Quiz" type="string" />
     </definition>
 
+    <definition name="quiz.flash" extends=".mainTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/flash.jsp" />
+    </definition>    
+    
+
     <definition name="quiz.liste.scene" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/listeQuiz.jsp" />
     </definition>
+    
+    <definition name="quiz.json.tablette" extends=".jsonTemplate"/>
 
  	<!--
 

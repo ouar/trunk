@@ -17,13 +17,13 @@ import org.springframework.stereotype.Repository;
 import fr.gfi.quiz.dao.QuizDAO;
 import fr.gfi.quiz.dao.utils.HibConst;
 import fr.gfi.quiz.dao.utils.MyRequest;
-import fr.gfi.quiz.entite.SujetDifficulteBean;
 import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
 import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
+import fr.gfi.quiz.json.entite.ChoixQuiz;
 
 
 @Repository("quizDAO")
@@ -40,7 +40,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	 * @return @
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion(List<SujetDifficulteBean>  listNiveauTypeSujet) {
+	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion(List<ChoixQuiz>  lChoix) {
 		Session hSession = null;
 
 		List<Question> lQuestions = null;
@@ -57,9 +57,9 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		Disjunction orTypeSujet = Restrictions.disjunction();
 
 
-		for (SujetDifficulteBean bean : listNiveauTypeSujet) {
+		for (ChoixQuiz choix : lChoix) {
 			Conjunction andNiveauTypeSujet =Restrictions.conjunction();
-			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", bean.getSujet().getId())).add(Restrictions.eq("niveauQuestion.id", bean.getDifficulte().getId()));
+			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", choix.getSujet().getId())).add(Restrictions.eq("niveauQuestion.id", choix.getDifficulte().getId()));
 			orTypeSujet.add(andNiveauTypeSujet);
 		}
 		criteres.add(orTypeSujet);

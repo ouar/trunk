@@ -17,8 +17,8 @@ import fr.gfi.quiz.dao.AdminDAO;
 import fr.gfi.quiz.dao.QuizDAO;
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.InfoReponseCandidat;
-import fr.gfi.quiz.entite.Questionnaire;
 import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.NiveauQuestion;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
@@ -26,6 +26,7 @@ import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.Reponse;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
 import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.IdLibelle;
 import fr.gfi.quiz.json.entite.Personne;
 import fr.gfi.quiz.json.entite.Quiz;
@@ -55,14 +56,14 @@ public class QuizBSImpl implements QuizBS {
 	 * @throws QuestionsNonTrouveesException
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Questionnaire genererQuizz(InfoGenerationQuizz infoGenerationQuizz)
+	public Quizz genererQuizz(InfoGenerationQuizz infoGenerationQuizz)
 			throws BusinessServiceException, QuestionsNonTrouveesException {
 
 		/*
 		 * on récupère du questionnaire selon le(s) type(s) de sujet et niveau
 		 * de difficulté.
 		 */
-		final List<Question> lQuestions = quizDAO.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz.getlSujetDifficulte());
+		final List<Question> lQuestions = quizDAO.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz.getlChoix());
 
 		/*
 		 * on alimente l'entité quizz
@@ -73,49 +74,44 @@ public class QuizBSImpl implements QuizBS {
 					" Il n'y a pas de questions correspondant à vos critères de géneration");
 		}
 
-		/**
-		 * TransactionManager.begin();
-		 */
 
 		Quizz quizz = new Quizz();
 		quizz.setUser(infoGenerationQuizz.getUser());
 		quizz.setDatQuizz(new Date());
 		quizz.setPrenomCandidat(infoGenerationQuizz.getPrenomCandidat());
 		quizz.setNomCandidat(infoGenerationQuizz.getNomCandidat());
-		// enregistrement du quizz
+		
+		
+		//enregistrement du quizz
 		quizz = quizDAO.enregistreQuizz(quizz);
-
-		// On récupère ici la vraie liste des types de sujet du
-		// questionnaire
-		// qui peut être différente de la liste choisie par l'utilisateur
-		// lors de la génération.
-		final List<TypeSujet> lTypesSujetsForQuestionnairePossible = getTypesSujetsForQuestionnaire(lQuestions);
-
-		// on associe l'entité Quizz à un type de sujet.
-		for (TypeSujet typeSujet : lTypesSujetsForQuestionnairePossible) {
-			QuizzSujet quizzSujet = new QuizzSujet();
-			quizzSujet.setTypeSujet(typeSujet);
-			quizzSujet.setQuizz(quizz);
-			// enregistrement du quizzSujet
-			quizzSujet = quizDAO.enregistrerQuizzSujet(quizzSujet);
-
+		
+		//enregistrement des sujets et niveaux de difficultés choisis
+		for(ChoixQuiz choix : infoGenerationQuizz.getlChoix()){
+			QuizzSujet sujetDifficulteBD = new QuizzSujet();
+			sujetDifficulteBD.setQuizz(quizz);
+			
+			NiveauQuestion niveauBD = new NiveauQuestion();
+			niveauBD.setId(choix.getDifficulte().getId());
+			sujetDifficulteBD.setNiveauQuestion(niveauBD);
+			
+			TypeSujet sujetBD = new TypeSujet();
+			sujetBD.setId(choix.getSujet().getId());
+			sujetDifficulteBD.setTypeSujet(sujetBD);
+			
+			quizDAO.enregistrerQuizzSujet(sujetDifficulteBD);
 		}
 
+		//enregistrement des questions qui seront posées
 		for (Question question : lQuestions) {
 			QuizzQuestion quizzQuestion = new QuizzQuestion();
-			quizzQuestion.setQuestion(question);
 			quizzQuestion.setQuizz(quizz);
-			// enregistrement du quizzQuestion
-			quizzQuestion = quizDAO.enregistrerQuizzQuestion(quizzQuestion);
+			quizzQuestion.setQuestion(question);
 
+			quizDAO.enregistrerQuizzQuestion(quizzQuestion);
 		}
 
 
-		Questionnaire questionnaire = new Questionnaire();
-		questionnaire.setQuizz(quizz);
-		questionnaire.setlQuestions(lQuestions);
-
-		return questionnaire;
+		return quizz;
 
 	}
 
@@ -250,7 +246,7 @@ public class QuizBSImpl implements QuizBS {
 		 */
 		lQuestions = quizDAO
 				.getListQuestionsByListTypesSujetsAndNiveauQuestion(infoGenerationQuizz
-						.getlSujetDifficulte());
+						.getlChoix());
 
 		/*
 		 * on alimente l'entité quizz
@@ -353,5 +349,35 @@ public class QuizBSImpl implements QuizBS {
 		List<Langage> listLangages = quizDAO.getListLangage(lAssociations);
 		return listLangages;
 
+	}
+
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void enregistrerReponsesQuizz(Quiz quiz) {
+		for(fr.gfi.quiz.json.entite.Question question : quiz.getLQuestions()){
+
+			for(fr.gfi.quiz.json.entite.Reponse reponse : question.getlReponses()){
+				
+				if(reponse.isChoisie()){
+					ReponseCandidat reponseChoisie = new ReponseCandidat();
+					
+					Quizz quizBD = new Quizz();
+					quizBD.setId(quiz.getId());
+					
+					Question questionBD = new Question();
+					questionBD.setId(question.getId());
+					
+					Reponse reponseBD = new Reponse();
+					reponseBD.setId(reponse.getReponse().getId());
+					
+					reponseChoisie.setQuizz(quizBD);
+					reponseChoisie.setQuestion(questionBD);
+					reponseChoisie.setReponse(reponseBD);
+			
+					quizDAO.enregistrerReponseCandidat(reponseChoisie);
+				}
+			}
+		}
+		
 	}
 }

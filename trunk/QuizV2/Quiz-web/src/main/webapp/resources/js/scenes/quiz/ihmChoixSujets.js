@@ -10,12 +10,17 @@ function entree(langage, sujet, difficulte){
 }
 
 entree.prototype.toJSON = function(){
-	return '{"langageid":"'+this.langage.id+'",'+
-        '"langagelib":"'+this.langage.libelle+'",'+
-        '"sujetid":"'+this.sujet.id+'",'+
-        '"sujetlib":"'+this.sujet.libelle+'",'+
-        '"difficulteid":"'+this.difficulte.id+'",'+
-        '"difficultelib":"'+this.difficulte.libelle+'"}';
+	return '{'+
+				'"langage":{'+
+					'"id":'+this.langage.id+','+
+					'"libelle":"'+this.langage.libelle+'"},'+
+				'"sujet":{'+
+					'"id":'+this.sujet.id+','+
+					'"libelle":"'+this.sujet.libelle+'"},'+
+				'"difficulte":{'+
+					'"id":"'+this.difficulte.id+'",'+
+					'"libelle":"'+this.difficulte.libelle+'"}'+
+			'}';
 };
 
 var ihm = Class.create({

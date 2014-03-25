@@ -753,4 +753,7 @@ div.lien {
 }
 
 
-
+.titre{
+	height: 25px;
+	font-size: 18px; 
+}
