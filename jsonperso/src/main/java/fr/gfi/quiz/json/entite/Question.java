@@ -16,6 +16,8 @@ public class Question implements Serializable {
 	private IdLibelle difficulte;
 	private boolean uniqueReponseCorrecte;
 	private int dureeReflexionEnSec;
+	private boolean repondue;
+	private boolean correcte;
 	private String libelle;
 	private String urlInmage;
 	private List<Reponse> lReponses;
@@ -112,20 +114,27 @@ public class Question implements Serializable {
 		this.lReponses = lReponses;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", langage=" + langage + ", typeSujet="
-				+ typeSujet + ", difficulte=" + difficulte
-				+ ", uniqueReponseCorrecte=" + uniqueReponseCorrecte
-				+ ", dureeReflexionEnSec=" + dureeReflexionEnSec + ", libelle="
-				+ libelle + ", urlInmage=" + urlInmage + ", lReponses="
-				+ lReponses + "]";
+	public boolean isRepondue() {
+		return repondue;
+	}
+
+	public void setRepondue(boolean repondue) {
+		this.repondue = repondue;
+	}
+
+	public boolean isCorrecte() {
+		return correcte;
+	}
+
+	public void setCorrecte(boolean correcte) {
+		this.correcte = correcte;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (correcte ? 1231 : 1237);
 		result = prime * result
 				+ ((difficulte == null) ? 0 : difficulte.hashCode());
 		result = prime * result + dureeReflexionEnSec;
@@ -134,9 +143,10 @@ public class Question implements Serializable {
 				+ ((lReponses == null) ? 0 : lReponses.hashCode());
 		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
 		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		result = prime * result + (uniqueReponseCorrecte ? 1231 : 1237);
+		result = prime * result + (repondue ? 1231 : 1237);
 		result = prime * result
 				+ ((typeSujet == null) ? 0 : typeSujet.hashCode());
+		result = prime * result + (uniqueReponseCorrecte ? 1231 : 1237);
 		result = prime * result
 				+ ((urlInmage == null) ? 0 : urlInmage.hashCode());
 		return result;
@@ -151,6 +161,8 @@ public class Question implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Question other = (Question) obj;
+		if (correcte != other.correcte)
+			return false;
 		if (difficulte == null) {
 			if (other.difficulte != null)
 				return false;
@@ -175,12 +187,14 @@ public class Question implements Serializable {
 				return false;
 		} else if (!libelle.equals(other.libelle))
 			return false;
-		if (uniqueReponseCorrecte != other.uniqueReponseCorrecte)
+		if (repondue != other.repondue)
 			return false;
 		if (typeSujet == null) {
 			if (other.typeSujet != null)
 				return false;
 		} else if (!typeSujet.equals(other.typeSujet))
+			return false;
+		if (uniqueReponseCorrecte != other.uniqueReponseCorrecte)
 			return false;
 		if (urlInmage == null) {
 			if (other.urlInmage != null)
@@ -189,6 +203,18 @@ public class Question implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", langage=" + langage + ", typeSujet="
+				+ typeSujet + ", difficulte=" + difficulte
+				+ ", uniqueReponseCorrecte=" + uniqueReponseCorrecte
+				+ ", dureeReflexionEnSec=" + dureeReflexionEnSec
+				+ ", repondue=" + repondue + ", correcte=" + correcte
+				+ ", libelle=" + libelle + ", urlInmage=" + urlInmage
+				+ ", lReponses=" + lReponses + "]";
+	}
+
 	
 	
 	
