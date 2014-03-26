@@ -103,12 +103,10 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
-		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
-		// lAssociations.add(HibConst.QuizzEnum.Questions_Quizz.getValue());
+		lAssociations.add(HibConst.QuizzEnum.DifficulteSujet.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
-		lAssociations.add(HibConst.QuizzEnum.NiveauQuestion.getValue());
-		lAssociations.add(HibConst.QuizzEnum.NiveauSujet.getValue());
+		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidat.getValue());
 		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
 
