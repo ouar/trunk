@@ -2,7 +2,7 @@ package fr.gfi.quiz.presentation.commun.dto;
 
 import java.io.Serializable;
 
-import fr.gfi.quiz.entite.hibernate.NiveauQuestion;
+import fr.gfi.quiz.entite.hibernate.Difficulte;
 import fr.gfi.quiz.json.entite.IdLibelle;
 
 public class DifficulteForm implements Serializable{
@@ -29,8 +29,8 @@ public class DifficulteForm implements Serializable{
 		difficulte.setLibelle(libelle);
 	}
 
-	public DifficulteForm(NiveauQuestion difficulteBDD){
-		this(difficulteBDD.getId(),difficulteBDD.getLibNiveau());
+	public DifficulteForm(Difficulte difficulteBDD){
+		this(difficulteBDD.getId(),difficulteBDD.getLibDifficulte());
 	}
 
 	public IdLibelle getDifficulte() {

@@ -44,7 +44,9 @@ public class QuizController extends AbstractController{
 		ModelAndView mv = new ModelAndView("new.quiz.scene");
 
 		List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.LangageEnum.Questions.getValue() + "." + HibConst.QuestionEnum.Niveau.getValue());
+		lAssociations.add(HibConst.LangageEnum.DifficulteSujets.getValue());
+		lAssociations.add(HibConst.LangageEnum.Questions.getValue());
+
 
 		List<Langage> lLangagesBD = quizBS.getListLangage(lAssociations);
 		List<LangageForm> lLangage = new ArrayList<LangageForm>();
@@ -64,9 +66,9 @@ public class QuizController extends AbstractController{
 
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public ModelAndView creerQuiz(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
-		
+
 		ModelAndView model = new ModelAndView("quiz.flash");
-		
+
 		List<ChoixQuiz> lChoix = JsonBuilder.getChoixQuizBeanFromJson(gestionFormBean.getJsonSujetDifficulte());
 		InfoGenerationQuizz infoGenerationQuizz = new InfoGenerationQuizz(lChoix, connecte, gestionFormBean.getNomCandidat(), gestionFormBean.getPrenomCandidat());
 		//infoGenerationQuizz.setListNiveauTypeSujet(gestionFormBean.getListNiveauTypeSujetPanier());
@@ -80,8 +82,8 @@ public class QuizController extends AbstractController{
 
 			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" 
-					+ urlServeur + "/web/quiz" 
+			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl="
+					+ urlServeur + "/web/quiz"
 					+ SEPARATOR + quiz.getId();
 
 			model.addObject("flashUrl", urlFlashCode);

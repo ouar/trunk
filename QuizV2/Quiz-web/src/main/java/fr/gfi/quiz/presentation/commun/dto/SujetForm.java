@@ -30,11 +30,11 @@ public class SujetForm implements Serializable{
 
 	public SujetForm(TypeSujet sujetFromBDD){
 		this();
-		sujet.setId(sujetFromBDD.getId());
+		sujet.setId(sujetFromBDD.getId().getId());
 		sujet.setLibelle(sujetFromBDD.getLibelle());
 		if (sujetFromBDD.getQuestions().size() > 0) {
 			for (Question question : sujetFromBDD.getQuestions()) {
-				DifficulteForm difficulteTemp = new DifficulteForm(question.getNiveauQuestion());
+				DifficulteForm difficulteTemp = new DifficulteForm(question.getTypeSujet().getDifficulte());
 				if (!lDifficultes.contains(difficulteTemp)) {
 					lDifficultes.add(difficulteTemp);
 				}

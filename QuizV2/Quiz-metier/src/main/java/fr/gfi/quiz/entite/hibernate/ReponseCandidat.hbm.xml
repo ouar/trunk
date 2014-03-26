@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="fr.gfi.quiz.entite.hibernate.ReponseCandidat" table="reponse_candidat" catalog="quizz">
         <id name="id" type="java.lang.Integer">
@@ -13,7 +13,7 @@
         </many-to-one>
         <many-to-one name="reponse" class="fr.gfi.quiz.entite.hibernate.Reponse" fetch="select">
             <column name="ref_reponse">
-                <comment>r&#233;f&#233;rence de la r&#233;ponse du candidat</comment>
+                <comment>r</comment>
             </column>
         </many-to-one>
         <many-to-one name="quizz" class="fr.gfi.quiz.entite.hibernate.Quizz" fetch="select">

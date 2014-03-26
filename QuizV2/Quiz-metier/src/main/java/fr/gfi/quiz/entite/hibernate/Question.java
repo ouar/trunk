@@ -1,6 +1,6 @@
 package fr.gfi.quiz.entite.hibernate;
 
-// Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0
+// Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,7 +13,6 @@ public class Question implements java.io.Serializable {
 
 	private Integer id;
 	private TypeSujet typeSujet;
-	private NiveauQuestion niveauQuestion;
 	private String libQuestion;
 	private Date datCreation;
 	private Integer intDureeReflexion;
@@ -28,18 +27,16 @@ public class Question implements java.io.Serializable {
 	public Question() {
 	}
 
-	public Question(TypeSujet typeSujet, NiveauQuestion niveauQuestion) {
+	public Question(TypeSujet typeSujet) {
 		this.typeSujet = typeSujet;
-		this.niveauQuestion = niveauQuestion;
 	}
 
-	public Question(TypeSujet typeSujet, NiveauQuestion niveauQuestion,
-			String libQuestion, Date datCreation, Integer intDureeReflexion,
-			Boolean bolUniqueReponse, String urlImage, Boolean isValid,
+	public Question(TypeSujet typeSujet, String libQuestion, Date datCreation,
+			Integer intDureeReflexion, Boolean bolUniqueReponse,
+			String urlImage, Boolean isValid,
 			Set<QuizzQuestion> quizzQuestions,
 			Set<ReponseCandidat> reponseCandidats, Set<Reponse> reponses) {
 		this.typeSujet = typeSujet;
-		this.niveauQuestion = niveauQuestion;
 		this.libQuestion = libQuestion;
 		this.datCreation = datCreation;
 		this.intDureeReflexion = intDureeReflexion;
@@ -65,14 +62,6 @@ public class Question implements java.io.Serializable {
 
 	public void setTypeSujet(TypeSujet typeSujet) {
 		this.typeSujet = typeSujet;
-	}
-
-	public NiveauQuestion getNiveauQuestion() {
-		return this.niveauQuestion;
-	}
-
-	public void setNiveauQuestion(NiveauQuestion niveauQuestion) {
-		this.niveauQuestion = niveauQuestion;
 	}
 
 	public String getLibQuestion() {

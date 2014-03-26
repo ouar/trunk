@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.gfi.quiz.entite.hibernate.NiveauQuestion;
+import fr.gfi.quiz.entite.hibernate.Difficulte;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Reponse;
 
@@ -16,7 +16,7 @@ public class InfoQuestion {
 
 	private ChoixSujet sujet;
 	private String libQuestion;
-	private NiveauQuestion nivDifficulte;
+	private Difficulte nivDifficulte;
 	private Integer dureeReflexionEnSec;
 	private boolean has_unique_Response;
 	private List<InfoReponseQuestion> listInfoReponseQuestion;
@@ -32,7 +32,7 @@ public class InfoQuestion {
 	 * @param dureeReflexionEnSec
 	 * @param listInfoReponseQuestion
 	 */
-	public InfoQuestion(ChoixSujet sujet, String libQuestion, NiveauQuestion nivDifficulte, Integer dureeReflexionEnSec,
+	public InfoQuestion(ChoixSujet sujet, String libQuestion, Difficulte nivDifficulte, Integer dureeReflexionEnSec,
 			List<InfoReponseQuestion> listInfoReponseQuestion) {
 		this.sujet = sujet;
 		this.libQuestion = libQuestion;
@@ -104,7 +104,7 @@ public class InfoQuestion {
 	/**
 	 * @return the nivDifficulte
 	 */
-	public NiveauQuestion getNivDifficulte() {
+	public Difficulte getNivDifficulte() {
 		return nivDifficulte;
 	}
 
@@ -112,7 +112,7 @@ public class InfoQuestion {
 	 * @param nivDifficulte
 	 *            the nivDifficulte to set
 	 */
-	public void setNivDifficulte(NiveauQuestion nivDifficulte) {
+	public void setNivDifficulte(Difficulte nivDifficulte) {
 		this.nivDifficulte = nivDifficulte;
 	}
 
@@ -133,7 +133,6 @@ public class InfoQuestion {
 		}
 
 		question.setLibQuestion(getLibQuestion());
-		question.setNiveauQuestion(getNivDifficulte());
 		question.setDatCreation(new Date());
 		question.setIntDureeReflexion(getDureeReflexion());
 
@@ -152,7 +151,7 @@ public class InfoQuestion {
 	/**
 	 * Constitue un set des entit�s r�ponses en fct des r�ponses saisies par
 	 * l'utilisateur.
-	 * 
+	 *
 	 * @param listInfoReponseQuestion
 	 * @return
 	 */
@@ -176,7 +175,7 @@ public class InfoQuestion {
 
 	/**
 	 * D�termine si une question a plusieurs r�ponses ou pas.
-	 * 
+	 *
 	 * @param lReponses
 	 * @return
 	 * @throws ReponseQuestionNonSaisieException
