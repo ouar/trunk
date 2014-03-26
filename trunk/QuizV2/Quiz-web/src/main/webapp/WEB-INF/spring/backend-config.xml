@@ -71,7 +71,7 @@
 				<value>fr/gfi/quiz/entite/hibernate/QuizzQuestion.hbm.xml</value>
 				<value>fr/gfi/quiz/entite/hibernate/TypeSujet.hbm.xml</value>
 				<value>fr/gfi/quiz/entite/hibernate/QuizzSujet.hbm.xml</value>
-				<value>fr/gfi/quiz/entite/hibernate/NiveauQuestion.hbm.xml</value>
+				<value>fr/gfi/quiz/entite/hibernate/Difficulte.hbm.xml</value>
 				<value>fr/gfi/quiz/entite/hibernate/Quizz.hbm.xml</value>
 				<value>fr/gfi/quiz/entite/hibernate/UserRoles.hbm.xml</value>
 			</list>

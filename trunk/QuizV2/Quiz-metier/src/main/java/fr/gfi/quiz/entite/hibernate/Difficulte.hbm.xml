@@ -3,21 +3,17 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.quiz.entite.hibernate.Langage" table="langage" catalog="quizz">
-        <id name="id" type="java.lang.Integer">
+    <class name="fr.gfi.quiz.entite.hibernate.Difficulte" table="difficulte" catalog="quizz">
+        <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
-        <property name="libelle" type="string">
-            <column name="libelle" length="50" not-null="true">
-                <comment>libelle du langage (exemple jee,java,...)</comment>
-            </column>
+        <property name="libDifficulte" type="string">
+            <column name="lib_difficulte" length="20" />
         </property>
         <set name="typeSujets" table="type_sujet" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="ref_langage" not-null="true">
-                    <comment>cl</comment>
-                </column>
+                <column name="ref_difficulte" not-null="true" />
             </key>
             <one-to-many class="fr.gfi.quiz.entite.hibernate.TypeSujet" />
         </set>

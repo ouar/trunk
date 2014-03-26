@@ -1,6 +1,6 @@
 package fr.gfi.quiz.entite.hibernate;
 
-// Generated Mar 19, 2014 12:00:06 AM by Hibernate Tools 4.0.0
+// Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,8 @@ import java.util.Set;
  */
 public class TypeSujet implements java.io.Serializable {
 
-	private Integer id;
+	private TypeSujetId id;
+	private Difficulte difficulte;
 	private Langage langage;
 	private String libelle;
 	private Set<Question> questions = new HashSet<Question>(0);
@@ -19,25 +20,38 @@ public class TypeSujet implements java.io.Serializable {
 	public TypeSujet() {
 	}
 
-	public TypeSujet(Langage langage, String libelle) {
+	public TypeSujet(TypeSujetId id, Difficulte difficulte, Langage langage,
+			String libelle) {
+		this.id = id;
+		this.difficulte = difficulte;
 		this.langage = langage;
 		this.libelle = libelle;
 	}
 
-	public TypeSujet(Langage langage, String libelle, Set<Question> questions,
-			Set<QuizzSujet> quizzSujets) {
+	public TypeSujet(TypeSujetId id, Difficulte difficulte, Langage langage,
+			String libelle, Set<Question> questions, Set<QuizzSujet> quizzSujets) {
+		this.id = id;
+		this.difficulte = difficulte;
 		this.langage = langage;
 		this.libelle = libelle;
 		this.questions = questions;
 		this.quizzSujets = quizzSujets;
 	}
 
-	public Integer getId() {
+	public TypeSujetId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(TypeSujetId id) {
 		this.id = id;
+	}
+
+	public Difficulte getDifficulte() {
+		return this.difficulte;
+	}
+
+	public void setDifficulte(Difficulte difficulte) {
+		this.difficulte = difficulte;
 	}
 
 	public Langage getLangage() {

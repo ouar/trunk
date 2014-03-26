@@ -23,6 +23,7 @@ import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
 import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
+import fr.gfi.quiz.entite.hibernate.TypeSujetId;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 
 
@@ -59,7 +60,10 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		for (ChoixQuiz choix : lChoix) {
 			Conjunction andNiveauTypeSujet =Restrictions.conjunction();
-			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", choix.getSujet().getId())).add(Restrictions.eq("niveauQuestion.id", choix.getDifficulte().getId()));
+			TypeSujetId sujetId = new TypeSujetId();
+			sujetId.setId(choix.getSujet().getId());
+			sujetId.setRefDifficulte(choix.getDifficulte().getId());
+			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", sujetId));
 			orTypeSujet.add(andNiveauTypeSujet);
 		}
 		criteres.add(orTypeSujet);
@@ -137,7 +141,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.QuizzEnum.TypesSujets.getValue());
+		lAssociations.add(HibConst.QuizzEnum.Questions.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Questions_Quizz.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());

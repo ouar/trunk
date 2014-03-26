@@ -49,7 +49,10 @@ public class HibConst {
 
 	public enum LangageEnum {
 
-		TypeSujets("typeSujets"), Questions("typeSujets.questions"), Quizzs("typeSujets.sujets.quizz");
+		TypeSujets("typeSujets"),
+		DifficulteSujets("typeSujets.difficulte"),
+		Questions("typeSujets.questions"),
+		Quizzs("typeSujets.sujets.quizz");
 
 		private final String value;
 
@@ -91,7 +94,7 @@ public class HibConst {
 			return this.value;
 		}
 	}
-	
+
 	public enum UserEnum {
 
 		roles("userRoleses.role");
@@ -106,5 +109,5 @@ public class HibConst {
 			return this.value;
 		}
 	}
-	
+
 }

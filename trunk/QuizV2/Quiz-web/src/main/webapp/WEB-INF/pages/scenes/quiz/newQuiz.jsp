@@ -76,34 +76,34 @@
 					<div class="row">
 						<form:form method="post" action="create" name="formCreationQuiz" commandName="gestionFormBean" modelAttribute="gestionFormBean" id="generation">
 						<div class="col-md-8">
-								<span class="titre">
+							<div class="well">
+								<div class="titre">
 									<img src="<c:url value="/resources/img/question.png" />" />
 									Génération d'un Quizz
-								</span>
+								</div>
+								<p>
+									<label>Prénom du Candidat</label>
+									<form:input path="PrenomCandidat" name="PrenomCandidat" id="idChampPrenomCandidat" size="55" maxlength="40" />
+								</p>
 								<p>
 									<label>Nom du Candidat</label>
 									<form:input path="NomCandidat" name="NomCandidat" size="55" maxlength="40" id="idChampNomCandidat" />
-
-								</p>
-
-								<p>
-									<label>Prenom du Candidat</label>
-									<form:input path="PrenomCandidat" name="PrenomCandidat" id="idChampPrenomCandidat" size="55" maxlength="40" />
-
 								</p>
 								<form:hidden path="jsonSujetDifficulte" id="idDujetDifficulte"/>
 								<!-- <input type="hidden" id="idDujetDifficulte" name="JsonSujetDifficulte"/> -->
 								<div id="quizzCandidat">
 								</div>
-
 							</div>
-							<div class="col-md-4" >
-								<span class="titre"><img
+						</div>
+						<div class="col-md-4" >
+							<div class="well">
+								<div class="titre"><img
 									src="<c:url value="/resources/img/panier.png" />" />
-									Mon Panier </span>
+									Mon Panier </div>
 								<div id="divPanier"></div>
 							<br/>
 							</div>
+						</div>
 						</form:form>
 					</div>
 				</div>
