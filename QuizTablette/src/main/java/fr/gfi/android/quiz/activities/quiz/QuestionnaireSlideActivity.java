@@ -138,7 +138,8 @@ public class QuestionnaireSlideActivity extends FragmentActivity {
 		@Override
         public Fragment getItem(int _position) {
 			quiz.setIdQuestionAffichee(_position);
-            return QuestionnaireSlidePageFragment.afficheQuestion(quiz);
+			Question questionAAfficher = quiz.getQuiz().getLQuestions().get(_position);
+            return QuestionnaireSlidePageFragment.afficheQuestion(questionAAfficher,_position);
         }
         
         @Override

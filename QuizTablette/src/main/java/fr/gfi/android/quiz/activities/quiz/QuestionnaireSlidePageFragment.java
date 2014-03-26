@@ -18,13 +18,12 @@ package fr.gfi.android.quiz.activities.quiz;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import fr.gfi.android.quiz.R;
-import fr.gfi.android.quiz.model.QuizzToScreen;
 import fr.gfi.quiz.json.entite.Question;
 
 /**
@@ -36,39 +35,39 @@ import fr.gfi.quiz.json.entite.Question;
  */
 public class QuestionnaireSlidePageFragment extends Fragment {
 
-	public static final String QUIZ_TO_SCREEN 	= "quiz";
-	public static final String ID_QUESTION  	= "idQuestion";
+	public static final String QUESTION 		= "question";
+	public static final String NUMERO_PAGE 		= "numPage";
+	MyCustomAdaptater dataAdapter = null;
 
-    public QuizzToScreen getQuiz() {
-		return quiz;
+
+	public int getNbPageAffichee() {
+		return nbPageAffichee;
 	}
 
-	public void setQuiz(QuizzToScreen quiz) {
-		this.quiz = quiz;
+	public void setNbPageAffichee(int nbPageAffichee) {
+		this.nbPageAffichee = nbPageAffichee;
 	}
 
-	public int getIdQuestion() {
-		return idQuestion;
+	public Question getQuestion() {
+		return question;
 	}
 
-	public void setIdQuestion(int idQuestion) {
-		this.idQuestion = idQuestion;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
-	private QuizzToScreen quiz;
-    private int idQuestion;
+	private Question question;
+    private int nbPageAffichee;
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static QuestionnaireSlidePageFragment afficheQuestion(QuizzToScreen _quiz) {
+    public static QuestionnaireSlidePageFragment afficheQuestion(Question question,int _nbPageAffichee) {
         QuestionnaireSlidePageFragment fragment = new QuestionnaireSlidePageFragment();
         Bundle args = new Bundle();
-        args.putSerializable(QUIZ_TO_SCREEN, _quiz);
-        args.putInt(ID_QUESTION, _quiz.getIdQuestionAffichee());
+        args.putSerializable(QUESTION, question);
+        args.putInt(NUMERO_PAGE, _nbPageAffichee);
         fragment.setArguments(args);
-        fragment.setIdQuestion(_quiz.getIdQuestionAffichee());
-        fragment.setQuiz(_quiz);
         return fragment;
     }
 
@@ -79,8 +78,8 @@ public class QuestionnaireSlidePageFragment extends Fragment {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        quiz = (QuizzToScreen) getArguments().getSerializable(QUIZ_TO_SCREEN);
-        idQuestion = getArguments().getInt(ID_QUESTION);
+        question = (Question) getArguments().getSerializable(QUESTION);
+        nbPageAffichee = getArguments().getInt(NUMERO_PAGE);
     }
 
     @Override
@@ -88,13 +87,11 @@ public class QuestionnaireSlidePageFragment extends Fragment {
         // Inflate the layout containing a title and body text.
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
 
+        ((TextView) rootView.findViewById(R.id.question_titre)).setText(question.getLibelle());
         
-        Question question = null;
-		if(idQuestion < quiz.getQuiz().getLQuestions().size()){
-			question = quiz.getQuiz().getLQuestions().get(idQuestion);
-	        ((TextView) rootView.findViewById(R.id.question_titre)).setText(question.getLibelle());
-		}
-
+        ListView listReponse = ((ListView)rootView.findViewById(R.id.listeReponse));
+        dataAdapter = new MyCustomAdaptater(this.getActivity(), R.layout.reponse, question.getlReponses());
+        listReponse.setAdapter(dataAdapter);
         return rootView;
     }
 
@@ -102,6 +99,6 @@ public class QuestionnaireSlidePageFragment extends Fragment {
      * Returns the page number represented by this fragment object.
      */
     public int getPageNumber() {
-        return quiz.getIdQuestionAffichee();
+        return nbPageAffichee;
     }
 }

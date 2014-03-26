@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <CheckBox
+        android:id="@+id/checkReponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="4px"
+        android:layout_marginRight="10px" >
+    </CheckBox>
+    
+    <TextView
+        android:id="@+id/labelReponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/checkReponse"
+        android:layout_toRightOf="@id/checkReponse"
+        android:text="reponse"
+        android:textSize="30px" >
+    </TextView>
+
+</RelativeLayout> 
