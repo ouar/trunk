@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">Quiz</string>
     <string name="action_about">A propos</string>
@@ -19,13 +19,18 @@
     <string name="candidat_name">Nom candidat : </string>
     <string name="logo">logo entreprise</string>
     <string name="chronometre">Temps restant : </string>
-    <string name="question_numero">Question n° </string>
+    <!-- <string name="question_numero">Question n° </string> -->
     <string name="question_intitule">Intitule de la question </string>
     <string name="question_theme">Intitule du thème</string>
     <string name="suivant">Question suivante \>\> </string>
     <string name="precedent">Question précédente </string>
  	<string name="noquizz">Pas d\'objet quiz récupéré.</string>
  	<string name="submit">soumettre</string>
+ 	<string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem
+        Ipsum</string>
+ 	
+ 	<string name="question_numero">Question n° <xliff:g>%1$d</xliff:g> sur <xliff:g>%2$d</xliff:g></string>
+ 	<string name="type_sujet"><xliff:g>%1$s</xliff:g> > <xliff:g>%2$s</xliff:g></string>
  	
  	<string name="goHomeInQuiz">Voulez vous abandonner le quiz ?</string>
 </resources>

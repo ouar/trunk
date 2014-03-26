@@ -8,6 +8,7 @@ import android.util.Log;
 import fr.gfi.android.quiz.R;
 import fr.gfi.android.quiz.activities.MainActivity;
 import fr.gfi.android.quiz.activities.QuestionnaireProcessActivity;
+import fr.gfi.android.quiz.activities.quiz.QuestionnaireSlideActivity;
 import fr.gfi.android.quiz.constants.MagicValues;
 import fr.gfi.quiz.json.entite.Quiz;
 
@@ -82,8 +83,8 @@ public class Messages {
 
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						QuestionnaireProcessActivity._context = context;
-						ReusablesMethodes.gotoNextActivity(context, QuestionnaireProcessActivity.class);
+						QuestionnaireSlideActivity._context = context;
+						ReusablesMethodes.gotoNextActivity(context, QuestionnaireSlideActivity.class);
 					}
 				});
 

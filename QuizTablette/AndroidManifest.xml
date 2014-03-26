@@ -40,7 +40,10 @@
             android:label="@string/app_name" >
         </activity>
         
-        
+        <activity
+            android:name="fr.gfi.android.quiz.activities.quiz.QuestionnaireSlideActivity"
+            android:label="@string/app_name" >
+        </activity>
         
           
     </application>
