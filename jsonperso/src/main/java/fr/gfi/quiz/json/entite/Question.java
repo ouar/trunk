@@ -206,13 +206,13 @@ public class Question implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", langage=" + langage + ", typeSujet="
+		return "\nQuestion [id=" + id + ", langage=" + langage + ", typeSujet="
 				+ typeSujet + ", difficulte=" + difficulte
 				+ ", uniqueReponseCorrecte=" + uniqueReponseCorrecte
 				+ ", dureeReflexionEnSec=" + dureeReflexionEnSec
 				+ ", repondue=" + repondue + ", correcte=" + correcte
 				+ ", libelle=" + libelle + ", urlInmage=" + urlInmage
-				+ ", lReponses=" + lReponses + "]";
+				+ ",\n lReponses=" + lReponses + "]";
 	}
 
 	
