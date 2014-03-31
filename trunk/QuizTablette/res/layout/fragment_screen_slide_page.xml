@@ -33,16 +33,16 @@
         android:textSize="40sp"
         android:text="@string/question_intitule" />
   
-    <ListView 
+<!--     <ListView 
     	android:id="@+id/listeReponse" 
     	android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
-  		android:layout_marginTop="10dp" />
+  		android:layout_marginTop="10dp" /> -->
   
     <LinearLayout
 		android:orientation="vertical"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
 		android:paddingLeft="10dp"
 		android:id="@+id/layoutOfDynamicContent"
 		android:layout_marginTop="50dp"

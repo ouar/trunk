@@ -25,9 +25,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="60dp"
 		android:id="@+id/layoutBarre"
-		android:layout_below="@+id/header"
-        />
-    
+		android:layout_below="@+id/header"/>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
@@ -61,7 +60,15 @@
 	<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/pager"
 	    android:layout_width="fill_parent"
-	    android:layout_height="match_parent"
+	    android:layout_height="800dp"
 	    android:layout_below="@+id/question_numero" />
-    
+		
+	<Button
+	    android:id="@+id/soumettre"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/pager"
+	    android:text="Soumettre"
+		android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
