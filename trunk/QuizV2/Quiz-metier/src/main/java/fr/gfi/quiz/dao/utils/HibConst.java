@@ -21,14 +21,14 @@ public class HibConst {
 
 		TypesSujets("quizzSujets.typeSujet"),
 		DifficulteSujet("quizzSujets.typeSujet.difficulte"),
-		LangageSujet("quizzSujets.typeSujet.langage"), 
-		Reponses("quizzQuestions.question.reponses"), 
-		Questions("quizzQuestions.question"), 
-		ReponsesCandidatAvecQuestions("quizzQuestions.question.reponses.reponseCandidats"), 
-		ReponsesCandidat("reponseCandidats.reponse"), 
-		User("user"), 
-		
-		DifficulteQuestion("quizzQuestions.question.typeSujet.niveauQuestion"),
+		LangageSujet("quizzSujets.typeSujet.langage"),
+		Reponses("quizzQuestions.question.reponses"),
+		Questions("quizzQuestions.question"),
+		ReponsesCandidatAvecQuestions("quizzQuestions.question.reponses.reponseCandidats"),
+		ReponsesCandidat("reponseCandidats.reponse"),
+		User("user"),
+
+		DifficulteQuestion("quizzQuestions.question.typeSujet.difficulte"),
 		LangageQuestion("quizzQuestions.question.typeSujet.langage");
 
 		private final String value;

@@ -18,6 +18,7 @@ import fr.gfi.quiz.dao.QuizDAO;
 import fr.gfi.quiz.dao.utils.HibConst;
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.InfoReponseCandidat;
+import fr.gfi.quiz.entite.PairInt;
 import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
@@ -209,7 +210,7 @@ public class QuizBSImpl implements QuizBS {
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
 		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidat.getValue());
-		
+
 		final Quizz quizz = quizDAO.getDetailsQuizz(id,lAssociations);
 		return quizz;
 
@@ -331,12 +332,12 @@ public class QuizBSImpl implements QuizBS {
 			typeSujet.setId(questionBD.getTypeSujet().getId().getId());
 			typeSujet.setLibelle(questionBD.getTypeSujet().getLibelle());
 			question.setTypeSujet(typeSujet);
-						
+
 			IdLibelle difficulte = new IdLibelle();
 			difficulte.setId(questionBD.getTypeSujet().getDifficulte().getId());
 			difficulte.setLibelle(questionBD.getTypeSujet().getDifficulte().getLibDifficulte());
 			question.setDifficulte(difficulte);
-			
+
 			if(StringUtils.isNotEmpty(questionBD.getUrlImage())){
 				question.setUrlInmage(questionBD.getUrlImage());
 			}
@@ -393,26 +394,24 @@ public class QuizBSImpl implements QuizBS {
 
 						quizDAO.enregistrerReponseCandidat(reponseChoisie);
 					}
-				}	
+				}
 			}
 		}
 	}
 
 
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public StatsQuiz getStatQuiz(int idQuiz) {
-		
+
 		final List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(HibConst.QuizzEnum.LangageQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidatAvecQuestions.getValue());
-		
-		Quizz quiz = quizDAO.getDetailsQuizz(idQuiz,lAssociations);
-		
-		
-		
+		lAssociations.add(HibConst.QuizzEnum.User.getValue());
+
+		Quizz quiz = quizDAO.getDetailsQuizzFini(idQuiz,lAssociations);
 		return convertQuizBDtoStatsJson(quiz);
 	}
 
@@ -420,63 +419,82 @@ public class QuizBSImpl implements QuizBS {
 	public StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD) {
 		Map<Integer,StatsLangage> mStatsLangage = new HashMap<Integer, StatsLangage>();
 		Map<TypeSujetId,StatsSujet> mStatsSujet = new HashMap<TypeSujetId, StatsSujet>();
-		
+
 		StatsQuiz statsQuiz = new StatsQuiz();
+		statsQuiz.setCandidat(new Personne(0,quizzBD.getPrenomCandidat(),quizzBD.getNomCandidat()));
+		statsQuiz.setExaminateur(new Personne(quizzBD.getUser().getId(),quizzBD.getUser().getPrenom(),quizzBD.getUser().getNom()));
+		if(quizzBD.getIntDuree()!=null){
+			statsQuiz.setDureePrevue(quizzBD.getIntDuree());
+		}
+		statsQuiz.setDate(quizzBD.getDatQuizz());
+
 		for(QuizzQuestion quizQuestion : quizzBD.getQuizzQuestions()){
+			Question question = quizQuestion.getQuestion();
 			StatsLangage statsLangage = null;
 			StatsSujet statsSujet = null;
 
 			//on récupère le langage et le sujet de la question à traiter
-			Langage langageBD = quizQuestion.getQuestion().getTypeSujet().getLangage();
-			TypeSujet typeSujetBD = quizQuestion.getQuestion().getTypeSujet();
-			if(mStatsSujet.containsKey(typeSujetBD.getId())){
-				//si le sujet a déjà initialisé, on le récupère
-				//le langage a forcément été traité puisqu'il englobe le sujet
-				statsSujet = mStatsSujet.get(typeSujetBD.getId());
+			Langage langageBD = question.getTypeSujet().getLangage();
+			TypeSujet typeSujetBD = question.getTypeSujet();
+
+			//on vérifie que le langage a déjà été traité dans la boucle
+			if(mStatsLangage.containsKey(langageBD.getId())){
 				statsLangage = mStatsLangage.get(langageBD.getId());
 			}else{
-				//sinon on vérifie que le langage a été initialisé
-				if(mStatsLangage.containsKey(langageBD.getId())){
-					statsLangage = mStatsLangage.get(langageBD.getId());
-				}else{
-					//on l'initialise
-					statsLangage = new StatsLangage();
-					statsLangage.setLangage(new IdLibelle(langageBD.getId(), langageBD.getLibelle()));
-					mStatsLangage.put(langageBD.getId(), statsLangage);
-				}
+				statsLangage = new StatsLangage();
+				statsLangage.setLangage(new IdLibelle(langageBD.getId(), langageBD.getLibelle()));
+				mStatsLangage.put(langageBD.getId(), statsLangage);
+			}
+			//on vérifie que le sujet est déjà dans le langage
+			PairInt sujetId = new PairInt(typeSujetBD.getId().getId(),typeSujetBD.getId().getRefDifficulte());
+			if(statsLangage.getmSujets().containsKey(sujetId)){
+				statsSujet = statsLangage.getmSujets().get(sujetId);
+			}else{
 				statsSujet = new StatsSujet();
 				statsSujet.setSujet(new IdLibelle(typeSujetBD.getId().getId(), typeSujetBD.getLibelle()));
 				statsSujet.setDifficulte(new IdLibelle(typeSujetBD.getDifficulte().getId(), typeSujetBD.getDifficulte().getLibDifficulte()));
 				mStatsSujet.put(typeSujetBD.getId(), statsSujet);
+				statsLangage.getmSujets().put(sujetId, statsSujet);
 			}
-			int nbBonneReponseNonTrouvee = 0;
-			int nbBonneReponse = 0;
-			int nbMauvaiseReponse = 0;
-			for(Reponse reponse: quizQuestion.getQuestion().getReponses()){
+
+			int nbReponsesNonTrouvees = 0;
+			int nbBonnesReponses = 0;
+			int nbMauvaisesReponses = 0;
+			for(Reponse reponse: question.getReponses()){
 				if(reponse.getBolTypeReponse() == Boolean.TRUE){
 					if(reponse.getReponseCandidats().size()>0){
-						nbBonneReponse++;
+						nbBonnesReponses++;
 					}else{
-						nbBonneReponseNonTrouvee++;
+						nbReponsesNonTrouvees++;
 					}
 				}else{
 					if(reponse.getReponseCandidats().size()>0){
-						nbMauvaiseReponse++;
-					}else{
-						nbBonneReponse++;
+						nbMauvaisesReponses++;
 					}
+//					else{
+//						nbBonneReponse++;
+//					}
 				}
 			}
 			StatsQuestion statsQuestion = new StatsQuestion(typeSujetBD.getDifficulte().getId(),
-					(nbBonneReponseNonTrouvee>0 || nbMauvaiseReponse>0)?0:typeSujetBD.getDifficulte().getId(),
-					nbBonneReponse,
-					nbMauvaiseReponse);
+					(nbReponsesNonTrouvees>0 || nbMauvaisesReponses>0)?0:typeSujetBD.getDifficulte().getId(),
+					nbBonnesReponses,
+					nbMauvaisesReponses,
+					nbReponsesNonTrouvees);
 			statsSujet.addStatsQuestion(statsQuestion);
-			}
-		
+		}
+		//Les statistiques du quiz ont été effectuées au niveau Question et sujet.
+		//on doit mettre à jour le quiz qui mettra à jour les langages
+		//en se basant sur les statistiques des sujets
+		List<StatsLangage> lStatsLangage = new ArrayList<StatsLangage>(mStatsLangage.size());
+		for(Integer mapKey : mStatsLangage.keySet()){
+			lStatsLangage.add(mStatsLangage.get(mapKey));
+		}
+		statsQuiz.setlStatsLangages(lStatsLangage);
+		statsQuiz.process();
 
 		return statsQuiz;
 	}
-	
+
 
 }

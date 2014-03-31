@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.gfi.quiz.dao;
 
@@ -17,7 +17,7 @@ import fr.gfi.quiz.json.entite.ChoixQuiz;
 public interface QuizDAO extends AbstractDAO{
 
 	/**
-	 * 
+	 *
 	 * @param quizz
 	 * @return
 	 * @
@@ -25,7 +25,7 @@ public interface QuizDAO extends AbstractDAO{
 	public Quizz enregistreQuizz(Quizz quizz) ;
 
 	/**
-	 * 
+	 *
 	 * @param quizzSujet
 	 * @return
 	 * @
@@ -33,7 +33,7 @@ public interface QuizDAO extends AbstractDAO{
 	public QuizzSujet enregistrerQuizzSujet(QuizzSujet quizzSujet) ;
 
 	/**
-	 * 
+	 *
 	 * @param quizzQuestion
 	 * @
 	 */
@@ -42,7 +42,7 @@ public interface QuizDAO extends AbstractDAO{
 	/**
 	 * enregistre une réponse cochée par un candidat pour une question au cours
 	 * d'un quizz.
-	 * 
+	 *
 	 * @param reponseCandidat
 	 * @return
 	 * @
@@ -52,13 +52,13 @@ public interface QuizDAO extends AbstractDAO{
 	/**
 	 * Met à jour un quizz avec la durée passée par un candidat pour répondre
 	 * aux questions.
-	 * 
+	 *
 	 * @param idQuizz
 	 * @param duree
 	 * @
 	 */
 	public void enrengistrerDureeQuizz(Integer idQuizz, Integer duree) ;
-	
+
 	/**
 	 * retourne une liste des questions en fonction du type de sujet et du
 	 * niveau de question
@@ -70,14 +70,14 @@ public interface QuizDAO extends AbstractDAO{
 			;
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * @
 	 */
 	public List<Quizz> getListQuizzByDate() ;
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 * @
@@ -86,7 +86,7 @@ public interface QuizDAO extends AbstractDAO{
 
 	/**
 	 * Récupère la liste des réponses candidats correspondant à un quizz.
-	 * 
+	 *
 	 * @param Id
 	 * @return
 	 * @
@@ -95,7 +95,7 @@ public interface QuizDAO extends AbstractDAO{
 
 	/**
 	 * récupération des détails d'un quizz avec les réponses candidats.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 * @
@@ -104,11 +104,13 @@ public interface QuizDAO extends AbstractDAO{
 
 	/**
 	 * récupère les détails des réponses candidats.
-	 * 
+	 *
 	 * @return
 	 * @
 	 */
 	public List<ReponseCandidat> getDetailsReponseCandidat() ;
 
-	
-	public List<Langage> getListLangage(List<String> lAssociations);}
+
+	public List<Langage> getListLangage(List<String> lAssociations);
+
+	public Quizz getDetailsQuizzFini(int idQuiz, List<String> lAssociations);}

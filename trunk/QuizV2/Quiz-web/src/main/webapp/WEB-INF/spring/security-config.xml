@@ -19,6 +19,7 @@
         <intercept-url pattern="/web/quiz/list" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/web/quiz/get/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/web/quiz/getjson/**" access="permitAll" />
+        <intercept-url pattern="/web/quiz/get/stats/**" access="permitAll" />
         <intercept-url pattern="/web/quiz/save/**" access="permitAll" />
         <intercept-url pattern="/web/errors/**" access="permitAll" />
         <intercept-url pattern="/j_spring_security_check" access="permitAll" />
