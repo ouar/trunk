@@ -55,7 +55,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 			question.setRepondue(jsonObject.get("repondue").getAsBoolean());
 		}
 		if(jsonObject.has("correcte")){
-			question.setRepondue(jsonObject.get("correcte").getAsBoolean());
+			question.setCorrecte(jsonObject.get("correcte").getAsBoolean());
 		}
 	
 		return question;

@@ -3,21 +3,21 @@ package fr.gfi.quiz.json.entite;
 import java.io.Serializable;
 import java.util.List;
 
-public class StatLangage implements Serializable{
+public class StatsLangage implements Serializable{
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -1949212748982190820L;
 	private IdLibelle langage;
-	private List<StatSujet> lSujets;
+	private List<StatsSujet> lSujets;
 
 	private int noteSur20;
 
-	public StatLangage() {
+	public StatsLangage() {
 	}
 
-	public StatLangage(IdLibelle langage, List<StatSujet> lSujets, int noteSur20) {
+	public StatsLangage(IdLibelle langage, List<StatsSujet> lSujets, int noteSur20) {
 		super();
 		this.langage = langage;
 		this.lSujets = lSujets;
@@ -32,11 +32,11 @@ public class StatLangage implements Serializable{
 		this.langage = langage;
 	}
 
-	public List<StatSujet> getlSujets() {
+	public List<StatsSujet> getlSujets() {
 		return lSujets;
 	}
 
-	public void setlSujets(List<StatSujet> lSujets) {
+	public void setlSujets(List<StatsSujet> lSujets) {
 		this.lSujets = lSujets;
 	}
 
@@ -66,7 +66,7 @@ public class StatLangage implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		StatLangage other = (StatLangage) obj;
+		StatsLangage other = (StatsLangage) obj;
 		if (lSujets == null) {
 			if (other.lSujets != null)
 				return false;

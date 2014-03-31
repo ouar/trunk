@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.IdLibelle;
-import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
 
 public class TestJsonServeur extends TestCase {

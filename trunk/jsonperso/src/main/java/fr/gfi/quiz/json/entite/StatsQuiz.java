@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class StatQuiz implements Serializable{
+public class StatsQuiz implements Serializable{
 
 	/**
 	 *
@@ -17,14 +17,14 @@ public class StatQuiz implements Serializable{
 	private int dureePrevue;
 	private int dureeUtilisee;
 	private int noteSur20;
-	private List<StatLangage> lLangages;
+	private List<StatsLangage> lLangages;
 
-	public StatQuiz() {
+	public StatsQuiz() {
 	}
 
-	public StatQuiz(Personne examinateur, Personne candidat, Date date,
+	public StatsQuiz(Personne examinateur, Personne candidat, Date date,
 			int dureePrevue, int dureeUtilisee, int noteSur20,
-			List<StatLangage> lLangages) {
+			List<StatsLangage> lLangages) {
 		super();
 		this.examinateur = examinateur;
 		this.candidat = candidat;
@@ -83,11 +83,11 @@ public class StatQuiz implements Serializable{
 		this.noteSur20 = noteSur20;
 	}
 
-	public List<StatLangage> getlLangages() {
+	public List<StatsLangage> getlLangages() {
 		return lLangages;
 	}
 
-	public void setlLangages(List<StatLangage> lLangages) {
+	public void setlLangages(List<StatsLangage> lLangages) {
 		this.lLangages = lLangages;
 	}
 
@@ -116,7 +116,7 @@ public class StatQuiz implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		StatQuiz other = (StatQuiz) obj;
+		StatsQuiz other = (StatsQuiz) obj;
 		if (candidat == null) {
 			if (other.candidat != null)
 				return false;
