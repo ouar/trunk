@@ -10,18 +10,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import fr.gfi.android.quiz.R;
 import fr.gfi.quiz.json.entite.Reponse;
 
 public class MyCustomAdaptater extends ArrayAdapter<Reponse> {
 
-	private List<Reponse> lReponses = null;
+	private List<Reponse> lReponses = new ArrayList<Reponse>();
 	private Activity context;
+	private RelativeLayout layoutBarreNavigation = null;
+	private LinearLayout layoutOfDynamicContent = null;
 
 	public MyCustomAdaptater(Activity _context, int resource, List<Reponse> _lReponses) {
 		super(_context, resource, _lReponses);
 		context = _context;
+		layoutOfDynamicContent = (LinearLayout) context.findViewById(R.id.layoutOfDynamicContent);
+		layoutBarreNavigation = (RelativeLayout) context.findViewById(R.id.layoutBarre);
 		lReponses = new ArrayList<Reponse>();
 		lReponses.addAll(_lReponses);
 	}

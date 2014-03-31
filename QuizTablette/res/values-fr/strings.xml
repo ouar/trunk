@@ -30,7 +30,7 @@
         Ipsum</string>
  	
  	<string name="question_numero">Question n° <xliff:g>%1$d</xliff:g> sur <xliff:g>%2$d</xliff:g></string>
- 	<string name="type_sujet"><xliff:g>%1$s</xliff:g> > <xliff:g>%2$s</xliff:g></string>
+ 	<string name="type_sujet"><xliff:g>%1$s</xliff:g> > <xliff:g>%2$s</xliff:g> (<xliff:g>%3$s</xliff:g>)</string>
  	
  	<string name="goHomeInQuiz">Voulez vous abandonner le quiz ?</string>
 </resources>
