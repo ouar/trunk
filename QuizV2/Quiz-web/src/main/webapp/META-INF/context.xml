@@ -7,9 +7,9 @@
 	<!-- La datasource de prod à spécialiser !! -->
 	<Resource name="jdbc/QuizDB" auth="Container" type="javax.sql.DataSource"
 				driverClassName="com.mysql.jdbc.Driver"
-				url="jdbc:mysql://localhost:3306/Quiz"
+				url="jdbc:mysql://localhost:3306/Quizz"
 				username="root"
-				password=""
+				password="trankil"
 				validationQuery="select 1"
 				testOnBorrow ="true"
 				maxActive="5"

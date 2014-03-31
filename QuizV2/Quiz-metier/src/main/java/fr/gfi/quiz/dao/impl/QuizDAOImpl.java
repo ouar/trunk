@@ -90,7 +90,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		return lQuizz;
 	}
 
-	public Quizz getDetailsQuizz(Integer id) {
+	public Quizz getDetailsQuizz(Integer id,List<String> lAssociations) {
 
 		Session hSession = null;
 
@@ -101,23 +101,16 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		final Criteria criteres = hSession.createCriteria(Quizz.class);
 
 		// Chargement des associations
-		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
-		lAssociations.add(HibConst.QuizzEnum.DifficulteSujet.getValue());
-		lAssociations.add(HibConst.QuizzEnum.User.getValue());
-		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
-		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
-		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidat.getValue());
-		lAssociations.add(HibConst.QuizzEnum.TypesSujetsLangage.getValue());
+		
 
 		// On traite le résultat de la requÃªte pour avoir une question avec
 		// des réponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
 
-		criteres.add(Restrictions.eq("id", id))
+		criteres.add(Restrictions.eq("id", id));
 		// .createAlias("quizzQuestions.question", "question")
-		;
+		
 		// .add(Restrictions.eq("question.quizzQuestions.quizz.id",
 		// id))
 		// .createAlias("quizzQuestions.question.reponses.reponseCandidats",
@@ -140,7 +133,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(HibConst.QuizzEnum.Questions.getValue());
-		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
+		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidat.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Questions_Quizz.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 		// lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());

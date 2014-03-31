@@ -19,7 +19,17 @@ public class HibConst {
 
 	public enum QuizzEnum {
 
-		TypesSujets("quizzSujets.typeSujet"), TypesSujetsLangage("quizzSujets.typeSujet.langage"), Reponses("quizzQuestions.question.reponses"), Questions("quizzQuestions.question"), QuestionsReponsesCandidat("quizzQuestions.question.reponses.reponseCandidats"), ReponsesCandidat("reponseCandidats"), User("user"), DifficulteSujet("quizzSujets.typeSujet.difficulte"),DifficulteQuestion("quizzQuestions.question.typeSujet.niveauQuestion");
+		TypesSujets("quizzSujets.typeSujet"),
+		DifficulteSujet("quizzSujets.typeSujet.difficulte"),
+		LangageSujet("quizzSujets.typeSujet.langage"), 
+		Reponses("quizzQuestions.question.reponses"), 
+		Questions("quizzQuestions.question"), 
+		ReponsesCandidatAvecQuestions("quizzQuestions.question.reponses.reponseCandidats"), 
+		ReponsesCandidat("reponseCandidats.reponse"), 
+		User("user"), 
+		
+		DifficulteQuestion("quizzQuestions.question.typeSujet.niveauQuestion"),
+		LangageQuestion("quizzQuestions.question.typeSujet.langage");
 
 		private final String value;
 

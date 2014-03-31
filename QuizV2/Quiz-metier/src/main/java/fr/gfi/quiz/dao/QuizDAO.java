@@ -82,7 +82,7 @@ public interface QuizDAO extends AbstractDAO{
 	 * @return
 	 * @
 	 */
-	public Quizz getDetailsQuizz(Integer id) ;
+	public Quizz getDetailsQuizz(Integer id, List<String> lAssociations) ;
 
 	/**
 	 * Récupère la liste des réponses candidats correspondant à un quizz.
