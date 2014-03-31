@@ -23,6 +23,7 @@ import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.User;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.Quiz;
+import fr.gfi.quiz.json.entite.StatsQuiz;
 import fr.gfi.quiz.json.moteur.JsonBuilder;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
 import fr.gfi.quiz.metier.exception.QuestionsNonTrouveesException;
@@ -150,10 +151,11 @@ public class QuizController extends AbstractController{
 	}
 
 	@RequestMapping(value="/get/stats/{idquiz}")
-	public String getStatsQuiz(@PathVariable("idquiz") Integer idQuizz) {
-		Quizz quizz = quizBS.getDetailsQuizz(idQuizz);
-		quizBS.enregistrerReponsesQuizz(quizRepondu);
-		return "accueil.scene";
+	public ModelAndView getStatsQuiz(@PathVariable("idquiz") Integer idQuizz) {
+		ModelAndView mv = new ModelAndView("quiz.stats");
+		StatsQuiz statsQuiz = quizBS.getStatQuiz(idQuizz);
+		mv.addObject("stats", statsQuiz);
+		return mv;
 	}
 
 }

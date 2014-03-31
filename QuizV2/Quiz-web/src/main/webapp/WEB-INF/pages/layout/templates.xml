@@ -105,16 +105,21 @@
 
     <definition name="quiz.flash" extends=".mainTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/flash.jsp" />
-    </definition>    
-    
+    </definition>
+
 
     <definition name="quiz.liste.scene" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/listeQuiz.jsp" />
     </definition>
-    
+
     <definition name="quiz.json.tablette" extends=".jsonTemplate"/>
 
- 	<!--
+    <definition name="quiz.stats" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/pages/scenes/quiz/stats.jsp" />
+    </definition>
+
+
+ 	<!--http://localhost:8080/Quiz-web/web/get/quiz/stats/5
 
 		Scénario : Editeur
 

@@ -101,7 +101,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		final Criteria criteres = hSession.createCriteria(Quizz.class);
 
 		// Chargement des associations
-		
+
 
 		// On traite le résultat de la requÃªte pour avoir une question avec
 		// des réponses correspondantes et non pas autant de questions qu'il
@@ -110,7 +110,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		criteres.add(Restrictions.eq("id", id));
 		// .createAlias("quizzQuestions.question", "question")
-		
+
 		// .add(Restrictions.eq("question.quizzQuestions.quizz.id",
 		// id))
 		// .createAlias("quizzQuestions.question.reponses.reponseCandidats",
@@ -305,6 +305,39 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	public void update(Object object) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Quizz getDetailsQuizzFini(int idQuiz, List<String> lAssociations) {
+		Session hSession = null;
+
+		Quizz quizz = null;
+
+		hSession = sessionFactory.getCurrentSession();
+
+		final Criteria criteres = hSession.createCriteria(Quizz.class)
+				.createAlias("quizzQuestions.question.reponseCandidats", "reponseCandidat");
+
+		// Chargement des associations
+
+
+		// On traite le résultat de la requÃªte pour avoir une question avec
+		// des réponses correspondantes et non pas autant de questions qu'il
+		// ya de reponses.
+		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
+
+		criteres.add(Restrictions.eq("id", idQuiz));
+		criteres.add(Restrictions.eq("reponseCandidat.quizz.id", idQuiz));
+		// .createAlias("quizzQuestions.question", "question")
+
+		// .add(Restrictions.eq("question.quizzQuestions.quizz.id",
+		// id))
+		// .createAlias("quizzQuestions.question.reponses.reponseCandidats",
+		// "reponseCandidats")
+		// .add(Restrictions.eq("reponseCandidats.quizz.id", id));
+		quizz = (Quizz) MyRequest.uniqueResult(criteres, lAssociations);
+
+		return quizz;
 	}
 
 }
