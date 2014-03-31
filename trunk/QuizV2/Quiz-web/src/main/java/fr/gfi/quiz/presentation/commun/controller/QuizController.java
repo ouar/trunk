@@ -149,5 +149,11 @@ public class QuizController extends AbstractController{
 		return "accueil.scene";
 	}
 
+	@RequestMapping(value="/get/stats/{idquiz}")
+	public String getStatsQuiz(@PathVariable("idquiz") Integer idQuizz) {
+		Quizz quizz = quizBS.getDetailsQuizz(idQuizz);
+		quizBS.enregistrerReponsesQuizz(quizRepondu);
+		return "accueil.scene";
+	}
 
 }

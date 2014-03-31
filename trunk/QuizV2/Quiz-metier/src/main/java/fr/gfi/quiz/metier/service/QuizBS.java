@@ -9,7 +9,7 @@ import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
 import fr.gfi.quiz.json.entite.Quiz;
-import fr.gfi.quiz.json.entite.StatQuiz;
+import fr.gfi.quiz.json.entite.StatsQuiz;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
 import fr.gfi.quiz.metier.exception.QuestionsNonTrouveesException;
 
@@ -87,8 +87,10 @@ public interface QuizBS {
 
 	public List<Langage> getListLangage(List<String> lAssociations);
 
-	public StatQuiz getStatQuiz(int idQuiz);
+	public StatsQuiz getStatQuiz(int idQuiz);
 
 	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD);
+	
+	public StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD);
 
 }
