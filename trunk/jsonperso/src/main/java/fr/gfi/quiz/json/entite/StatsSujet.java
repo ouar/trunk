@@ -1,9 +1,10 @@
 package fr.gfi.quiz.json.entite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class StatsSujet implements Serializable{
+public class StatsSujet extends StatsAbstract implements Serializable{
 
 	/**
 	 *
@@ -11,14 +12,10 @@ public class StatsSujet implements Serializable{
 	private static final long serialVersionUID = 8248299183306733123L;
 	private IdLibelle sujet;
 	private IdLibelle difficulte;
-	private int nbPointsDispos;
-	private int nbPointsObtenus;
-	private int nbBonnesReponses;
-	private int nbMauvaisesReponses;
 	private List<StatsQuestion> lStatsQuestions;
 
 	public StatsSujet() {
-
+		lStatsQuestions = new ArrayList<StatsQuestion>();
 	}
 
 	public StatsSujet(IdLibelle sujet, IdLibelle difficulte, int noteSur20,
@@ -41,21 +38,7 @@ public class StatsSujet implements Serializable{
 		this.difficulte = difficulte;
 	}
 
-	public int getNbPointsDispo() {
-		return nbPointsDispos;
-	}
 
-	public void setNbPointsDispo(int nbPointsDispo) {
-		this.nbPointsDispos = nbPointsDispo;
-	}
-
-	public int getNbPointsObtenus() {
-		return nbPointsObtenus;
-	}
-
-	public void setNbPointsObtenus(int nbPointsObtenus) {
-		this.nbPointsObtenus = nbPointsObtenus;
-	}
 
 	public List<StatsQuestion> getlStatsQuestions() {
 		return lStatsQuestions;
@@ -64,14 +47,17 @@ public class StatsSujet implements Serializable{
 	public void setlStatsQuestions(List<StatsQuestion> lStatsQuestions) {
 		this.lStatsQuestions = lStatsQuestions;
 	}
-	
+
+
+
+
 	public void addStatsQuestion(StatsQuestion statsQuestion){
 		lStatsQuestions.add(statsQuestion);
-		nbPointsDispos+=statsQuestion.getNbPointDisponible();
-		nbPointsObtenus+=statsQuestion.getNbPointObtenu();
-		nbBonnesReponses+=statsQuestion.getNbReponseOK();
-		nbMauvaisesReponses+=statsQuestion.getNbReponseKO();
+		nbPointsDispos+=statsQuestion.getNbPointsDispos();
+		nbPointsObtenus+=statsQuestion.getNbPointsObtenus();
+		nbBonnesReponses+=statsQuestion.getNbBonnesReponses();
+		nbMauvaisesReponses+=statsQuestion.getNbMauvaisesReponses();
+		nbReponsesNonTrouvees+=statsQuestion.getNbReponsesNonTrouvees();
 	}
-
 
 }

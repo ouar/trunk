@@ -1,27 +1,23 @@
 package fr.gfi.quiz.json.entite;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class StatsLangage implements Serializable{
+import fr.gfi.quiz.entite.PairInt;
+
+public class StatsLangage extends StatsAbstract implements Serializable{
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -1949212748982190820L;
 	private IdLibelle langage;
-	private List<StatsSujet> lSujets;
+	private Map<PairInt,StatsSujet> mSujets;
 
-	private int noteSur20;
 
 	public StatsLangage() {
-	}
-
-	public StatsLangage(IdLibelle langage, List<StatsSujet> lSujets, int noteSur20) {
-		super();
-		this.langage = langage;
-		this.lSujets = lSujets;
-		this.noteSur20 = noteSur20;
+		mSujets = new HashMap<PairInt,StatsSujet>();
 	}
 
 	public IdLibelle getLangage() {
@@ -32,59 +28,26 @@ public class StatsLangage implements Serializable{
 		this.langage = langage;
 	}
 
-	public List<StatsSujet> getlSujets() {
-		return lSujets;
+	public Map<PairInt, StatsSujet> getmSujets() {
+		return mSujets;
 	}
 
-	public void setlSujets(List<StatsSujet> lSujets) {
-		this.lSujets = lSujets;
+	public void setmSujets(Map<PairInt, StatsSujet> mSujets) {
+		this.mSujets = mSujets;
 	}
 
-	public int getNoteSur20() {
-		return noteSur20;
+	public void process(){
+		if(mSujets.size()>0){
+			for(PairInt mapKey : mSujets.keySet()){
+				StatsSujet sujetTemp = mSujets.get(mapKey);
+				nbPointsDispos+=sujetTemp.getNbPointsDispos();
+				nbPointsObtenus+=sujetTemp.getNbPointsObtenus();
+				nbBonnesReponses+=sujetTemp.getNbBonnesReponses();
+				nbMauvaisesReponses+=sujetTemp.getNbMauvaisesReponses();
+				nbReponsesNonTrouvees+=sujetTemp.getNbReponsesNonTrouvees();
+			}
+		}
 	}
 
-	public void setNoteSur20(int noteSur20) {
-		this.noteSur20 = noteSur20;
-	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((lSujets == null) ? 0 : lSujets.hashCode());
-		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
-		result = prime * result + noteSur20;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StatsLangage other = (StatsLangage) obj;
-		if (lSujets == null) {
-			if (other.lSujets != null)
-				return false;
-		} else if (!lSujets.equals(other.lSujets))
-			return false;
-		if (langage == null) {
-			if (other.langage != null)
-				return false;
-		} else if (!langage.equals(other.langage))
-			return false;
-		if (noteSur20 != other.noteSur20)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "StatLangage [langage=" + langage + ", lSujets=" + lSujets
-				+ ", noteSur20=" + noteSur20 + "]";
-	}
 }
