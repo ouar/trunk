@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="difficulte"></table-filter>
+	<table-filter match-name="langage"></table-filter>
+	<table-filter match-name="question"></table-filter>
+	<table-filter match-name="quizz"></table-filter>
+	<table-filter match-name="quizz_question"></table-filter>
+	<table-filter match-name="quizz_sujet"></table-filter>
+	<table-filter match-name="reponse"></table-filter>
+	<table-filter match-name="reponse_candidat"></table-filter>
+	<table-filter match-name="role"></table-filter>
+	<table-filter match-name="type_sujet"></table-filter>
+	<table-filter match-name="user"></table-filter>
+	<table-filter match-name="user_roles"></table-filter>
+
+	<table name="difficulte">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="langage">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="question">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="quizz_question">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="reponse">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="reponse_candidat">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="role">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="type_sujet">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="user">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+	<table name="user_roles">
+	<meta attribute="class-code" >toString</meta>
+	</table>
+</hibernate-reverse-engineering>
