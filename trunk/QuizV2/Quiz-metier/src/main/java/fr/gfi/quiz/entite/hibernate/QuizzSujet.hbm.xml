@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2 avr. 2014 11:27:10 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.quiz.entite.hibernate.QuizzSujet" table="quizz_sujet" catalog="quizz">
+    <class name="fr.gfi.quiz.entite.hibernate.QuizzSujet" table="quizz_sujet">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
@@ -15,5 +15,20 @@
         <many-to-one name="quizz" class="fr.gfi.quiz.entite.hibernate.Quizz" fetch="select">
             <column name="ref_quizz" />
         </many-to-one>
+        <property name="nbQuestion" type="java.lang.Integer">
+            <column name="nb_question">
+                <comment>nombre de questions posees</comment>
+            </column>
+        </property>
+        <property name="nbQuestionOk" type="java.lang.Integer">
+            <column name="nb_question_ok">
+                <comment>nombre de bonnes r</comment>
+            </column>
+        </property>
+        <property name="nbQuestionDemiOk" type="java.lang.Integer">
+            <column name="nb_question_demi_ok">
+                <comment>nombre de questions a moitie bien repondues</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

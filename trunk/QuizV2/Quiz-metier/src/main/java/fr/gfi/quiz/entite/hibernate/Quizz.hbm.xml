@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 26 mars 2014 17:52:51 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2 avr. 2014 11:27:10 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.gfi.quiz.entite.hibernate.Quizz" table="quizz" catalog="quizz">
+    <class name="fr.gfi.quiz.entite.hibernate.Quizz" table="quizz">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
