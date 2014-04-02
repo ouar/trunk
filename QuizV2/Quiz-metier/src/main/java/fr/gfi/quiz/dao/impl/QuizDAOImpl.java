@@ -321,7 +321,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		// Chargement des associations
 
 
-		// On traite le résultat de la requÃªte pour avoir une question avec
+		// On traite le résultat de la requête pour avoir une question avec
 		// des réponses correspondantes et non pas autant de questions qu'il
 		// ya de reponses.
 		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
