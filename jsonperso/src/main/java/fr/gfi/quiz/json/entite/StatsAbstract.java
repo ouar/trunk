@@ -15,6 +15,10 @@ public class StatsAbstract {
 		return nbPointsDispos-nbPointsObtenus;
 	}
 
+	public int getNoteSur20() {
+		return Math.round((nbPointsObtenus*20f)/nbPointsDispos);
+	}
+	
 	public int getNbPointsDispos() {
 		return nbPointsDispos;
 	}
