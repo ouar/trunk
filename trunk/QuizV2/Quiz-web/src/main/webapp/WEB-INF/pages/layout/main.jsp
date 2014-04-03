@@ -34,6 +34,8 @@
 		       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
 
 		 <script src="<c:url value="/resources/js/libs/modernizr-2.6.1.min.js" />"></script>
+		 
+		 <script src="<c:url value="/resources/js/libs/jquery-1.10.2.min.js" />"></script>
 	</head>
 
 	<body>
@@ -71,7 +73,7 @@
 		</div>
 
 	     <!-- JQuery -->
-	     <script src="<c:url value="/resources/js/libs/jquery-1.10.2.min.js" />"></script>
+
 	     <!-- JQuery Widget -->
 		 <script src="<c:url value="/resources/js/libs/jquery-ui-1.10.2.custom.min.js" />"></script>
 		 <script src="<c:url value="/resources/js/libs/jquery.ui.datepicker-fr.js" />"></script>
