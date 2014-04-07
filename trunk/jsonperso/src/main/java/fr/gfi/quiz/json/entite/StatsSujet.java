@@ -53,6 +53,7 @@ public class StatsSujet extends StatsAbstract implements Serializable{
 
 	public void addStatsQuestion(StatsQuestion statsQuestion){
 		lStatsQuestions.add(statsQuestion);
+		nbQuestionNonRepondue+=statsQuestion.nbQuestionNonRepondue;
 		nbPointsDispos+=statsQuestion.getNbPointsDispos();
 		nbPointsObtenus+=statsQuestion.getNbPointsObtenus();
 		nbBonnesReponses+=statsQuestion.getNbBonnesReponses();
