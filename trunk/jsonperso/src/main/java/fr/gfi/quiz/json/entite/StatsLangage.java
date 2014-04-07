@@ -40,9 +40,17 @@ public class StatsLangage extends StatsAbstract implements Serializable{
 		if(mSujets.size()>0){
 			for(PairInt mapKey : mSujets.keySet()){
 				StatsSujet sujetTemp = mSujets.get(mapKey);
-				nbQuestionNonRepondue+=sujetTemp.getNbQuestionNonRepondue();
+				nbQuestionsKO+=sujetTemp.nbQuestionsKO;
+				nbQuestionsOK+=sujetTemp.nbQuestionsOK;
+				nbQuestionsNonRepondues+=sujetTemp.nbQuestionsNonRepondues;
+				nbQuestionsPartielles+=sujetTemp.nbQuestionsPartielles;
+
 				nbPointsDispos+=sujetTemp.getNbPointsDispos();
 				nbPointsObtenus+=sujetTemp.getNbPointsObtenus();
+				nbPointsPerdusMauvaiseReponse+=sujetTemp.nbPointsPerdusMauvaiseReponse;
+				nbPointsPerdusQuestionNonRepondue+=sujetTemp.nbPointsPerdusQuestionNonRepondue;
+				nbPointsPerdusQuestionPartielle+=sujetTemp.nbPointsPerdusQuestionPartielle;
+
 				nbBonnesReponses+=sujetTemp.getNbBonnesReponses();
 				nbMauvaisesReponses+=sujetTemp.getNbMauvaisesReponses();
 				nbReponsesNonTrouvees+=sujetTemp.getNbReponsesNonTrouvees();

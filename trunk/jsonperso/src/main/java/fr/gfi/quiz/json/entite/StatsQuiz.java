@@ -74,12 +74,20 @@ public class StatsQuiz extends StatsAbstract implements Serializable{
 	public void process() {
 		for(StatsLangage langage : lStatsLangages){
 			langage.process();
-			this.nbQuestionNonRepondue+=langage.getNbQuestionNonRepondue();
-			this.nbBonnesReponses+=langage.getNbBonnesReponses();
-			this.nbMauvaisesReponses+=langage.getNbMauvaisesReponses();
-			this.nbPointsDispos+=langage.getNbPointsDispos();
-			this.nbPointsObtenus+=langage.getNbPointsObtenus();
-			this.nbReponsesNonTrouvees+=langage.getNbReponsesNonTrouvees();
+			nbQuestionsKO+=langage.nbQuestionsKO;
+			nbQuestionsOK+=langage.nbQuestionsOK;
+			nbQuestionsNonRepondues+=langage.nbQuestionsNonRepondues;
+			nbQuestionsPartielles+=langage.nbQuestionsPartielles;
+
+			nbPointsDispos+=langage.getNbPointsDispos();
+			nbPointsObtenus+=langage.getNbPointsObtenus();
+			nbPointsPerdusMauvaiseReponse+=langage.nbPointsPerdusMauvaiseReponse;
+			nbPointsPerdusQuestionNonRepondue+=langage.nbPointsPerdusQuestionNonRepondue;
+			nbPointsPerdusQuestionPartielle+=langage.nbPointsPerdusQuestionPartielle;
+
+			nbBonnesReponses+=langage.getNbBonnesReponses();
+			nbMauvaisesReponses+=langage.getNbMauvaisesReponses();
+			nbReponsesNonTrouvees+=langage.getNbReponsesNonTrouvees();
 		}
 	}
 }
