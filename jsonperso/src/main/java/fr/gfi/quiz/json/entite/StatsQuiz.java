@@ -74,6 +74,7 @@ public class StatsQuiz extends StatsAbstract implements Serializable{
 	public void process() {
 		for(StatsLangage langage : lStatsLangages){
 			langage.process();
+			this.nbQuestionNonRepondue+=langage.getNbQuestionNonRepondue();
 			this.nbBonnesReponses+=langage.getNbBonnesReponses();
 			this.nbMauvaisesReponses+=langage.getNbMauvaisesReponses();
 			this.nbPointsDispos+=langage.getNbPointsDispos();

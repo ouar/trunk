@@ -3,6 +3,8 @@ package fr.gfi.quiz.json.entite;
 public class StatsAbstract {
 	protected int nbPointsDispos=0;
 	protected int nbPointsObtenus=0;
+	
+	protected int nbQuestionNonRepondue=0;
 	protected int nbBonnesReponses=0;
 	protected int nbMauvaisesReponses=0;
 	protected int nbReponsesNonTrouvees=0;
@@ -59,5 +61,12 @@ public class StatsAbstract {
 		this.nbReponsesNonTrouvees = nbReponsesNonTrouvees;
 	}
 
+	public int getNbQuestionNonRepondue() {
+		return nbQuestionNonRepondue;
+	}
+
+	public void setNbQuestionNonRepondue(int nbQuestionNonRepondue) {
+		this.nbQuestionNonRepondue = nbQuestionNonRepondue;
+	}
 
 }
