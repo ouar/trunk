@@ -409,9 +409,9 @@ public class QuizBSImpl implements QuizBS {
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 
 		Quizz quiz = quizDAO.getDetailsQuizz(idQuiz,lAssociations);
-		
+
 		List<ReponseCandidat> lReponses = getListReponsesCandidatsByQuizz(idQuiz);
-		
+
 		return convertQuizBDtoStatsJson(quiz,lReponses);
 	}
 
@@ -456,8 +456,8 @@ public class QuizBSImpl implements QuizBS {
 				mStatsSujet.put(typeSujetBD.getId(), statsSujet);
 				statsLangage.getmSujets().put(sujetId, statsSujet);
 			}
-			
-			
+
+
 			int nbReponsesNonTrouvees = 0;
 			int nbBonnesReponses = 0;
 			int nbMauvaisesReponses = 0;
@@ -471,7 +471,7 @@ public class QuizBSImpl implements QuizBS {
 						break;
 					}
 				}
-				
+
 				if(reponseATraiter.getBolTypeReponse() == Boolean.TRUE){
 					if(bReponseDonneeParCandidat){
 						nbBonnesReponses++;
@@ -487,11 +487,29 @@ public class QuizBSImpl implements QuizBS {
 //					}
 				}
 			}
-			StatsQuestion statsQuestion = new StatsQuestion(bRepondue, typeSujetBD.getDifficulte().getId(),
-					(nbReponsesNonTrouvees>0 || nbMauvaisesReponses>0)?0:typeSujetBD.getDifficulte().getId(),
-					nbBonnesReponses,
-					nbMauvaisesReponses,
-					nbReponsesNonTrouvees);
+			int pointsQuestion = typeSujetBD.getDifficulte().getId();
+			StatsQuestion statsQuestion = new StatsQuestion();
+			statsQuestion.setNbBonnesReponses(nbBonnesReponses);
+			statsQuestion.setNbMauvaisesReponses(nbMauvaisesReponses);
+			statsQuestion.setNbReponsesNonTrouvees(nbReponsesNonTrouvees);
+
+			if(bRepondue){
+				statsQuestion.setNbQuestionsOK((nbBonnesReponses>0 && nbMauvaisesReponses==0 && nbReponsesNonTrouvees==0)?1:0);
+				statsQuestion.setNbQuestionsKO((nbBonnesReponses==0 && (nbMauvaisesReponses>0 || nbReponsesNonTrouvees>0))?1:0);
+				statsQuestion.setNbQuestionsPartielles((nbBonnesReponses>0 &&(nbMauvaisesReponses>0 || nbReponsesNonTrouvees>0))?1:0);
+				statsQuestion.setNbQuestionsNonRepondues(0);
+			}else{
+				statsQuestion.setNbQuestionsOK(0);
+				statsQuestion.setNbQuestionsKO(0);
+				statsQuestion.setNbQuestionsPartielles(0);
+				statsQuestion.setNbQuestionsNonRepondues(1);
+			}
+			statsQuestion.setNbPointsDispos(pointsQuestion);
+			statsQuestion.setNbPointsObtenus(statsQuestion.getNbQuestionsOK()*pointsQuestion);
+			statsQuestion.setNbPointsPerdusMauvaiseReponse(statsQuestion.getNbQuestionsKO()*pointsQuestion);
+			statsQuestion.setNbPointsPerdusQuestionPartielle(statsQuestion.getNbQuestionsPartielles()*pointsQuestion);
+			statsQuestion.setNbPointsPerdusQuestionNonRepondue(statsQuestion.getNbQuestionsNonRepondues()*pointsQuestion);
+
 			statsSujet.addStatsQuestion(statsQuestion);
 		}
 		//Les statistiques du quiz ont été effectuées au niveau Question et sujet.

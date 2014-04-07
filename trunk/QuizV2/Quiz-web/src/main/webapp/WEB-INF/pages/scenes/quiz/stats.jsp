@@ -6,23 +6,33 @@
 <script type="text/javascript">
 
 tabLibelle = new Array();
-tabNbPointsGagnes = new Array();
-tabNbPointsPerdus = new Array();
+tabNbPointsObtenus = new Array();
+tabNbPointsPerdusMauvaiseReponse = new Array();
+tabNbPointsPerdusQuestionNonRepondue = new Array();
+tabNbPointsPerdusQuestionPartielle = new Array();
+
 
 tabLibelle.push('<b>Quiz</b>');
-tabNbPointsGagnes.push(${stats.nbPointsObtenus});
-tabNbPointsPerdus.push(${stats.nbPointsDispos - stats.nbPointsObtenus});
+tabNbPointsObtenus.push(${stats.nbPointsObtenus});
+tabNbPointsPerdusMauvaiseReponse.push(${stats.nbPointsPerdusMauvaiseReponse});
+tabNbPointsPerdusQuestionNonRepondue.push(${stats.nbPointsPerdusQuestionNonRepondue});
+tabNbPointsPerdusQuestionPartielle.push(${stats.nbPointsPerdusQuestionPartielle});
+
 
 <c:forEach var="langage" items="${stats.lStatsLangages}">
 tabLibelle.push('<i><c:out value="${langage.langage.libelle}"/></i>');
-tabNbPointsGagnes.push(${langage.nbPointsObtenus});
-tabNbPointsPerdus.push(${langage.nbPointsDispos - langage.nbPointsObtenus});
+tabNbPointsObtenus.push(${langage.nbPointsObtenus});
+tabNbPointsPerdusMauvaiseReponse.push(${langage.nbPointsPerdusMauvaiseReponse});
+tabNbPointsPerdusQuestionNonRepondue.push(${langage.nbPointsPerdusQuestionNonRepondue});
+tabNbPointsPerdusQuestionPartielle.push(${langage.nbPointsPerdusQuestionPartielle});
 </c:forEach>
 <c:forEach var="langage" items="${stats.lStatsLangages}">
 <c:forEach var="sujet" items="${langage.mSujets}">
 tabLibelle.push('<i><c:out value="${langage.langage.libelle}"/></i><br/><c:out value="${sujet.value.sujet.libelle}"/><br/>(<c:out value="${sujet.value.difficulte.libelle}"/>)');
-tabNbPointsGagnes.push(${sujet.value.nbPointsObtenus});
-tabNbPointsPerdus.push(${sujet.value.nbPointsDispos - sujet.value.nbPointsObtenus});
+tabNbPointsObtenus.push(${sujet.value.nbPointsObtenus});
+tabNbPointsPerdusMauvaiseReponse.push(${sujet.value.nbPointsPerdusMauvaiseReponse});
+tabNbPointsPerdusQuestionNonRepondue.push(${sujet.value.nbPointsPerdusQuestionNonRepondue});
+tabNbPointsPerdusQuestionPartielle.push(${sujet.value.nbPointsPerdusQuestionPartielle});
 </c:forEach>
 </c:forEach>
 
@@ -48,22 +58,30 @@ $(function () {
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} points)<br/>',
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
             shared: true
         },
         plotOptions: {
             column: {
-                stacking: 'percent'
+                stacking: 'normal'
             }
         },
         series: [{
-        	name: 'Points perdus',
+        	name: 'Réponse fausse',
             color: "#DD0000",
-            data: tabNbPointsPerdus
+            data: tabNbPointsPerdusMauvaiseReponse
         },{
-        	name: 'Points gagnés',
+        	name: 'Réponse incomplète',
+            color: "#FA8258",
+            data: tabNbPointsPerdusQuestionPartielle
+        },{
+        	name: 'Question non répondue',
+            color: "#FFBF00",
+            data: tabNbPointsPerdusQuestionNonRepondue
+        },{
+        	name: 'Réponse correcte',
             color: "#009000",
-            data: tabNbPointsGagnes
+            data: tabNbPointsObtenus
         }]
     });
 });
