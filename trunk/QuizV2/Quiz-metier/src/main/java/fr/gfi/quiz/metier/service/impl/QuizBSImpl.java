@@ -220,9 +220,7 @@ public class QuizBSImpl implements QuizBS {
 	 * retourne les objets réponses candidats attachés à un quizz.
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<ReponseCandidat> getListReponsesCandidatsByQuizz(Integer id)
-			throws BusinessServiceException {
-
+	public List<ReponseCandidat> getListReponsesCandidatsByQuizz(Integer id){
 		final List<ReponseCandidat> lCandidats = quizDAO.getListReponsesCandidatsByQuizz(id);
 		return lCandidats;
 
@@ -408,15 +406,17 @@ public class QuizBSImpl implements QuizBS {
 		final List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(HibConst.QuizzEnum.LangageQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
-		lAssociations.add(HibConst.QuizzEnum.ReponsesCandidatAvecQuestions.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 
-		Quizz quiz = quizDAO.getDetailsQuizzFini(idQuiz,lAssociations);
-		return convertQuizBDtoStatsJson(quiz);
+		Quizz quiz = quizDAO.getDetailsQuizz(idQuiz,lAssociations);
+		
+		List<ReponseCandidat> lReponses = getListReponsesCandidatsByQuizz(idQuiz);
+		
+		return convertQuizBDtoStatsJson(quiz,lReponses);
 	}
 
-	@Override
-	public StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD) {
+
+	private StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD,List<ReponseCandidat> lReponsesCandidat) {
 		Map<Integer,StatsLangage> mStatsLangage = new HashMap<Integer, StatsLangage>();
 		Map<TypeSujetId,StatsSujet> mStatsSujet = new HashMap<TypeSujetId, StatsSujet>();
 
@@ -429,13 +429,13 @@ public class QuizBSImpl implements QuizBS {
 		statsQuiz.setDate(quizzBD.getDatQuizz());
 
 		for(QuizzQuestion quizQuestion : quizzBD.getQuizzQuestions()){
-			Question question = quizQuestion.getQuestion();
+			Question questionATraiter = quizQuestion.getQuestion();
 			StatsLangage statsLangage = null;
 			StatsSujet statsSujet = null;
 
 			//on récupère le langage et le sujet de la question à traiter
-			Langage langageBD = question.getTypeSujet().getLangage();
-			TypeSujet typeSujetBD = question.getTypeSujet();
+			Langage langageBD = questionATraiter.getTypeSujet().getLangage();
+			TypeSujet typeSujetBD = questionATraiter.getTypeSujet();
 
 			//on vérifie que le langage a déjà été traité dans la boucle
 			if(mStatsLangage.containsKey(langageBD.getId())){
@@ -443,7 +443,7 @@ public class QuizBSImpl implements QuizBS {
 			}else{
 				statsLangage = new StatsLangage();
 				statsLangage.setLangage(new IdLibelle(langageBD.getId(), langageBD.getLibelle()));
-				mStatsLangage.put(langageBD.getId(), statsLangage);
+ 				mStatsLangage.put(langageBD.getId(), statsLangage);
 			}
 			//on vérifie que le sujet est déjà dans le langage
 			PairInt sujetId = new PairInt(typeSujetBD.getId().getId(),typeSujetBD.getId().getRefDifficulte());
@@ -456,19 +456,30 @@ public class QuizBSImpl implements QuizBS {
 				mStatsSujet.put(typeSujetBD.getId(), statsSujet);
 				statsLangage.getmSujets().put(sujetId, statsSujet);
 			}
-
+			
+			
 			int nbReponsesNonTrouvees = 0;
 			int nbBonnesReponses = 0;
 			int nbMauvaisesReponses = 0;
-			for(Reponse reponse: question.getReponses()){
-				if(reponse.getBolTypeReponse() == Boolean.TRUE){
-					if(reponse.getReponseCandidats().size()>0){
+			boolean bRepondue = false;
+			for(Reponse reponseATraiter: questionATraiter.getReponses()){
+				boolean bReponseDonneeParCandidat = false;
+				for(ReponseCandidat reponseCandidatTemp : lReponsesCandidat){
+					if(reponseATraiter.getId().equals(reponseCandidatTemp.getReponse().getId())){
+						bReponseDonneeParCandidat = true;
+						bRepondue = true;
+						break;
+					}
+				}
+				
+				if(reponseATraiter.getBolTypeReponse() == Boolean.TRUE){
+					if(bReponseDonneeParCandidat){
 						nbBonnesReponses++;
 					}else{
 						nbReponsesNonTrouvees++;
 					}
 				}else{
-					if(reponse.getReponseCandidats().size()>0){
+					if(bReponseDonneeParCandidat){
 						nbMauvaisesReponses++;
 					}
 //					else{
@@ -476,7 +487,7 @@ public class QuizBSImpl implements QuizBS {
 //					}
 				}
 			}
-			StatsQuestion statsQuestion = new StatsQuestion(typeSujetBD.getDifficulte().getId(),
+			StatsQuestion statsQuestion = new StatsQuestion(bRepondue, typeSujetBD.getDifficulte().getId(),
 					(nbReponsesNonTrouvees>0 || nbMauvaisesReponses>0)?0:typeSujetBD.getDifficulte().getId(),
 					nbBonnesReponses,
 					nbMauvaisesReponses,

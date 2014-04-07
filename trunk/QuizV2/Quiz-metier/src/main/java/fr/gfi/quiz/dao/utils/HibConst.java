@@ -44,7 +44,12 @@ public class HibConst {
 
 	public enum ReponseCandidatEnum {
 
-		Admin("quizz.admin"), NiveauQuestion("question.niveauQuestion"), Reponse("reponse"), TypeSujet("question.typeSujet"), Quizz("quizz");
+		Examinateur("quizz.user"), 
+		Question("question"),
+		DifficulteSujet("question.typeSujet.difficulte"), 
+		Reponse("reponse"), 
+		TypeSujet("question.typeSujet"),
+		Quizz("quizz");
 
 		private final String value;
 

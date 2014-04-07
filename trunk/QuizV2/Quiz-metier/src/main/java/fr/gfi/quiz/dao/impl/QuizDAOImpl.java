@@ -91,31 +91,12 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 	}
 
 	public Quizz getDetailsQuizz(Integer id,List<String> lAssociations) {
-
 		Session hSession = null;
-
 		Quizz quizz = null;
 
 		hSession = sessionFactory.getCurrentSession();
-
 		final Criteria criteres = hSession.createCriteria(Quizz.class);
-
-		// Chargement des associations
-
-
-		// On traite le résultat de la requÃªte pour avoir une question avec
-		// des réponses correspondantes et non pas autant de questions qu'il
-		// ya de reponses.
-		// criteres.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);quizzQuestions
-
 		criteres.add(Restrictions.eq("id", id));
-		// .createAlias("quizzQuestions.question", "question")
-
-		// .add(Restrictions.eq("question.quizzQuestions.quizz.id",
-		// id))
-		// .createAlias("quizzQuestions.question.reponses.reponseCandidats",
-		// "reponseCandidats")
-		// .add(Restrictions.eq("reponseCandidats.quizz.id", id));
 		quizz = (Quizz) MyRequest.uniqueResult(criteres, lAssociations);
 
 		return quizz;
@@ -160,20 +141,20 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 	@SuppressWarnings({ "unchecked" })
 	public List<ReponseCandidat> getListReponsesCandidatsByQuizz(Integer id) {
-		// TODO Auto-generated method stub
-
 		Session hSession = null;
 		List<ReponseCandidat> lReponseCandidats = null;
 
+
+		// Chargement des associations
+		final List<String> lAssociations = new ArrayList<String>();
+		lAssociations.add(HibConst.ReponseCandidatEnum.Question.getValue());
+		lAssociations.add(HibConst.ReponseCandidatEnum.Reponse.getValue());
+		
 		hSession = sessionFactory.getCurrentSession();
-		final Criteria criteres = hSession
-				.createCriteria(ReponseCandidat.class).createAlias("reponse",
-						"reponse");
+		final Criteria criteres = hSession.createCriteria(ReponseCandidat.class).createAlias("quizz", "quizz");
 
 		criteres.add(Restrictions.eq("quizz.id", id));
-		// lReponseCandidats = (List<ReponseCandidat>)
-		// MyRequest.list(criteres, lAssociations);
-		lReponseCandidats = criteres.list();
+		lReponseCandidats = MyRequest.list(criteres,lAssociations);
 
 		return lReponseCandidats;
 
@@ -192,10 +173,9 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.ReponseCandidatEnum.Admin.getValue());
+		lAssociations.add(HibConst.ReponseCandidatEnum.Examinateur.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.Reponse.getValue());
-		lAssociations.add(HibConst.ReponseCandidatEnum.NiveauQuestion
-				.getValue());
+		lAssociations.add(HibConst.ReponseCandidatEnum.DifficulteSujet.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.TypeSujet.getValue());
 
 		// On traite le résultat de la requête pour avoir une question avec
