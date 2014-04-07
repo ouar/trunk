@@ -12,16 +12,4 @@ public class StatsQuestion extends StatsAbstract implements Serializable{
 	public StatsQuestion() {
 
 	}
-
-	public StatsQuestion(boolean _repondue,int nbPointsDispos, int nbPointsObtenus,
-			int nbBonnesReponses, int nbMauvaisesReponses, int nbReponsesNonTrouvees ) {
-		super();
-		this.nbQuestionNonRepondue = (_repondue)?0:1;
-		this.nbPointsDispos = nbPointsDispos;
-		this.nbPointsObtenus = nbPointsObtenus;
-		this.nbBonnesReponses = nbBonnesReponses;
-		this.nbMauvaisesReponses = nbMauvaisesReponses;
-		this.nbReponsesNonTrouvees = nbReponsesNonTrouvees;
-	}
-
 }
