@@ -91,6 +91,4 @@ public interface QuizBS {
 
 	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD);
 	
-	public StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD);
-
 }

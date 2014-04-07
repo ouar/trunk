@@ -11,4 +11,16 @@ INSERT INTO `reponse` (`id`, `ref_question`, `lib_reponse`, `bol_type_reponse`) 
 	(39, 12, 'loop until( i<50){...}', 0),
 	(40, 12, 'while(i<50){...}', 0),
 	(41, 12, 'boucle(i<50){...}', 0),
-	(42, 13, 'test1', 1);
+	(42, 13, 'test1', 1),
+	(43, 14, 'Compilé', 0),
+	(44, 14, 'Interprété', 0),
+	(45, 14, 'Compilé et interprété', 1),
+	(46, 14, 'Ni compilé ni interprété', 0),
+	(47, 15, 'Aucune', 0),
+	(48, 15, 'Cinq', 0),
+	(49, 15, 'Trois', 0),
+	(50, 15, 'Deux', 1),
+	(51, 16, 'Petite y =new Petite(); Grande x= (Grande)y; Petite z=x;', 0),
+	(52, 16, 'Grande x= new Grande(); Petite y = x; Grande z=(Grande)y;', 1),
+	(53, 16, 'Grande x= new Grande(); Petite y = x; Grande z=y;', 0),
+	(54, 16, 'Petite y =new Petite(); Grande x= (Grande)y; Petite z=(Petite)x;', 0);
