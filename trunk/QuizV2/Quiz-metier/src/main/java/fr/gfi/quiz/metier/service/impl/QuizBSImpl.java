@@ -336,9 +336,8 @@ public class QuizBSImpl implements QuizBS {
 			difficulte.setLibelle(questionBD.getTypeSujet().getDifficulte().getLibDifficulte());
 			question.setDifficulte(difficulte);
 
-			if(StringUtils.isNotEmpty(questionBD.getUrlImage())){
-				question.setUrlInmage(questionBD.getUrlImage());
-			}
+			question.setImage(StringUtils.isNotEmpty(questionBD.getUrlImage()));
+
 
 			List<fr.gfi.quiz.json.entite.Reponse> lReponses = new ArrayList<fr.gfi.quiz.json.entite.Reponse>();
 			for(Reponse reponseBD : questionBD.getReponses()){
@@ -523,6 +522,13 @@ public class QuizBSImpl implements QuizBS {
 		statsQuiz.process();
 
 		return statsQuiz;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public String getImagePath(int idQuestion) {
+		String sPath = quizDAO.getImagePath(idQuestion);
+		return sPath;
 	}
 
 

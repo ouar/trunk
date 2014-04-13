@@ -84,6 +84,7 @@ public interface QuizBS {
 	 */
 	public List<Question> getListQuestionsByListTypesSujetsAndNiveauQuestion (InfoGenerationQuizz infoGenerationQuizz) throws BusinessServiceException, QuestionsNonTrouveesException;
 
+	public String getImagePath(int idQuestion);
 
 	public List<Langage> getListLangage(List<String> lAssociations);
 

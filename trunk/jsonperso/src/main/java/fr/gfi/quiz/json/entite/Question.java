@@ -19,7 +19,7 @@ public class Question implements Serializable {
 	private boolean repondue;
 	private boolean correcte;
 	private String libelle;
-	private String urlInmage;
+	private boolean image;
 	private List<Reponse> lReponses;
 	
 	public Question() {
@@ -28,7 +28,7 @@ public class Question implements Serializable {
 
 	public Question(int id, IdLibelle langage, IdLibelle typeSujet,
 			IdLibelle difficulte, boolean uniqueReponseCorrecte,
-			int dureeReflexionEnSec, String libelle, String urlInmage,
+			int dureeReflexionEnSec, String libelle, boolean image,
 			List<Reponse> lReponses) {
 		super();
 		this.id = id;
@@ -38,7 +38,7 @@ public class Question implements Serializable {
 		this.uniqueReponseCorrecte = uniqueReponseCorrecte;
 		this.dureeReflexionEnSec = dureeReflexionEnSec;
 		this.libelle = libelle;
-		this.urlInmage = urlInmage;
+		this.image = image;
 		this.lReponses = lReponses;
 	}
 
@@ -98,12 +98,12 @@ public class Question implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public String getUrlInmage() {
-		return urlInmage;
+	public boolean isImage() {
+		return image;
 	}
 
-	public void setUrlInmage(String urlInmage) {
-		this.urlInmage = urlInmage;
+	public void setImage(boolean image) {
+		this.image = image;
 	}
 
 	public List<Reponse> getlReponses() {
@@ -147,8 +147,7 @@ public class Question implements Serializable {
 		result = prime * result
 				+ ((typeSujet == null) ? 0 : typeSujet.hashCode());
 		result = prime * result + (uniqueReponseCorrecte ? 1231 : 1237);
-		result = prime * result
-				+ ((urlInmage == null) ? 0 : urlInmage.hashCode());
+		result = prime * result + (image ? 1231 : 1237);
 		return result;
 	}
 
@@ -196,10 +195,7 @@ public class Question implements Serializable {
 			return false;
 		if (uniqueReponseCorrecte != other.uniqueReponseCorrecte)
 			return false;
-		if (urlInmage == null) {
-			if (other.urlInmage != null)
-				return false;
-		} else if (!urlInmage.equals(other.urlInmage))
+		if (image != other.image)
 			return false;
 		return true;
 	}
@@ -211,7 +207,7 @@ public class Question implements Serializable {
 				+ ", uniqueReponseCorrecte=" + uniqueReponseCorrecte
 				+ ", dureeReflexionEnSec=" + dureeReflexionEnSec
 				+ ", repondue=" + repondue + ", correcte=" + correcte
-				+ ", libelle=" + libelle + ", urlInmage=" + urlInmage
+				+ ", libelle=" + libelle + ", image=" + image
 				+ ",\n lReponses=" + lReponses + "]";
 	}
 

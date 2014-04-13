@@ -54,7 +54,7 @@ $(function () {
         yAxis: {
         	min: 0,
             title: {
-                text: 'Pourcentage'
+                text: 'Note'
             }
         },
         tooltip: {
@@ -75,7 +75,7 @@ $(function () {
             color: "#FA8258",
             data: tabNbPointsPerdusQuestionPartielle
         },{
-        	name: 'Question non répondue',
+        	name: 'Sans réponse',
             color: "#FFBF00",
             data: tabNbPointsPerdusQuestionNonRepondue
         },{

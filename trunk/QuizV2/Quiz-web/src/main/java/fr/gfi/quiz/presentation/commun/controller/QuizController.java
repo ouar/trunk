@@ -1,19 +1,29 @@
 package fr.gfi.quiz.presentation.commun.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.quiz.dao.utils.HibConst;
@@ -39,6 +49,8 @@ public class QuizController extends AbstractController{
 
 	private final static String SEPARATOR = "|";
 
+	@Autowired
+	ServletContext context;
 
 	@RequestMapping(value="/new")
 	public ModelAndView nouveauQuiz(@ModelAttribute("gestionFormBean") GestionFormBean gestionFormBean,HttpServletRequest request) {
@@ -84,7 +96,7 @@ public class QuizController extends AbstractController{
 			String urlServeur = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
 			String urlFlashCode = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl="
-					+ urlServeur + "/web/quiz"
+					+ urlServeur + "/web/"
 					+ SEPARATOR + quiz.getId();
 
 			model.addObject("flashUrl", urlFlashCode);
@@ -142,7 +154,22 @@ public class QuizController extends AbstractController{
 		return mv;
 	}
 
-
+	@ResponseBody
+	@RequestMapping(value="/getImage/{idImage}", produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] getImage(@PathVariable("idImage") Integer idQuestion) throws IOException {
+		String sPath = quizBS.getImagePath(idQuestion);
+		InputStream in = null;
+		if(!StringUtils.isEmpty(sPath)){
+			FileSystemResource resource = new FileSystemResource(new File("C:/dev/", sPath));
+			in = resource.getInputStream();
+		}
+		if(in == null){
+			in = context.getResourceAsStream("/resources/img/noimage.jpg");	
+		}
+		return IOUtils.toByteArray(in);
+	}
+	
+	
 	@RequestMapping(value="/save/{idquiz}",method = RequestMethod.POST, headers ={"Accept=application/json"},consumes="application/json")
 	public String enregistrerQuiz(@PathVariable("idquiz") Integer idQuizz,@RequestBody String json) {
 		Quiz quizRepondu = JsonBuilder.getQuizBeanFromJson(json);
