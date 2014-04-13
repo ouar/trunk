@@ -48,8 +48,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		question.setLibelle(libEnonce);
 		question.setlReponses(lReponses);
 		if(jsonObject.has("image")){
-			String sUrlImage = jsonObject.get("image").getAsString();
-			question.setUrlInmage(sUrlImage);
+			question.setImage(jsonObject.get("image").getAsBoolean());
 		}
 		if(jsonObject.has("repondue")){
 			question.setRepondue(jsonObject.get("repondue").getAsBoolean());

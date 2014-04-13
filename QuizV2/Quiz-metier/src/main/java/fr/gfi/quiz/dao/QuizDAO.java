@@ -113,4 +113,7 @@ public interface QuizDAO extends AbstractDAO{
 
 	public List<Langage> getListLangage(List<String> lAssociations);
 
-	public Quizz getDetailsQuizzFini(int idQuiz, List<String> lAssociations);}
+	public Quizz getDetailsQuizzFini(int idQuiz, List<String> lAssociations);
+	
+	public String getImagePath(int idQuestion);
+}

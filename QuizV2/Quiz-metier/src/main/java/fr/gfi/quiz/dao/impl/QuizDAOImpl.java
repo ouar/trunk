@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -318,6 +319,21 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		quizz = (Quizz) MyRequest.uniqueResult(criteres, lAssociations);
 
 		return quizz;
+	}
+
+	@Override
+	public String getImagePath(int idQuestion) {
+		Session hSession = null;
+
+		hSession = sessionFactory.getCurrentSession();
+
+		final Criteria criteres = hSession.createCriteria(Question.class);
+				
+		criteres.setProjection(Projections.property("urlImage"));
+		criteres.add(Restrictions.eq("id", idQuestion));
+		
+		String sPathImage = (String) criteres.uniqueResult();
+		return sPathImage;
 	}
 
 }
