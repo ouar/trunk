@@ -3,37 +3,37 @@ package fr.gfi.quiz.presentation.commun.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.gfi.quiz.entite.hibernate.Langage;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.json.entite.IdLibelle;
 
 public class LangageForm {
 
-	private IdLibelle langage;
+	private IdLibelle theme;
 	private List<SujetForm> lSujets;
 
 	public LangageForm() {
-		langage = new IdLibelle();
+		theme = new IdLibelle();
 		lSujets = new ArrayList<SujetForm>();
 	}
 
-	public LangageForm(IdLibelle langage) {
+	public LangageForm(IdLibelle theme) {
 		this();
-		this.langage = langage;
+		this.theme = theme;
 	}
 
 	public LangageForm(int id, String libelle) {
 		this();
-		langage.setId(id);
-		langage.setLibelle(libelle);
+		theme.setId(id);
+		theme.setLibelle(libelle);
 	}
 
-	public LangageForm(Langage langageFromBDD){
+	public LangageForm(Theme themeFromBDD){
 		this();
-		langage.setId(langageFromBDD.getId());
-		langage.setLibelle(langageFromBDD.getLibelle());
-		if (langageFromBDD.getTypeSujets().size() > 0) {
-			for (TypeSujet typeSujet : langageFromBDD.getTypeSujets()) {
+		theme.setId(themeFromBDD.getId());
+		theme.setLibelle(themeFromBDD.getLibelle());
+		if (themeFromBDD.getSujets().size() > 0) {
+			for (Sujet typeSujet : themeFromBDD.getSujets()) {
 				SujetForm sujetTemp = new SujetForm(typeSujet);
 				if(!lSujets.contains(sujetTemp)){
 					lSujets.add(sujetTemp);
@@ -44,15 +44,15 @@ public class LangageForm {
 
 	@Override
 	public String toString() {
-		return "LangageForm [langage=" + langage + ", lSujets=" + lSujets + "]";
+		return "LangageForm [langage=" + theme + ", lSujets=" + lSujets + "]";
 	}
 
 	public IdLibelle getLangage() {
-		return langage;
+		return theme;
 	}
 
 	public void setLangage(IdLibelle langage) {
-		this.langage = langage;
+		this.theme = langage;
 	}
 
 	public List<SujetForm> getlSujets() {
@@ -67,7 +67,7 @@ public class LangageForm {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
+		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
 		return result;
 	}
 
@@ -80,10 +80,10 @@ public class LangageForm {
 		if (getClass() != obj.getClass())
 			return false;
 		LangageForm other = (LangageForm) obj;
-		if (langage == null) {
-			if (other.langage != null)
+		if (theme == null) {
+			if (other.theme != null)
 				return false;
-		} else if (!langage.equals(other.langage))
+		} else if (!theme.equals(other.theme))
 			return false;
 		return true;
 	}

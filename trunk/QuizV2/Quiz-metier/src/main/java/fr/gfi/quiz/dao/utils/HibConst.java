@@ -4,7 +4,7 @@ public class HibConst {
 
 	public enum ParametresEnum {
 
-		reponse("reponses"), type_sujet("typeSujet");
+		reponse("reponses"), sujet("Sujet");
 
 		private final String value;
 
@@ -19,17 +19,17 @@ public class HibConst {
 
 	public enum QuizzEnum {
 
-		TypesSujets("quizzSujets.typeSujet"),
-		DifficulteSujet("quizzSujets.typeSujet.difficulte"),
-		LangageSujet("quizzSujets.typeSujet.langage"),
+		Sujets("quizzSujets.Sujet"),
+		DifficulteSujet("quizzSujets.Sujet.difficulte"),
+		ThemeSujet("quizzSujets.Sujet.theme"),
 		Reponses("quizzQuestions.question.reponses"),
 		Questions("quizzQuestions.question"),
 		ReponsesCandidatAvecQuestions("quizzQuestions.question.reponses.reponseCandidats"),
 		ReponsesCandidat("reponseCandidats.reponse"),
 		User("user"),
 
-		DifficulteQuestion("quizzQuestions.question.typeSujet.difficulte"),
-		LangageQuestion("quizzQuestions.question.typeSujet.langage");
+		DifficulteQuestion("quizzQuestions.question.Sujet.difficulte"),
+		ThemeQuestion("quizzQuestions.question.Sujet.theme");
 
 		private final String value;
 
@@ -44,11 +44,11 @@ public class HibConst {
 
 	public enum ReponseCandidatEnum {
 
-		Examinateur("quizz.user"), 
+		Examinateur("quizz.user"),
 		Question("question"),
-		DifficulteSujet("question.typeSujet.difficulte"), 
-		Reponse("reponse"), 
-		TypeSujet("question.typeSujet"),
+		DifficulteSujet("question.Sujet.difficulte"),
+		Reponse("reponse"),
+		Sujet("question.Sujet"),
 		Quizz("quizz");
 
 		private final String value;
@@ -64,10 +64,10 @@ public class HibConst {
 
 	public enum LangageEnum {
 
-		TypeSujets("typeSujets"),
-		DifficulteSujets("typeSujets.difficulte"),
-		Questions("typeSujets.questions"),
-		Quizzs("typeSujets.sujets.quizz");
+		Sujets("Sujets"),
+		DifficulteSujets("Sujets.difficulte"),
+		Questions("Sujets.questions"),
+		Quizzs("Sujets.sujets.quizz");
 
 		private final String value;
 
@@ -82,7 +82,12 @@ public class HibConst {
 
 	public enum QuestionEnum {
 
-		Reponses("reponses"), Niveau("niveauQuestion"), sujet("typeSujet"), Langage("typeSujet.langage"), quizzQuestions("quizzQuestions"), reponseCandidats("reponseCandidats");
+		Reponses("reponses"),
+		Niveau("niveauQuestion"),
+		Sujet("Sujet"),
+		Theme("Sujet.theme"),
+		quizzQuestions("quizzQuestions"),
+		reponseCandidats("reponseCandidats");
 
 		private final String value;
 
@@ -95,13 +100,15 @@ public class HibConst {
 		}
 	}
 
-	public enum typeSujetEnum {
+	public enum SujetEnum {
 
-		Langage("langage"), Questions("questions"), QuizzSujets("quizzSujets");
+		Theme("theme"),
+		Questions("questions"),
+		QuizzSujets("quizzSujets");
 
 		private final String value;
 
-		private typeSujetEnum(String sValue) {
+		private SujetEnum(String sValue) {
 			this.value = sValue;
 		}
 

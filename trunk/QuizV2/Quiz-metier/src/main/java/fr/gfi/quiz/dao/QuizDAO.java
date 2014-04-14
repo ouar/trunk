@@ -5,12 +5,13 @@ package fr.gfi.quiz.dao;
 
 import java.util.List;
 
-import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
 import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 
 
@@ -111,9 +112,9 @@ public interface QuizDAO extends AbstractDAO{
 	public List<ReponseCandidat> getDetailsReponseCandidat() ;
 
 
-	public List<Langage> getListLangage(List<String> lAssociations);
+	public List<Theme> getListThemes(List<String> lAssociations);
 
 	public Quizz getDetailsQuizzFini(int idQuiz, List<String> lAssociations);
-	
+
 	public String getImagePath(int idQuestion);
 }

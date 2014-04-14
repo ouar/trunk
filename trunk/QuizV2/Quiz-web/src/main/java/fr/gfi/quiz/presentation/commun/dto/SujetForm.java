@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.gfi.quiz.entite.hibernate.Question;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 import fr.gfi.quiz.json.entite.IdLibelle;
 
 public class SujetForm implements Serializable{
@@ -28,13 +28,13 @@ public class SujetForm implements Serializable{
 		sujet = new IdLibelle(id,libelle);
 	}
 
-	public SujetForm(TypeSujet sujetFromBDD){
+	public SujetForm(Sujet sujetFromBDD){
 		this();
 		sujet.setId(sujetFromBDD.getId().getId());
 		sujet.setLibelle(sujetFromBDD.getLibelle());
 		if (sujetFromBDD.getQuestions().size() > 0) {
 			for (Question question : sujetFromBDD.getQuestions()) {
-				DifficulteForm difficulteTemp = new DifficulteForm(question.getTypeSujet().getDifficulte());
+				DifficulteForm difficulteTemp = new DifficulteForm(question.getSujet().getDifficulte());
 				if (!lDifficultes.contains(difficulteTemp)) {
 					lDifficultes.add(difficulteTemp);
 				}

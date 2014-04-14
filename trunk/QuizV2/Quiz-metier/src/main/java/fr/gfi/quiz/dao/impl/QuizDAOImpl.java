@@ -18,13 +18,13 @@ import org.springframework.stereotype.Repository;
 import fr.gfi.quiz.dao.QuizDAO;
 import fr.gfi.quiz.dao.utils.HibConst;
 import fr.gfi.quiz.dao.utils.MyRequest;
-import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
 import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
-import fr.gfi.quiz.entite.hibernate.TypeSujetId;
+import fr.gfi.quiz.entite.hibernate.SujetId;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 
 
@@ -53,7 +53,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		// Chargement des associations
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.ParametresEnum.type_sujet.getValue());
+		lAssociations.add(HibConst.ParametresEnum.sujet.getValue());
 		lAssociations.add(HibConst.ParametresEnum.reponse.getValue());
 
 		Disjunction orTypeSujet = Restrictions.disjunction();
@@ -61,7 +61,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 		for (ChoixQuiz choix : lChoix) {
 			Conjunction andNiveauTypeSujet =Restrictions.conjunction();
-			TypeSujetId sujetId = new TypeSujetId();
+			SujetId sujetId = new SujetId();
 			sujetId.setId(choix.getSujet().getId());
 			sujetId.setRefDifficulte(choix.getDifficulte().getId());
 			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", sujetId));
@@ -150,7 +150,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		final List<String> lAssociations = new ArrayList<String>();
 		lAssociations.add(HibConst.ReponseCandidatEnum.Question.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.Reponse.getValue());
-		
+
 		hSession = sessionFactory.getCurrentSession();
 		final Criteria criteres = hSession.createCriteria(ReponseCandidat.class).createAlias("quizz", "quizz");
 
@@ -177,7 +177,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		lAssociations.add(HibConst.ReponseCandidatEnum.Examinateur.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.Reponse.getValue());
 		lAssociations.add(HibConst.ReponseCandidatEnum.DifficulteSujet.getValue());
-		lAssociations.add(HibConst.ReponseCandidatEnum.TypeSujet.getValue());
+		lAssociations.add(HibConst.ReponseCandidatEnum.Sujet.getValue());
 
 		// On traite le résultat de la requête pour avoir une question avec
 		// des réponses correspondantes et non pas autant de questions qu'il
@@ -259,13 +259,13 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 
 	}
 
-	public List<Langage> getListLangage(List<String> lAssociations) {
+	public List<Theme> getListThemes(List<String> lAssociations) {
 		Session hSession = null;
 
 		hSession = this.sessionFactory.getCurrentSession();
-		Criteria criteria = hSession.createCriteria(Langage.class);
+		Criteria criteria = hSession.createCriteria(Theme.class);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		final List<Langage> listLangages = MyRequest.list(criteria, lAssociations);
+		final List<Theme> listLangages = MyRequest.list(criteria, lAssociations);
 		return listLangages;
 
 	}
@@ -328,10 +328,10 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 		hSession = sessionFactory.getCurrentSession();
 
 		final Criteria criteres = hSession.createCriteria(Question.class);
-				
+
 		criteres.setProjection(Projections.property("urlImage"));
 		criteres.add(Restrictions.eq("id", idQuestion));
-		
+
 		String sPathImage = (String) criteres.uniqueResult();
 		return sPathImage;
 	}

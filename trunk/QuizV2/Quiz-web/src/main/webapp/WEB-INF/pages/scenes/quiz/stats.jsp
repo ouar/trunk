@@ -69,18 +69,22 @@ $(function () {
         series: [{
         	name: 'Réponse fausse',
             color: "#DD0000",
+            index:0,
             data: tabNbPointsPerdusMauvaiseReponse
         },{
         	name: 'Réponse incomplète',
-            color: "#FA8258",
+            color: "#FFBF00",
+            index:2,
             data: tabNbPointsPerdusQuestionPartielle
         },{
         	name: 'Sans réponse',
-            color: "#FFBF00",
+            color: "#FA8258",
+            index:1,
             data: tabNbPointsPerdusQuestionNonRepondue
         },{
         	name: 'Réponse correcte',
             color: "#009000",
+            index:3,
             data: tabNbPointsObtenus
         }]
     });

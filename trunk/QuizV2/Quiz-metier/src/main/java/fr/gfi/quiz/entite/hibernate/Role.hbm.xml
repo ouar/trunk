@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2014 11:27:10 by Hibernate Tools 3.4.0.CR1 -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 avr. 2014 16:36:24 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="fr.gfi.quiz.entite.hibernate.Role" table="role">
-        <meta attribute="class-code" inherit="false">toString</meta>
         <id name="id" type="int">
             <column name="id" />
             <generator class="assigned" />
         </id>
         <property name="libRole" type="string">
-            <column name="lib_role" length="50" not-null="true" unique="true" />
+            <column name="lib_role" length="50" not-null="true" />
         </property>
         <set name="userRoleses" table="user_roles" inverse="true" lazy="true" fetch="select">
             <key>

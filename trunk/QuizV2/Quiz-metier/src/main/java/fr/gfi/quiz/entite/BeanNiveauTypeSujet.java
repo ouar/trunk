@@ -2,7 +2,7 @@ package fr.gfi.quiz.entite;
 
 import java.io.Serializable;
 
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 
 
 
@@ -14,26 +14,26 @@ public class BeanNiveauTypeSujet implements Serializable{
 	 */
 	private static final long serialVersionUID = 8482605223063445534L;
 
-	private TypeSujet typeSujet;
+	private Sujet sujet;
 
 
 	public BeanNiveauTypeSujet() {
 		super();
-		typeSujet=new TypeSujet();
+		sujet=new Sujet();
 
 	}
 
-	public BeanNiveauTypeSujet(TypeSujet typeSujet) {
+	public BeanNiveauTypeSujet(Sujet Sujet) {
 		super();
-		this.typeSujet = typeSujet;
+		this.sujet = Sujet;
 	}
 
-	public TypeSujet getTypeSujet() {
-		return typeSujet;
+	public Sujet getSujet() {
+		return sujet;
 	}
 
-	public void setTypeSujet(TypeSujet typeSujet) {
-		this.typeSujet = typeSujet;
+	public void setSujet(Sujet Sujet) {
+		this.sujet = Sujet;
 	}
 
 }

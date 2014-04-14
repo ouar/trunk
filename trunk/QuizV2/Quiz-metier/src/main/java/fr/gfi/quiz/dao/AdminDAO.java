@@ -3,10 +3,10 @@ package fr.gfi.quiz.dao;
 import java.util.List;
 
 import fr.gfi.quiz.entite.hibernate.Difficulte;
-import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Reponse;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 import fr.gfi.quiz.entite.hibernate.User;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
 
@@ -27,7 +27,7 @@ public interface AdminDAO extends AbstractDAO{
 	 * @param typeSujet
 	 * @return @
 	 */
-	public TypeSujet enregistreNouveauSujet(TypeSujet typeSujet);
+	public Sujet enregistreNouveauSujet(Sujet typeSujet);
 
 	/**
 	 *
@@ -47,7 +47,7 @@ public interface AdminDAO extends AbstractDAO{
 	 *
 	 * @return @
 	 */
-	public List<TypeSujet> getListTypesSujet(List<String> lAssociations);
+	public List<Sujet> getListSujets(List<String> lAssociations);
 
 	/**
 	 *
@@ -72,12 +72,12 @@ public interface AdminDAO extends AbstractDAO{
 
 	/**
 	 * Renvoie une liste de langage avec leurs associations passées en
-	 * param�tres
+	 * paramètres
 	 *
 	 * @param lAssociations
 	 * @return @
 	 */
-	public List<Langage> getListLangage(List<String> lAssociations);
+	public List<Theme> getListThemes(List<String> lAssociations);
 
 	/**
 	 *

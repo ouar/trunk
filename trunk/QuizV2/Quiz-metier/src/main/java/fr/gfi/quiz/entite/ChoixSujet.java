@@ -1,24 +1,24 @@
 package fr.gfi.quiz.entite;
 
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 
 /**
- * représente un type de sujet choisi par l'utilisateur. Si l'utilisateur
- * choisit un sujet déjà parametré en base, c'est le champ "sujetChoisi" qui
- * sera renseigné sinon ça sera le champ "sNouveauSujet" .
- * 
- * 
+ * reprï¿½sente un type de sujet choisi par l'utilisateur. Si l'utilisateur
+ * choisit un sujet dï¿½jï¿½ parametrï¿½ en base, c'est le champ "sujetChoisi" qui
+ * sera renseignï¿½ sinon ï¿½a sera le champ "sNouveauSujet" .
+ *
+ *
  */
 
 public class ChoixSujet {
 
-	private TypeSujet sujetChoisi;
+	private Sujet sujetChoisi;
 	private String sNouveauSujet;
 
 	/**
 	 * @return the sujetChoisi
 	 */
-	public TypeSujet getSujetChoisi() {
+	public Sujet getSujetChoisi() {
 		return sujetChoisi;
 	}
 
@@ -26,7 +26,7 @@ public class ChoixSujet {
 	 * @param sujetChoisi
 	 *            the sujetChoisi to set
 	 */
-	public void setSujetChoisi(TypeSujet sujetChoisi) {
+	public void setSujetChoisi(Sujet sujetChoisi) {
 		this.sujetChoisi = sujetChoisi;
 	}
 

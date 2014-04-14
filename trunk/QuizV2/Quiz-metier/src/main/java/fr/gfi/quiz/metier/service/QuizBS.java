@@ -4,10 +4,10 @@ import java.util.List;
 
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.InfoReponseCandidat;
-import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.json.entite.Quiz;
 import fr.gfi.quiz.json.entite.StatsQuiz;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
@@ -86,10 +86,10 @@ public interface QuizBS {
 
 	public String getImagePath(int idQuestion);
 
-	public List<Langage> getListLangage(List<String> lAssociations);
+	public List<Theme> getListThemes(List<String> lAssociations);
 
 	public StatsQuiz getStatQuiz(int idQuiz);
 
 	public Quiz convertQuizBDtoQuizJson(Quizz quizzBD);
-	
+
 }
