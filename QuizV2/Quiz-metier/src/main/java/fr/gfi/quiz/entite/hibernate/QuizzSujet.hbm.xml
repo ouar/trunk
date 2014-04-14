@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2014 11:27:10 by Hibernate Tools 3.4.0.CR1 -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 avr. 2014 16:36:24 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="fr.gfi.quiz.entite.hibernate.QuizzSujet" table="quizz_sujet">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="typeSujet" class="fr.gfi.quiz.entite.hibernate.TypeSujet" fetch="select">
+        <many-to-one name="sujet" class="fr.gfi.quiz.entite.hibernate.Sujet" fetch="select">
             <column name="ref_type_sujet" />
             <column name="ref_difficulte" not-null="true" />
         </many-to-one>

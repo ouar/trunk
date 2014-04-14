@@ -19,15 +19,15 @@ import fr.gfi.quiz.dao.utils.HibConst;
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
 import fr.gfi.quiz.entite.InfoReponseCandidat;
 import fr.gfi.quiz.entite.PairInt;
-import fr.gfi.quiz.entite.hibernate.Langage;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.QuizzQuestion;
 import fr.gfi.quiz.entite.hibernate.QuizzSujet;
 import fr.gfi.quiz.entite.hibernate.Reponse;
 import fr.gfi.quiz.entite.hibernate.ReponseCandidat;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
-import fr.gfi.quiz.entite.hibernate.TypeSujetId;
+import fr.gfi.quiz.entite.hibernate.Sujet;
+import fr.gfi.quiz.entite.hibernate.SujetId;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.IdLibelle;
 import fr.gfi.quiz.json.entite.Personne;
@@ -96,12 +96,12 @@ public class QuizBSImpl implements QuizBS {
 			QuizzSujet sujetDifficulteBD = new QuizzSujet();
 			sujetDifficulteBD.setQuizz(quizz);
 
-			TypeSujetId sujetId = new TypeSujetId();
+			SujetId sujetId = new SujetId();
 			sujetId.setId(choix.getSujet().getId());
 			sujetId.setRefDifficulte(choix.getDifficulte().getId());
-			TypeSujet sujet = new TypeSujet();
+			Sujet sujet = new Sujet();
 			sujet.setId(sujetId);
-			sujetDifficulteBD.setTypeSujet(sujet);
+			sujetDifficulteBD.setSujet(sujet);
 
 			quizDAO.enregistrerQuizzSujet(sujetDifficulteBD);
 		}
@@ -180,13 +180,13 @@ public class QuizBSImpl implements QuizBS {
 	 * @return
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	private List<TypeSujet> getTypesSujetsForQuestionnaire(final List<Question> lQuestions) {
-		Map<String, TypeSujet> hashMap = new HashMap<String, TypeSujet>();
+	private List<Sujet> getTypesSujetsForQuestionnaire(final List<Question> lQuestions) {
+		Map<String, Sujet> hashMap = new HashMap<String, Sujet>();
 		for (Question question : lQuestions) {
-			hashMap.put(question.getTypeSujet().getLibelle(), question.getTypeSujet());
+			hashMap.put(question.getSujet().getLibelle(), question.getSujet());
 		}
 
-		final List<TypeSujet> lTypesSujetsForQuestionnairePossible = new ArrayList<TypeSujet>(hashMap.values());
+		final List<Sujet> lTypesSujetsForQuestionnairePossible = new ArrayList<Sujet>(hashMap.values());
 		return lTypesSujetsForQuestionnairePossible;
 	}
 
@@ -204,7 +204,7 @@ public class QuizBSImpl implements QuizBS {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Quizz getDetailsQuizz(Integer id) throws BusinessServiceException {
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.QuizzEnum.LangageSujet.getValue());
+		lAssociations.add(HibConst.QuizzEnum.ThemeSujet.getValue());
 		lAssociations.add(HibConst.QuizzEnum.DifficulteSujet.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 		lAssociations.add(HibConst.QuizzEnum.Reponses.getValue());
@@ -293,16 +293,16 @@ public class QuizBSImpl implements QuizBS {
 			TypeQuestion typeQuestion = new TypeQuestion();
 
 			IdLibelle sujet = new IdLibelle();
-			sujet.setId(quizzSujet.getTypeSujet().getId().getId());
-			sujet.setLibelle(quizzSujet.getTypeSujet().getLibelle());
+			sujet.setId(quizzSujet.getSujet().getId().getId());
+			sujet.setLibelle(quizzSujet.getSujet().getLibelle());
 
 			IdLibelle difficulte = new IdLibelle();
-			difficulte.setId(quizzSujet.getTypeSujet().getDifficulte().getId());
-			difficulte.setLibelle(quizzSujet.getTypeSujet().getDifficulte().getLibDifficulte());
+			difficulte.setId(quizzSujet.getSujet().getDifficulte().getId());
+			difficulte.setLibelle(quizzSujet.getSujet().getDifficulte().getLibDifficulte());
 
 			IdLibelle langage = new IdLibelle();
-			langage.setId(quizzSujet.getTypeSujet().getLangage().getId());
-			langage.setLibelle(quizzSujet.getTypeSujet().getLangage().getLibelle());
+			langage.setId(quizzSujet.getSujet().getTheme().getId());
+			langage.setLibelle(quizzSujet.getSujet().getTheme().getLibelle());
 
 			typeQuestion.setDifficulte(difficulte);
 			typeQuestion.setLangage(langage);
@@ -322,18 +322,18 @@ public class QuizBSImpl implements QuizBS {
 			question.setUniqueReponseCorrecte(questionBD.getBolUniqueReponse());
 
 			IdLibelle langage = new IdLibelle();
-			langage.setId(questionBD.getTypeSujet().getLangage().getId());
-			langage.setLibelle(questionBD.getTypeSujet().getLangage().getLibelle());
+			langage.setId(questionBD.getSujet().getTheme().getId());
+			langage.setLibelle(questionBD.getSujet().getTheme().getLibelle());
 			question.setLangage(langage);
 
 			IdLibelle typeSujet = new IdLibelle();
-			typeSujet.setId(questionBD.getTypeSujet().getId().getId());
-			typeSujet.setLibelle(questionBD.getTypeSujet().getLibelle());
+			typeSujet.setId(questionBD.getSujet().getId().getId());
+			typeSujet.setLibelle(questionBD.getSujet().getLibelle());
 			question.setTypeSujet(typeSujet);
 
 			IdLibelle difficulte = new IdLibelle();
-			difficulte.setId(questionBD.getTypeSujet().getDifficulte().getId());
-			difficulte.setLibelle(questionBD.getTypeSujet().getDifficulte().getLibDifficulte());
+			difficulte.setId(questionBD.getSujet().getDifficulte().getId());
+			difficulte.setLibelle(questionBD.getSujet().getDifficulte().getLibDifficulte());
 			question.setDifficulte(difficulte);
 
 			question.setImage(StringUtils.isNotEmpty(questionBD.getUrlImage()));
@@ -360,8 +360,8 @@ public class QuizBSImpl implements QuizBS {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<Langage> getListLangage(List<String> lAssociations){
-		List<Langage> listLangages = quizDAO.getListLangage(lAssociations);
+	public List<Theme> getListThemes(List<String> lAssociations){
+		List<Theme> listLangages = quizDAO.getListThemes(lAssociations);
 		return listLangages;
 	}
 
@@ -403,7 +403,7 @@ public class QuizBSImpl implements QuizBS {
 	public StatsQuiz getStatQuiz(int idQuiz) {
 
 		final List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.QuizzEnum.LangageQuestion.getValue());
+		lAssociations.add(HibConst.QuizzEnum.ThemeQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.DifficulteQuestion.getValue());
 		lAssociations.add(HibConst.QuizzEnum.User.getValue());
 
@@ -417,7 +417,7 @@ public class QuizBSImpl implements QuizBS {
 
 	private StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD,List<ReponseCandidat> lReponsesCandidat) {
 		Map<Integer,StatsLangage> mStatsLangage = new HashMap<Integer, StatsLangage>();
-		Map<TypeSujetId,StatsSujet> mStatsSujet = new HashMap<TypeSujetId, StatsSujet>();
+		Map<SujetId,StatsSujet> mStatsSujet = new HashMap<SujetId, StatsSujet>();
 
 		StatsQuiz statsQuiz = new StatsQuiz();
 		statsQuiz.setCandidat(new Personne(0,quizzBD.getPrenomCandidat(),quizzBD.getNomCandidat()));
@@ -433,16 +433,16 @@ public class QuizBSImpl implements QuizBS {
 			StatsSujet statsSujet = null;
 
 			//on récupère le langage et le sujet de la question à traiter
-			Langage langageBD = questionATraiter.getTypeSujet().getLangage();
-			TypeSujet typeSujetBD = questionATraiter.getTypeSujet();
+			Theme themeBD = questionATraiter.getSujet().getTheme();
+			Sujet typeSujetBD = questionATraiter.getSujet();
 
 			//on vérifie que le langage a déjà été traité dans la boucle
-			if(mStatsLangage.containsKey(langageBD.getId())){
-				statsLangage = mStatsLangage.get(langageBD.getId());
+			if(mStatsLangage.containsKey(themeBD.getId())){
+				statsLangage = mStatsLangage.get(themeBD.getId());
 			}else{
 				statsLangage = new StatsLangage();
-				statsLangage.setLangage(new IdLibelle(langageBD.getId(), langageBD.getLibelle()));
- 				mStatsLangage.put(langageBD.getId(), statsLangage);
+				statsLangage.setLangage(new IdLibelle(themeBD.getId(), themeBD.getLibelle()));
+ 				mStatsLangage.put(themeBD.getId(), statsLangage);
 			}
 			//on vérifie que le sujet est déjà dans le langage
 			PairInt sujetId = new PairInt(typeSujetBD.getId().getId(),typeSujetBD.getId().getRefDifficulte());
@@ -530,6 +530,4 @@ public class QuizBSImpl implements QuizBS {
 		String sPath = quizDAO.getImagePath(idQuestion);
 		return sPath;
 	}
-
-
 }

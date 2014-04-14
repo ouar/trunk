@@ -1,25 +1,25 @@
 package fr.gfi.quiz.entite;
 
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 
 public class SujetDifficulteBean {
 
-	private TypeSujet sujet;
+	private Sujet sujet;
 
 	public SujetDifficulteBean() {
 		super();
 	}
 
-	public SujetDifficulteBean(TypeSujet sujet) {
+	public SujetDifficulteBean(Sujet sujet) {
 		this();
 		this.sujet = sujet;
 	}
 
-	public void setSujet(TypeSujet sujet) {
+	public void setSujet(Sujet sujet) {
 		this.sujet = sujet;
 	}
 
-	public TypeSujet getSujet() {
+	public Sujet getSujet() {
 		return sujet;
 	}
 

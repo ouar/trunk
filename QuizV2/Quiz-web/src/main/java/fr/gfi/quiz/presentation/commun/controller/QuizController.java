@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.gfi.quiz.dao.utils.HibConst;
 import fr.gfi.quiz.entite.InfoGenerationQuizz;
-import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.entite.hibernate.Quizz;
 import fr.gfi.quiz.entite.hibernate.User;
 import fr.gfi.quiz.json.entite.ChoixQuiz;
@@ -61,12 +61,12 @@ public class QuizController extends AbstractController{
 		lAssociations.add(HibConst.LangageEnum.Questions.getValue());
 
 
-		List<Langage> lLangagesBD = quizBS.getListLangage(lAssociations);
+		List<Theme> lThemesBD = quizBS.getListThemes(lAssociations);
 		List<LangageForm> lLangage = new ArrayList<LangageForm>();
 
-		if(lLangagesBD != null && lLangagesBD.size() > 0){
-			for(Langage langageBD : lLangagesBD){
-				LangageForm langageTemp = new LangageForm(langageBD);
+		if(lThemesBD != null && lThemesBD.size() > 0){
+			for(Theme themeBD : lThemesBD){
+				LangageForm langageTemp = new LangageForm(themeBD);
 				if(!lLangage.contains(langageTemp)){
 					lLangage.add(langageTemp);
 				}
@@ -164,12 +164,12 @@ public class QuizController extends AbstractController{
 			in = resource.getInputStream();
 		}
 		if(in == null){
-			in = context.getResourceAsStream("/resources/img/noimage.jpg");	
+			in = context.getResourceAsStream("/resources/img/noimage.jpg");
 		}
 		return IOUtils.toByteArray(in);
 	}
-	
-	
+
+
 	@RequestMapping(value="/save/{idquiz}",method = RequestMethod.POST, headers ={"Accept=application/json"},consumes="application/json")
 	public String enregistrerQuiz(@PathVariable("idquiz") Integer idQuizz,@RequestBody String json) {
 		Quiz quizRepondu = JsonBuilder.getQuizBeanFromJson(json);

@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 import fr.gfi.quiz.dao.AdminDAO;
 import fr.gfi.quiz.dao.utils.MyRequest;
 import fr.gfi.quiz.entite.hibernate.Difficulte;
-import fr.gfi.quiz.entite.hibernate.Langage;
+import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.entite.hibernate.Question;
 import fr.gfi.quiz.entite.hibernate.Reponse;
-import fr.gfi.quiz.entite.hibernate.TypeSujet;
+import fr.gfi.quiz.entite.hibernate.Sujet;
 import fr.gfi.quiz.entite.hibernate.User;
 
 @Repository("adminDAO")
@@ -48,7 +48,7 @@ public class AdminDAOImpl extends AbstractDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public TypeSujet enregistreNouveauSujet(TypeSujet typeSujet) {
+	public Sujet enregistreNouveauSujet(Sujet typeSujet) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -66,7 +66,7 @@ public class AdminDAOImpl extends AbstractDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<TypeSujet> getListTypesSujet(List<String> lAssociations) {
+	public List<Sujet> getListSujets(List<String> lAssociations) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -90,7 +90,7 @@ public class AdminDAOImpl extends AbstractDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<Langage> getListLangage(List<String> lAssociations) {
+	public List<Theme> getListThemes(List<String> lAssociations) {
 		// TODO Auto-generated method stub
 		return null;
 	}

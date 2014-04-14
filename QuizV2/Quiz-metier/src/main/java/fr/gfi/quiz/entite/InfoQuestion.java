@@ -129,7 +129,7 @@ public class InfoQuestion {
 
 		// si l'utilisateur a choisi un sujet d�j� parametr� en base.
 		if (getSujet().getSujetChoisi() != null) {
-			question.setTypeSujet(getSujet().getSujetChoisi());
+			question.setSujet(getSujet().getSujetChoisi());
 		}
 
 		question.setLibQuestion(getLibQuestion());

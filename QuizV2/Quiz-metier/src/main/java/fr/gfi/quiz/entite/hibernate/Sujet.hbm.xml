@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2014 11:27:10 by Hibernate Tools 3.4.0.CR1 -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 avr. 2014 16:36:24 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="fr.gfi.quiz.entite.hibernate.TypeSujet" table="type_sujet">
-        <meta attribute="class-code" inherit="false">toString</meta>
-        <composite-id name="id" class="fr.gfi.quiz.entite.hibernate.TypeSujetId">
+    <class name="fr.gfi.quiz.entite.hibernate.Sujet" table="sujet">
+        <composite-id name="id" class="fr.gfi.quiz.entite.hibernate.SujetId">
             <key-property name="id" type="int">
                 <column name="Id" />
             </key-property>
@@ -16,13 +15,13 @@
         <many-to-one name="difficulte" class="fr.gfi.quiz.entite.hibernate.Difficulte" update="false" insert="false" fetch="select">
             <column name="ref_difficulte" not-null="true" />
         </many-to-one>
-        <many-to-one name="langage" class="fr.gfi.quiz.entite.hibernate.Langage" fetch="select">
+        <many-to-one name="theme" class="fr.gfi.quiz.entite.hibernate.Theme" fetch="select">
             <column name="ref_langage" not-null="true">
                 <comment>cl</comment>
             </column>
         </many-to-one>
         <property name="libelle" type="string">
-            <column name="libelle" length="50" not-null="true" unique="true">
+            <column name="libelle" length="50" not-null="true">
                 <comment>libell</comment>
             </column>
         </property>
