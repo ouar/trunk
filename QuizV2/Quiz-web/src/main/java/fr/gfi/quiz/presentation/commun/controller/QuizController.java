@@ -38,7 +38,7 @@ import fr.gfi.quiz.json.moteur.JsonBuilder;
 import fr.gfi.quiz.metier.exception.BusinessServiceException;
 import fr.gfi.quiz.metier.exception.QuestionsNonTrouveesException;
 import fr.gfi.quiz.presentation.commun.dto.GestionFormBean;
-import fr.gfi.quiz.presentation.commun.dto.LangageForm;
+import fr.gfi.quiz.presentation.commun.dto.ThemeForm;
 
 
 @Controller
@@ -57,23 +57,23 @@ public class QuizController extends AbstractController{
 		ModelAndView mv = new ModelAndView("new.quiz.scene");
 
 		List<String> lAssociations = new ArrayList<String>();
-		lAssociations.add(HibConst.LangageEnum.DifficulteSujets.getValue());
-		lAssociations.add(HibConst.LangageEnum.Questions.getValue());
+		lAssociations.add(HibConst.ThemeEnum.DifficulteSujets.getValue());
+		lAssociations.add(HibConst.ThemeEnum.Questions.getValue());
 
 
 		List<Theme> lThemesBD = quizBS.getListThemes(lAssociations);
-		List<LangageForm> lLangage = new ArrayList<LangageForm>();
+		List<ThemeForm> lTheme = new ArrayList<ThemeForm>();
 
 		if(lThemesBD != null && lThemesBD.size() > 0){
 			for(Theme themeBD : lThemesBD){
-				LangageForm langageTemp = new LangageForm(themeBD);
-				if(!lLangage.contains(langageTemp)){
-					lLangage.add(langageTemp);
+				ThemeForm themeTemp = new ThemeForm(themeBD);
+				if(!lTheme.contains(themeTemp)){
+					lTheme.add(themeTemp);
 				}
 			}
 		}
 
-		mv.addObject("lLangages", lLangage);
+		mv.addObject("lThemes", lTheme);
 		return mv;
 	}
 

@@ -32,7 +32,7 @@ import fr.gfi.quiz.json.entite.ChoixQuiz;
 import fr.gfi.quiz.json.entite.IdLibelle;
 import fr.gfi.quiz.json.entite.Personne;
 import fr.gfi.quiz.json.entite.Quiz;
-import fr.gfi.quiz.json.entite.StatsLangage;
+import fr.gfi.quiz.json.entite.StatsTheme;
 import fr.gfi.quiz.json.entite.StatsQuestion;
 import fr.gfi.quiz.json.entite.StatsQuiz;
 import fr.gfi.quiz.json.entite.StatsSujet;
@@ -300,13 +300,13 @@ public class QuizBSImpl implements QuizBS {
 			difficulte.setId(quizzSujet.getSujet().getDifficulte().getId());
 			difficulte.setLibelle(quizzSujet.getSujet().getDifficulte().getLibDifficulte());
 
-			IdLibelle langage = new IdLibelle();
-			langage.setId(quizzSujet.getSujet().getTheme().getId());
-			langage.setLibelle(quizzSujet.getSujet().getTheme().getLibelle());
+			IdLibelle theme = new IdLibelle();
+			theme.setId(quizzSujet.getSujet().getTheme().getId());
+			theme.setLibelle(quizzSujet.getSujet().getTheme().getLibelle());
 
 			typeQuestion.setDifficulte(difficulte);
-			typeQuestion.setLangage(langage);
-			typeQuestion.setTypeSujet(sujet);
+			typeQuestion.setTheme(theme);
+			typeQuestion.setSujet(sujet);
 
 			lTypesQuestions.add(typeQuestion);
 		}
@@ -321,15 +321,15 @@ public class QuizBSImpl implements QuizBS {
 			question.setLibelle(questionBD.getLibQuestion());
 			question.setUniqueReponseCorrecte(questionBD.getBolUniqueReponse());
 
-			IdLibelle langage = new IdLibelle();
-			langage.setId(questionBD.getSujet().getTheme().getId());
-			langage.setLibelle(questionBD.getSujet().getTheme().getLibelle());
-			question.setLangage(langage);
+			IdLibelle Theme = new IdLibelle();
+			Theme.setId(questionBD.getSujet().getTheme().getId());
+			Theme.setLibelle(questionBD.getSujet().getTheme().getLibelle());
+			question.setTheme(Theme);
 
-			IdLibelle typeSujet = new IdLibelle();
-			typeSujet.setId(questionBD.getSujet().getId().getId());
-			typeSujet.setLibelle(questionBD.getSujet().getLibelle());
-			question.setTypeSujet(typeSujet);
+			IdLibelle sujet = new IdLibelle();
+			sujet.setId(questionBD.getSujet().getId().getId());
+			sujet.setLibelle(questionBD.getSujet().getLibelle());
+			question.setSujet(sujet);
 
 			IdLibelle difficulte = new IdLibelle();
 			difficulte.setId(questionBD.getSujet().getDifficulte().getId());
@@ -416,7 +416,7 @@ public class QuizBSImpl implements QuizBS {
 
 
 	private StatsQuiz convertQuizBDtoStatsJson(Quizz quizzBD,List<ReponseCandidat> lReponsesCandidat) {
-		Map<Integer,StatsLangage> mStatsLangage = new HashMap<Integer, StatsLangage>();
+		Map<Integer,StatsTheme> mStatsLangage = new HashMap<Integer, StatsTheme>();
 		Map<SujetId,StatsSujet> mStatsSujet = new HashMap<SujetId, StatsSujet>();
 
 		StatsQuiz statsQuiz = new StatsQuiz();
@@ -429,30 +429,30 @@ public class QuizBSImpl implements QuizBS {
 
 		for(QuizzQuestion quizQuestion : quizzBD.getQuizzQuestions()){
 			Question questionATraiter = quizQuestion.getQuestion();
-			StatsLangage statsLangage = null;
+			StatsTheme statsLangage = null;
 			StatsSujet statsSujet = null;
 
 			//on récupère le langage et le sujet de la question à traiter
 			Theme themeBD = questionATraiter.getSujet().getTheme();
-			Sujet typeSujetBD = questionATraiter.getSujet();
+			Sujet sujetBD = questionATraiter.getSujet();
 
 			//on vérifie que le langage a déjà été traité dans la boucle
 			if(mStatsLangage.containsKey(themeBD.getId())){
 				statsLangage = mStatsLangage.get(themeBD.getId());
 			}else{
-				statsLangage = new StatsLangage();
+				statsLangage = new StatsTheme();
 				statsLangage.setLangage(new IdLibelle(themeBD.getId(), themeBD.getLibelle()));
  				mStatsLangage.put(themeBD.getId(), statsLangage);
 			}
 			//on vérifie que le sujet est déjà dans le langage
-			PairInt sujetId = new PairInt(typeSujetBD.getId().getId(),typeSujetBD.getId().getRefDifficulte());
+			PairInt sujetId = new PairInt(sujetBD.getId().getId(),sujetBD.getId().getRefDifficulte());
 			if(statsLangage.getmSujets().containsKey(sujetId)){
 				statsSujet = statsLangage.getmSujets().get(sujetId);
 			}else{
 				statsSujet = new StatsSujet();
-				statsSujet.setSujet(new IdLibelle(typeSujetBD.getId().getId(), typeSujetBD.getLibelle()));
-				statsSujet.setDifficulte(new IdLibelle(typeSujetBD.getDifficulte().getId(), typeSujetBD.getDifficulte().getLibDifficulte()));
-				mStatsSujet.put(typeSujetBD.getId(), statsSujet);
+				statsSujet.setSujet(new IdLibelle(sujetBD.getId().getId(), sujetBD.getLibelle()));
+				statsSujet.setDifficulte(new IdLibelle(sujetBD.getDifficulte().getId(), sujetBD.getDifficulte().getLibDifficulte()));
+				mStatsSujet.put(sujetBD.getId(), statsSujet);
 				statsLangage.getmSujets().put(sujetId, statsSujet);
 			}
 
@@ -486,7 +486,7 @@ public class QuizBSImpl implements QuizBS {
 //					}
 				}
 			}
-			int pointsQuestion = typeSujetBD.getDifficulte().getId();
+			int pointsQuestion = sujetBD.getDifficulte().getId();
 			StatsQuestion statsQuestion = new StatsQuestion();
 			statsQuestion.setNbBonnesReponses(nbBonnesReponses);
 			statsQuestion.setNbMauvaisesReponses(nbMauvaisesReponses);
@@ -514,7 +514,7 @@ public class QuizBSImpl implements QuizBS {
 		//Les statistiques du quiz ont été effectuées au niveau Question et sujet.
 		//on doit mettre à jour le quiz qui mettra à jour les langages
 		//en se basant sur les statistiques des sujets
-		List<StatsLangage> lStatsLangage = new ArrayList<StatsLangage>(mStatsLangage.size());
+		List<StatsTheme> lStatsLangage = new ArrayList<StatsTheme>(mStatsLangage.size());
 		for(Integer mapKey : mStatsLangage.keySet()){
 			lStatsLangage.add(mStatsLangage.get(mapKey));
 		}

@@ -38,16 +38,16 @@
 		<script src="<c:url value="/resources/js/scenes/quiz/Class-0.0.2.min.js" />"></script>
 		<script src="<c:url value="/resources/js/scenes/quiz/ihmChoixSujets.js" />"></script>
 		<script>
-			//tableau qui va contenir les langages/sujets/difficultés à saisir
+			//tableau qui va contenir les themes/sujets/difficultés à saisir
 			var tabDispo = new Array();
 
-			//tableau qui va contenir les langages/sujets/difficultés sélectionnés dans le panier
+			//tableau qui va contenir les themes/sujets/difficultés sélectionnés dans le panier
 			//var tabChoisi = new Array();
 
-			<c:forEach var="langage" items="${lLangages}">
-				<c:forEach var="sujet" items="${langage.lSujets}">
+			<c:forEach var="theme" items="${lThemes}">
+				<c:forEach var="sujet" items="${theme.lSujets}">
 					<c:forEach var="difficulte" items="${sujet.lDifficultes}">
-						<c:out value="tabDispo.push(new entree(new element('${langage.langage.id}','${langage.langage.libelle}'),new element('${sujet.sujet.id}','${sujet.sujet.libelle}'), new element('${difficulte.difficulte.id}','${difficulte.difficulte.libelle}')));" escapeXml="false"></c:out>
+						<c:out value="tabDispo.push(new entree(new element('${theme.theme.id}','${theme.theme.libelle}'),new element('${sujet.sujet.id}','${sujet.sujet.libelle}'), new element('${difficulte.difficulte.id}','${difficulte.difficulte.libelle}')));" escapeXml="false"></c:out>
 					</c:forEach>
 				</c:forEach>
 			</c:forEach>
