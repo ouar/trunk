@@ -17,10 +17,10 @@ public class StatsQuiz extends StatsAbstract implements Serializable{
 
 	private int dureePrevue;
 	private int dureeUtilisee;
-	private List<StatsLangage> lStatsLangages;
+	private List<StatsTheme> lStatsLangages;
 
 	public StatsQuiz() {
-		lStatsLangages = new ArrayList<StatsLangage>();
+		lStatsLangages = new ArrayList<StatsTheme>();
 	}
 
 	public Personne getExaminateur() {
@@ -63,16 +63,16 @@ public class StatsQuiz extends StatsAbstract implements Serializable{
 		this.dureeUtilisee = dureeUtilisee;
 	}
 
-	public List<StatsLangage> getlStatsLangages() {
+	public List<StatsTheme> getlStatsLangages() {
 		return lStatsLangages;
 	}
 
-	public void setlStatsLangages(List<StatsLangage> lStatsLangages) {
+	public void setlStatsLangages(List<StatsTheme> lStatsLangages) {
 		this.lStatsLangages = lStatsLangages;
 	}
 
 	public void process() {
-		for(StatsLangage langage : lStatsLangages){
+		for(StatsTheme langage : lStatsLangages){
 			langage.process();
 			nbQuestionsKO+=langage.nbQuestionsKO;
 			nbQuestionsOK+=langage.nbQuestionsOK;

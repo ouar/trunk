@@ -21,27 +21,27 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		      throws JsonParseException {
 
 		final Question question = new Question();
-		
+
 		final JsonObject jsonObject = json.getAsJsonObject();
-		
-		
-		
-		IdLibelle langage = context.deserialize(jsonObject.get("langage"), IdLibelle.class);
-		IdLibelle typeSujet = context.deserialize(jsonObject.get("typeSujet"), IdLibelle.class);
+
+
+
+		IdLibelle theme = context.deserialize(jsonObject.get("theme"), IdLibelle.class);
+		IdLibelle sujet = context.deserialize(jsonObject.get("sujet"), IdLibelle.class);
 		IdLibelle difficulte = context.deserialize(jsonObject.get("difficulte"), IdLibelle.class);
-		
+
 		int idQuestion = jsonObject.get("id").getAsInt();
 		String libEnonce = jsonObject.get("libelle").getAsString();
 		boolean isUniqueReponseCorrecte = jsonObject.get("uniqueReponseCorrecte").getAsBoolean();
 		int dureeReflexionEnSec = jsonObject.get("dureeReflexionEnSec").getAsInt();
 
-			
+
 		Reponse[] tabTypeReponses = context.deserialize(jsonObject.get("lReponses"), Reponse[].class);
 		List<Reponse> lReponses = Arrays.asList(tabTypeReponses);
-		
+
 		question.setId(idQuestion);
-		question.setLangage(langage);
-		question.setTypeSujet(typeSujet);
+		question.setTheme(theme);
+		question.setSujet(sujet);
 		question.setDifficulte(difficulte);
 		question.setUniqueReponseCorrecte(isUniqueReponseCorrecte);
 		question.setDureeReflexionEnSec(dureeReflexionEnSec);
@@ -56,7 +56,7 @@ public class QuestionDeserialisation implements JsonDeserializer<Question> {
 		if(jsonObject.has("correcte")){
 			question.setCorrecte(jsonObject.get("correcte").getAsBoolean());
 		}
-	
+
 		return question;
 	}
 

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import fr.gfi.quiz.entite.PairInt;
 
-public class StatsLangage extends StatsAbstract implements Serializable{
+public class StatsTheme extends StatsAbstract implements Serializable{
 
 	/**
 	 *
@@ -16,7 +16,7 @@ public class StatsLangage extends StatsAbstract implements Serializable{
 	private Map<PairInt,StatsSujet> mSujets;
 
 
-	public StatsLangage() {
+	public StatsTheme() {
 		mSujets = new HashMap<PairInt,StatsSujet>();
 	}
 

@@ -3,40 +3,40 @@ package fr.gfi.quiz.json.entite;
 import java.io.Serializable;
 
 public class TypeQuestion implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 6500627937157025171L;
-	private IdLibelle langage;
-	private IdLibelle typeSujet;
+	private IdLibelle theme;
+	private IdLibelle sujet;
 	private IdLibelle difficulte;
-	
+
 	public TypeQuestion() {
 	}
 
-	public TypeQuestion(IdLibelle langage, IdLibelle typeSujet,
+	public TypeQuestion(IdLibelle theme, IdLibelle typeSujet,
 			IdLibelle difficulte) {
 		super();
-		this.langage = langage;
-		this.typeSujet = typeSujet;
+		this.theme = theme;
+		this.sujet = typeSujet;
 		this.difficulte = difficulte;
 	}
 
-	public IdLibelle getLangage() {
-		return langage;
+	public IdLibelle getTheme() {
+		return theme;
 	}
 
-	public void setLangage(IdLibelle langage) {
-		this.langage = langage;
+	public void setTheme(IdLibelle theme) {
+		this.theme = theme;
 	}
 
-	public IdLibelle getTypeSujet() {
-		return typeSujet;
+	public IdLibelle getSujet() {
+		return sujet;
 	}
 
-	public void setTypeSujet(IdLibelle typeSujet) {
-		this.typeSujet = typeSujet;
+	public void setSujet(IdLibelle typeSujet) {
+		this.sujet = typeSujet;
 	}
 
 	public IdLibelle getDifficulte() {
@@ -49,7 +49,7 @@ public class TypeQuestion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TypeQuestion [langage=" + langage + ", typeSujet=" + typeSujet
+		return "TypeQuestion [theme=" + theme + ", typeSujet=" + sujet
 				+ ", difficulte=" + difficulte + "]";
 	}
 
@@ -59,9 +59,9 @@ public class TypeQuestion implements Serializable{
 		int result = 1;
 		result = prime * result
 				+ ((difficulte == null) ? 0 : difficulte.hashCode());
-		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
+		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
 		result = prime * result
-				+ ((typeSujet == null) ? 0 : typeSujet.hashCode());
+				+ ((sujet == null) ? 0 : sujet.hashCode());
 		return result;
 	}
 
@@ -79,20 +79,20 @@ public class TypeQuestion implements Serializable{
 				return false;
 		} else if (!difficulte.equals(other.difficulte))
 			return false;
-		if (langage == null) {
-			if (other.langage != null)
+		if (theme == null) {
+			if (other.theme != null)
 				return false;
-		} else if (!langage.equals(other.langage))
+		} else if (!theme.equals(other.theme))
 			return false;
-		if (typeSujet == null) {
-			if (other.typeSujet != null)
+		if (sujet == null) {
+			if (other.sujet != null)
 				return false;
-		} else if (!typeSujet.equals(other.typeSujet))
+		} else if (!sujet.equals(other.sujet))
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+
+
+
 }

@@ -27,7 +27,7 @@ public class TestJsonTablette extends TestCase {
 			"  }," +
 			"  \"lTypesQuestions\": [" +
 			"    {" +
-			"      \"langage\": {" +
+			"      \"theme\": {" +
 			"        \"id\": 1," +
 			"        \"libelle\": \"JAVA\"" +
 			"      }," +
@@ -41,7 +41,7 @@ public class TestJsonTablette extends TestCase {
 			"      }" +
 			"    }," +
 			"    {" +
-			"      \"langage\": {" +
+			"      \"theme\": {" +
 			"        \"id\": 1," +
 			"        \"libelle\": \"JAVA\"" +
 			"      }," +
@@ -58,7 +58,7 @@ public class TestJsonTablette extends TestCase {
 			"  \"lQuestions\": [" +
 			"    {" +
 			"      \"id\": 0," +
-			"      \"langage\": {" +
+			"      \"theme\": {" +
 			"        \"id\": 1," +
 			"        \"libelle\": \"JAVA\"" +
 			"      }," +
@@ -102,7 +102,7 @@ public class TestJsonTablette extends TestCase {
 			"    }," +
 			"    {" +
 			"      \"id\": 0," +
-			"      \"langage\": {" +
+			"      \"theme\": {" +
 			"        \"id\": 1," +
 			"        \"libelle\": \"JAVA\"" +
 			"      }," +
@@ -146,7 +146,7 @@ public class TestJsonTablette extends TestCase {
 			"    }," +
 			"    {" +
 			"      \"id\": 0," +
-			"      \"langage\": {" +
+			"      \"theme\": {" +
 			"        \"id\": 1," +
 			"        \"libelle\": \"JAVA\"" +
 			"      }," +
