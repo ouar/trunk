@@ -17,14 +17,14 @@ public class ChoixQuizDeserialisation implements JsonDeserializer<ChoixQuiz> {
 	public ChoixQuiz deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		ChoixQuiz returnValue = new ChoixQuiz();
 		JsonObject jsonObject = json.getAsJsonObject();
-		
-		IdLibelle langage= context.deserialize(jsonObject.get("langage"), IdLibelle.class);
-		returnValue.setLangage(langage);
+
+		IdLibelle theme= context.deserialize(jsonObject.get("theme"), IdLibelle.class);
+		returnValue.setTheme(theme);
 		IdLibelle sujet= context.deserialize(jsonObject.get("sujet"), IdLibelle.class);
 		returnValue.setSujet(sujet);
 		IdLibelle difficulte= context.deserialize(jsonObject.get("difficulte"), IdLibelle.class);
 		returnValue.setDifficulte(difficulte);
-		
+
 		return returnValue;
 	}
 

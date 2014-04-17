@@ -16,19 +16,19 @@ public class TypeQuestionDeserialisation implements JsonDeserializer<TypeQuestio
 	@Override
 	  public TypeQuestion deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
 	      throws JsonParseException {
-		  
+
 		  final TypeQuestion typeQuestion = new TypeQuestion();
-			
+
 			final JsonObject jsonObject = json.getAsJsonObject();
-			
-			IdLibelle langage = context.deserialize(jsonObject.get("langage"), IdLibelle.class);
-			IdLibelle typeSujet = context.deserialize(jsonObject.get("typeSujet"), IdLibelle.class);
+
+			IdLibelle theme = context.deserialize(jsonObject.get("theme"), IdLibelle.class);
+			IdLibelle sujet = context.deserialize(jsonObject.get("sujet"), IdLibelle.class);
 			IdLibelle difficulte = context.deserialize(jsonObject.get("difficulte"), IdLibelle.class);
 
-			typeQuestion.setLangage(langage);
-			typeQuestion.setTypeSujet(typeSujet);
+			typeQuestion.setTheme(theme);
+			typeQuestion.setSujet(sujet);
 			typeQuestion.setDifficulte(difficulte);
-			
+
 			return typeQuestion;
 	  }
 }

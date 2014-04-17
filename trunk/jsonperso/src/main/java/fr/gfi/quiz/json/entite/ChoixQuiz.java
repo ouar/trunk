@@ -5,29 +5,29 @@ import java.io.Serializable;
 public class ChoixQuiz implements Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 344934583549356337L;
-	private IdLibelle langage;
+	private IdLibelle theme;
 	private IdLibelle sujet;
 	private IdLibelle difficulte;
-	
+
 	public ChoixQuiz() {
 	}
 
-	public ChoixQuiz(IdLibelle langage, IdLibelle sujet, IdLibelle difficulte) {
+	public ChoixQuiz(IdLibelle theme, IdLibelle sujet, IdLibelle difficulte) {
 		super();
-		this.langage = langage;
+		this.theme = theme;
 		this.sujet = sujet;
 		this.difficulte = difficulte;
 	}
 
-	public IdLibelle getLangage() {
-		return langage;
+	public IdLibelle getTheme() {
+		return theme;
 	}
 
-	public void setLangage(IdLibelle langage) {
-		this.langage = langage;
+	public void setTheme(IdLibelle theme) {
+		this.theme = theme;
 	}
 
 	public IdLibelle getSujet() {
@@ -48,7 +48,7 @@ public class ChoixQuiz implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ChoixQuiz [langage=" + langage + ", sujet=" + sujet
+		return "ChoixQuiz [theme=" + theme + ", sujet=" + sujet
 				+ ", difficulte=" + difficulte + "]";
 	}
 
@@ -58,7 +58,7 @@ public class ChoixQuiz implements Serializable{
 		int result = 1;
 		result = prime * result
 				+ ((difficulte == null) ? 0 : difficulte.hashCode());
-		result = prime * result + ((langage == null) ? 0 : langage.hashCode());
+		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
 		result = prime * result + ((sujet == null) ? 0 : sujet.hashCode());
 		return result;
 	}
@@ -77,10 +77,10 @@ public class ChoixQuiz implements Serializable{
 				return false;
 		} else if (!difficulte.equals(other.difficulte))
 			return false;
-		if (langage == null) {
-			if (other.langage != null)
+		if (theme == null) {
+			if (other.theme != null)
 				return false;
-		} else if (!langage.equals(other.langage))
+		} else if (!theme.equals(other.theme))
 			return false;
 		if (sujet == null) {
 			if (other.sujet != null)
@@ -89,6 +89,6 @@ public class ChoixQuiz implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+
 }

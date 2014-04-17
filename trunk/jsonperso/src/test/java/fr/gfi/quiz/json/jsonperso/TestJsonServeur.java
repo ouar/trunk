@@ -20,7 +20,7 @@ public class TestJsonServeur extends TestCase {
 
 	private static String jsonstatic = "["+
   "{"+
-    "\"langage\": {"+
+    "\"theme\": {"+
       "\"id\": 3,"+
       "\"libelle\": \"JAVA\""+
     "},"+
@@ -56,11 +56,11 @@ public class TestJsonServeur extends TestCase {
 
 	
 	public void testSerialisationQuiz() throws UnsupportedEncodingException {
-		IdLibelle langage = new IdLibelle(3, "JAVA");
+		IdLibelle theme = new IdLibelle(3, "JAVA");
 		IdLibelle sujet = new IdLibelle(4, "Hibernate");
 		IdLibelle difficulte = new IdLibelle(1, "facile"); 
 		
-		ChoixQuiz choix = new ChoixQuiz(langage, sujet, difficulte);
+		ChoixQuiz choix = new ChoixQuiz(theme, sujet, difficulte);
 		List<ChoixQuiz> lChoix = new ArrayList<ChoixQuiz>();
 		lChoix.add(choix);
 		
