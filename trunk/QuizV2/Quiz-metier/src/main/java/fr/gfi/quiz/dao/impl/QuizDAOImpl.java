@@ -64,7 +64,7 @@ public class QuizDAOImpl extends AbstractDAOImpl implements QuizDAO {
 			SujetId sujetId = new SujetId();
 			sujetId.setId(choix.getSujet().getId());
 			sujetId.setRefDifficulte(choix.getDifficulte().getId());
-			andNiveauTypeSujet.add(Restrictions.eq("typeSujet.id", sujetId));
+			andNiveauTypeSujet.add(Restrictions.eq("sujet.id", sujetId));
 			orTypeSujet.add(andNiveauTypeSujet);
 		}
 		criteres.add(orTypeSujet);

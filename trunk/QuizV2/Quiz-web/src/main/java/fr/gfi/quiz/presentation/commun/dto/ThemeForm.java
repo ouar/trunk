@@ -7,34 +7,34 @@ import fr.gfi.quiz.entite.hibernate.Sujet;
 import fr.gfi.quiz.entite.hibernate.Theme;
 import fr.gfi.quiz.json.entite.IdLibelle;
 
-public class LangageForm {
+public class ThemeForm {
 
 	private IdLibelle theme;
 	private List<SujetForm> lSujets;
 
-	public LangageForm() {
+	public ThemeForm() {
 		theme = new IdLibelle();
 		lSujets = new ArrayList<SujetForm>();
 	}
 
-	public LangageForm(IdLibelle theme) {
+	public ThemeForm(IdLibelle theme) {
 		this();
 		this.theme = theme;
 	}
 
-	public LangageForm(int id, String libelle) {
+	public ThemeForm(int id, String libelle) {
 		this();
 		theme.setId(id);
 		theme.setLibelle(libelle);
 	}
 
-	public LangageForm(Theme themeFromBDD){
+	public ThemeForm(Theme themeFromBDD){
 		this();
 		theme.setId(themeFromBDD.getId());
 		theme.setLibelle(themeFromBDD.getLibelle());
 		if (themeFromBDD.getSujets().size() > 0) {
-			for (Sujet typeSujet : themeFromBDD.getSujets()) {
-				SujetForm sujetTemp = new SujetForm(typeSujet);
+			for (Sujet sujet : themeFromBDD.getSujets()) {
+				SujetForm sujetTemp = new SujetForm(sujet);
 				if(!lSujets.contains(sujetTemp)){
 					lSujets.add(sujetTemp);
 				}
@@ -47,11 +47,11 @@ public class LangageForm {
 		return "LangageForm [langage=" + theme + ", lSujets=" + lSujets + "]";
 	}
 
-	public IdLibelle getLangage() {
+	public IdLibelle getTheme() {
 		return theme;
 	}
 
-	public void setLangage(IdLibelle langage) {
+	public void setTheme(IdLibelle langage) {
 		this.theme = langage;
 	}
 
@@ -79,7 +79,7 @@ public class LangageForm {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LangageForm other = (LangageForm) obj;
+		ThemeForm other = (ThemeForm) obj;
 		if (theme == null) {
 			if (other.theme != null)
 				return false;

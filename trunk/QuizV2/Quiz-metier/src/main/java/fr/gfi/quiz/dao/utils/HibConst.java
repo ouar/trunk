@@ -4,7 +4,7 @@ public class HibConst {
 
 	public enum ParametresEnum {
 
-		reponse("reponses"), sujet("Sujet");
+		reponse("reponses"), sujet("sujet");
 
 		private final String value;
 
@@ -19,17 +19,17 @@ public class HibConst {
 
 	public enum QuizzEnum {
 
-		Sujets("quizzSujets.Sujet"),
-		DifficulteSujet("quizzSujets.Sujet.difficulte"),
-		ThemeSujet("quizzSujets.Sujet.theme"),
+		Sujets("quizzSujets.sujet"),
+		DifficulteSujet("quizzSujets.sujet.difficulte"),
+		ThemeSujet("quizzSujets.sujet.theme"),
 		Reponses("quizzQuestions.question.reponses"),
 		Questions("quizzQuestions.question"),
 		ReponsesCandidatAvecQuestions("quizzQuestions.question.reponses.reponseCandidats"),
 		ReponsesCandidat("reponseCandidats.reponse"),
 		User("user"),
 
-		DifficulteQuestion("quizzQuestions.question.Sujet.difficulte"),
-		ThemeQuestion("quizzQuestions.question.Sujet.theme");
+		DifficulteQuestion("quizzQuestions.question.sujet.difficulte"),
+		ThemeQuestion("quizzQuestions.question.sujet.theme");
 
 		private final String value;
 
@@ -46,9 +46,9 @@ public class HibConst {
 
 		Examinateur("quizz.user"),
 		Question("question"),
-		DifficulteSujet("question.Sujet.difficulte"),
+		DifficulteSujet("question.sujet.difficulte"),
 		Reponse("reponse"),
-		Sujet("question.Sujet"),
+		Sujet("question.sujet"),
 		Quizz("quizz");
 
 		private final String value;
@@ -62,16 +62,16 @@ public class HibConst {
 		}
 	}
 
-	public enum LangageEnum {
+	public enum ThemeEnum {
 
-		Sujets("Sujets"),
-		DifficulteSujets("Sujets.difficulte"),
-		Questions("Sujets.questions"),
-		Quizzs("Sujets.sujets.quizz");
+		Sujets("sujets"),
+		DifficulteSujets("sujets.difficulte"),
+		Questions("sujets.questions"),
+		Quizzs("sujets.sujets.quizz");
 
 		private final String value;
 
-		private LangageEnum(String sValue) {
+		private ThemeEnum(String sValue) {
 			this.value = sValue;
 		}
 
@@ -84,8 +84,8 @@ public class HibConst {
 
 		Reponses("reponses"),
 		Niveau("niveauQuestion"),
-		Sujet("Sujet"),
-		Theme("Sujet.theme"),
+		Sujet("sujet"),
+		Theme("sujet.theme"),
 		quizzQuestions("quizzQuestions"),
 		reponseCandidats("reponseCandidats");
 
